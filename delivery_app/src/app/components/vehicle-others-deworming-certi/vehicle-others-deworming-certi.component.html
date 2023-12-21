@@ -1,0 +1,35 @@
+<div>
+  <form [formGroup]="dewormingCertDocForm" (ngSubmit)="saveDewormingCertDocDetails()">
+    <!-- updateOrAddDewormingCert ? updateDewormingCertDocDetails() :  -->
+    <div class="segment">
+      <div class="documentInput" (click)="chooseImage('dewormingCertificate')">
+        <ng-container>
+          <img [src]="dewormingCertiImage ? dewormingCertiImage: '/assets/icon/ic-vehicle-licence.svg'" alt=""
+            class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!dewormingCertiImage">
+            <label for="pan">
+              <u>{{'UploadDewormingCertificate' | language : 'Upload Deworming Certificate'}}</u>
+            </label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="dewormingCertiImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('others')">
+            {{'re-upload' | language :'Re-upload '}}
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="kyc-footer">
+        <div class="footer">
+          <ion-button *ngIf="!isProfilePage" color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">{{'skip'|language:'Skip'}}</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">
+            {{ !isProfilePage ? ('save&Continue'|language:'Save & Continue') : ('save'|language:'Save')}}
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

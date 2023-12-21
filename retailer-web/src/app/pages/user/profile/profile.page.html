@@ -1,0 +1,127 @@
+
+<!-- <ion-header class="home-header">
+  <div class="home-header-sploc">
+    <img src="../../../../assets/icon/Account circle.svg" alt="" class="home-header-addicn">
+    <p>Vignesh</p>
+    <img src="../../../../assets/icon/EDIT.svg" class="editimg" alt=""/>
+  </div>
+
+  <div class="home-header-spadd">
+    <h4>+91-7893214680</h4>
+  </div>
+</ion-header> -->
+
+
+<!--***************************** new contents***************************-->
+
+
+<ion-split-pane contentId="main">
+  <ion-menu  contentId="main">
+    <div>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" defaultHref="/home" text="" icon="chevron-back-outline"></ion-back-button>Back
+    </ion-buttons>
+  </div>
+    
+    <ion-content class="menu">
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/edit-profile-screen"routerDirection="root" routerLinkActive="active-link">
+          <ion-avatar slot="start">
+            <img src="assets/icon/profileicon.svg" />
+          </ion-avatar>
+         
+          <ion-label>
+            <h3>  {{'Profile ' | language : 'Profile '}}</h3>
+             <p>{{commonservice.userData.phone}}</p>
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/shop-address" routerDirection="root"
+          routerLinkActive="active-link" >
+          <ion-icon  src="assets/icon/shoplogo.svg"></ion-icon>
+          <ion-label>
+            {{'shopAddress' | language : 'Shop Address'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/selected-language" routerDirection="root"
+          routerLinkActive="active-link">
+          <ion-icon src="assets/icon/settingsicon.svg"></ion-icon>
+          <ion-label>
+            {{'settings' | language : 'Settings'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/wallet" routerDirection="root" routerLinkActive="active-link">
+          <ion-icon src="assets/icon/walleticon.svg"></ion-icon>
+          <ion-label>
+            {{'Wallet' | language : 'Wallet'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/bank-form" routerDirection="root"
+          routerLinkActive="active-link">
+          <ion-icon src="assets/icon/Bank Details.svg"></ion-icon>
+          <ion-label>
+            {{'bankDetails' | language : 'Bank Details'}} 
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" (click)="refferalModule()" routerDirection="root" routerLinkActive="active-link">
+          <ion-icon src="assets/icon/refer-and-earn-icon.svg">
+          </ion-icon>
+          <ion-label>
+            {{'Refer&earn' | language : 'Refer & Earn'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/package-list" routerDirection="root"
+          routerLinkActive="active-link">
+          <ion-icon  src="assets/icon/subscription-icon.svg">
+          </ion-icon>
+          <ion-label>
+            {{'subscription' | language : 'Subscription'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" (click)="openGstModal()" routerDirection="root" routerLinkActive="active-link">
+          <ion-icon src="assets/icon/gstin.svg">
+          </ion-icon>
+          <ion-label>
+            {{'gstin ' | language : 'GSTIN'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" routerLink="/profile/help" routerDirection="root"
+         routerLinkActive="active-link">
+         <ion-icon src="assets/icon/helpicon.svg"></ion-icon>
+          <ion-label>
+            {{'help' | language : 'Help'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+      <ion-menu-toggle autoHide="false">
+        <ion-item lines="none" (click)="logOutUser()"
+        routerDirection="root"
+         routerLinkActive="active-link">
+         <ion-icon src="assets/icon/logouticon.svg"></ion-icon>
+          <ion-label>          
+            {{'logout' | language : 'Logout'}}
+          </ion-label>
+        </ion-item>
+      </ion-menu-toggle>
+    </ion-content>
+  </ion-menu>
+
+  <ion-router-outlet id="main">
+
+  </ion-router-outlet>
+</ion-split-pane>

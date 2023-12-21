@@ -1,0 +1,7 @@
+{
+  "name": "Sarvm",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

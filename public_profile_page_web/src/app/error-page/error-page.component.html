@@ -1,0 +1,117 @@
+<section class="pricing py-5 ">
+  <div class="container ">
+      <div class="row justify-content-center">
+          <div class="col-md-4 col-lg-4 col-sm-6 col-12 m-auto  mb-3 ">
+              <div class="card text-center border-0 ">
+                  <img src="./assets/icons/HHA_illustration.svg" class="card-img-top" alt="appImg" >
+                  <div class="card-body">
+                    <p class="card-text">"Freshness  At Doorstep!"</p>
+                    <div class="app-btn">
+                      <a href="https://play.google.com/store/apps/details?id=com.sarvm.hh" target="_blank"><img
+                          src="./assets/icons/Google Play.svg" width="80%" height="80%"></a>
+                        <a target="_blank" href="https://apps.apple.com/in/app/sarvm/id1639099386"><img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;"
+                          width="80%" height="80%"></a>
+                    </div>
+                    
+                  </div>
+                </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-sm-6 col-12 m-auto  mb-3 ">
+                <div class="card text-center border-0">
+                  <img src="./assets/icons/RA_Illustration.svg" class="card-img-top" alt="appImg">
+                  <div class="card-body">
+                    <p class="card-text">"Smart Retail Solutions"</p>
+                    <div class="app-btn">
+                      <a href="https://play.google.com/store/apps/details?id=com.sarvm.biz" target="_blank"><img
+                          src="./assets/icons/Google Play.svg" width="80%" height="80%"></a>
+                        <a><img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;opacity: 0.2;"
+                          width="80%" height="80%"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4 col-lg-4 col-sm-6 col-12 m-auto  mb-3">
+                <div class="card text-center border-0">
+                  <img src="./assets/icons/LA_illustration.svg" class="card-img-top" alt="appImg">
+                  <div class="card-body"> 
+                    <p class="card-text">"Instant Delivery Solutions"</p>
+                    <div class="app-btn">
+                      <a href="https://play.google.com/store/apps/details?id=com.sarvm.loga&hl=en-IN" target="_blank"><img
+                          src="./assets/icons/Google Play.svg" width="80%" height="80%"></a>
+                        <a><img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;opacity: 0.2;"
+                          width="80%" height="80%"></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
+      </div>
+ 
+</section>
+
+
+
+
+<!-- <div id="notfound">
+    <div class="notfound-bg"></div>
+    <div class="notfound">
+        <img src="./assets/icons/Retailer.svg" width="30%" height="30%" alt="">
+        <div class="notfound-404">
+            <h1>404</h1>
+        </div>
+        <h2>we are sorry, shop does not exist</h2>
+    </div>
+</div> -->
+
+<ng-template #content let-modal>
+    <div class="modal-header border-0">
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      </button>
+    </div>
+    <div class="modal-body">
+      <div class="container-fluid">
+        <div class="row text-center">
+          <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+            <p class="text-center heading"> Retailer</p>
+            <img src="./assets/icons/Retailer.svg" width="70%" height="70%" alt="">
+            <div class="me-auto">
+              <div>
+                <!-- <a class="btn btn-primary" href="#" role="button" ><img src="./images/images-2/App Store.svg" style="margin-bottom: 20px;" width="100%" height="100%"></a> -->
+                <img src="./assets/icons/App_Store_Disable.svg" alt="" style="margin-bottom: 20px;" width="100%"
+                  height="100%">
+                <a href="https://play.google.com/store/apps/details?id=com.sarvm.biz" target="_blank">
+                  <img src="./assets/icons/Google Play.svg" width="100%" height="100%" alt=""></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+            <p class="text-center heading"> Consumer</p>
+            <img src="./assets/icons/Household.svg" width="70%" height="70%">
+            <div class="me-auto">
+              <!-- <qrcode [qrdata]="'consumer'"
+                  [width]="125" 
+                  [errorCorrectionLevel]="'M'">
+                </qrcode> -->
+                <a target="_blank" href="https://apps.apple.com/in/app/sarvm/id1639099386"> <img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;" width="100%" height="100%"></a>
+             
+              <a href="https://play.google.com/store/apps/details?id=com.sarvm.hh" target="_blank"><img
+                  src="./assets/icons/Google Play.svg" width="100%" height="100%"></a>
+            </div>
+          </div>
+          <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+                    <p class="text-center heading">Logistics</p>
+                    <img src="./assets/icons/Delivery-Logo 1.svg" width="70%" height="70%">
+                    <div>
+                      <a> <img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;opacity: 0.2;"
+                          width="100%" height="100%"></a>
+  
+                      <a href="https://play.google.com/store/apps/details?id=com.sarvm.loga&hl=en-IN" target="_blank"><img
+                          src="./assets/icons/Google Play.svg" width="100%" height="100%"></a>
+                    </div>
+                  </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer border-0">
+    </div>
+  </ng-template>

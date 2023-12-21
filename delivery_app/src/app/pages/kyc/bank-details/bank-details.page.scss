@@ -1,0 +1,81 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ion-toolbar {
+  display: flex;
+  ion-title {
+    font-weight: bold;
+    font-size: 18px;
+    justify-content: center;
+    place-content: center;
+  }
+  ion-icon {
+    margin: auto 0;
+    font-size: 5vw;
+    padding: 0 0 0 3vw;
+    color: #a42c24;
+  }
+}
+
+ion-segment-button {
+  width: 50%;
+  //--color: #7d7c83;
+  --background-checked: var(--ion-color-primary);
+  --color-checked: var(--ion-color-light);
+  margin: -2px;
+}
+
+.segment-label {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.ionSegment {
+  border: 1px solid var(--ion-color-primary);
+  border-radius: 10px;
+  width: 90%;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 5px;
+}
+
+.btns2 {
+    margin: 2vh auto;
+    background: #FFFFFF;
+    border: 1px solid #F7BC0D;
+    border-radius: 10px;
+    width: 100px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+}
+
+.addbtn {
+    background-color: white;
+    margin-left: 35px;
+    color: #F7BC0D;
+}
+
+.card {
+  box-shadow: none;
+  padding: 4px;
+  margin: 10px 8px;
+}
+
+.UpiId {
+  margin: 0px 0 2px;
+}
+
+.IdBranch {
+  margin-right: 45px;
+  align-items: center;
+  display: flex;
+}
+
+.pngImage {
+  height: 12px;
+  width: 12px;
+}

@@ -1,0 +1,37 @@
+<ion-header>
+
+  
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button mode="md" defaultHref="/profile"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'settings'| language : 'settings'}}</ion-title>
+    </ion-toolbar>
+
+</ion-header>
+
+<ion-content>
+  <div routerLink="/update-language">
+    <ion-card>
+      <ion-img src="/assets/uil_language.svg"></ion-img>
+      <p class="change">
+        {{'changelanguage' | language : 'Change Language'}}
+      </p>
+    </ion-card>
+    <p class="txt">
+      {{'nowyoucanchooseyoursuitablelanguage' | language : 'Now you can choose your suitable language'}}
+    </p>
+  </div>
+  <div (click)="del()">
+    <ion-card>
+      <ion-img src="assets/icon/deleteIcon.svg"></ion-img>
+      <p class="change">
+        {{'DeleteAccount' | language : 'Delete Account'}}
+      </p>
+    </ion-card>
+    <p class="txt">
+      {{'Youwanttodeleteyouraccount' | language : 'You want to delete your account'}}
+    </p>
+  </div>
+</ion-content>
+

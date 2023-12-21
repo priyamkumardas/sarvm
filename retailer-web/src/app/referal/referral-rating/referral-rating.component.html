@@ -1,0 +1,121 @@
+<ion-header>
+  <div class="CrossIcon" (click)="action('close')">
+    <ion-icon name="close-outline"></ion-icon>
+</div>
+  <ion-toolbar>
+      <h2>Update Rating</h2>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4" (click)="selectRating('1')"
+        [style.background]="rating=='1' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">1</ion-col>
+      <ion-col size="4" (click)="selectRating('2')"
+        [style.background]="rating=='2' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">2</ion-col>
+      <ion-col size="4" (click)="selectRating('3')"
+        [style.background]="rating=='3' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">3</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size=" 4 " (click)="selectRating( '4') "
+        [style.background]="rating=='4' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">4</ion-col>
+      <ion-col size="4 " (click)="selectRating( '5') "
+        [style.background]="rating=='5' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">5</ion-col>
+      <ion-col size="4 " (click)="selectRating( '6') "
+        [style.background]="rating=='6' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">6</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col size="4 " (click)="selectRating( '7') "
+        [style.background]="rating=='7' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">7</ion-col>
+      <ion-col size="4 " (click)="selectRating( '8') "
+        [style.background]="rating=='8' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">8</ion-col>
+      <ion-col size="4 " (click)="selectRating( '9') "
+        [style.background]="rating=='9' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">9</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card>
+    <ion-item>
+        <ion-textarea placeholder="Remarks " #remarks></ion-textarea>
+    </ion-item>
+</ion-card>
+<ion-row>
+    <ion-button fill="solid" shape="round" class="referral-ratings" expand="block" (click)="referralRatingSave(remarks.value)">
+        Submit
+    </ion-button>
+</ion-row>
+</ion-content>
+
+<!-- <div class="modal">
+    <div class="CrossIcon" (click)="action('close')">
+        <ion-icon name="close-outline"></ion-icon>
+    </div>
+
+    <div class="content">
+        <div class="header">
+            <p>Update Rating</p>
+        </div>
+
+        <ion-grid>
+            <ion-row>
+                <ion-col size="4" (click)="selectRating('1')" [style.background]="rating=='1' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">1</ion-col>
+                <ion-col size="4" (click)="selectRating('2')" [style.background]="rating=='2' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">2</ion-col>
+                <ion-col size="4" (click)="selectRating('3')" [style.background]="rating=='3' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">3</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size=" 4 " (click)="selectRating( '4') " [style.background]="rating=='4' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">4</ion-col>
+                <ion-col size="4 " (click)="selectRating( '5') " [style.background]="rating=='5' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">5</ion-col>
+                <ion-col size="4 " (click)="selectRating( '6') " [style.background]="rating=='6' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">6</ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col size="4 " (click)="selectRating( '7') " [style.background]="rating=='7' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">7</ion-col>
+                <ion-col size="4 " (click)="selectRating( '8') " [style.background]="rating=='8' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">8</ion-col>
+                <ion-col size="4 " (click)="selectRating( '9') " [style.background]="rating=='9' ?'var(--ion-color-secondary-shade)':'var(--ion-color-success-shade)'">9</ion-col>
+            </ion-row>
+        </ion-grid>
+        <ion-card>
+            <ion-item>
+                <ion-textarea placeholder="Remarks " #remarks></ion-textarea>
+            </ion-item>
+        </ion-card>
+        <ion-row>
+            <ion-button fill="solid" shape="round" class="referral-ratings" expand="block" (click)="referralRatingSave(remarks.value)">
+                Submit
+            </ion-button>
+        </ion-row>
+    </div>
+</div> -->
+
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button (click)="action('close')" defaultHref="/profile">
+      </ion-back-button>
+    </ion-buttons>
+    <ion-img class="nav-logo" src="assets/icon/Sarvmlogo.png"></ion-img>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>1</ion-col>
+      <ion-col>2</ion-col>
+      <ion-col>3</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>4</ion-col>
+      <ion-col>5</ion-col>
+      <ion-col>6</ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>7</ion-col>
+      <ion-col>8</ion-col>
+      <ion-col>9</ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-card>
+    <ion-item>
+      <ion-textarea placeholder="Remarks"></ion-textarea>
+    </ion-item>
+
+</ion-card>
+</ion-content> -->

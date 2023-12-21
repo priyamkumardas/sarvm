@@ -1,0 +1,11 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss(date)">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <ion-card-content>
+      <ion-datetime   [max]="maxDate" [min]="minDate" presentation="date" [(ngModel)]="date" (ionChange)="modelCtrl.dismiss(date)" [showDefaultButtons]="true"
+      doneText="{{'Apply'|language:'Apply'}}" cancelText="{{'clear'|language:'Clear'}}" ></ion-datetime>
+    </ion-card-content>
+  </ion-card>
+</ion-footer>

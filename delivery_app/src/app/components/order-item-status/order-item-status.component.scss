@@ -1,0 +1,84 @@
+.modal {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+}
+
+.CrossIcon {
+    height: 15vw;
+    width: 15vw;
+    margin-bottom: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10vw;
+    border-radius: 50%;
+    color: grey;
+    background: var(--ion-color-primary-contrast);
+}
+.content {
+    background: var(--ion-color-primary-contrast);
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-evenly;
+    height: 460px;
+}
+
+
+.header {
+    text-align: center;
+    margin: 0px;
+    p {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 600;
+        font-size: 22px;
+        line-height: 20px;
+        color: #a42c24;
+        margin: 20px 14px 20px 14px;
+        text-align: center;
+    }
+}
+
+
+.btns {
+    margin: 0 3vw;
+    margin-top: 3vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+ion-button{
+    width: 100%;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #4F5052;
+    text-transform: capitalize;
+    border-radius: 37px;
+    border: 1px solid #FFFFFF;
+}
+
+.available-button{
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #0AC511;
+}
+
+.not-available-button{
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #888888;
+}
+
+.return-button{
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #FECB32;
+}
+
+.cancel-button{
+    box-sizing: border-box;
+    background: linear-gradient(0deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.8)), #FF5353;
+}

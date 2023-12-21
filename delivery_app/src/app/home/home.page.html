@@ -1,0 +1,144 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="refferalservice.startWalletActivity()">
+        <ion-icon src="assets/icon/ic-wallet.svg"></ion-icon>
+      </ion-button>
+      <ion-button routerLink="/profile">
+        <ion-icon src="assets/icon/ic-user.svg"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div id="report-toggle">
+    <div class="toggle-left">
+      <ion-toggle [(ngModel)]="isToggle" [checked]="isToggle" (ionChange)="changeStatus($event)"></ion-toggle>
+    </div>
+  </div>
+
+  <div (click)="refferalModule()">
+    <img class="refer-banner" src="assets/icon/referral-banner.svg" alt="" />
+  </div>
+
+  <div class="home-card">
+    <ion-grid class="panel-new-trips">
+      <ion-row>
+        <ion-col size="6" class="" (click)="newOrOngoingTripsToggle()">
+          <div class="panel-icon-text">
+            <ion-icon src="assets/icon/ic-bike.svg"></ion-icon>
+            <h4 class="amount" *ngIf="!tripStatus">{{ongoingItem}}</h4>
+            <h4 class="amount" *ngIf="tripStatus">{{newItem}}</h4>
+          </div>
+          <h4 class="tips-text" *ngIf="!tripStatus">{{'OngoingTrips'|language:'Ongoing Trips'}}</h4>
+          <h4 class="tips-text" *ngIf="tripStatus">{{'NewTrips '|language:'New Trips '}}</h4>
+        </ion-col>
+        <ion-col size="6" class="">
+          <div class="panel-icon-text">
+            <ion-icon src="assets/icon/ic-rupee.svg"></ion-icon>
+            <h4 class="amount" *ngIf="expectedEarning !== 'N/A'">{{expectedEarning  | currency:'INR':'symbol':'0.0-0'}}</h4>
+            <h4 class="amount" *ngIf="expectedEarning == 'N/A'">{{expectedEarning}}</h4>
+          </div>
+          <h4 class="tips-text">{{'ExpectedEarnings'|language:'Expected Earnings'}}</h4>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <!-- ********************************************************** -->
+
+  <div *ngIf="tripStatus">
+    <div *ngFor="let item of tripData">
+      <div class="home-card">
+        <div class="order-status">
+          <div class="left-header">{{'OngoingTrip'|language:'Ongoing Trip'}}</div>
+          <div class="right-header">#{{item?.orderId}}</div>
+        </div>
+        <div class="tracker steps">
+          <div class="step completed">
+            <h4 class="step-title">{{'Accepted '|language:'Accepted'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon" *ngIf="item?.status == 'ACCEPTED' && item?.status !== 'REACHED_PL' && item?.status !== 'PICKUP' && item?.status !== 'DELIVERED' && item?.status !== 'REACHED_DL'" (click)="openAcceptedComponent(item)">
+                <ion-icon class="steps-right-icon" src="assets/icon/ic-gree-right.svg"></ion-icon></div>
+                <div class="step-icon checked-icon" *ngIf="item?.status == 'REACHED_PL' || item?.status == 'PICKUP' || item?.status == 'REACHED_DL' || item?.status == 'DELIVERED'">
+                  <ion-icon class="steps-right-icon" src="assets/icon/ic-gree-right.svg"></ion-icon></div>
+            </div>
+          </div>
+          <div class="step completed">
+            <h4 class="step-title">{{'pickUp'|language:'Pickup'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon checked-icon" *ngIf="item?.status == 'PICKUP' || item?.status == 'DELIVERED' || item?.status == 'REACHED_DL'">
+                <ion-icon class="steps-right-icon" src="assets/icon/ic-gree-right.svg"></ion-icon></div>
+              <div class="step-icon" *ngIf="item?.status == 'ACCEPTED' || item?.status == 'REACHED_PL'" (click)="openPickUpOrder(item)"><ion-icon class="steps-right-icon"
+                src="assets/icon/ic-pickup.svg"></ion-icon></div>
+            </div>
+            <h4 class="step-title top-text bottom-text" *ngIf="item?.status == 'ACCEPTED' || item?.status == 'REACHED_PL'">{{item?.pickUp?.shopName}}</h4>
+          </div>
+          <div class="step completed">
+            <h4 class="step-title top-text strong-text">{{'intransit'|language:'In Transit'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon checked-icon" *ngIf="item?.status == 'REACHED_DL'">
+                <ion-icon class="steps-right-icon" src="assets/icon/ic-gree-right.svg"></ion-icon></div>
+              <div class="step-icon" *ngIf="item?.status == 'PICKUP'"><ion-icon class="steps-right-icon"
+                src="assets/icon/ic-pickup.svg" (click)="openInTransitComponent(item)"></ion-icon></div>
+              <div class="step-icon" *ngIf="item?.status == 'ACCEPTED' || item?.status == 'REACHED_PL' || item?.status == 'DELIVERED'"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+            <h4 class="step-title top-text bottom-text" *ngIf="item?.status == 'PICKUP'">{{item?.pickUp?.shopName}}</h4>
+          </div>
+          <div class="step completed">
+            <h4 class="step-title">{{'Drop-Off'|language:'Drop-Off'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon checked-icon" *ngIf="item?.status == 'DELIVERED'">
+                <ion-icon class="steps-right-icon" src="assets/icon/ic-gree-right.svg"></ion-icon></div>
+              <div class="step-icon" *ngIf="item?.status == 'REACHED_DL'" (click)="openDeliveryOrder(item)"><ion-icon class="steps-right-icon"
+                src="assets/icon/ic-pickup.svg"></ion-icon></div>
+              <div class="step-icon" *ngIf="item?.status != 'DELIVERED' && item?.status != 'REACHED_DL'"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+            <h4 class="step-title top-text bottom-text" *ngIf="item?.status == 'REACHED_DL'">{{item?.pickUp?.shopName}}</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!tripStatus">
+    <div *ngFor="let item of tripData">
+      <div class="home-card">
+        <div class="order-status">
+          <div class="left-header">{{'NewTrip'|language:'New Trip'}}</div>
+          <div class="right-header">#{{item?.orderId}}</div>
+        </div>
+        <div class="tracker steps" (click)="getTripDetailsforOrder(item)">
+          <div class="step completed">
+            <h4 class="step-title">{{'Accepted '|language:'Accepted'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+          </div>
+          <div class="step completed">
+            <h4 class="step-title">{{'pickUp'|language:'Pickup'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+          </div>
+          <div class="step completed">
+            <h4 class="step-title top-text">{{'intransit'|language:'In Transit'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+          </div>
+          <div class="step">
+            <h4 class="step-title">{{'Drop-Off'|language:'Drop-Off'}}</h4>
+            <div class="step-icon-wrap">
+              <div class="step-icon"><ion-icon class="steps-right-icon"></ion-icon></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer class="ion-no-border footer">
+  <app-bottom-tab-view [tabsTextAvailable]="false"></app-bottom-tab-view>
+</ion-footer>

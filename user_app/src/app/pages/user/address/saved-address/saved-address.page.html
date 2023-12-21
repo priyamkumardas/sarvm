@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'savedAddress'|language:'Saved Address'}}</ion-title>
+    <ion-progress-bar mode="ios" color="primary" type="indeterminate" *ngIf="commonService.isLoading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="container">
+    <ion-card  *ngFor="let data of address">
+      <div class="card">
+
+      <div class="icon">
+        <ion-icon *ngIf="data.addressType == 'Other'" name="location-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="data.addressType == 'Home'" name="home-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="data.addressType == 'Work'" name="bag-outline" size="large"></ion-icon>
+      </div>
+      <ion-label class="Text"><span class="textInner" *ngIf="data.addressType == 'Home'">{{'home'|language:'Home'}}<br/></span>
+        <span class="textInner" *ngIf="data.addressType == 'Other'">{{'other'|language:'Other'}}<br/></span>
+        <span class="textInner" *ngIf="data.addressType == 'Work'">{{'work'|language:'Work'}}<br/></span>{{data.streetAddress}} near
+        {{data.landmark}}, {{data.region}}, {{data.city}} {{data.state}}, {{data.country}},{{data.pincode}}</ion-label>
+      </div>
+      
+        <!-- added Delete and Edit button -->
+        <div class="btn">
+          <div>
+            <ion-button (click)="deletePopup(data)" slot="" fill="clear" shape="round" color="danger">
+              {{'delete' | language:'Delete'}}
+            </ion-button>
+          </div>
+          <div >
+
+            <ion-button [routerLink]="['/update-address',data._id]" slot="start" expand="block" fill="clear" shape="round" color="primary">
+              {{'Edit' | language:'Edit'}}
+              </ion-button>
+          </div>
+
+        </div>
+    </ion-card>
+</div>
+    <ion-button style="margin: 10px;" routerLink="/update-address/0" expand="block" shape="round" class="add-btn">
+      {{'addNewAddress'|language:'Add new Address'}}
+    </ion-button>
+</ion-content>

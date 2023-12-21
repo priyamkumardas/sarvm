@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+     <ion-buttons slot="start">
+        <ion-back-button defaultHref="addsociety" text=""></ion-back-button>
+     </ion-buttons>
+     <ion-title class="ion-text-left">Upload Documents</ion-title>
+     <ion-buttons slot="end">
+        <ion-button>
+           <ion-icon name="add"></ion-icon>
+        </ion-button>
+     </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col size="12" size-sm="12" size-md="4" size-lg="2">
+      <div class="document">
+        <ion-img src="../../../../../assets/icon/id.svg"></ion-img>
+        <ion-label class="title">Upload PAN Card</ion-label>
+      </div>
+    </ion-col>
+    <ion-col size="12" size-sm="12" size-md="4" size-lg="2">
+      <div class="document">
+        <ion-img src="../../../../../assets/icon/id.svg"></ion-img>
+        <ion-label class="title">Upload Other Documents</ion-label>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+</ion-content>
+<ion-footer class="ion-margin-bottom">
+  <ion-button expand="block" fill="solid" shape="round" color="primary" mode="ios" [routerLink]="['/add-admin']">
+    Continue
+  </ion-button>
+  <ion-button expand="block" fill="clear" shape="round" color="primary" class="ion-margin-top" mode="ios">
+    Skip
+  </ion-button>
+</ion-footer>

@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="img">
+    <img *ngIf="orderType == 'Rejected' || orderType == 'Cancelled' || orderType == 'No_show'" src="\assets\images\cancel-reject_icon.svg" alt="sadFaceIcon">
+  </div>
+  <div class="msg">
+    <p>{{'areYouSure' | language : 'Are you sure.'}}</p>
+  </div>
+  <div class="confirmation">
+    <p *ngIf="orderType == 'Accepted'">Do you want to Accept the order?</p>
+    <p *ngIf="orderType == 'Rejected'">Do you want to Reject the order?</p>
+    <p *ngIf="orderType == 'Processing'">Do you want to Process the order?</p>
+    <p *ngIf="orderType == 'Cancelled'">Do you want to Cancel the order?</p>
+    <p *ngIf="orderType == 'Ready'">Do you want to Ready the order?</p>
+    <p *ngIf="orderType == 'No_show'">Do you want to No Show the order?</p>
+    <p *ngIf="orderType == 'Delivery'">Do you want to Deliver the order?</p>
+    <p *ngIf="orderType == 'Delivered'">Have you Delivered the order?</p>
+    <p *ngIf="orderType == 'Received'">Have you Received the payment?</p>
+  </div>
+  <div class="btns">
+    <ion-button fill="outline" shape="round" color="warning" expand="full" class="no" (click)="viewNo()">
+      <ion-icon slot="start" src="../../../../assets/icon/thumbs-down.svg"></ion-icon>{{'no' | language : 'No'}}</ion-button>
+    <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+      <ion-icon slot="start" src="../../../../assets/icon/thumbs-up.svg"></ion-icon>{{'yes' | language : 'Yes'}}</ion-button>
+  </div>
+</div>

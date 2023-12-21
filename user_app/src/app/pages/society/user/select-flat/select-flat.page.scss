@@ -1,0 +1,50 @@
+@import '../../owner/custom.scss';
+
+ion-header {
+    ion-toolbar {
+        ion-title {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: #4F5052;
+        }
+
+    }
+}
+
+.type {
+    margin-bottom: 16px;
+    ion-label {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: #666666;
+    }
+
+    .card {
+        height: 30px;
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0.05)), #FFFFFF;
+        border-radius: 6px;
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 14px;
+        line-height: 24px;
+        color: #666666;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        &.active
+        {
+            font-weight: 500;
+            color: #00A64F;
+            background: transparent;
+            border: 1px solid #00A64F;
+        }
+    }
+}

@@ -1,0 +1,39 @@
+<ion-footer>
+    <div class="CrossIcon" (click)="action('close')">
+            <ion-icon name="close-outline"></ion-icon>
+     </div>
+
+    <div class="content">  
+        <ion-grid class="ion-padding-bottom">
+            <ion-row class="ion-margin-bottom">
+                <ion-col size="12">
+                    <div class="ion-text-center">
+                        <h3>{{'menu'|language:'Menu '}}</h3>
+                    </div>
+                </ion-col>
+            </ion-row>
+            <ion-row >
+             <ion-col *ngIf="commonService.userData" size="4"  (click)="action('fav')" class="ion-padding-horizontal">
+              <div class="ion-text-center">
+                <img src="/assets/images/heartFav.svg" alt="">
+                <p>{{favShops.includes(shopId)? 'Remove from' : 'Add to'}} {{'Favourites'|language:'Favourite\'s'}}</p>
+              </div> 
+             </ion-col>
+             <ion-col [size]="commonService.userData?4:6" (click)="share('share')" class="ion-padding-horizontal">
+                <div class="shareBtn">
+                    <button  [disabled]="addDisable" class="shareBtnDisable">
+                        <img src="/assets/images/share.svg" alt="">
+                        <p>{{'share'|language:'Share'}}</p>
+                    </button>
+                </div>
+             </ion-col>
+             <ion-col [size]="commonService.userData?4:6"  (click)="sellerProfile(vendDetails)" class="ion-padding-horizontal">
+              <div class="ion-text-center">
+                <img src="/assets/images/shopinfo.svg" alt="">
+                <p>{{'shopInfo'|language:'Shop Info'}}</p>
+              </div>    
+             </ion-col>
+            </ion-row>
+        </ion-grid>
+    </div> 
+</ion-footer>

@@ -1,0 +1,132 @@
+
+ <!--  BEGIN MAIN CONTAINER  -->
+   <div class="main-container" id="container">
+
+    <div class="overlay"></div>
+    <div class="search-overlay"></div>
+
+    <!--  BEGIN SIDEBAR  -->
+    <div class="sidebar-wrapper sidebar-theme">
+
+        <nav id="sidebar">
+            <div class="profile-info">
+                <figure class="user-cover-image"></figure>
+                <div class="user-info">
+                    <!-- <img src="assets/img/90x90.jpg" alt="avatar"> -->
+                    <img src="https://icon-library.com/images/users-icon-png/users-icon-png-6.jpg" alt="avatar">
+                    <h6 class="">Nurul Choudhury </h6>
+                    <p class="">Project Manager</p>
+                </div>
+            </div>
+            <div class="shadow-bottom"></div>
+            <ul class="list-unstyled menu-categories" id="accordionExample">
+
+                <li class="menu" [routerLink]="['/home']" [routerLinkActive]="['active']">
+                    <a href="javascript:void(0);" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            <span>Home</span>
+                        </div>
+                    </a>
+                </li>
+
+                <li class="menu" [routerLink]="['/shoplist']" [routerLinkActive]="['active']">
+                  <a href="javascript:void(0);" aria-expanded="false" class="dropdown-toggle">
+                      <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                          <span>Shop List</span>
+                      </div>
+                  </a>
+              </li>
+
+
+                <li class="menu" [routerLink]="['/retailer-profile']" [routerLinkActive]="['active']">
+                  <a href="javascript:void(0);" aria-expanded="false" class="dropdown-toggle">
+                      <div class="">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+                          <span>Retailer Profile</span>
+                      </div>
+                  </a>
+              </li>
+
+              <li class="menu" [routerLink]="['/app-emplist']" [routerLinkActive]="['active']">
+                <a href="javascript:void(0);" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>Employee List</span>
+                    </div>
+                </a>
+            </li>
+            <li class="menu" [routerLink]="['/product-list']" [routerLinkActive]="['active']">
+                <a href="javascript:void(0);" aria-expanded="false" class="dropdown-toggle">
+                    <div class="">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                        <span>Product List</span>
+                    </div>
+                </a>
+            </li>
+
+                <!-- <li class="menu">
+                    <a href="#submenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-airplay"><path d="M5 17H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-1"></path><polygon points="12 15 17 21 7 21 12 15"></polygon></svg>
+                            <span> Menu 2</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled" id="submenu" data-parent="#accordionExample">
+                        <li>
+                            <a href="javascript:void(0);"> Submenu 1 </a>
+                        </li>
+                        <li>
+                            <a href="javascript:void(0);"> Submenu 2 </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="menu">
+                    <a data-bs-toggle="collapse" data-bs-target="#demo" href="#submenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                        <div class="">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>
+                            <span> Menu 3</span>
+                        </div>
+                        <div>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                        </div>
+                    </a>
+                    <ul class="collapse submenu list-unstyled" id="demo" data-parent="#accordionExample">
+                        <li>
+                            <a href="javascript:void(0);"> Submenu 1 </a>
+                        </li>
+                        <li>
+                            <a href="#sm2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle"> Submenu 2 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg> </a>
+                            <ul class="collapse list-unstyled sub-submenu" id="sm2" data-parent="#submenu2">
+                                <li>
+                                    <a href="javascript:void(0);"> Sub-Submenu 1 </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"> Sub-Submenu 2 </a>
+                                </li>
+                                <li>
+                                    <a href="javascript:void(0);"> Sub-Submenu 3 </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li> -->
+
+
+
+            </ul>
+
+        </nav>
+
+    </div>
+    <!--  END SIDEBAR  -->
+
+
+
+</div>
+<!-- END MAIN CONTAINER -->

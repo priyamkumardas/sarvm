@@ -1,0 +1,171 @@
+product-form.component.scss * {
+  box-sizing: border-box;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.image-container {
+  width: 50%;
+}
+
+.title {
+  text-align: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.form-control {
+  width: 100%;
+  height: 45px;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+  // margin-left: -140px;
+  // margin-top: 45px;
+}
+
+.stringFields {
+  width: 100%;
+  height: 45px;
+  padding: 9px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+// label {
+//   padding: 12px 12px 12px 0;
+//   display: inline-block;
+//   // margin-top: 43px;
+// }
+
+button {
+  background-color: #004f43;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 30px;
+  float: left;
+  // margin-left: 600px;
+
+}
+
+.submitbutton {
+  margin-left: 600px;
+  margin-top: 9px;
+}
+
+button:hover {
+  background-color: #018a75;
+}
+
+.container {
+  border-radius: 5px;
+  position: relative;
+  padding: 2px;
+  // top: -20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.asterisk {
+  color: #d00;
+  font-weight: 700;
+}
+
+.imgBox {
+  text-align: center;
+}
+
+.container .previewImg {
+  height: 150px;
+}
+
+.form-group.center {
+  width: auto;
+  display: flex;
+  justify-content: center;
+
+  .addBtn {
+    width: auto;
+    margin: 15px auto;
+  }
+}
+
+
+
+@media screen and (max-width: 600px) {
+
+  .col-25,
+  .col-75,
+  input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+
+
+.upload {
+  width: 100px;
+  position: relative;
+  margin: auto;
+}
+
+.upload .uploadImg {
+  // border-radius: 50%;
+  // border : 6px solid #eaeaea;
+  border-radius: 15%;
+  border: 1px solid #c1bdbd;
+
+}
+
+.upload .round {
+  position: absolute;
+  bottom: 0;
+  right: -45px;
+  background: #00B4FF;
+  width: 32px;
+  height: 32px;
+  line-height: 33px;
+  text-align: center;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.upload .round input[type='file'] {
+  position: absolute;
+  transform: scale(2);
+  opacity: 0;
+}
+
+input[type=file]::-webkit-file-upload-button {
+  cursor: pointer;
+}
+
+.editIcon {
+  color: #fff
+}
+
+.form-control stringFields {
+  background-color: #004f43;
+}

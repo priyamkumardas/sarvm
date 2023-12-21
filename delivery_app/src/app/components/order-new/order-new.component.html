@@ -1,0 +1,74 @@
+<ion-content>
+  <div class="modal">
+    <div class="CrossIcon" (click)="closeOrderNewModal()">
+      <ion-icon name="close-outline"></ion-icon>
+    </div>
+
+    <div class="content">
+      <div class="order-image">
+        <img [src]="newOrderData?.pickUp?.shopImage ? newOrderData?.pickUp?.shopImage : 'assets/icon/gray_user.svg'">
+      </div>
+
+      <div class="order-content">
+        <div class="order-title">
+          <p>New Order!</p>
+        </div>
+        <div class="order-card order-earn-weight"  *ngIf="newOrderData?.expectedEarning !== 'N/A'">
+          <p>Expected Earnings: <span class="order-amount">{{newOrderData?.expectedEarning | currency:'INR':'symbol':'0.0-2'}}</span></p>
+        </div>
+        <div class="order-card order-earn-weight" *ngIf="newOrderData?.expectedEarning == 'N/A'">
+          <p>Expected Earnings: <span class="order-amount">{{newOrderData?.expectedEarning}}</span></p>
+        </div>
+        <div class="order-card order-earn-weight">
+          <p>Order Weight: <span class="order-amount">{{newOrderData.orderWeight | number: '0.0-2'}} Kg</span></p>
+        </div>
+
+
+        <div class="order-pick-drop">
+          <div class="column order-card">
+            <div class="pickup-view-kg">
+              <div class="subview-pickup">
+                <span>{{locationToRetailer | number:'0.0-1'}} km</span>
+                <!-- <span>{{locationToRetailer}}</span> -->
+                <img src="assets/icon/ic-round-pickup.svg" alt="icon" />
+              </div>
+              <p>{{newOrderData.pickUp?.location?.address}}</p>
+            </div>
+            <div class="pickup-view" (click)="openMap(newOrderData.pickUp.location.lat,newOrderData.pickUp.location.lon)">
+              <span>Pickup</span>
+              <ion-icon src="assets/icon/ic-directions.svg" alt="icon"></ion-icon>
+            </div>
+          </div>
+          <div class="column order-card">
+            <div class="pickup-view-kg">
+              <div class="subview-pickup">
+                <span>{{newOrderData.distanceFromRetailerToHouseHold}}</span>
+                <img src="assets/icon/ic-round-drop.svg" alt="icon" />
+              </div>
+              <p>{{newOrderData.dropOff?.location?.address}}</p>
+            </div>
+            <div class="pickup-view" (click)="openMap(newOrderData.dropOff.location.lat,newOrderData.dropOff.location.lon)">
+              <span>Drop Off</span>
+              <ion-icon src="assets/icon/ic-directions.svg" alt="icon"></ion-icon>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-details" (click)="openOrderDetailsModal(newOrderData)">
+          <ion-icon class="icon-transaction" src="assets/icon/ic-transaction-order.svg"
+            alt="icon"></ion-icon>
+          <span class="text">Order Details</span>
+          <ion-icon class="icon-down-arrow" src="assets/icon/ic-down-arrow.svg" alt="icon"></ion-icon>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-view">
+      <!-- <ion-button color="light" fill="outline" expand="full" shape="round" class="save btn" type="submit">Reject</ion-button> -->
+      <ion-button class="btn-reject" fill="outline" expand="full" shape="round"
+        (click)="dialogOrderStatusComponentModal('REJECTED', newOrderData)">Reject</ion-button>
+      <ion-button class="btn-accept" fill="solid" expand="full" shape="round" type="submit"
+        (click)="dialogOrderStatusComponentModal('ACCEPTED', newOrderData)">Accept</ion-button>
+    </div>
+  </div>
+</ion-content>

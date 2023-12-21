@@ -1,0 +1,164 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button mode="md" defaultHref="/tabs/home"></ion-back-button>
+          </ion-buttons>
+        <ion-title><strong><span *ngIf="id==0">{{'add'|language:'Add'}}</span><span *ngIf="id!=0">{{'Edit'|language:'Edit'}}</span> {{'employee'|language:'Employee'}}</strong></ion-title>
+        <ion-buttons slot="end">
+            <ion-button class="reset"  mode="ios" fill="clear" (click)="f.reset();form.profilePhotoURL =''">
+                <ion-icon src="./assets/icon/refresh-ccw.svg" ></ion-icon>
+                  {{'reset' | language:'Reset'}}
+            </ion-button>
+            <!-- <ion-text color="primary" slot="end">Reset</ion-text> -->
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+    <div class="profile">
+        <img src="{{form.profilePhotoURL ? form.profilePhotoURL : 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'}}"
+            class="profile_img" />
+        <div class="camera" (click)="presentActionSheet()">
+            <ion-icon color="light" name="camera-outline"></ion-icon>
+        </div>
+    </div>
+
+    <!-- forms for entering details -->
+
+    <form style="display: block" (ngSubmit)="f.form.valid && (id!=0?editEmployee():addEmployee())" #f="ngForm">
+
+        <!-- <div class="inputBox" [ngClass]="f.submitted && organization.invalid?'error':''">
+          <ion-select readonly [(ngModel)]="form.organization" #organization="ngModel" name="organization" mode="ios"
+                    interface="action-sheet" required>
+                <ion-select-option value="sarvm">SarvM</ion-select-option>
+                <ion-select-option value="other">other</ion-select-option>
+            </ion-select>
+                <span class="placeholder">{{'OrgID' | language:'Org ID'}}<span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && organization.invalid">{{'invalidorg'|language:'Invalid Org Id'}}</ion-label>
+        </div> -->
+
+        <!-- <div class="inputBox" (click)="!disablePopup && openFilterModalOrg()" [ngClass]="f.submitted && organization.invalid?'error':''">
+            <ion-input readonly [(ngModel)]="form.organization" #organization="ngModel" name="organization" required></ion-input>
+            <ion-icon color="medium" slot="end" name="add-outline"></ion-icon>
+            <span class="placeholder">{{'OrgId'|language:'Org ID'}} <span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && role.invalid">{{'invalidorganization'|language:'Invalid organization'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" (click)="!disablePopup && openFilterModalOrg()" [ngClass]="f.submitted && organization.invalid?'error':''">
+            <ion-label position="floating">{{'OrgId'|language:'Org ID'}}</ion-label>
+            <ion-input readonly [(ngModel)]="form.organization" #organization="ngModel" name="organization" required></ion-input>
+            <ion-icon color="medium" slot="end" name="add-outline"></ion-icon>
+            <ion-note *ngIf="f.submitted && role.invalid" slot="error">{{'invalidorganization'|language:'Invalid organization'}}</ion-note>
+          </ion-item>
+
+        <!-- <div class="inputBox" *ngIf="id!=0">
+            <ion-input [(ngModel)]="form.employeeId" name="employeeId" disabled></ion-input>
+            <span class="placeholder">{{'employeeId'|language:'Employee ID'}}</span>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" *ngIf="id!=0" disabled>
+            <ion-label position="floating">{{'employeeId'|language:'Employee ID'}}</ion-label>
+            <ion-input [(ngModel)]="form.employeeId" name="employeeId"></ion-input>
+          </ion-item>
+
+        <!-- <div class="inputBox" [ngClass]="f.submitted && managerId.invalid?'error':''" (click)="!disablePopup && openManagerModal()">
+            <ion-input type="text" readonly [(ngModel)]="form.managerId" #managerId="ngModel" name="managerId" required>
+            </ion-input>
+            <span class="placeholder"> {{'ManagerId '|language:'Manager ID'}}<span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && managerId.invalid">{{'invalidmanagerid'|language:'Invalid Manager Id'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" (click)="!disablePopup && openManagerModal()" [ngClass]="f.submitted && organization.invalid?'error':''">
+            <ion-label position="floating">{{'ManagerId '|language:'Manager ID'}}</ion-label>
+            <ion-input readonly [(ngModel)]="form.managerId" #managerId="ngModel" name="managerId" required></ion-input>
+            <ion-note *ngIf="f.submitted && managerId.invalid">{{'invalidmanagerid'|language:'Invalid Manager Id'}}</ion-note>
+          </ion-item>
+        
+        <!-- <div *ngIf="this.form.organization !='sarvm'" (click)="!disablePopup && openManagerModal()" class="inputBox" [ngClass]="f.submitted && managerId.invalid?'error':''">
+            <ion-input type="text" readonly [(ngModel)]="form.managerId" #managerId="ngModel" name="managerId" required>
+            </ion-input>
+            <span class="placeholder"> Sarvm.ai {{'ManagerId '|language:'Manager ID'}}<span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && managerId.invalid">{{'invalidmanagerid'|language:'Invalid Manager Id'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" *ngIf="this.form.organization !='sarvm'" (click)="!disablePopup && openManagerModal()"  [ngClass]="f.submitted && organization.invalid?'error':''">
+            <ion-label position="floating"> Sarvm.ai {{'ManagerId '|language:'Manager ID'}}</ion-label>
+            <ion-input readonly [(ngModel)]="form.managerId" #managerId="ngModel" name="managerId" required></ion-input>
+            <ion-note *ngIf="f.submitted && managerId.invalid">{{'invalidmanagerid'|language:'Invalid Manager Id'}}</ion-note>
+          </ion-item>
+
+        <!-- <div class="inputBox" [ngClass]="f.submitted && mobileNumber.invalid?'error':''">
+            <ion-input pattern="^[0-9]{10}$" #mobileNumber="ngModel" maxlength="10" type="tel" [(ngModel)]="form.mobileNumber" name="mobileNumber" required></ion-input>
+            <span class="placeholder">{{'mobileNumber'|language:'Mobile Number'}}<span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && mobileNumber.invalid">{{'invalidmobilenumber'|language:'Invalid Mobile Number'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" [ngClass]="f.submitted && mobileNumber.invalid?'error':''">
+            <ion-label position="floating">{{'mobileNumber'|language:'Mobile Number'}}</ion-label>
+            <ion-input pattern="^[0-9]{10}$" #mobileNumber="ngModel" maxlength="10" type="tel" [(ngModel)]="form.mobileNumber" name="mobileNumber" required></ion-input>
+            <ion-note *ngIf="f.submitted && mobileNumber.invalid">{{'invalidmobilenumber'|language:'Invalid Mobile Number'}}</ion-note>
+          </ion-item>
+       
+        <!-- <div class="inputBox" (click)="!disablePopup && openFilterModal()" [ngClass]="f.submitted && role.invalid?'error':''">
+            <ion-input readonly [(ngModel)]="form.role" #role="ngModel" name="role" required></ion-input>
+            <ion-icon color="medium" slot="end" name="add-outline"></ion-icon>
+            <span class="placeholder">{{'assignRoles'|language:'Assign Roles'}} <span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && role.invalid">{{'invalidrole'|language:'Invalid Role'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" (click)="!disablePopup && openFilterModal()" [ngClass]="f.submitted && role.invalid?'error':''">
+            <ion-label position="floating">{{'assignRoles'|language:'Assign Roles'}} </ion-label>
+            <ion-input readonly [(ngModel)]="form.role" #role="ngModel" name="role" required></ion-input>
+            <ion-icon color="medium" slot="end" name="add-outline"></ion-icon>
+            <ion-note *ngIf="f.submitted && mobileNumber.invalid">{{'invalidrole'|language:'Invalid Role'}}</ion-note>
+          </ion-item>
+        <!-- <div class="inputBox" [ngClass]="f.submitted && fullName.invalid?'error':''"> -->
+        <!-- <div class="inputBox" [ngClass]="f.submitted && fullName.invalid?'error':''">
+            <ion-input pattern="^[a-zA-Z ]*$" [(ngModel)]="form.fullName" #fullName="ngModel" name="fullName"
+                (ionChange)="noWhitespaceValidator($event.target)" required></ion-input>
+            <span class="placeholder">{{'fullName'|language:'Full Name'}} <span id="star">*</span></span>
+            <ion-label *ngIf="f.submitted && fullName.invalid">{{'Invalid'|language:'Invalid Full Name'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" [ngClass]="f.submitted && fullName.invalid?'error':''">
+            <ion-label position="floating">{{'fullName'|language:'Full Name'}}</ion-label>
+            <ion-input pattern="^[a-zA-Z ]*$" [(ngModel)]="form.fullName" #fullName="ngModel" name="fullName"
+            (ionChange)="noWhitespaceValidator($event.target)" required></ion-input>
+            <ion-note *ngIf="f.submitted && fullName.invalid">{{'Invalid'|language:'Invalid Full Name'}}</ion-note>
+          </ion-item>
+      
+        <!-- <div class="inputBox" [ngClass]="f.submitted && email.invalid?'error':''">
+            <ion-input type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" [(ngModel)]="form.email" #email="ngModel" name="email"></ion-input>
+            <span class="placeholder">{{'invalidemail'|language:'Invalid Email'}}</span>
+            <ion-label *ngIf="f.submitted && email.invalid">{{'invalidemail'|language:'Invalid Email'}}</ion-label>
+        </div> -->
+        <ion-item mode="md" fill="outline" shape="round" [ngClass]="f.submitted && email.invalid?'error':''">
+            <ion-label position="floating">{{'email'|language:'Email'}}</ion-label>
+            <ion-input type="email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" [(ngModel)]="form.email" #email="ngModel" name="email"></ion-input>
+            <ion-note *ngIf="f.submitted && email.invalid">{{'invalidemail'|language:'Invalid Email'}}</ion-note>
+          </ion-item>
+
+       <!-- <div class="inputBox" (click)="!disablePopup && openDateModal()" [ngClass]="f.submitted && dateofJoining.invalid?'error':''">
+            <ion-input readonly [ngModel]="form.dateofJoining | date: 'dd MMM YYYY'" #dateofJoining="ngModel" name="dateofJoining" required></ion-input>
+            <ion-icon color="primary" name="calendar-outline"></ion-icon>
+            <span class="placeholder">{{'DateofJoining '|language:'Date of Joining'}}</span>
+            <ion-label *ngIf="f.submitted && dateofJoining.invalid">{{'Invaliddoj'|language:'Invalid DOJ'}}</ion-label>
+        </div> -->
+
+        <ion-item mode="md" fill="outline" shape="round" (click)="!disablePopup && openDateModal()" [ngClass]="f.submitted && dateofJoining.invalid?'error':''">
+            <ion-label position="floating">{{'DateofJoining '|language:'Date of Joining'}}</ion-label>
+            <ion-input readonly [ngModel]="form.dateofJoining | date: 'dd MMM YYYY'" #dateofJoining="ngModel" name="dateofJoining" required></ion-input>
+            <ion-icon color="primary" name="calendar-outline" class="calender"></ion-icon>
+            <ion-note *ngIf="f.submitted && dateofJoining.invalid">{{'Invaliddoj'|language:'Invalid DOJ'}}</ion-note>
+          </ion-item>
+        <!-- <div class="inputBox" [ngClass]="f.submitted && pincode.invalid?'error':''">
+            <ion-input [(ngModel)]="form.pincode" minlength="6" maxlength="6" type="tel" #pincode="ngModel" name="pincode" required></ion-input>
+            <span class="placeholder">{{'pincode'|language:'Pincode'}}<span id="star">*</span></span> 
+             <ion-label *ngIf="f.submitted && pincode.invalid">{{'Invalidpincode'|language:'Invalid pincode'}}</ion-label>
+         </div> -->
+         <ion-item fill="outline" shape="round" mode="md" [ngClass]="f.submitted && pincode.invalid?'error':''">
+            <ion-label position="floating">{{'pincode'|language:'Pincode'}}</ion-label>
+            <ion-input [(ngModel)]="form.pincode" minlength="6" maxlength="6" type="tel" #pincode="ngModel" name="pincode" required></ion-input>
+            <ion-note *ngIf="f.submitted && pincode.invalid">{{'Invalidpincode'|language:'Invalid pincode'}}</ion-note>
+          </ion-item>
+        <!-- <div class="inputBox" [ngClass]="f.submitted && fullName.invalid?'error':''"> -->
+        <ion-button mode="ios" type="submit" class="btn" color="primary" ><span *ngIf="id=='0'"  >{{'save&Continue'|language:'Save & Continue'}}</span><span *ngIf="id!='0'">{{'Update&Continue'|language:'Update & Continue'}}</span></ion-button>
+    </form>
+
+
+</ion-content>

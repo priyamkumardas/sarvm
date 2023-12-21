@@ -1,0 +1,295 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    ion-icon {
+        margin: auto 3vw;
+        color: #10bab2;
+    }
+}
+ion-toolbar {
+    display: flex;
+    ion-title {
+        font-weight: bold;
+        font-size: 18px;
+        justify-content: center;
+        place-content: center;
+    }
+    ion-icon {
+        margin: auto 0;
+        font-size: 5vw;
+        padding: 0 0 0 3vw;
+        color: #a42c24;
+    }
+}
+
+ion-searchbar {
+    margin: 18px 18px 0px 18px;
+    width: 92%;
+    --icon-color: var (--ion-color-primary);
+    --box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    font-family: "AvertaStd-Regular";
+    font-size: 16px;
+    line-height: 19px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: rgba(44, 51, 72, 0.6);
+    ::ng-deep {
+        .searchbar-input-container {
+            .searchbar-input {
+                border-radius: 20px;
+                //any style that you want to implement on your searchbar
+            }
+        }
+    }
+}
+
+ion-modal {
+    --background: #0000003b !important;
+}
+
+.order-segment-view {
+    margin-bottom: 0px;
+    margin-left: 10px;
+    margin-right: 10px;
+     
+    ion-segment-button {
+        //width: 50%;
+        font-size: 15px;
+        text-transform: none;
+        --color-checked: #a42c24;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: transparent !important;
+        //border-radius: 10px !important;
+        img {
+            width: 22px;
+            height: 22px;
+            padding-right: 6px;
+            filter: none;
+        }
+        ion-label {
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 12px;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.1px;
+            color: #333333;
+            text-transform: none;
+        }
+    }
+    .segment-button-checked ::ng-deep {
+        place-self: center;
+        --color: #FFFFFF;
+        font-weight: 700;
+        font-size: 16px;
+        border-radius: 12px;
+        height: 34px;
+        min-height: 34px;
+        background: #a42c24;
+        --indicator-height: 0px;
+        img{
+            width: 22px;
+            height: 22px;
+            padding-right: 6px;
+            // filter: invert(100%) sepia(95%) saturate(20%) hue-rotate(135deg) brightness(105%) contrast(215%) !important;       
+        }
+        ion-label {
+            font-family: "Poppins";
+            font-size: 16px;
+            line-height: 14px;
+            align-items: center;
+            color: #ffffff !important;
+            text-transform: none;
+        }
+    }
+}
+
+.select-time-section {
+    align-items: center;
+    margin-bottom: 8px;
+    ion-segment-button {
+        min-height: 31px;
+        border-color: #e62100;
+        color: #e62100;
+        border-width: thin;
+        border-style: solid;
+        background: linear-gradient(0deg, rgba(164, 44, 36, 0.1), rgba(164, 44, 36, 0.1)), #ffffff;
+        border: 1px solid #a42c24;
+        --background-checked: #a42c24;
+        border-radius: 30px;
+        margin-left: 8px;
+        ion-label {
+         
+            font-size: 13px;
+            // line-height: 14px;
+            display: flex;
+            align-items: center;
+            //color: #a42c24;
+            text-transform: none;
+        }
+    }
+    .segment-button-checked {
+        --color: #ffffff;
+        font-weight: 700;
+        font-size: 16px;
+        background: #a42c24;
+        --indicator-height: 0px;
+        ion-label {
+            font-family: "AvertaStd-Semibold";
+            font-size: 14px;
+            line-height: 14px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
+            text-transform: none;
+        }
+    }
+    .calendar-img {
+        img {
+            width: 50px;
+            height: 50px;
+        }
+    }
+}
+
+.list-data-today {
+    width: 95%;
+    box-sizing: border-box;
+    display: flex;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    padding: 10px;
+    margin: 12px 12px 12px 12px;
+    .order-item {
+        width: 100%;
+        padding: 0px;
+        margin: 0px;
+        ion-row {
+            height: 80px;
+            padding: 0px;
+            margin: 0px;
+            ion-col {
+                padding: 0px;
+                margin: 0px;
+                text-align: center;
+                .today-date {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #747474;
+                    margin: 6px 0px 0px 0px;
+                    text-align: right;
+                }
+                .today-order {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 14px;
+                    color: #464646;
+                    margin: 8px 0px 0px 0px;
+                    text-align: start;
+                }
+                ion-icon {
+                    width: 30px;
+                    height: 50px;
+                }
+                .today-amount {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    text-align: start;
+                    color: #464646;
+                    margin: 8px 0px 0px 0px;
+                    .amount {
+                        color: #037022;
+                    }
+                }
+            }
+            .right-item{
+                text-align: right;
+            }
+        }
+        .timeline-view{
+
+            .timeline-wrapper {
+                width: 100%;
+            }
+            
+            .timeline-wrapper .middle-line {
+                position: absolute;
+                width: 84%;
+                margin-left: 16px;
+                border: 1px solid #d9d9d9;
+            }
+            
+            .left-circle .date {
+                transform: translateY(-43%);
+                width: 18px;
+                height: 18px;
+                border-radius: 100%;
+                background: #fff;
+                border: 3px solid #fcc464;
+            }
+            .right-circle .date {
+                transform: translateY(-43%);
+                width: 18px;
+                height: 18px;
+                border-radius: 100%;
+                background: #fff;
+                border: 3px solid #037022;
+            }
+            
+            .date p {
+                text-align: center;
+                margin-top: 3px;
+                margin-bottom: 0px;
+            }
+            
+            .content-text {
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 18px;
+                color: #747474;
+            }
+            
+            .right-top {
+                float: left;
+                width: 50%;
+                text-align: start;
+            }
+            .left-top {
+                float: right;
+                width: 50%;
+                text-align: right;
+                text-align: -webkit-right;
+            }
+        }
+    }
+}
+
+.footer {
+    display: block;
+    position: relative;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0px;
+    background-image: none;
+    box-shadow: 0px 1px 10px 1px rgba(2, 27, 26, 0.1);
+    ion-icon {
+        font-size: 25px;
+    }
+}

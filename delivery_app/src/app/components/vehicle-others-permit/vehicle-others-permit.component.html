@@ -1,0 +1,55 @@
+<div>
+  <form [formGroup]="vehiclePermitDocForm" (ngSubmit)="saveVehiclePermitDocDetails()">
+    <!-- updateOrAddVehiclePermit ? updateVehiclePermitDocDetails() :  -->
+    <div class="segment">
+      <div>
+        <ion-text class="choose-any">Please choose any one</ion-text>
+        <ion-radio-group value="custom-checked" [value]="checkVehiclePrOption" [(ngModel)]="vehicleDocInfo.permit_type"
+          (ionChange)="checkVehiclePermitOption($event)" formControlName="permitType">
+          <ion-list lines="none">
+            <ion-item>
+              <ion-radio slot="start" value="AllIndia" [disabled]="true"></ion-radio>
+              <ion-label>All India Permit</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-radio slot="start" value="Multistate" [disabled]="true"></ion-radio>
+              <ion-label>Multi - State Permit</ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-radio slot="start" value="state" [disabled]="true"></ion-radio>
+              <ion-label>State Level Permit</ion-label>
+            </ion-item>
+          </ion-list>
+        </ion-radio-group>
+      </div>
+      <div class="documentInput div-disabled" (click)="chooseImage('vehiclePermit')">
+        <ng-container>
+          <img [src]="vehiclePermitImage ? vehiclePermitImage: '/assets/icon/ic-vehicle-licence.svg'" alt=""
+            class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!vehiclePermitImage">
+            <label for="pan">
+              <u>{{'uploadVehiclePermitDocs' | language : 'Upload Vehicle Permit Docs'}}</u>
+            </label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="vehiclePermitImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('others')">
+            {{'re-upload' | language :'Re-Upload'}}
+          </ion-button>
+        </div>
+      </div>
+
+      <div class="kyc-footer div-disabled" (click)="commonService.featureNotAvailable()">
+        <div class="footer">
+          <ion-button *ngIf="!isProfilePage" color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">Skip</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">
+            {{ !isProfilePage ? ('save&Continue'|language:'Save & Continue') : ('save'|language:'Save')}}
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

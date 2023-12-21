@@ -1,0 +1,94 @@
+<app-header></app-header>
+
+
+<ion-content class="customContainer">
+  <!-- <ion-refresher mode="ios" slot="fixed" (ionRefresh)="pullToRefresh($event)">
+    <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles"
+      refreshingText="Refreshing..."></ion-refresher-content>
+  </ion-refresher> -->
+
+  <!-- Sub Header START -->
+  <ion-grid class="subHeader">
+    <ion-row class="ion-justify-content-around ion-align-items-center">
+      <ion-col size="12" size-sm="4" size-md="4" size-lg="4">
+        <ion-toolbar mode="md">
+          <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+          </ion-buttons>
+          <ion-title class="page-title" slot="start">Orders</ion-title>
+        </ion-toolbar>
+      </ion-col>
+      <ion-col size="12" size-sm="4" size-md="4" size-lg="4">
+        <ion-searchbar [debounce]="500" search-icon="search-outline" id="myInput" mode="md" show-clear-button="focus"
+          placeholder="Search" (ionChange)="searchFunction()" placeholder="Order ID or Customer Number"  [(ngModel)]="searchLang"></ion-searchbar>
+      </ion-col>
+      <ion-col size="12" size-sm="4" size-md="4" size-lg="4">        
+        <ion-item lines="none" class="ion-float-right" routerLink = "/order-history">
+          <ion-img slot="start" src="/assets/icon/history.svg"></ion-img>
+          <ion-label color="primary">History</ion-label>
+        </ion-item>
+        <!-- <ion-item lines="none" class="ion-float-right">
+          <ion-img slot="start" src="/assets/icon/calendar.svg"></ion-img>
+          <ion-label color="primary">Today</ion-label>
+        </ion-item> -->
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- Sub Header END -->
+
+  <ion-segment [scrollable]="true" mode="md" value="{{selectedSegment | lowercase}}"
+    (ionChange)="changeSegment($event)">
+    <!-- <ion-segment-button *ngFor="let tab of tabs" value="{{ tab |  lowercase }}"> -->
+    <ion-segment-button *ngFor="let tab of tabs" value="{{ OrderStatus[tab] | lowercase }}">
+      <ion-label>{{tab | titlecase}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <ng-container>
+    <div class="day-navbar"
+      *ngIf="selectedSegment === OrderStatus.NEW || OrderStatus.ACCEPTED || selectedSegment === OrderStatus.PROCESSING">
+      <p class="dayFilter" (click)="activeDay('All')" [ngClass]="{'filterActive': activeNav==='All'}">{{'all' | language
+        : 'All'}}</p>
+      <p class="dayFilter" (click)="activeDay('Today')" [ngClass]="{'filterActive': activeNav==='Today'}">{{'today' |
+        language : 'Today'}}</p>
+      <p class="dayFilter" (click)="activeDay('Tomorrow')" [ngClass]="{'filterActive': activeNav==='Tomorrow'}">
+        {{'tomorrow' | language : 'tomorrow'}}
+      </p>
+      <div class="dateFilter" id="dateFil" *ngIf="this.orderList?.data?.length != 0">
+        <p><u>{{defaultDate | date:'dd MM yyyy'}}</u></p>
+        <ion-modal trigger="dateFil" handleBehavior="cycle" show-backdrop="false" side="end">
+          <ng-template>
+            <app-date-time-picker [isDisabled]="this.orderList?.data?.length == 0 ? true : false" [value]="defaultDate"
+              [date_format]="format" (datePickerValue)="activeDay($event)" color="none">
+            </app-date-time-picker>
+          </ng-template>
+        </ion-modal>
+        <ion-icon name="calendar-clear-outline"></ion-icon>
+      </div>
+    </div>
+    <div class="timing ion-hide">
+      <p class="day">{{selectedDay}}</p>
+    </div>
+  </ng-container>
+
+
+  <ng-container *ngIf="orders?.length != 0; else empty_content">
+    <app-order-container (orderStateChange)="changeTab($event)" [order]="orders"
+      [selected-tab]="selectedSegment"></app-order-container>
+  </ng-container>
+
+  <ng-template #empty_content>
+    <app-empty-list></app-empty-list>
+  </ng-template>
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="pullToRefresh($event)">
+      <ion-icon name="reload-outline" color="light"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+<!-- <ion-footer class="ion-no-border footer">
+  <app-bottom-tab-view [tabsTextAvailable]="false"></app-bottom-tab-view>
+</ion-footer> -->

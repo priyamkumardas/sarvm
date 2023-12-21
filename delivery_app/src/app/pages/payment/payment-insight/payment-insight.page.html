@@ -1,0 +1,216 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button slot="start" color="primary" defaultHref="/home" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'Payments' | language : 'Payments'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+  <ion-segment class="segment-view" [scrollable]="true" mode="md" [value]="segment" [(ngModel)]="segment" 
+    (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="TODAY" layout="icon-start">
+      <img *ngIf="segment !== 'TODAY'" src="assets/icon/inactiveCalender.svg" alt="icon" />
+      <img *ngIf="segment == 'TODAY'" src="assets/icon/ic-calendar-red.svg" alt="icon" />
+      <ion-label>{{'today' | language : 'Today'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="WEEK" layout="icon-start">
+      <img *ngIf="segment !== 'WEEK'" src="assets/icon/ic-calendar-time.svg" alt="icon" />
+      <img *ngIf="segment == 'WEEK'" src="assets/icon/activeCalender.svg" alt="icon" />
+      <ion-label>{{'Thisweek ' | language : 'This Week'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="MONTH" layout="icon-start">
+      <img *ngIf="segment !== 'MONTH'" src="assets/icon/ic-calendar-time.svg" alt="icon" />
+      <img *ngIf="segment == 'MONTH'" src="assets/icon/activeCalender.svg" alt="icon" />
+      <ion-label>{{'ThisMonth ' | language : 'This Month '}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button class="custom-calander-segment" value="customdate" id="tripDateFilt">
+      <img *ngIf="segment !== 'customdate'" src="assets/icon/inactiveCalender.svg" alt="icon" />
+      <img *ngIf="segment == 'customdate'" src="assets/icon/ic-calendar-red.svg" alt="icon" />
+    </ion-segment-button>
+  </ion-segment>
+  </div>
+  <div>
+    <ion-modal trigger="tripDateFilt" handleBehavior="cycle" show-backdrop="false" side="end">
+      <ng-template>
+        <app-date-time-picker [formType]="'paymentinsight'" [value]="defaultDate" [date_format]="format"
+          (datePickerValue)="openDateSelectModal($event)">
+        </app-date-time-picker>
+      </ng-template>
+    </ion-modal>
+  </div>
+  <div class="card-earning-section">
+    <ion-text class="total-earn" *ngIf="segment === 'TODAY'">{{'TodaysEarnings'|language:'Todays Earnings'}}:
+      {{allPaymentsInsights?.earning !== "N/A" ? allPaymentsInsights?.earning : "N/A"}}</ion-text>
+    <ion-text class="total-earn" *ngIf="segment === 'WEEK'">{{'ThisWeeksEarnings'|language:'This Weeks Earnings'}}:
+      {{allPaymentsInsights?.earning !== "N/A" ? allPaymentsInsights?.earning : "N/A"}}</ion-text>
+    <ion-text class="total-earn" *ngIf="segment === 'MONTH'">{{'ThisMonthsEarnings'|language:'This Months Earnings'}}:
+      {{allPaymentsInsights?.earning !== "N/A" ? allPaymentsInsights?.earning : "N/A"}}</ion-text>
+    <ion-text class="total-earn" *ngIf="segment === 'customdate'">{{'Earningson'|language:'Earnings on'}} {{defaultDate
+      | date:"dd MMM, YYYY"}}: {{allPaymentsInsights?.earning !== "N/A" ? allPaymentsInsights?.earning : "N/A"}}</ion-text>
+  </div>
+
+  <div class="card-amout-status">
+    <ion-grid class="panel-new-trips">
+      <ion-row class="ion-justify-content-evenly">
+        <ion-col size="5" class="ion-align-items-center">
+          <ion-card>
+            <ion-text class="status-amount-text">{{'Receivedamount'|language:'Received amount'}}</ion-text>
+            <h4 class="status-amount amount">{{allPaymentsInsights?.receivedAmount | currency:'INR':'symbol':'0.0-2'}}</h4>
+          </ion-card>
+        </ion-col>
+        <ion-col size="5">
+          <ion-card>
+            <ion-text class="status-amount-text">{{'Pendingamount'|language:'Pending amount'}}</ion-text>
+            <h4 class="status-amount">{{allPaymentsInsights?.pendingAmount | currency:'INR':'symbol':'0.0-2'}}</h4>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <div *ngIf="segment === 'TODAY'">
+    <div *ngFor="let item of allPaymentsInsights?.history" class="list-data-today">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <p class="today-date" *ngIf="item.deliveredOn !== null">{{item.deliveredOn | date:"MMM dd, y, h:mm a"}}</p>
+            <p class="today-date" *ngIf="item.deliveredOn == null">{{item.date | date:"MMM dd, YYYY"}} {{item.time}}</p>
+            <h4 class="today-name">{{item.name}}</h4>
+            <h4 class="today-order">{{'order'|language:'Order'}} # {{item.orderId}}</h4>
+          </ion-col>
+          <ion-col size="4">
+            <ion-icon *ngIf="item.status == 'PENDING'" src="assets/icon/ic-pending.svg"></ion-icon>
+            <ion-icon *ngIf="item.status == 'RECEIVED'" src="assets/icon/ic-received.svg"></ion-icon>
+            <h4 class="today-amount"><span class="amount">{{item?.amount + (item?.expectedEarning !== 'N/A' ? item?.expectedEarning : 0) - (item.discount ?
+                item?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span>&nbsp;<span>{{item.status}}</span></h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div *ngIf="item.status == 'PENDING'" class="reminderCall">
+        <ion-button fill="clear" expand="full" (click)="getSendPaymentReminderRetailer(item?.tripId)">
+          <ion-icon slot="start" src="assets/icon/ic-color-bell.svg"></ion-icon>
+          {{'SendReminder'|language:'Send Reminder'}}
+        </ion-button>
+        <ion-button fill="clear" expand="full" href="tel:{{item?.phoneNumber}}">
+          <ion-icon slot="start" src="assets/icon/ic-call.svg"></ion-icon>
+          {{'call'|language:'Call'}}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <div *ngIf="segment === 'WEEK'">
+    <!-- <ion-item-divider class="left-padd"  color="light" sticky> {{ item | groupBy: 'event.time'}} </ion-item-divider> -->
+    <div *ngFor="let itemDate of allPaymentsInsights | groupByDate">
+      <ion-item-divider class="left-padd" color="light" sticky>{{itemDate.date | date:"EEEE"}}</ion-item-divider>
+      <div *ngFor="let item of itemDate.events" class="list-data-today">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <p class="today-date" *ngIf="item.deliveredOn !== null">{{item.deliveredOn | date:"MMM dd, y, h:mm a"}}</p>
+              <p class="today-date" *ngIf="item.deliveredOn == null">{{item.date | date:"MMM dd, YYYY"}} {{item.time}}</p>
+              <h4 class="today-name">{{item.name}}</h4>
+              <h4 class="today-order">{{'order'|language:'Order'}} # {{item.orderId}}</h4>
+            </ion-col>
+            <ion-col size="4">
+              <ion-icon *ngIf="item.status == 'PENDING'" src="assets/icon/ic-pending.svg"></ion-icon>
+              <ion-icon *ngIf="item.status == 'RECEIVED'" src="assets/icon/ic-received.svg"></ion-icon>
+
+              <h4 class="today-amount"><span class="amount">{{item?.amount + (item?.expectedEarning !== 'N/A' ? item?.expectedEarning : 0) - (item.discount ? item?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span>&nbsp;<span>{{item.status}}</span></h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div *ngIf="item.status == 'PENDING'" class="reminderCall">
+          <ion-button fill="clear" expand="full" (click)="getSendPaymentReminderRetailer(item?.tripId)">
+            <ion-icon slot="start" src="assets/icon/ic-color-bell.svg"></ion-icon>
+            {{'SendReminder'|language:'Send Reminder'}}
+          </ion-button>
+          <ion-button fill="clear" expand="full" href="tel:{{item?.phoneNumber}}">
+            <ion-icon slot="start" src="assets/icon/ic-call.svg"></ion-icon>
+            {{'call'|language:'Call'}}
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div *ngIf="segment === 'MONTH'">
+    <div *ngFor="let itemDate of allPaymentsInsights | groupByDate" >
+      <ion-item-divider class="left-padd" color="light" sticky>{{itemDate.date | date:"dd MMMM"}}</ion-item-divider>
+      <div *ngFor="let item of itemDate.events" class="list-data-today">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8">
+              <p class="today-date" *ngIf="item.deliveredOn !== null">{{item.deliveredOn | date:"MMM dd, y, h:mm a"}}</p>
+              <p class="today-date" *ngIf="item.deliveredOn == null">{{item.date | date:"MMM dd, YYYY"}} {{item.time}}</p>
+              <h4 class="today-name">{{item.name}}</h4>
+              <h4 class="today-order">{{'order'|language:'Order'}} # {{item.orderId}}</h4>
+            </ion-col>
+            <ion-col size="4">
+              <ion-icon *ngIf="item.status == 'PENDING'" src="assets/icon/ic-pending.svg"></ion-icon>
+              <ion-icon *ngIf="item.status == 'RECEIVED'" src="assets/icon/ic-received.svg"></ion-icon>
+
+              <h4 class="today-amount"><span class="amount">{{item?.amount + (item?.expectedEarning !== 'N/A' ? item?.expectedEarning : 0) - (item.discount ? item?.discount : 0)  | currency:'INR':'symbol':'0.0-2'}}</span>&nbsp;<span>{{item.status}}</span></h4>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <div *ngIf="item.status == 'PENDING'" class="reminderCall">
+          <ion-button fill="clear" expand="full" (click)="getSendPaymentReminderRetailer(item?.tripId)">
+            <ion-icon slot="start" src="assets/icon/ic-color-bell.svg"></ion-icon>
+            {{'SendReminder'|language:'Send Reminder'}}
+          </ion-button>
+          <ion-button fill="clear" expand="full" href="tel:{{item?.phoneNumber}}">
+            <ion-icon slot="start" src="assets/icon/ic-call.svg"></ion-icon>
+            {{'call'|language:'Call'}}
+          </ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="segment === 'customdate'">
+    <ion-item-divider class="left-padd" *ngIf="displayDateFormate" color="light"
+      sticky>{{displayDateFormate}}</ion-item-divider>
+    <div *ngFor="let item of allPaymentsInsights?.history" class="list-data-today">
+      <ion-grid>
+        <ion-row>
+          <ion-col size="8">
+            <p class="today-date" *ngIf="item.deliveredOn !== null">{{item.deliveredOn | date:"MMM dd, y, h:mm a"}}</p>
+            <p class="today-date" *ngIf="item.deliveredOn == null">{{item.date | date:"MMM dd, YYYY"}} {{item.time}}</p>
+            <h4 class="today-name">{{item.name}}</h4>
+            <h4 class="today-order">{{'order'|language:'Order'}} # {{item.orderId}}</h4>
+          </ion-col>
+          <ion-col size="4">
+            <ion-icon *ngIf="item.status == 'PENDING'" src="assets/icon/ic-pending.svg"></ion-icon>
+            <ion-icon *ngIf="item.status == 'RECEIVED'" src="assets/icon/ic-received.svg"></ion-icon>
+
+            <h4 class="today-amount"><span class="amount">{{item?.amount + (item?.expectedEarning !== 'N/A' ? item?.expectedEarning : 0) - (item.discount ?
+                item?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span>&nbsp;<span>{{item.status}}</span></h4>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <div *ngIf="item.status == 'PENDING'" class="reminderCall">
+        <ion-button fill="clear" expand="full" (click)="getSendPaymentReminderRetailer(item?.tripId)">
+          <ion-icon slot="start" src="assets/icon/ic-color-bell.svg"></ion-icon>
+          {{'SendReminder'|language:'Send Reminder'}}
+        </ion-button>
+        <ion-button fill="clear" expand="full" href="tel:{{item?.phoneNumber}}">
+          <ion-icon slot="start" src="assets/icon/ic-call.svg"></ion-icon>
+          {{'call'|language:'Call'}}
+
+        </ion-button>
+      </div>
+    </div>
+  </div>
+
+</ion-content>
+<ion-footer class="ion-no-border footer">
+  <app-bottom-tab-view [tabsTextAvailable]="false"></app-bottom-tab-view>
+</ion-footer>

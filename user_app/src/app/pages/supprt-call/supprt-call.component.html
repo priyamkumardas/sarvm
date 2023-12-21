@@ -1,0 +1,15 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p class="ion-text-center">Tap to Call</p>
+    <a href="tel:{{data.seller.phone}}" class="container" *ngFor="let data of order">
+      <img class="image" [src]="data.shop.image" onerror=" this.onerror = null ;this.src ='https://media.istockphoto.com/vectors/storefront-flat-design-ecommerce-icon-vector-id912819604?k=20&m=912819604&s=612x612&w=0&h=tUJrqTFeqBRNSWCFyTJLU1ekulp5PfnF6w5nngqHCV4='" alt="order" />
+      <div class="detailes">
+        <p class="OId">Order ID <span class="orderId">{{ data.orderID}} </span> <span class="date">{{data.delivery.deliveryDate | date:'dd MMM yyyy'}}</span></p>
+        <p class="shopName">{{data.shop.name | titlecase}}</p>
+      </div>
+    </a>
+  </ion-card>
+</ion-footer>

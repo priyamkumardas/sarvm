@@ -1,0 +1,95 @@
+<div>
+  <form [formGroup]="rcDocForm" (ngSubmit)="saveRCDocDetails()">
+    <!-- updateOrAddRc ? updateRCDocDetails() : -->
+    <div class="segment">
+      <div class="documentInput" (click)="chooseImage('RC')">
+        <ng-container>
+          <img [src]="rcLicenseImage ? rcLicenseImage: '/assets/icon/ic-vehicle-licence.svg'" alt="" class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!rcLicenseImage">
+            <label for="pan">
+              <u>{{'UploadRCLicense' | language : 'Upload RC License'}}</u>
+            </label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="rcLicenseImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('RC')">
+            {{'re-upload' | language :'Re-Upload'}}
+          </ion-button>
+        </div>
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.rc_number" formControlName="rcNumber" id="rcNumber"
+              class="input" (keypress)="keyPressNumbers($event)"></ion-input>
+            <label for="idCard" class="label">{{'RCNo.'|language:'RC No.'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.name" formControlName="name" class="input"
+              (keypress)="onKeyPress($event)"></ion-input>
+            <label for="name" class="label">{{'name' | language : 'Name'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.vehicle_number" formControlName="vehicleNumber"
+              id="vehicleNumber" class="input"></ion-input>
+            <label class="label">{{'VehicleNumber' | language : 'Vehicle Number'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.rc_valid_from" formControlName="rcValidFrom"
+              [readonly]="true" id="rcValidFrom" class="inputDiff" (click)="openDateSelectModal('rcValidFrom')">
+            </ion-input>
+            <label class="label">{{'rcValidFrom' | language : 'Valid From'}}<span id="star">*</span></label> -->
+
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.rc_valid_from" [readonly]="true" formControlName="rcValidFrom" id="dateFiltRcFrom" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <ion-modal trigger="dateFiltRcFrom" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'rcDocForm'"
+                      [value]="rcValidFrom" [date_format]="format" (datePickerValue)="openDateSelectModal('rcValidFrom', $event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'ValidFrom' | language : 'Valid From'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.rc_valid_upto" formControlName="rcValidUpto"
+              [readonly]="true" id="rcValidUpto" class="inputDiff" (click)="openDateSelectModal('rcValidUpto')">
+            </ion-input>
+            <label class="label">{{'rcValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label> -->
+
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.rc_valid_upto" [readonly]="true" formControlName="rcValidUpto" id="dateFiltRcUpto" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <ion-modal trigger="dateFiltRcUpto" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'rcDocForm'" [date_info]="dateCondition"
+                      [value]="rcValidUpto" [date_format]="format" (datePickerValue)="openDateSelectModal('rcValidUpto', $event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'ValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="kyc-footer">
+        <div class="footer">
+          <ion-button *ngIf="!isProfilePage" color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">{{'skip'|language:'Skip'}}</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">
+            {{ !isProfilePage ? ('save&Continue'|language:'Save & Continue') : ('save'|language:'Save')}}
+          </ion-button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

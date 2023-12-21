@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar mode="ios">
+    <!-- <ion-title>{{'home' | language:'Home'}}</ion-title> -->
+    <ion-item lines="none" button detail="false" routerLink="/address-list" [disabled]="addressdisable">
+      <ion-avatar slot="start" class="location-icons">
+        <ion-icon *ngIf="!currentAddress.addressType" name="location-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="currentAddress.addressType == 'Other'" name="location-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="currentAddress.addressType == 'Home'" name="home-outline" size="large"></ion-icon>
+        <ion-icon *ngIf="currentAddress.addressType == 'Work'" name="bag-outline" size="large"></ion-icon>
+      </ion-avatar>
+      <div style="width: 80%;" *ngIf="!currentAddress">
+        <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+      </div>
+      <div *ngIf="currentAddress" style="display: flex;flex-direction: column;width: -webkit-fill-available;">
+        <ion-label class="addressType">
+          {{currentAddress.addressType ? currentAddress.addressType : 'Using GPS'}}
+        </ion-label>
+        <span class="address">{{currentAddress.display_name}}...</span>
+      </div>
+    </ion-item>
+    <ion-buttons slot="end">
+      <ion-button (click)="refferalservice.startWalletActivity()">
+        <img class="wallet" src="{{commonservice.userData?.userType === 'EMPLOYEE_SH' || commonservice.userData?.userType === 'EMPLOYEE_SSO' || commonservice.userData?.userType === 'EMPLOYEE_CO' ?'/assets/employee/Employee.svg':'/assets/employee/Customer.svg'}}" srcset="" />
+      </ion-button>
+      <ion-button routerLink="/profile">
+        <ion-icon name="person-circle-sharp" class="" ion-icon size="large"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-progress-bar mode="ios" color="primary" type="indeterminate" *ngIf="commonservice.isLoading"></ion-progress-bar>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-no-border">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" offset="0">
+        <img src="/assets/images/Refer a friend.svg" width="auto" alt="SarvM.AI" srcset="" (click)="refferalModule()" />
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-grid>
+    <ion-row style="margin-bottom:6px;">
+      <ion-col size="3" size-sm="2" size-md="2" size-lg="1" *ngFor="let category of categoryList">
+        <div class="box" (click)="moveToStoreListing(category.title)">
+          <img src="{{category.image}}" onerror=" this.onerror = null ;this.src ='/assets/images/fruit-basket.jpg'" alt="" srcset="">
+          <p>{{category.title}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="navbaar">
+    <button class="box1" ion-button color="primary" fill="outline" (click)="openFilterModal('sortBy')" [disabled]="isClick">
+      <p>{{'filters' | language}}</p>
+      <ion-icon name="funnel-outline" style="padding: 0.2em;"></ion-icon>
+    </button>
+    <div class="box1" ion-button color="primary" fill="outline" (click)="this.commonservice.featureNotAvailable()">
+      <p>{{'sortBy' | language}}</p>
+      <ion-icon name="chevron-down-outline" style="padding: 0.2em;"></ion-icon>
+    </div>
+    <div class="box1" ion-button color="primary" fill="outline" (click)="this.commonservice.featureNotAvailable()">
+      <p *ngIf="filter.isVeg">{{'vegetarian' | language :'Veg'}}</p>
+      <p *ngIf="!filter.isVeg">{{'nonVegetarian' | language : 'Non-Veg'}}</p>
+      <!-- <ion-icon name="leaf-outline" style="padding: 0.2em;"></ion-icon> -->
+      <img *ngIf="filter.isVeg" src="assets/img/leaf.svg">
+      <img *ngIf="!filter.isVeg" src="assets/img/meat.svg">
+    </div>
+    <div class="box1" ion-button color="primary" fill="outline" (click)="this.commonservice.featureNotAvailable()">
+      <p>{{'ratings'|language:'Ratings'}}</p>
+      <p style="margin-left:4px">{{filter.ratingNumber}}+</p>
+    </div>
+  </div>
+  <!-- <p class="txt"> {{'shopByCategories' | language:"Shop By Categories"}}</p> -->
+  <p class="txt">{{'nearYou' | language:"Near You"}} <span style="font-size: 14px;color: #666;">({{this.merchantListArrayCopyForFilter.length}})</span></p>
+  <button (click)="openFilterModal('sortBy')" class="distance" [disabled]="isClick">{{'within'|language:'Within'}} {{filter.rangeValue}} {{'kms'|language:'Kms'}}</button>
+  <ion-searchbar color="light" type="text" mode="ios" placeholder="{{'search' | language:'Search'}}" [(ngModel)]="searchShopDetails" (ionChange)="searchShop()"></ion-searchbar>
+  <div *ngIf="!loadingStore">
+    <div *ngFor="let item of !searchShopDetails?count:filtermerchantListArray let i = index">
+      <app-store-listing-component [item]="item" (favEvent)="favouriteShop($event)"></app-store-listing-component>
+    </div>
+  </div>
+  <ion-infinite-scroll threshold="50px" (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+  <div *ngIf="loadingStore" class="box full-width-card">
+    <div class="thumbnailloading" id="img">
+      <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+    </div>
+    <div class="content">
+      <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+      <ion-skeleton-text animated style="width: 50%"></ion-skeleton-text>
+      <div>
+        <span style="width: 20px">
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </span>
+        <span style="width: 20px">
+          <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="flag" style="height: fit-content;">
+    <app-empty-list></app-empty-list>
+  </div>
+</ion-content>

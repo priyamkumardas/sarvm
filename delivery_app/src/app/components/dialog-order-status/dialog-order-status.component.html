@@ -1,0 +1,62 @@
+<div class="container" *ngIf="!isOrder">
+  <div class="img">
+    <img *ngIf="statusType == 'REJECTED' || statusType == 'NO_SHOW'" src="assets/images/rejected.png" alt="sadFaceIcon">
+  </div>
+  <div class="confirmation">
+    <p class="display-conf" *ngIf="statusType == 'ACCEPTED'">
+      <span class="display-conf-span"><b>Accept Order</b></span>
+      {{'areYouSureYou' | language : 'Are you sure ?'}}
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'REJECTED'">
+      <span class="display-conf-span"><b></b></span>
+      <span class="display-span">Are you sure you want to reject the trip ?</span>
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'REACHED_PL'">
+      <span class="display-conf-span"><b>Reached Pickup Location</b></span>
+      {{'areYouSureYou' | language : 'Are you sure ?'}}
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'PICKUP'">
+      <span class="display-conf-span"><b>Order Picked Up</b></span>
+      {{'areYouSureYou' | language : 'Are you sure ?'}}
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'REACHED_DL'">
+      <span class="display-conf-span"><b>Reached Delivery Location</b></span>
+      {{'areYouSureYou' | language : 'Are you sure ?'}}
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'DELIVERED'">
+      <span class="display-conf-span"><b>Delivered</b></span>
+      {{'areYouSureYou' | language : 'Are you sure ?'}}
+    </p>
+    <p class="display-conf" *ngIf="statusType == 'NO_SHOW'">
+      <span class="display-conf-span"><b></b></span>
+      Do you want to No Show the order?
+    </p>
+    <!-- <p class="display-conf" *ngIf="statusType == 'Payment Received'">
+      <span class="display-conf-span"><b>Payment Received</b></span>
+      <span class="display-amount"> {{orderTripDetail?.amount + (orderTripDetail?.deliveryInfo?.deliveryCharges) - (orderTripDetail.discount ? orderTripDetail?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span>
+    </p> -->
+  </div>
+  <div class="btns">
+    <ion-button fill="clear" expand="full" class="no" (click)="viewNo()">
+      {{'no' | language : 'No'}}
+    </ion-button>
+    <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+      {{'yes' | language : 'Yes'}}
+    </ion-button>
+  </div>
+</div>
+
+<div class="container1" *ngIf="isOrder">
+  <div>
+    <app-scan-qr-code [isOrder]="true" [orderTripDetail]="orderTripDetail"></app-scan-qr-code>
+    <!-- <p *ngIf="statusType == 'Payment Received'" class="display-conf ion-text-center">
+      <span class="display-conf-span payment-received"> <b class="ion-align-self-center"> {{orderTripDetail?.amount + (orderTripDetail?.deliveryInfo?.deliveryCharges ? orderTripDetail?.deliveryInfo?.deliveryCharges : 0) - (orderTripDetail.discount ? orderTripDetail?.discount : 0) | currency:'INR':'symbol':'0.0-2'}} Payment Received</b></span>
+    </p> -->
+    <!-- <div class="btns">
+      <ion-button fill="clear" expand="full" class="no" (click)="viewNo()">
+        <ion-icon slot="start" src="assets/icon/ic-thumbs-down.svg" class="icon-margin"></ion-icon>{{'no' | language : 'No'}}</ion-button>
+      <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+        <ion-icon slot="start" src="assets/icon/ic-thumbs-up.svg" class="icon-margin"></ion-icon>{{'yes' | language : 'Yes'}}</ion-button>
+    </div> -->
+  </div>
+</div>

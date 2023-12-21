@@ -1,0 +1,50 @@
+<!-- <div class="container-fluid g-0">
+  <app-header (sideNavToggled)="sideNavStatus = $event" *ngIf="showMenu"></app-header>
+  <main>
+    <app-sidebar [sideNavStatus]="sideNavStatus" [ngClass]="{'app-sidebar-open':sideNavStatus}"
+      *ngIf="showMenu"></app-sidebar>
+    <div class="display-area p-3" [ngClass]="{'display-area-shrink':sideNavStatus}">
+
+
+
+    </div>
+  </main>
+</div> -->
+
+<app-header></app-header>
+<router-outlet></router-outlet>
+<ngx-ui-loader></ngx-ui-loader>
+
+<!-- <app-sidebar  *ngIf="showMenu"></app-sidebar> -->
+ 
+<!-- <span *ngIf="showMenu">
+    <app-header></app-header>
+</span>
+
+<div id="layoutSidenav">
+        <div *ngIf="showMenu" id="layoutSidenav_nav">
+            <app-sidebar></app-sidebar>
+        </div>
+  <div id="layoutSidenav_content">
+    <main>
+      <div class="container-fluid px-4">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+    <span *ngIf="showMenu">
+        <footer class="py-4 bg-light mt-auto">
+            <div class="container-fluid px-4">
+                <div class="d-flex align-items-center justify-content-between small">
+                <div class="text-muted">Copyright &copy; Your Website 2022</div>
+                <div>
+                    <a href="#">Privacy Policy</a>
+                    &middot;
+                    <a href="#">Terms &amp; Conditions</a>
+                </div>
+                </div>
+            </div>
+        </footer>
+    </span>
+
+  </div>
+</div> -->

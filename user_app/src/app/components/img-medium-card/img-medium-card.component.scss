@@ -1,0 +1,65 @@
+.dynamic-page-course-container {
+    margin: 0;
+    padding: 0;
+}
+
+.row {
+    display: flex;
+    padding: 0px 16px !important;
+    .box {
+        margin: 5px 16px 15px 0px !important;
+        &:last-child {
+            margin-right: 0;
+        }
+    }
+}
+
+.medium-card {
+    width: 150px;
+    &.common-card {
+        width: 135px;
+    }
+    .thumbnail {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        > img {
+            height: 87px;
+            border-radius: 5px;
+            width: 100%;
+            object-fit: fill;
+        }
+    }
+    .content {
+        padding: 10px;
+        &.continue {
+            padding-top: 2px;
+        }
+      
+            .title {
+                color: #151522;
+                font-size: 14px;
+                font-weight: 500;
+            } 
+    }
+}
+
+
+.line-ellipsis {
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+}
+.one-line {
+    @extend .line-ellipsis;
+    -webkit-line-clamp: 1;
+}
+.two-line {
+    @extend .line-ellipsis;
+    -webkit-line-clamp: 2;
+}
+.three-line {
+    @extend .line-ellipsis;
+    -webkit-line-clamp: 3;
+}

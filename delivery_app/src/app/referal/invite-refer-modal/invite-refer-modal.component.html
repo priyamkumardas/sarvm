@@ -1,0 +1,26 @@
+<ion-content>
+    <div class="modal">
+        <div class="CrossIcon" (click)="action('close')">
+            <ion-icon name="close-outline"></ion-icon>
+        </div>
+
+        <div class="content">
+            <div class="header">
+                <p>{{'Invitevia'|language:'Invite via'}} </p>
+            </div>
+
+            <div class="options">
+
+                <ion-col class="ion-margin" (click)="action(0)">
+                    <img src="/assets/InvitePageImg/whatsapp.svg" alt="">
+                </ion-col>
+                <ion-col class="ion-margin" (click)="action(1)">
+                    <img src="/assets/InvitePageImg/sms.svg" alt="">
+                </ion-col>
+
+            </div>
+
+
+        </div>
+    </div>
+</ion-content>

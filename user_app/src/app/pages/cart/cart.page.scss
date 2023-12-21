@@ -1,0 +1,431 @@
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+}
+
+.content {
+	--background: #F7F7F8;
+}
+
+body {
+	width: 100vw;
+	height: 100vh;
+}
+
+.applymargin {
+	margin-left: 20px;
+}
+
+.backButton {
+	margin-left: 3px;
+
+}
+
+.shopname{
+	display: flex;
+	padding: 10px;
+	align-items: center;
+	ion-label{
+		color: #F4A259;
+		font-weight: 600;
+		font-size: 14px;
+		overflow: hidden !important;
+		display: -webkit-box;
+		-webkit-line-clamp: 1;
+		-webkit-box-orient: vertical;
+	}
+	.shopimage{
+		padding-right: 5px;
+	}
+}
+
+.discount{
+	margin: 5px;
+	padding: 5px 10px;
+	border-top:  1px solid rgba(125, 124, 131, 0.2);
+}
+
+
+.content{
+    p{
+        font-size: 14px;
+    }
+}
+
+ion-accordion-group{
+    border-radius: 12px;
+	.text{
+		color: black;
+	}
+	ion-item{
+		--ion-item-background: transparent;
+	    --inner-padding-end: 15px;
+	    --inner-padding-start: 0px;
+	    --padding-start: 0px;
+	    --min-height: 30px;
+	    font-size: 14px;
+	}
+	ion-row{
+		align-items: center;
+	}
+}
+ion-accordion.accordion-animated > [slot=header] .ion-accordion-toggle-icon{
+	margin: 5px;
+    font-size: 19px;
+}
+
+
+.shops{
+    padding: 5px 15px 5px 30px;
+    color: #686868;
+    p{
+    	font-size: 12px !important;
+    }
+}
+
+.cart-bill {
+	margin: 10px 10px 10px 10px;
+	border: 1px solid #fff;
+	background: rgba(0, 166, 79, 0.05);
+	border-radius: 12px;
+    padding: 5px 0px;
+}
+
+.quantity {
+	display: flex;
+	background: #FCFCFC;
+	padding: 3px;
+	background: #FCFCFC;
+	box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+	border-radius: 18px;
+	width: 70px;
+	justify-content: space-between;
+	align-items: center;
+	p {
+		font-family: 'Poppins';
+		font-style: normal;
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 18px;
+		letter-spacing: 2px;
+		color: #333333;
+	}
+
+	ion-icon {
+		font-size: 20px;
+	}
+}
+
+.cart-time {
+	display: flex;
+	margin-right: 10px;
+	align-items: center;
+}
+
+.cart-selfp {
+	display: flex;
+	align-items: center;
+	margin: 10px 16px 10px 16px;
+
+	.check {
+		height: 13px;
+		width: 13px;
+	}
+
+	input[type='checkbox'] {
+		height: 25px;
+		width: 25px;
+		border-radius: 100%;
+		border: 1px solid black;
+
+	}
+}
+input{
+  accent-color: #00A64F;
+}
+.deliveryText {
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	color: #4F5052;
+	margin-left: 10px;
+}
+
+.cart-selfp1 {
+	justify-content: space-between;
+	display: flex;
+	align-items: center;
+	height: 24px;
+
+	.ondelivey {
+		display: flex;
+
+	}
+}
+
+.cart-bill-part {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 7px 15px 7px 28px;
+    font-weight: bold;
+	.pricetype,
+	.prices {
+		font-size: 15px;
+		line-height: 18px;
+		color: #333333;
+	}
+}
+
+
+.shop{
+	border-radius: 10px;
+	margin-left: 10px;
+	margin-right: 10px;
+	align-items: center;
+	box-shadow: none;
+	background: #fff;
+}
+
+.cart-items {
+	border-radius: 10px;
+	width: -webkit-fill-available;
+	display: flex;
+	align-items: center;
+	box-shadow: none;
+	padding: 0px 10px 0px 10px;
+	margin-bottom: 2px;
+
+	.details {
+		width: calc(100% - 65px);
+	}
+
+	.img {
+		width: 65px;
+		height: 65px;
+		border: 1px solid rgba(125, 124, 131, 0.2);
+		border-radius: 10px;
+	}
+
+	.upper,
+	.bottom {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+	}
+
+	.upper,
+	.bottom,
+	.middle {
+
+		margin-left: 10px;
+	}
+
+	.upper {
+		.itemText {
+			font-weight: 400;
+			font-size: 14px;
+			line-height: 21px;
+			color: #4F5052;
+			text-overflow: ellipsis;
+			overflow: hidden;
+			white-space: normal;
+			width: 95%;
+			display: -webkit-box;
+			-webkit-line-clamp: 2;
+			-webkit-box-orient: vertical;
+		}
+		.prices {
+			text-align: end;
+			width: 34%;
+		}
+
+		.itemPrice {
+			font-size: 14px;
+		}
+
+		.txt {
+			width: 50%;
+			margin-top: 10px;
+		}
+
+		.quantities {
+			border-radius: 10px;
+			border: 1px solid grey;
+			display: flex;
+			align-items: center;
+			width: 73px;
+			height: 30px;
+			justify-content: space-evenly;
+
+			p {
+				font-size: 11px;
+				line-height: 21px;
+			}
+
+			ion-icon {
+				font-size: 18px;
+				background: var(--ion-color-primary);
+				border-radius: 10px;
+				color: #fff;
+
+			}
+		}
+	}
+
+	.middle {
+		margin-top: 5px;
+		display: flex;
+		align-items: center;
+
+		.itemPice {
+			font-weight: 500;
+			font-size: 14px;
+			line-height: 21px;
+			color: #4F5052;
+		}
+
+		select {
+			margin-left: 30px;
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 18px;
+			color: #333333;
+			background: #FCFCFC;
+			box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.25);
+			border-radius: 18px;
+		}
+	}
+
+	.bottom {
+		// margin-top: 5px;
+
+		.itemMand {
+
+			font-weight: 400;
+			font-size: 12px;
+			line-height: 15px;
+			color: #4F5052;
+			margin-left: 10px;
+		}
+
+		.check {
+			display: flex;
+			align-items: center;
+			width: 80%;
+		}
+
+		ion-icon {
+			font-size: 30px;
+			color: black;
+		}
+	}
+}
+
+.dateAndTime {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin: 10px;
+
+	.left {
+		width: 60%;
+		display: flex;
+		align-items: center;
+	}
+
+	.time {
+		display: flex;
+		align-items: center;
+
+	}
+
+	.date {
+
+		font-weight: 500;
+		font-size: 16px;
+		line-height: 24px;
+		color: #4F5052;
+	}
+
+	.timeText {
+		font-weight: 400;
+		font-size: 16px;
+		line-height: 24px;
+		color: #4F5052;
+	}
+
+	.cal {
+		margin-left: 10px;
+		color: black;
+	}
+
+	.arrow {
+		color: black;
+		margin-left: 5px;
+	}
+}
+
+.delivryAtText {
+	margin: 12px 0px 15px 16px;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 24px;
+	color: #4F5052;
+
+}
+
+.address {
+	display: flex;
+	box-shadow: 0px 1px 3px rgba(153, 153, 153, 0.25);
+	border-radius: 12px;
+	margin-left: 0;
+	margin-right: 0;
+	padding: 10px;
+	height: auto;
+	align-items: center;
+
+	ion-icon {
+		height: 29px;
+		width: 29px;
+		color: black;
+	}
+
+	.addressText {
+
+		margin-left: 5px;
+		margin-right: 5px;
+		width: 90%;
+		font-weight: 400;
+		font-size: 11px;
+		line-height: 16px;
+		color: #4F5052;
+
+	}
+
+	.changeText {
+
+		font-weight: 600;
+		font-size: 12px;
+		line-height: 24px;
+		letter-spacing: 0.01em;
+		text-transform: uppercase;
+		color: var(--ion-color-primary);
+	}
+}
+
+.continue{
+  width: -webkit-fill-available;
+  margin: 16px;
+  height: 48px;
+  text-transform: capitalize;
+  font-size: 16px;
+  font-weight: 500;
+  // --border-radius: 30px;
+}
+.calendaricon{
+	background-color: #fff;
+}

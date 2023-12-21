@@ -1,0 +1,52 @@
+<ion-tabs *ngIf="tabsRootType == 'home'">
+  <!-- Tab bar -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon src="assets/icon/home.svg" ></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="moveToStoreListing()">
+      <ion-icon name="heart-outline"></ion-icon>
+      <ion-label>Favourites</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-label>Notification</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()" >
+      <ion-icon name="volume-medium-outline"></ion-icon>
+      <ion-label>Voice</ion-label>
+
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<ion-tabs *ngIf="tabsRootType == 'productlisting'">
+  <!-- Tab bar -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" [selected]="checkRouter === '/productlisting' ? true : false" (click)="orderPageNavigation('home')">
+      <ion-icon src="assets/icon/inactive-home.svg" ></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="heart-outline"></ion-icon>
+      <ion-label>Favourites</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-label>Notification</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()" >
+      <ion-icon name="volume-medium-outline"></ion-icon>
+      <ion-label>Voice</ion-label>
+
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+
+

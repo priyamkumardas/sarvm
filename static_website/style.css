@@ -1,0 +1,352 @@
+button{
+  font-family: 'Roboto',sans-serif!important;
+}
+.btn1{
+  color: white; 
+ background: rgb(76, 185, 102);
+ width: 150px;
+}
+
+#btn-download{
+ border-radius: 6px;
+ color: white;
+ background-color: #4CB966;
+ width: 200px;
+height: 50px;
+border: 0;
+text-align: center;
+padding-top: 12px;
+}
+.nav-item{
+  margin: 20px;
+}
+.nav-link{
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 18px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+text-align: center;
+letter-spacing: 0.015em;
+
+color: #888888;
+}
+.green-part{ 
+  
+    aspect-ratio : 1 / 0.8;
+    width:41%;
+    position:absolute;
+    right:0;
+    top:0;
+    background-color:#4CB966;
+    z-index: 1;
+  }
+  .nav-bar-item-col
+  {
+    font-family: 'Roboto'!important;
+    font-style: normal!important;
+    font-weight: 500!important;
+    font-size: 18px!important;
+    /* Text */
+    color: #222222!important;
+  }
+  .btn-radius
+  {
+    border-radius: 20px!important;
+  }
+  .download-btn-text
+  {
+    
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  /* padding-left:16px !important;
+  padding-right: 16px!important; */
+  /* identical to box height, or 143% */
+  color: #FFFFFF;
+  /* Inside auto layout */
+  }
+  
+  
+  .icon-con
+  {
+    position:absolute;
+    top:-30px;
+    left:17px;
+    height: 59.95px;
+    width: 59.95px;
+  }
+  .why-u-choose-us-paragraph
+  {
+  /* content 1 */
+  
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 1rem;
+    color: #222222;
+  
+  }
+  .why-u-choose-us-title
+  {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 42px;
+  /* line-height: 50px; */
+  /* identical to box height, or 119% */
+  letter-spacing: 0.02em;
+  
+  /* Text */
+  
+  color: #222222;
+  
+  }
+  
+  
+  .icon-con-3
+  {
+    position:absolute;
+    top:-40px;
+    left:17px;
+    height: 59.95px;
+    width: 59.95px;
+  }
+  .margin-left-style
+  {
+    margin-left: auto!important;
+  }
+  .space-con
+  {
+    margin-left: 20px!important;
+  }
+  .contact-us-section
+  {
+    background-color: #222222;
+    width: 100%;
+    border-top-left-radius: 30px;
+    padding-top: 20px;
+    border-top-right-radius: 30px;
+  }
+  .contact-us-description
+  {
+    /* perishable food segment. */
+  
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  /* line-height: 40px; */
+  /* or 200% */
+  color: rgba(255, 255, 255, 0.9);
+  }
+  .social-media-icons
+  {
+    display:flex;
+    /* justify-content: space-around; */
+  }
+  svg
+  {
+    margin-right: 30px;
+  }
+  .all-sections
+  {
+    
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.02em;
+  
+  color: rgba(255, 255, 255, 0.95);
+  
+  }
+  .business-text
+  {
+    
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 20px;
+  letter-spacing: 0.02em;
+  
+  color: rgba(255, 255, 255, 0.95);
+  
+  }
+  
+  /* .footer
+  {
+    height: 100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end ;
+  } */
+  ul{
+    list-style-type:none;
+    /* display: inline-block;  */
+	/* text-align: left; */
+  display: flex;
+  flex-direction: column;
+    }
+  footer{
+    position: relative;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: auto;
+    width: 100vw;
+    background: #4CB966;
+    display:flex;
+    flex-direction:column;
+    /* justify-content:flex-end ;
+    */
+}
+li a{
+  text-decoration: none;
+  font-family: 'Poppins';
+font-style: normal;
+font-weight: 500;
+font-size: 16px;
+line-height: 24px;
+/* identical to box height, or 150% */
+
+color: #fff;
+letter-spacing: 0.015em;
+
+}
+p{
+  font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 24px;
+/* identical to box height, or 171% */
+
+
+letter-spacing: 0.02em;
+}
+@media screen and (max-width: 920px) and (min-width: 481px) {
+  /* .card-app{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  } */
+  .app-card{
+    min-height: 340px;
+    width: 280px;
+    
+  }
+  .consumer{
+    margin: 0 auto;
+    
+  }
+  .c1{
+    width: 100%;
+    text-align: center !important;
+   padding: 0% !important;
+    
+  }
+  .c2{
+    width: 100%;
+    text-align: center !important;
+   padding: 0% !important;
+    
+  }
+  
+  
+  }
+  @media only screen and (max-width: 480px) {
+    /* .navbar-nav .nav-link{
+      text-align: right;
+  
+    } */
+  .c1 {
+    width: 100%;
+   text-align: center !important;
+   padding: 0% !important;
+    
+  }
+  .c2 {
+    width: 100%;
+    text-align: center !important;
+    padding: 0% !important;
+   
+  }
+    .consumer{
+      margin: 0 auto;
+      width: 80%;
+      height: 80%;
+    }
+    .for-farmer-context{
+      display: flex;
+    }
+    .g{
+      text-align: center;
+    }
+    /*Info Graphic Image */
+     .dft{
+      max-width: 450px;
+    } 
+    #chain{
+      font-size: 25px;
+    }
+    #para2{
+      font-size: 18px;
+    }
+    .small{
+      width: 100%;
+      min-height: auto;
+      margin: 0 auto;
+    }
+    #con{
+      margin-top: 10px;
+    }
+    .wrapper-2{
+      margin-top: 0;
+     }
+     .cb-img img{
+      width: 50px;
+      height: 50px;
+      margin-bottom: 10px;
+  }
+  .cb-img p{
+      
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    /* line-height: 2px; */
+    /* or 150% */
+    color: #333333;
+    
+    }
+  }
+  .lists{
+    padding-left: 0px;
+}
+.lists li{
+  margin-bottom: 20px;
+}
+.contact{
+  padding-left: 0px;
+}
+.contact li{
+margin-bottom: 20px;
+}
+  .c1{
+    width: 100%;
+    text-align: center !important;
+   padding: 0% !important;
+   padding-right: 10% !important;
+    
+  }
+  .c2{
+    width: 100%;
+    text-align: center !important;
+   padding: 0% !important;
+    
+  }

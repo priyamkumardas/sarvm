@@ -1,0 +1,96 @@
+<div>
+  <form [formGroup]="drivingLicenseDocForm" (ngSubmit)="saveDrivingLicenseDocDetails()">
+    <!-- updateOrAddDrivingLicense ? updateDrivingLicenseDocDetails() : -->
+    <div>
+      <div class="documentInput" (click)="chooseImage('DL')">
+        <ng-container>
+          <img [src]="dLicenseImage ? dLicenseImage: '/assets/icon/ic-vehicle-licence.svg'" alt="" class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!dLicenseImage">
+            <label for="pan">
+              <u>{{'uploaddrivinglicence' | language : 'Upload Driving Licence'}}</u>
+            </label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="dLicenseImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('DL')">
+            {{'re-upload' | language :'Re-Upload'}}
+          </ion-button>
+        </div>
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.dlNumber" formControlName="dlNumber" class="input"
+              id="dlNumber" (keypress)="keyPressNumbers($event)"></ion-input>
+            <label for="idCard" class="label">{{'DrivingLicenseNo'|language:'Driving License No'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.drivingLicenseName" formControlName="name" class="input"
+              (keypress)="onKeyPress($event)"></ion-input>
+            <label for="name" class="label">{{'name' | language : 'Name'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <ion-select [(ngModel)]="vehicleDocInfo.license_type" mode="ios" class="input-license-type"
+              formControlName="licenseType" id="state">
+              <ion-select-option value="LMV">LMV</ion-select-option>
+              <ion-select-option value="Heavy">Heavy</ion-select-option>
+              <ion-select-option value="Commercial">Commercial</ion-select-option>
+            </ion-select>
+            <label for="dlLicenseType" class="labelDiff">{{'LicenseType' | language : 'License Type'}}<span
+                id="star">*</span></label>
+          </ion-col>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.dl_valid_upto" [readonly]="true" formControlName="dlValidUpto"
+              id="dlValidUpto" class="inputDiff" (click)="openDateSelectModal('dlValidUpto')"
+              (keypress)="restrictSpecialCharacters($event)">
+            </ion-input>
+            <label for="area" class="label">{{'dlValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label> -->
+          
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.dl_valid_upto" [readonly]="true" formControlName="dlValidUpto" id="dateFiltDriverLicense" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <ion-modal trigger="dateFiltDriverLicense" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'drivingLicenseDocForm'" [date_info]="dateCondition"
+                      [value]="defaultDate" [date_format]="format" (datePickerValue)="openDateSelectModal($event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label for="area" class="label">{{'ValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="12">
+            <ion-select mode="ios" class="input" [(ngModel)]="vehicleDocInfo.issuing_state"
+              formControlName="issuingState" id="issuingState">
+              <ion-select-option *ngFor="let state of stateList"
+                value="{{state.name}}">{{state.name}}</ion-select-option>
+            </ion-select>
+            <label class="label">{{'IssuingState' | language : 'Issuing State'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <div class="btns submit-view">
+        <ion-button color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+        (click)="skipVehicleDocument()">Skip</ion-button>
+        <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">Save &
+          Continue</ion-button>
+      </div> -->
+      <div class="kyc-footer">
+        <div class="footer">
+          <ion-button *ngIf="!isProfilePage" color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">{{'skip'|language:'Skip'}}</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">
+            {{ !isProfilePage ? ('save&Continue'|language:'Save & Continue') : ('save'|language:'Save')}}
+          </ion-button>
+        </div>
+      </div>
+      
+    </div>
+  </form>
+</div>

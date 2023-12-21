@@ -1,0 +1,26 @@
+<div class="modal">
+<div class="CrossIcon" (click) = "closeGstModal()">
+  <ion-icon name="close-outline"></ion-icon>
+</div>
+
+<div class="content">
+  <div class="header">
+    <p>Update GSTIN</p>
+  </div>
+  <div class="inputBox">
+
+    <ion-input type="text" id="gstNo" placeholder="GST Number" minlength="15" maxlength="15" [(ngModel)]="gstNo"></ion-input>
+
+      <!-- <ion-label for="gstNo">GSTIN Number</ion-label> -->
+      <!-- <img src="\assets\images\lens.svg" alt="lens" class="lens"> -->
+  </div>
+  <ion-row>
+    <ion-col size="6">
+      <ion-button fill="outline" shape="round" expand="block" (click)="skipped()">Skip</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button fill="solid" shape="round" expand="block" (click)="ConfirmGstNumber()">Continue</ion-button>
+    </ion-col>
+  </ion-row>
+</div>
+</div>

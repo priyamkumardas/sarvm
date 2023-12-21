@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">SarvM Logistics</string>
+    <string name="title_activity_main">SarvM Logistics</string>
+    <string name="package_name">com.sarvm.loga</string>
+    <string name="custom_url_scheme">com.sarvm.loga</string>
+</resources>

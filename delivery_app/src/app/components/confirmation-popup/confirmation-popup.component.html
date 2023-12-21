@@ -1,0 +1,25 @@
+<div class="container">
+  <!-- <div class="message-top">
+    <p>{{'areYouSure' | language : 'Are you sure'}}</p>
+  </div> -->
+  <div class="message-bottom" *ngIf="confirmPopupStatus == 'Deactivate'">
+    <p>{{'doYouWantToDeactivateAccount' | language : 'Do you want to Deactivate account?'}}</p>
+  </div>
+  <div class="message-bottom" *ngIf="confirmPopupStatus == 'Log Out'">
+    <p  class="message-top">{{'LogOut?' | language : 'Log Out'}}</p>
+    <p>{{'areYouSure' | language : 'Are you sure'}}</p>
+  </div>
+  <div class="message-bottom" *ngIf="confirmPopupStatus == 'Delete'">
+    <p>{{'deleteTheBankDetails' | language : 'Delete the Bank Details?'}}</p>
+  </div>
+  <div class="btns">
+    <ion-button fill="clear" expand="full" class="no" (click)="viewNo()">
+      <ion-icon slot="start" name="thumbs-down-outline"></ion-icon>
+      {{'no' | language : 'No'}}
+    </ion-button>
+    <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+      <ion-icon slot="start" name="thumbs-up-outline"></ion-icon>
+      {{'yes' | language : 'Yes'}}
+    </ion-button>
+  </div>
+</div>

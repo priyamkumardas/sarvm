@@ -1,0 +1,96 @@
+
+<div class="main-content p-4">
+
+
+  <div class="card custom-card">
+    <div class="card-body">
+
+      <h5 class="mb-4">Shop Details</h5>
+
+      <div class="row">
+
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <p class="heading">Shop Id: <span>{{shopData?.shop_id}}</span></p>
+          <p class="heading">Shop number: <span>{{shopData?.shop_number}}</span></p>
+          <p class="heading">Shop Name: <span>{{shopData?.shop_name}}</span></p>
+          <p class="heading">Address: <span>{{shopData?.street}}, {{shopData?.landmark}}, {{shopData?.city}} - {{shopData?.pincode}} </span></p>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <p class="heading">GST no: <span>{{shopData?.GST_no}}</span></p>
+          <p class="heading">Subscribed: <span>{{shopData?.isSubscribed}}</span></p>
+          <p class="heading">Member From: <span>{{shopData?.created_at}}</span></p>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+
+
+  <div class="card custom-card mt-4">
+    <div class="card-body">
+
+      <h5 class="mb-4">Subscription Details</h5>
+
+        <div class="table-responsive ">
+          <table class="table table-bordered mb-4">
+            <thead>
+              <tr>
+                <th *ngFor="let item of subscriptionList" class="text-primary">{{item.name}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let item of subscriptionDetails; let i=index;" >
+                <td >{{item.shopId}}</td>
+                <td>{{item.startDate | date}}</td>
+                <td>{{item.endDate | date}}</td>
+                <td>{{item.gstIn}}</td>
+                <td> <span class="badge rounded-pill bg-success">{{item.paymentStatus}}</span></td>
+                <td>{{item.subscriptionId}}</td>
+                <td>{{item.amount}}</td>
+
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+
+  </div>
+  </div>
+
+  <div class="card custom-card mt-4">
+    <div class="card-body">
+
+      <h5 class="mb-4">KYC Details </h5>
+
+      <div class="row">
+
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <p class="heading">Id Number: <span>{{kycDetails?.idno}}</span></p>
+          <p class="heading link">AAdhar: <span class="badge bg-secondary"><a target="_blank" [href]="kycDetails?.aadhar_key"> View </a></span></p>
+          <p class="heading">Address: <span>{{kycDetails?.street}}, {{kycDetails?.landmark}}, {{kycDetails?.city}} - {{kycDetails?.pincode}} </span></p>
+        </div>
+
+        <div class="col-xl-6 col-lg-6 col-md-6">
+          <p class="heading">GST no: <span>{{kycDetails?.GST_no}}</span></p>
+          <p class="heading">Subscribed: <span>{{kycDetails?.isSubscribed}}</span></p>
+          <p class="heading">Member From: <span>{{kycDetails?.created_at}}</span></p>
+        </div>
+
+      </div>
+
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+</div>
+
+<app-shop-orders></app-shop-orders>

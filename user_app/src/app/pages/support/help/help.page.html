@@ -1,0 +1,116 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <!-- <ion-back-button defaultHref="/tabs/home"></ion-back-button> -->
+            <ion-back-button mode="md" defaultHref="/tabs/home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{'help'|language:'Help'}}</ion-title>
+        <ion-buttons slot="end" >
+            <ion-button fill="clear" (click)="support()" color="primary" class="support" [disabled]="addDisable"> 
+                  <ion-icon slot="start" src="/assets/bx_support.svg"></ion-icon>
+               {{'support' | language:'Support'}}
+            </ion-button>
+          </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-toolbar>
+        <ion-row class="ion-margin-top">
+            <ion-col size="3" (click)="commonservice.featureNotAvailable()">
+                <div class="img">
+                    <ion-img src="/assets/icon/faqg.svg" alt=""></ion-img>
+                </div>
+                <p>{{'faqs'|language:'FAQs'}}</p>
+            </ion-col>
+            <ion-col size="3" (click)="openUrl('https://sarvm.ai/terms&conditions.html')">
+                <div class="img">
+                    <ion-img src="/assets/icon/term&con.svg" alt=""></ion-img>
+                </div>
+                <p>{{'terms&Conditions'|language:'Terms & Conditions'}}</p>
+            </ion-col>
+            <ion-col size="3" [routerLink]="['/active-order','ACTIVE']">
+                <div class="img">
+                    <ion-img src="/assets/icon/trackord.svg" alt=""></ion-img>
+                </div>
+                <p>{{'trackOrder'|language:'Track Order'}}</p>
+            </ion-col>
+            <ion-col size="3" (click)="openUrl('https://sarvm.ai/sarvm-privacy-policy.html')">
+                <div class="img">
+                    <ion-img src="/assets/icon/privict.svg" alt=""></ion-img>
+                </div>
+                <p>{{'privacyPolicies'|language:'Privacy Policies'}}</p>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
+    <ion-toolbar>
+        <ion-grid class="ion-no-padding">
+            <ion-row class="ion-padding">
+                
+                    <h3>{{'contactUs'|language:'Contact Us'}}</h3>
+                
+            </ion-row>
+
+            <ion-row class="ion-padding">
+                <ion-col size="3">
+                    <ion-toolbar>
+                        <ion-buttons slot="start">
+                            <ion-icon name="mail-outline"></ion-icon>
+                        </ion-buttons>
+                        <a href="mailto:cs@sarvm.ai" style="text-decoration: none;">
+                            <p>{{'email'|language:'Email'}}</p>
+                        </a>
+                    </ion-toolbar>
+                </ion-col>
+                <ion-col size="6" (click)="commonservice.featureNotAvailable()">
+                    <ion-toolbar>
+                        <ion-buttons slot="start">
+                            <img class="phoneCall" src="/assets/images/phone-call.png" alt="">
+                        </ion-buttons>
+                        <p>{{'AccountManager '|language:'Account manager '}}</p>
+                    </ion-toolbar>
+                </ion-col>
+                <ion-col size="3" (click)="commonservice.featureNotAvailable()">
+                    <ion-toolbar>
+                        <ion-buttons slot="start">
+                            <ion-icon name="chatbubble-outline" [color]="'medium'"></ion-icon>
+                        </ion-buttons>
+                        <p>{{'chat'|language:'Chat'}}</p>
+                    </ion-toolbar>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-item lines="none" (click)="openBrowser('https://goo.gl/maps/RMjBgsCJsDrzvMQaA')">
+                    <ion-icon slot="start" name="location-outline"></ion-icon>
+                    <p (click)="openBrowser('https://goo.gl/maps/RMjBgsCJsDrzvMQaA')">
+                        C-21 Workfella 150, 1, Infantry Rd, Vasanth Nagar, Bengaluru, Karnataka 560001
+                    </p>
+                </ion-item>
+                <!-- <ion-col size="12">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-icon name="location-outline"></ion-icon>
+            </ion-buttons>
+            <p>
+              C-21 Workfella 150, 1, Infantry Rd, Vasanth Nagar, Bengaluru,
+              Karnataka 560001
+            </p>
+          </ion-toolbar>
+        </ion-col> -->
+            </ion-row>
+            <ion-row class="ion-no-margin">
+                <ion-item lines="none">
+                    <ion-icon slot="start" name="link-outline"></ion-icon> <a href="https://sarvm.ai/">https://sarvm.ai/</a>
+                </ion-item>
+                <!-- <ion-col size="6">
+          <ion-toolbar>
+            <ion-buttons slot="start">
+              <ion-icon name="link-outline"></ion-icon>
+            </ion-buttons>
+            <span>https://sarvm.ai/</span>
+          </ion-toolbar>
+        </ion-col> -->
+            </ion-row>
+        </ion-grid>
+    </ion-toolbar>
+</ion-content>

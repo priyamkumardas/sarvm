@@ -1,0 +1,253 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .header {
+    ion-title {
+      text-align: center;
+      font-size: 6.5vw;
+    }
+    ion-icon {
+      width: 10vw;
+      height: 7vw;
+    }
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  
+  .complete-content-fav {
+    margin-top: 4vw;
+    margin-left: 5vw;
+  }
+  .complete-content-fav>h3{
+    font-style: normal;
+font-weight: 500;
+font-size: 20px;
+line-height: 30px;
+
+
+color: #333333;
+  }
+  .fav-items{
+    margin-top: 4vw;
+    margin-left: 5vw;  
+  }
+  .fav-items>h3{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #333333;
+  }
+  .fav-items-comp{
+      display: flex;
+margin-top: 5vw;
+overflow-x: scroll;
+
+  }
+  .fav-items-comp::-webkit-scrollbar {
+    display: none;
+  }
+  .fav-item-sec{
+      margin-right: 4vw;
+    
+  }
+  
+ 
+
+  .fav-item-img>image{
+z-index: 0;
+width: 70px;
+    height: 70px;
+    
+  }
+ 
+ .heart-icon{
+   border: 1px solid transparent;
+   background-color:rgba(0, 0, 0, 0.45)  ;
+   border-radius: 50%;
+   z-index: 1;
+   position: relative;
+   left: 49px;
+   top: -65px;
+ }
+  .fav-item-img{
+    object-fit: contain;
+    justify-content: center;
+  background-color: #fff;
+  box-shadow:(1px 1px 1px rgba(51, 51, 51, 0.25));
+  border-radius: 10px;
+ margin-top: 3vw;
+ 
+  height: 70px;
+  width: 70px;
+}
+  .fav-item-sec>h3{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    margin-top: 2vw;
+    color: #333333;
+  }
+ 
+  .fav-item-rate{
+      display: flex;
+    margin-top: 2vw;
+  }
+  .fav-item-rate>p{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 15px;
+    /* identical to box height */
+    
+    
+    color: #999999;
+  }
+  .fav-item-rate>h4{
+      margin-left: 3vw;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    /* identical to box height */
+    
+    
+    color: #333333;
+  }
+  .fav-shop{
+    margin-top: 7vw;
+    margin-left: 5vw;  
+  }
+  .fav-shop>h3{
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #333333;
+   
+  }
+  .fav-shop-comp{
+    display: flex;
+margin-top: 3vw;
+overflow: scroll;
+width: 360px;
+}
+.fav-shop-comp::-webkit-scrollbar {
+    display: none;
+  }
+
+.fav-shop-sec{
+    margin-right: 3vw;
+    
+}
+.fav-shop-img{
+  width: 98px;
+    height: 90px;
+}
+.heart-icon-shop{
+  border: 1px solid transparent;
+  background-color:rgba(0, 0, 0, 0.45)  ;
+  border-radius: 50%;
+    z-index: 1;
+    position: relative;
+    left: 77px;
+    top: -92px;
+}
+.fav-shop-img>img{
+    width: 98px;
+    height: 90px;
+    object-fit: contain;
+    justify-content: center;
+  background-color: #fff;
+  box-shadow:(1px 1px 1px rgba(51, 51, 51, 0.25));
+  border-radius: 10px;
+//   padding: 2vw;
+z-index: 0;
+}
+
+.fav-shop-sec>h3{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    margin-top: 2vw;
+    color: #333333;
+  }
+  .fav-shop-sec>h4{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    margin-top: 1vw;
+    color: #333333;
+  }
+  .fav-shop-addr{
+      display: flex;
+      margin-top: 1vw;
+      width: 100px;
+  }
+  .fav-shop-addr>h4{
+    font-style: normal;
+    font-weight: 300;
+    font-size: 12px;
+    line-height: 18px;
+    /* identical to box height */
+    
+    
+    color: #333333;
+  }
+.fav-big-img{
+    margin-top: 25vw;
+    margin-left: 5vw; 
+    margin-right: 4vw;
+}
+.fav-buttom-nav{
+  margin-left: 5vw;
+  margin-right: 5vw;
+  position: absolute;
+  bottom: 4px;
+  background-color: #fff;
+  display: flex;
+}
+.fav-buttom-nav>button{
+  margin-right: 8%;
+  padding: 2vw;
+  background-color: #fff;
+}
+.fav-buttom-nav>button>image{
+ width: 19px;
+height: 18px;
+
+}
+.fav-notification-btn{
+  width: 20px;
+  height: 30px;
+}
+.fav-buttom-nav>button>h3{
+  font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 16px;
+/* identical to box height, or 133% */
+
+text-align: center;
+
+color: #333333;
+}

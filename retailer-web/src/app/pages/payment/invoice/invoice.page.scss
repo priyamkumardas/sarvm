@@ -1,0 +1,68 @@
+.header {
+    display: flex;
+    ion-title {
+        font-size: 5.5vw;
+        position: relative;
+    }
+    ion-icon {
+        margin: auto 0;
+        font-size: 5vw;
+        padding: 0 0 0 3vw;
+        color: #08908c;
+    }
+}
+ion-button{
+    margin: 0 4vw;
+    font-size: 16px;
+    line-height: 24px;
+    font-weight: 600;
+    text-transform: capitalize;
+    height: 48px;
+    margin-bottom: 20px;
+}
+.total-amount{
+    border-top: 1px solid #92949c;
+}
+ion-text{
+    float: right;
+    font-size: 14px;
+    line-height: 16px;
+    color: var( --ion-color-medium-shade);
+}
+.shop-add{
+   text-align: end;
+   font-size: 14px;
+   line-height: 16px;
+   color: var( --ion-color-medium-shade);
+  
+}
+.first-card{
+    ion-label{
+        font-size: 14px;
+        line-height: 16px;
+        text-align: start;
+        font-weight: 500;
+        color: var(  --ion-color-dark-shade); 
+    }
+    ion-text{
+        text-align: start;
+        font-size: 14px;
+        line-height: 16px;
+        color: var( --ion-color-medium-shade);
+    }
+    
+}
+.second-card{
+    #basic-subscription{
+        color: var( --ion-color-primary);
+        font-size: 15px;
+        line-height: 19px;
+        font-weight: 600;
+    }
+    ion-label{
+        font-size: 14px;
+        line-height: 16px;
+        color: var(  --ion-color-dark-shade); 
+        font-weight: 500; 
+    }
+}

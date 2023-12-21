@@ -1,0 +1,45 @@
+<div class="box full-width-card">
+  <div class="image">
+    <div class="icon-remove blue delete">
+      <img id="img" class="thumbnailloading" src="{{item.image}}" (click)="item.dataList ? gotoStore(item) : gotoStore(item)" onerror=" this.onerror = null ;this.src ='/assets/images/istockphoto.svg'" />
+      <div class="heart" (click)="favouriteShop(item.shop_id, item.myfavshop);">
+        <ion-icon *ngIf="!item.myfavshop" name="heart-outline"></ion-icon>
+        <ion-icon *ngIf="item.myfavshop" class="redicon" name="heart"></ion-icon>
+      </div>
+    </div>
+  </div>
+  <div class="content" (click)="gotoStore(item)">
+    <div class="details">
+      <ion-label class="title"> {{item.shop_name | titlecase}} </ion-label>
+      <ion-text>{{item.distance | number:'0.0-0'}} KM</ion-text>
+      <div class="rating-content">
+        <!-- <div class="view">
+                <ion-icon name="star-outline"></ion-icon>
+                <span class="value">{{item.avg_rating}} ({{item.rating_user_count}})</span>
+              </div> -->
+        <!-- <div class="dot"></div> -->
+        <div class="view">
+          <!-- <ion-img class="icon" src="/assets/img/ic_location.svg"></ion-img> -->
+          <ion-icon class="icon" name="location-outline"></ion-icon>
+          <span class="value">{{item.locality | slice:0:15}}..</span>
+        </div>
+      </div>
+      <!-- <ion-label class="desc"> {{item.type_of_retailer | titlecase}} </ion-label> -->
+      <!-- <p class="item"><span *ngFor="let data of vendorDetails.dataList.categories; let i = index"><span *ngIf="i>0">,</span> {{data | language:data}}</span> -->
+      <p *ngIf="item?.categories?.length" class="desc">
+        <span class="value" *ngFor="let detail of item?.categories; let i = index">
+          <span *ngIf="i>0">, </span>{{detail}}
+        </span>
+      </p>
+      <p *ngIf="!item?.categories.length" class="desc" style="color: #ff7e7e">Catalog not available</p>
+      <div class="delivering-status" [style.background]="item.delivery?'linear-gradient(90deg, #76C893 1.55%, rgb(86 195 156) 69.44%)':'linear-gradient(90deg, rgb(86 195 156) 18.39%, rgba(224, 26, 26, 0) 100%)'">
+        <img class="title-image" src="../../../assets/Call-home.svg" />
+        <a [href]="'tel:'+item.seller.phone"> 
+	        <span>{{'call' | language:'Call'}}</span>
+         </a>
+        <!-- <span *ngIf="item.delivery">{{'delivery' | language:'Delivering'}}</span> -->
+        <!-- <span *ngIf="!item.delivery">{{'notdelivery' | language:'Not Delivering'}}</span> -->
+      </div>
+    </div>
+  </div>
+</div>

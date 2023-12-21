@@ -1,0 +1,27 @@
+
+version: 0.2
+env:
+  variables:
+    APP_NAME: "admin-panel"
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16.x
+    commands:
+      - echo install process started
+      - npm install && npm install -g @angular/cli
+  build:
+    commands:
+      - echo build process started now
+      - ng build 
+#   post_build:
+#     commands:
+#       - echo build process finished, we should uplload to S3 now
+#       - cd dist/admin-panel
+#       - ls -la
+#       - aws s3 sync . s3://my-awsome-bucket-of-files --delete
+artifacts:
+  files:
+    - "**/*"
+  discard-paths: no
+  base-directory: dist/admin-panel

@@ -1,0 +1,42 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="myBackButton()">
+      <ion-back-button defaultHref=""></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'selectyourpreference '| language : 'Select Your Preference'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="maincontainer">
+    <ion-grid>
+      <ion-row class="ion-text-center">
+        <ion-col class="ion-padding-left" size="6" style="position: relative;" (click)="funBorderChange('veg')">
+          <div id="content1">
+            <img class="image" id="veg" [ngClass]="nameOfItemSelected==='veg'?'border-highlited-green':''"
+              src="../../../assets/selectPreference/Frame 7643.svg" alt="img" />
+            <p class="text-description">{{'vegetarian' | language}}</p>
+          </div>
+
+
+
+
+        </ion-col>
+        <ion-col class="ion-padding-right" size="6" (click)="funBorderChange('nonveg')">
+          <div id="content2">
+            <img class="image" id="non-veg" [ngClass]="nameOfItemSelected==='nonveg'?'border-highlited-red':''"
+              src="../../../assets/selectPreference/Frame 7644.svg" alt="img" />
+            <p class="text-description">{{'nonVegetarian' | language}}</p>
+          </div>
+
+
+
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <button class="con-but con-text btn-text" [disabled] = " nameOfItemSelected === 'true' " [ngClass]="nameOfItemSelected === 'true' ? 'disabled' :'enabled' " (click)="continueNavigation()">{{'continue' | language}}</button> -->
+
+
+</ion-content>

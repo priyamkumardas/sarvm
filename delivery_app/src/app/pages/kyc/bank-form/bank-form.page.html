@@ -1,0 +1,159 @@
+<ion-header>
+  <ion-toolbar class="bank-doc-head">
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" defaultHref="/bank-details" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'BankAccount' | language : 'Bank Account'}}</ion-title>
+    <ion-buttons slot="end" (click)="confirmationPopupComponentModal('Delete')" *ngIf="bankForm.status == 'VALID'">
+      <ion-icon name="trash-outline" class="delete-margin"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form [formGroup]="bankForm" (ngSubmit)="updateOrAdd ? updateBankDetails() : saveBankDetails()">
+    <div class="documentInput" (click)="chooseImage()">
+      <ng-container>
+        <img [src]="bankImage ? bankImage: '/assets/icon/ic-upload.svg'" alt="" class="doc-img" />
+        <ion-spinner class="imgSpinner" name="crescent" *ngIf="bankImageloaded"></ion-spinner>
+        <!-- <ion-avatar>
+          <img [src]="bankImage ? bankImage : '/assets/icon/ic-upload.svg'"  alt="" class="doc-img"/>
+          <ion-spinner class="imgSpinner" name="crescent" *ngIf="bankImageloaded"></ion-spinner>
+        </ion-avatar> -->
+        <div class="labels" *ngIf="!bankImage">
+          <label for="pan">
+            <u>{{'uploadPassbookPhoto' | language : 'Upload Passbook photo'}}</u>
+          </label>
+        </div>
+      </ng-container>
+      <div class="removeBtn" *ngIf="bankImage">
+        <ion-button color="warning" class="re-upload" (click)="removeImage()">
+          {{'re-upload' | language :'Re-Upload'}}
+        </ion-button>
+      </div>
+    </div>
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col size="12">
+          <label for="idCard" class="labelDiff">{{'BeneficiaryName'|language:'Beneficiary Name'}}<span id="star">*</span></label>
+          <div class="inputDiff">
+            <ion-input type="text" [(ngModel)]="bankInfo.name" formControlName="name"
+            id="name" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <label for="idCard" class="labelDiff">{{'bankName'|language:'Bank Name'}}<span id="star">*</span></label>
+          <div class="inputDiff">
+            <ion-input type="text" [(ngModel)]="bankInfo.bankName" formControlName="bankName"
+              id="bankName" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <label for="idCard" class="labelDiff">{{'accountNo'|language:'Account No.'}}<span id="star">*</span></label>
+          <div class="inputDiff">
+            <ion-input type="text" [(ngModel)]="bankInfo.accountNumber" formControlName="accountNumber"
+              id="accountNumber" (ionChange)="changeAccountNumber($event)" (ionInput)="isNumberKey($event)" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <ion-icon class="correct-view" *ngIf="!invalidPhone" slot="end" name="checkmark-circle-sharp" style="color: gray"></ion-icon>
+            <ion-icon class="correct-view" *ngIf="invalidPhone" slot="end" name="checkmark-circle-sharp" color="primary"></ion-icon>
+          </div>
+        </ion-col>
+
+        <ion-col size="12">
+          <label for="idCard" class="labelDiff">{{'reEnterAccountNo'|language:'Re-enter Account No.'}}<span id="star">*</span></label>
+          <div class="inputDiff">
+            <ion-input type="text" [(ngModel)]="bankInfo.reAccountNumber" formControlName="reAccountNumber"
+              id="reAccountNumber" (ionChange)="changeAccountNumber($event)" (ionInput)="isNumberKey($event)" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+              <ion-icon class="correct-view" *ngIf="!invalidPhone" slot="end" name="checkmark-circle-sharp" style="color: gray"></ion-icon>
+              <ion-icon class="correct-view" *ngIf="invalidPhone" slot="end" name="checkmark-circle-sharp" color="primary"></ion-icon>
+          </div>
+          <span class="error" *ngIf="isSubmitted && bankForm.hasError('accountnoNotMatch')">
+            {{'accountnumberfieldsshouldmatch' | language : 'Account number and Re-account number fields should match'}}
+          </span>
+        </ion-col>
+
+        <ion-col size="12">
+          <label for="name" class="labelDiff">{{'ifsccode'|language:'IFSC Code'}}<span id="star">*</span></label>
+          <div class="inputDiff">
+            <ion-input type="text" [(ngModel)]="bankInfo.ifscCode" id="ifscCode" formControlName="ifscCode"
+              (keypress)="onKeyPress($event)"></ion-input>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
+
+    <div class="bank-footer">
+      <div class="footer">
+        <ion-button color="primary" fill="solid" expand="full" shape="round" class="save btn" type="submit">
+          {{'saveAndContinue'|language:'Save and Continue'}}
+        </ion-button>
+      </div>
+    </div>
+  </form>
+
+
+
+
+  <!-- <div class="bank-details">
+    <ion-input class="ip-field" placeholder="Account Holder Name"></ion-input>
+    <ion-item>
+      <ion-label>Bank Name</ion-label>
+      <ion-select interface="popover" class="custom-options">
+        <ion-select-option value="hdfc">HDFC BANK</ion-select-option>
+        <ion-select-option value="sbi">AXIS BANK</ion-select-option>
+        <ion-select-option value="boi">ICICI BANK</ion-select-option>
+        <ion-select-option value="icici">SBI BANK</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <h6>Popular Banks</h6>
+    <div class="popular-banks">
+      <div class="banks">
+        <img src="assets/bank-section-images/HDFC.png" alt="" />
+        <p>HDFC BANK</p>
+      </div>
+      <div class="banks">
+        <img src="assets/bank-section-images/AXIS.png" alt="" />
+        <p>AXIS BANK</p>
+      </div>
+      <div class="banks">
+        <img src="assets/bank-section-images/ICICI.png" alt="" />
+        <p>ICICI BANK</p>
+      </div>
+      <div class="banks">
+        <img src="assets/bank-section-images/SBI.png" alt="" />
+        <p>SBI BANK</p>
+      </div>
+    </div>
+    <ion-input class="ip-field" placeholder="IFSC Code"></ion-input>
+    <ion-input class="ip-field" placeholder="Account Number"></ion-input>
+    <ion-input class="ip-field" placeholder="UPI ID"></ion-input>
+  </div>
+  <div class="upload-container">
+    <input
+      type="file"
+      (change)="uploadImg($event)"
+      id="browser-file"
+      class="file-upload"
+    />
+    <div class="doc">
+      <img
+        class="image"
+        src="{{bankPassBook}}"
+        alt="Profile Picture"
+        (click)="selectImage('bankPassBook')"
+      />
+    </div>
+    <div class="next">
+      <ion-button class="next-button" shape="round" color="dark"
+        >Proceed</ion-button
+      >
+    </div>
+    <div class="next">
+      <ion-text>Skip for now</ion-text>
+    </div>
+  </div> -->
+</ion-content>
+

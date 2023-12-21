@@ -1,0 +1,196 @@
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+  }
+ 
+  .hydrated {
+    visibility: inherit;
+    position: inherit;
+  }
+  .header {
+    height: 56px;
+    display: flex;
+    margin-left: 18px;
+    margin-right: 16px;
+    justify-content: right;
+    align-items: center;
+  }
+  
+  .support {
+    display: flex;
+    align-items: center;
+  }
+  
+  .call{
+    height: 20px;
+  }
+  
+  #support-img img {
+    margin-right: 5px;
+  }
+  
+  #support-text {
+    font-weight: 400;
+    color: #76C893;
+    font-size: 14px;
+  
+  }
+  
+  #active {
+    font-size: 6vw;
+    margin: 15px;
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 500;
+    font-size: em;
+  }
+  
+  .active-orders {
+    display: block;
+    height: fit-content;
+  }
+  
+  .date-time {
+    display: flex;
+    justify-content: space-between;
+    .date {
+      margin: 10px 10px 0px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+    }
+    .time {
+      font-size: x-large;
+      margin: 4px;
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 500;
+    }
+  }
+  
+  .ordercard {
+    background: #ffffff;
+    box-shadow: 0px 0px 3px 1px rgb(0 0 0 / 25%);
+    border-radius: 8px;
+    margin: 5px;
+  }
+  
+  .shopName{
+    span{
+      position: absolute;
+      right: 15px;
+      top: 15px;
+    }
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 21px;
+    color: #4F5052;
+  }
+  
+  .farm-img {
+    border-radius: 5px;
+    width: 80px;
+    height: 82px;
+  }
+  
+  .container {
+    display: flex;
+    margin: 10px;
+  
+    .middletext {
+      padding: 10px;
+    }
+  
+    .value{
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 140px;
+      overflow: hidden;
+    }
+  
+    .location{
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      display: flex;
+      color: #4F5052;
+      align-items: center;
+    }
+  
+    .delivering-status{
+      background: linear-gradient(90deg, #76C893 1.55%, rgba(118, 200, 147, 0.32) 69.44%);
+      border-radius: 2px 20px 20px 2px;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 18px;
+      color: #4F5052;
+      padding: 3px;
+      display: flex;
+      align-items: center;
+  
+      ion-icon{
+        margin-right: 4px;
+      }
+    }
+  }
+  
+  .buttons{
+    display: flex;
+    padding: 0px 10px 10px;
+    justify-content: space-between;
+    ion-button{
+      width: -webkit-fill-available;
+      ion-icon{
+        margin-right: 20px;
+      }
+    }
+    ion-button:first-child{
+      margin-right: 10px;
+    }
+  }
+  
+  .scroll{
+    display: flex;
+    overflow: auto;
+    .content{
+      padding: 10px;
+      img{
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+      }
+    }
+  }
+  
+  
+  
+  
+  
+  .row {
+    display: flex;
+    padding: 0px 16px !important;
+  
+    .box {
+      margin: 5px 16px 15px 0px !important;
+  
+      &:last-child {
+        margin-right: 0;
+        flex-wrap: wrap;
+      }
+    }
+  
+    .round-box {
+      margin: 5px 16px 15px 0px !important;
+  
+      display: grid;
+  
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  

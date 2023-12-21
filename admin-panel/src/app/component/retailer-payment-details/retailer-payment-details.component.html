@@ -1,0 +1,45 @@
+<div class="main-content p-4">
+
+  <div class="card custom-card">
+    <div class="card-body">
+
+      <h5 class="mb-4">Retailer Payment</h5>
+
+
+      <div class="table-responsive ">
+        <table class="table table-bordered mb-4">
+          <thead>
+            <tr>
+              <th *ngFor="let item of paymentHead" class="text-primary">{{item.name}}</th>
+            </tr>
+          </thead>
+
+
+            <tbody>
+              <tr *ngFor="let item of paymentDetails; let i=index;">
+                <td >{{item.sarvmPgOrder?.id}}</td>
+                <td>{{item.sarvmPgOrder?.amountDue}}</td>
+                <td>{{item.sarvmPgOrder?.amountPaid}}</td>
+                <td>{{item.sarvmPgOrder?.paymentGatewayName}}</td>
+                <td>{{item.sarvmPgOrder?.serviceName}}</td>
+                <td>{{item.sarvmPgOrder?.creationTime | date}}</td>
+                <td>
+                  <span class="badge rounded-pill  bg-danger" *ngIf="!item.captured">false</span>
+                  <span class="badge rounded-pill  bg-success" *ngIf="item.captured">True</span>
+            </td>
+
+
+              </tr>
+
+            </tbody>
+
+
+
+        </table>
+      </div>
+
+
+
+      </div>
+      </div>
+</div>

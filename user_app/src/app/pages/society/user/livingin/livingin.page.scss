@@ -1,0 +1,51 @@
+@import '../../owner/custom.scss';
+ion-header {
+    ion-toolbar {
+        ion-title {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: #4F5052;
+        }
+
+    }
+}
+
+ion-content.selectlivingin {
+    .card {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 20%;
+        &.active
+        {
+            img
+            {
+                border: 2px solid #00A64F;
+            }
+            .label
+            {
+                color: #00A64F;
+                font-weight: 600;
+            }
+        }
+        img {
+            height: 164px;
+            border-radius: 20px;
+            padding: 0px 8px;            
+        }
+
+        .label {
+            margin: 16px 0;
+            height: 21px;
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 14px;
+            line-height: 21px;
+        }
+    }
+}

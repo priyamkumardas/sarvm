@@ -1,0 +1,71 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  height: 100vh;
+  width: 100vw;
+}
+
+.header{
+  display: flex;
+  ion-icon{
+    font-size: 7vw;
+    margin: auto;
+    padding-left: 3vw;
+  }
+}
+
+ion-title{
+  text-align: center;
+  font-size: 7vw;
+  position: relative;
+  left: 8vw;
+}
+
+.support{
+  img{
+    height: 5vw;
+    margin: auto;
+    padding: 0 1vw;
+  }
+  display: flex;
+  padding: 0 2vw;
+  p{
+    font-size: 4vw;
+    display: block;
+    margin: auto;
+    color:var(--ion-color-primary);
+  }
+}
+
+#text1{
+  margin-left: 5vw;
+  margin-top: 5vw;
+  font-size: 7vw;
+}
+
+#text2{
+  margin-left: 5vw;
+  margin-top: 4vw;
+  font-size: 5vw;
+}
+
+ion-card{
+  margin-top: 6vw;
+  padding: 2vw 4vw;
+  background-color: #FCFCFC;
+}
+
+.question{
+  font-weight: 550;
+  font-size: 3.5vw;
+  padding-bottom: 2vw;
+}
+
+.ans{
+  font-weight: 400;
+  font-size: 3.5vw;
+}

@@ -1,0 +1,18 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p>{{'support'|language:'Support'}}</p>
+    <div class="method">
+      <div class="cash" (click)="commonservice.featureNotAvailable()">
+        <img src="/assets/support_msg.svg"><br>
+        <span>{{'Complaint'|language:'Complaint'}}</span>
+      </div>
+      <div class="upi" (click)="modelCtrl.dismiss('Call')">
+        <img src="/assets/support_call.svg"><br>
+        <span>{{'call'|language:'Call'}}</span>
+      </div>
+    </div>
+  </ion-card>
+</ion-footer>

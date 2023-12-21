@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button slot="start" color="primary" defaultHref="/setting" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-no-padding">{{'DeleteAccount' | language : 'Delete Account'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="options" #options>
+    <p class="header">{{'Whywouldyouliketodeleteyouraccount?'|language:'Why would you like to delete your account?'}}</p>
+    <ion-radio-group (ionChange)="deleteReasonChange($event)">
+      <ion-item lines="none" *ngFor="let item of deleteReason; let idx=index">
+        <ion-radio slot="start" value="{{item.name}}" mode="md"></ion-radio>
+        <ion-label>{{item.languageKey | language : item.name}}</ion-label>
+      </ion-item>
+    </ion-radio-group>
+    <div *ngIf="selectedReason == 'Other'">
+      <ion-textarea rows="5" placeholder="Let us know why here" [(ngModel)]="otherReason"  (ionChange)="otherReasonChange()"></ion-textarea>
+    </div>
+    <div class="submitbtn">
+      <ion-button mode="ios" expand="block" fill="solid" shape="round" (click)="submitDeleteAccount()">
+        {{'submit'|language:'Submit '}}
+      </ion-button>
+    </div>
+  </div>
+</ion-content>

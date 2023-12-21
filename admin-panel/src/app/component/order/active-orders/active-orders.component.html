@@ -1,0 +1,63 @@
+<div class="container content">
+  <div class="row">
+    <div class="col-3">
+      <h1>Active Orders</h1>
+      <div style="display: inline-block" class="form-group mb-4">
+        <input
+          style="width: 200px"
+          class="form-control"
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search"
+        />
+      </div>
+    </div>
+    
+  </div>
+  <div class="row">
+    <div class="col-12">
+   
+    <table
+      class="table"
+      style="margin-right: 50px;"
+      *ngIf="(orders | filter: searchText).length > 0; else noResults"
+    >
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Order Id</th>
+          <th scope="col">Shop Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Details</th>
+          <th scope="col">Track</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          *ngFor="let data of orders
+              | filter: searchText; index as i"
+
+        >
+          <th scope="row">{{ i + 1 }}</th>
+          <td>{{data.orderID}}</td>
+          <td>{{data.shop.name}}</td>
+          <td>{{data.amount}}</td>
+
+          <td>
+            <i [routerLink]="['/order-details',data.orderID]" class="fa fa-info-circle" style="margin-left: 10px; cursor: pointer;" ></i>
+          </td>
+          <td>
+            <i [routerLink]="['/track-order',data.orderID]" class="fas fa-shipping-fast" style="cursor: pointer;"></i>
+
+          </td>
+
+        </tr>
+      </tbody>
+    </table>
+    <ng-template #noResults>
+      <p>No results found for "{{ searchText }}".</p>
+    </ng-template>
+
+  </div>
+</div>
+</div>

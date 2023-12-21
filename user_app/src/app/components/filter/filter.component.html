@@ -1,0 +1,118 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <h3 class="ion-text-center">{{'filters' | language : 'Filter'}}</h3>
+    <ion-row>
+      <div class="Menu">
+        <div class="segment">
+          <div [ngClass]="tab == 'sortBy'?'active':''" mode="md" (click)="tab = 'sortBy'">
+            <p>{{'sortBy' | language : 'Sort By'}}</p>
+          </div>
+          <div [ngClass]="tab == 'selectPrefrence'?'active':''" mode="md" (click)="tab = 'selectPrefrence'">
+            <p>{{'Preference ' | language : 'Preference'}}</p>
+          </div>
+          <div [ngClass]="tab == 'rating'?'active':''" mode="md" (click)="tab = 'rating'">
+            <p>{{'ratings' | language : 'Ratings'}}</p>
+          </div>
+          <div [ngClass]="tab == 'delivery'?'active':''" mode="md" (click)="tab = 'delivery'">
+            <p>{{'delivery' | language : 'Delivery'}}</p>
+          </div>
+        </div>
+      </div>
+      <div class="line">
+        <div class="vertical-line"></div>
+      </div>
+      <div class="info">
+        <div [ngSwitch]="tab">
+          <ion-grid *ngSwitchCase="'sortBy'" class="ion-padding">
+            <p class="ion-text-center">{{'Distance '|language:'Distance '}}( {{filter.rangeValue}} {{'kms' | language:'kms'}})</p>
+            <!-- <p class="ion-text-center">{{'Distance(' + filter.rangeValue + ' km)' | language : 'Distance(' + filter.rangeValue + ' km)'}}</p> -->
+            <div style="text-align:center;">
+              <ion-badge [ngClass]="filter.rangeValue == 5  ? 'active-badge' : 'default'" (click)="filter.rangeValue = 5 " slot="start">5 Km</ion-badge>
+              <ion-badge [ngClass]="filter.rangeValue == 10 ? 'active-badge' : 'default'" (click)="filter.rangeValue = 10" slot="start">10 Km</ion-badge>
+              <ion-badge [ngClass]="filter.rangeValue == 15 ? 'active-badge' : 'default'" (click)="filter.rangeValue = 15" slot="start">15 Km</ion-badge>
+              <ion-badge [ngClass]="filter.rangeValue == 20 ? 'active-badge' : 'default'" (click)="filter.rangeValue = 20" slot="start">20 Km</ion-badge>
+              <ion-badge [ngClass]="filter.rangeValue == 25 ? 'active-badge' : 'default'" (click)="filter.rangeValue = 25" slot="start">25 Km</ion-badge>
+              <ion-badge [ngClass]="filter.rangeValue == 50 ? 'active-badge' : 'default'" (click)="filter.rangeValue = 50" slot="start">50 Km</ion-badge>
+            </div>
+            <ion-row>
+                <ion-col>
+                  <ion-range mode="md" [pin]="true" min="0" max="2000" step="5" [(ngModel)]="filter.rangeValue">
+                  </ion-range>
+                  <ion-label><ion-badge class="badge-one" slot="start" color="warning">0</ion-badge></ion-label>
+                  <ion-label><ion-badge  class="badge-two" color="warning">2000</ion-badge></ion-label>
+                 </ion-col>
+           </ion-row>
+          
+          </ion-grid>
+          <ion-grid *ngSwitchCase="'selectPrefrence'" class="ion-padding">
+            <p class="ion-text-center">{{'SelectPreference ' | language : 'Select Preference'}}</p>
+            <ion-row class="ion-margin">
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" [ngClass]="{'active' : filter.isVeg === true}" (click)="setPreference(true)" src="/assets/Filter all img/Frame 7645.svg"> </ion-img>
+              </ion-col>
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" [ngClass]="{'active' : filter.isVeg === false}" (click)="setPreference(false)" src="/assets/Filter all img/Frame 7646.svg"> </ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngSwitchCase="'rating'" class="ion-padding">
+            <p class="ion-text-center">{{'ratings' | language : 'Ratings'}}</p>
+            <ion-row class="ion-margin">
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" (click)="filter.ratingNumber =4" [ngClass]="{'active' : filter.ratingNumber === 4}" src="/assets/Filter all img/4+.svg">
+                </ion-img>
+              </ion-col>
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" (click)="filter.ratingNumber=3" [ngClass]="{'active' : filter.ratingNumber=== 3}" src="/assets/Filter all img/3+.svg">
+                </ion-img>
+              </ion-col>
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" (click)="filter.ratingNumber=2" [ngClass]="{'active' : filter.ratingNumber === 2}" src="/assets/Filter all img/2+.svg">
+                </ion-img>
+              </ion-col>
+              <ion-col size="6" class="align-items-center">
+                <ion-img class="imges" (click)="filter.ratingNumber=1" [ngClass]="{'active' : filter.ratingNumber === 1}" src="/assets/Filter all img/1+.svg"> </ion-img>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+          <ion-grid *ngSwitchCase="'delivery'" class="ion-padding">
+            <div>
+              <p>{{'DeliveryPickup Within' | language : 'Delivery/Pickup Within'}}</p>
+              <ion-row>
+                <ion-radio-group value="Delivery" mode="md">
+                  <ion-item lines="none" class="ion-no-padding">
+                    <ion-radio slot="start" name="option" id="All" value="All" (click)="filter.deliveryType=0" class="ion-no-margin"></ion-radio>
+                    <ion-label>{{'all' | language : 'All'}}</ion-label>
+                  </ion-item>
+                  <ion-item lines="none" class="ion-no-padding">
+                    <ion-radio slot="start" name="option" id="Pickup" value="Pickup" (click)="filter.deliveryType=2" class="ion-no-margin"> </ion-radio>
+                    <ion-label>{{'pickUp' | language : 'Pickup'}}</ion-label>
+                  </ion-item>
+                  <ion-item lines="none" class="ion-no-padding">
+                    <ion-radio slot="start" name="option" id="Delivery" value="Delivery" (click)="filter.deliveryType=1" class="ion-no-margin"></ion-radio>
+                    <ion-label>{{'delivery' | language : 'Delivery'}}</ion-label>
+                  </ion-item>
+                </ion-radio-group>
+              </ion-row>
+            </div>
+            <ion-row class="ion-margin">
+              <ion-col size="6" class="align-items-center" >
+                <div (click)="this.commonservice.featureNotAvailable()">
+                  <ion-img class="imges" src="/assets/Filter all img/5 KM (7).svg" (click)="filter.deliveryType=3" [ngClass]="{'active' : filter.deliveryType === 3}"> </ion-img>
+                </div>
+              </ion-col>
+              <ion-col size="6" class="align-items-center">
+                <div (click)="this.commonservice.featureNotAvailable()">
+                  <ion-img class="imges" src="/assets/Filter all img/5 KM (6).svg" (click)="filter.deliveryType=4" [ngClass]="{'active' : filter.deliveryType=== 4}"> </ion-img>
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </div>
+    </ion-row>
+  </ion-card>
+</ion-footer>

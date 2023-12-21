@@ -1,0 +1,91 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'OrderSubmitted' | language:'Order Submitted'}}</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button fill="clear" (click)="support()" color="primary" class="support" [disabled]="isDisable">
+            <ion-icon slot="start" src="/assets/bx_support.svg"></ion-icon>
+         {{'support' | language:'Support'}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <p class="cnfrm_text">{{'OrderSubmitted' | language:'Order Submitted'}}</p>
+  <div class="ion-text-center" style="height: 130px">
+    <img src="/assets/cuate.svg" />
+  </div>
+  <div class="box">
+    <div class="card" style="margin-left: 16px">
+      <p style="font-size: 16px">{{'orderNumber' | language:'Order Number'}}</p>
+      <p style="font-size: 12px">{{orderDetails?.orderNumber}}</p>
+    </div>
+  </div>
+  <div class="box">
+    <div class="card" style="margin-left: 16px">
+      <p style="font-size: 16px">{{'paymentMethod' | language:'Payment Method'}}</p>
+      <p style="font-size: 12px">
+        <span *ngIf="paymentMode == 'DELIVERY'">{{'PayatDelivery' | language :'Pay at Delivery'}}</span>
+        <span *ngIf="paymentMode == 'PICKUP'">{{'payAtPickup' | language :'Pay at Pickup'}}</span>
+      </p>
+    </div>
+  </div>
+  <div class="box">
+    <div class="card" style="margin-left: 16px">
+      <p style="font-size: 16px">
+        {{'dateOfOrder' | language:'Date of Order'}}
+      </p>
+      <p style="font-size: 12px">
+        {{orderDetails?.orderDate | date:'dd MMM yyyy'}}
+      </p>
+    </div>
+  </div>
+  <div class="help_box" routerLink="/help">
+    <div class="card" style="margin-left: 16px; display: flex; align-items: center">
+      <span>{{'help' | language:'Help'}}</span>
+      <ion-icon name="chevron-forward-outline" class="right"></ion-icon>
+    </div>
+  </div>
+  <p class="date_time_text">{{'yourOrder' | language : 'Your Order'}}</p>
+  <div class="box" *ngFor="let data of orderDetails?.subOrders">
+    <div>
+      <div class="card" (click)="show(data)">
+        <p style="font-size: 16px">
+          {{data?.deliveryDate | customeDate}}
+        </p>
+        <div class="chip-container">
+          <ion-chip color="primary">{{data.mode}}</ion-chip>
+          <div class="card-drop" >
+            <p style="font-size: 16px">06AM - 10PM</p>
+            <ion-icon name="chevron-down-outline" *ngIf="!data.show"></ion-icon>
+            <ion-icon name="chevron-up-outline" *ngIf="data.show"></ion-icon>
+          </div>
+        </div>
+      </div>
+      <div class="card" *ngIf="data.show">
+        <button class="card_p" (click)="instruction(data,data.orderID)" *ngIf="!data.instruction" [disabled]="isDisable">
+          <img src="/assets/instruction.svg" /> Instructions
+        </button>
+        <p style="font-weight: bold;" *ngIf="data.instruction">
+          Instructions<br/>
+          <span style="font-weight: normal;font-size: 13px;color: #6a6a6a;">{{data.instruction}}</span>
+        </p>
+        <ion-button [routerLink]="['/track-order',data.orderID]" fill="solid" color="primary" shape="round">
+          <ion-icon
+            style="margin-right: 20px"
+            src="/assets/track.svg"
+          ></ion-icon>
+          {{'Track' | language:'Track' | titlecase}}
+        </ion-button>
+      </div>
+    </div>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="active_order" [routerLink]="['/active-order','ACTIVE']">
+   <span style="text-align: left">{{ noOfOrders }} {{'ActiveOrder' | language:'Active Order'}}</span>
+    <p >{{'view' | language:'View'}}</p>
+  </div>
+</ion-footer>

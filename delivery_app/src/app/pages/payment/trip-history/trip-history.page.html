@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button slot="start" color="primary" defaultHref="/home" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'TripsHistory ' | language : 'Trips History '}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div>
+    <ion-searchbar animated color="light" type="text" mode="md" id="myInput" [(ngModel)]="searchLang"
+      placeholder="{{'OrderIDorCustomerNumber' | language : 'Order ID or Customer Number'}}"
+      (ionChange)="searchFunction()">
+    </ion-searchbar>
+
+    <ion-segment class="order-segment-view" [scrollable]="true" mode="md" [value]="orderStatus"
+      [(ngModel)]="orderStatus" (ionChange)="orderSegmentChanged($event)">
+      <ion-segment-button value="all" layout="icon-start">
+        <ion-label>{{'all' | language : 'All'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="COMPLETED" layout="icon-start">
+        <img *ngIf="orderStatus !== 'COMPLETED'" src="assets/icon/ic-completed.svg" alt="icon" />
+        <img *ngIf="orderStatus == 'COMPLETED'" src="assets/icon/Done.svg" alt="icon" />
+        <ion-label>{{'Completed' | language : 'Completed'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="CANCELLED" layout="icon-start">
+        <img *ngIf="orderStatus !== 'CANCELLED'" src="assets/icon/ic-cancelled.svg" alt="icon" />
+        <img *ngIf="orderStatus == 'CANCELLED'" src="assets/icon/Unavailable.svg" alt="icon" />
+
+        <ion-label>{{'Cancelled' | language : 'Cancelled'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="REJECTED" layout="icon-start">
+        <img *ngIf="orderStatus !== 'REJECTED'" src="assets/icon/ic-rejected.svg" alt="icon" />
+        <img *ngIf="orderStatus == 'REJECTED'" src="assets/icon/Cancel.svg" alt="icon" />
+
+        <ion-label>{{'Rejected ' | language : 'Rejected'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="NO_SHOW" layout="icon-start">
+        <img *ngIf="orderStatus !== 'NO_SHOW'" src="assets/icon/ic-no-show.svg" alt="icon" />
+        <img *ngIf="orderStatus == 'NO_SHOW'" src="assets/icon/Box.svg" alt="icon" />
+        <ion-label>{{'noshow' | language : 'No Show'}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <ion-segment class="select-time-section" [scrollable]="true" mode="md" [value]="filterSegment"
+      [(ngModel)]="filterSegment" (ionChange)="filterSegmentChanged($event)">
+      <ion-segment-button value="Today">
+        <ion-label>{{'today' | language : 'Today'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Yesterday">
+        <ion-label>{{'yesterday' | language : 'Yesterday'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="customdate">
+        <ion-label>{{defaultDate | date:"dd MMM YYYY"}}</ion-label>
+      </ion-segment-button>
+      <div class="calendar-img" value="customdate" id="historyDateFilt">
+        <img src="assets/icon/ic-calendar.svg" alt="icon" />
+      </div>
+      <ion-modal trigger="historyDateFilt" handleBehavior="cycle" show-backdrop="false" side="end">
+        <ng-template>
+            <app-date-time-picker [formType]="'kycform'" [value]="defaultDate" [date_format]="format" 
+              (datePickerValue)="openDateSelectModal($event)">
+            </app-date-time-picker>
+        </ng-template>
+      </ion-modal>
+    </ion-segment>
+  </div>
+
+
+  <div>
+    <div *ngFor="let item of ordersDataTripHistory" class="list-data-today" (click)="openOrderAddressModal(item)">
+      <div class="order-item">
+        <ion-row>
+          <ion-col size="7">
+            <h4 class="today-order">{{'order'|language:'Order'}} # {{item?.orderId}}</h4>
+            <h4 class="today-amount"><span>{{item?.orderItemDetails?.length}} {{'itemsfor'|language:'Items For'}}</span>&nbsp;<span class="amount">{{item?.amount + (item?.deliveryInfo?.deliveryCharges ? item?.deliveryInfo?.deliveryCharges : 0) - (item.discount ? item?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span></h4>
+          </ion-col>
+          <ion-col size="5" class="right-item">
+            <!-- <p class="today-date" *ngIf="!item.deliveryInfo?.deliveredOn">{{item.deliveryInfo?.deliveryDate | date:"MMM d, y, h:mm a"}}</p>
+            <p class="today-date" *ngIf="item.deliveryInfo?.deliveredOn">{{item.deliveryInfo?.deliveredOn | date:"MMM d, y, h:mm a"}}</p> -->
+            <p class="today-date" *ngIf="item.createdAt">{{item?.createdAt| date:"MMM d, y, h:mm a"}}</p>
+            <ion-icon *ngIf="item?.status == 'COMPLETED'" src="assets/icon/ic-round-completed.svg"></ion-icon>
+            <ion-icon *ngIf="item?.status == 'CANCELLED'" src="assets/icon/ic-cancelled.svg"></ion-icon>
+            <ion-icon *ngIf="item?.status == 'REJECTED'" src="assets/icon/ic-rejected.svg"></ion-icon>
+            <ion-icon *ngIf="item?.status == 'NO_SHOW'" src="assets/icon/ic-no-show.svg"></ion-icon>
+          </ion-col>
+        </ion-row>
+        <div class="timeline-view">
+          <div class="timeline-wrapper">
+            <div class="middle-line"></div>
+            <div class="left-circle right-top">
+              <div class="date"></div>
+              <div class="content-text">{{item?.pickUp?.shopName}}</div>
+            </div>
+            <div class="right-circle left-top">
+              <div class="date"></div>
+              <div class="content-text">{{item?.dropOff?.userName}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border footer">
+  <app-bottom-tab-view [tabsTextAvailable]="false"></app-bottom-tab-view>
+</ion-footer>

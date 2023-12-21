@@ -1,0 +1,249 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="cancel()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="content">
+    <div class="Quantity-header" *ngIf="!showMore">
+      <p class="header" *ngIf="unit == 'Kg'">{{'addQuantityGKg' | language : 'Add Quantity (g/kg)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Kg'">Min Order Quantity {{moq}} Kg</p>
+      <p class="header" *ngIf="unit == 'Ltr'">{{'addQuantityMlL' | language : 'Add Quantity (ml/l)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Ltr'">Min Order Quantity {{moq}} l</p>
+      <p class="header" *ngIf="unit == 'Pcs' ">{{'AddQuantity(Pieces)' | language : 'Add Quantity (Pieces)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Pcs' ">Min Order Quantity {{moq}} Pcs</p>
+      <p class="header" *ngIf="unit == 'Plt'">{{'AddQuantity(Plates)' | language : 'Add Quantity (Plates)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Plt'">Min Order Quantity {{moq}} Pts</p>
+      <p class="header" *ngIf="unit == 'Gls'">{{'addQuantityGls' | language : 'Add Quantity (gls)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Gls'">Min Order Quantity {{moq}} gls</p>
+      <p class="header" *ngIf="unit == 'Pkt'">{{'addQuantityPkt' | language : 'Add Quantity (pkt)'}}</p>
+      <p class="header-quantity" *ngIf="moq && unit == 'Pkt'">Min Order Quantity {{moq}} pkt</p>
+      
+      <!-- For Kgs -->
+      <ion-grid *ngIf="unit == 'Kg'">
+        <ion-row class="qunatity" color="primary">
+          <ion-col size="3" *ngFor="let item of availableQuantityGm">
+            <div  (click)="setQuanity(item, 'gm')">
+              <ion-img *ngIf="item === 0.005" src="/assets/icon/kg/5-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.01" src="/assets/icon/kg/10-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.025" src="/assets/icon/kg/25-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.05" src="/assets/icon/kg/50-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.1" src="/assets/icon/kg/100-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.25" src="/assets/icon/kg/250-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.5" src="/assets/icon/kg/500-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.75" src="/assets/icon/kg/750-gm.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item * 1000}} gm</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="3" *ngFor="let item of availableQuantityKg">
+            <div  (click)="setQuanity(item, unit)">
+              <ion-img *ngIf="item === 1.5" src="/assets/icon/kg/1.5-kg.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 2" src="/assets/icon/kg/2-kg.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 2.5" src="/assets/icon/kg/2.5-kg.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item}} {{unit}}</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div (click)="toggleMore()">
+              <ion-img src="/assets/icon/kg/kg-more.svg"></ion-img>
+              <!-- <p>{{'more' | language : 'More'}} </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- For Plates -->
+      <ion-grid *ngIf="unit == 'Plt'">
+        <ion-row class="qunatity" color="primary">
+          <ng-container *ngFor="let item of availableQuantityPlt">
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 0.25 && unit == 'Plt'">
+              <ion-img src="/assets/icon/plt/one-by-four-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 0.5">
+              <ion-img *ngIf="item === 0.5" src="/assets/icon/plt/one-by-two-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 1">
+              <ion-img *ngIf="item === 1" src="/assets/icon/plt/one-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 1.5">
+              <ion-img *ngIf="item === 1.5" src="/assets/icon/plt/one-one-by-two-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 2">
+              <ion-img *ngIf="item === 2" src="/assets/icon/plt/two-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 4">
+              <ion-img *ngIf="item === 4" src="/assets/icon/plt/four-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 5">
+              <ion-img *ngIf="item === 5" src="/assets/icon/plt/five-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 6">
+              <ion-img *ngIf="item === 6" src="/assets/icon/plt/six-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 8">
+              <ion-img *ngIf="item === 8" src="/assets/icon/plt/eight-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 10">
+              <ion-img *ngIf="item === 10" src="/assets/icon/plt/ten-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 12">
+              <ion-img *ngIf="item === 12" src="/assets/icon/plt/12-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+            <ion-col (click)="setQuanity(item, unit)" size="3" *ngIf="item === 15">
+              <ion-img *ngIf="item === 15" src="/assets/icon/plt/15-pcs.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+            </ion-col>
+          </ng-container>
+          <ion-col size="3" *ngIf="unit != 'Plt'">
+            <div (click)="toggleMore()" >
+              <!-- <ion-img src="/assets/Quantity Modal/Frame 7635.png"></ion-img> -->
+              <ion-img src="/assets/icon/plt/pcs-more.svg"></ion-img>
+              <!-- <p> {{'more' | language : 'More'}} </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- For Pices -->
+      <ion-grid *ngIf="unit == 'Pcs'">
+        <ion-row class="qunatity" color="primary">
+          <ion-col size="4" *ngFor="let item of availableQuantityPcs">
+            <div class="box" (click)="setQuanity(item, unit)">
+              <ion-img *ngIf="item ===1" src="/assets/icon/pcs/pcs1.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===2" src="/assets/icon/pcs/pcs2.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===4" src="/assets/icon/pcs/pcs3.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===6" src="/assets/icon/pcs/pcs4.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===8" src="/assets/icon/pcs/pcs5.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item * 1000}} ml</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div (click)="toggleMore()" class="box">
+              <!-- <ion-img src="/assets/Quantity Modal/Frame 7635.png"></ion-img> -->
+              <ion-img src="/assets/icon/pcs/pcs6.png"></ion-img>
+              <!-- <p> More </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- For Liter -->
+      <ion-grid *ngIf="unit == 'Ltr'">
+        <ion-row class="qunatity" color="primary">
+          <ion-col size="3" *ngFor="let item of availableQuantityMl">
+            <div  (click)="setQuanity(item, 'ml')">
+              <ion-img *ngIf="item === 0.05" src="/assets/icon/ltr/50-ml.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.1" src="/assets/icon/ltr/100-ml.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.25" src="/assets/icon/ltr/250-ml.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.5" src="/assets/icon/ltr/500-ml.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 0.75" src="/assets/icon/ltr/750-ml.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item * 1000}} ml</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="3" *ngFor="let item of availableQuantityLtr">
+            <div  (click)="setQuanity(item, unit)">
+              <ion-img *ngIf="item === 1.5" src="/assets/icon/ltr/1.5-ltr.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item === 2" src="/assets/icon/ltr/2-ltr.svg" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item}} {{unit}}</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <div (click)="toggleMore()" >
+              <!-- <ion-img src="/assets/Quantity Modal/Frame 7635.png"></ion-img> -->
+              <ion-img src="/assets/icon/ltr/ltr-more.svg"></ion-img>
+              <!-- <p> More </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="unit == 'Gls'">
+        <ion-row class="qunatity" color="primary">
+          <ion-col size="4" *ngFor="let item of availableQuantityGls">
+            <div class="box" (click)="setQuanity(item, unit)">
+              <ion-img *ngIf="item ===1" src="/assets/icon/gls/gls1.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===2" src="/assets/icon/gls/gls2.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===4" src="/assets/icon/gls/gls3.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===6" src="/assets/icon/gls/gls4.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===8" src="/assets/icon/gls/gls5.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item * 1000}} ml</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div (click)="toggleMore()" class="box">
+              <!-- <ion-img src="/assets/Quantity Modal/Frame 7635.png"></ion-img> -->
+              <ion-img src="/assets/icon/gls/glsMore.png"></ion-img>
+              <!-- <p> More </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid *ngIf="unit == 'Pkt'">
+        <ion-row class="qunatity" color="primary">
+          <ion-col size="4" *ngFor="let item of availableQuantityPkt">
+            <div class="box" (click)="setQuanity(item, unit)">
+              <ion-img *ngIf="item ===1" src="/assets/icon/pkt/pkt1.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===2" src="/assets/icon/pkt/pkt2.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===4" src="/assets/icon/pkt/pkt3.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===6" src="/assets/icon/pkt/pkt4.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <ion-img *ngIf="item ===8" src="/assets/icon/pkt/pkt5.png" [ngClass]="{'active' : quantity === item}"></ion-img>
+              <!-- <p>{{item * 1000}} ml</p> -->
+            </div>
+          </ion-col>
+          <ion-col size="4">
+            <div (click)="toggleMore()" class="box">
+              <!-- <ion-img src="/assets/Quantity Modal/Frame 7635.png"></ion-img> -->
+              <ion-img src="/assets/icon/pkt/pktMore.png"></ion-img>
+              <!-- <p> More </p> -->
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+    <!-- <div class="Add_more-header" *ngIf="showMore"> -->
+    <ion-grid fixed *ngIf="showMore">
+      <ion-row>
+        <ion-col>
+          <h4 class="ion-text-center">{{'more' | language : 'More'}}</h4>
+        </ion-col>
+      </ion-row>
+      
+          <div class="inputs">
+            <ion-chip color="primary" mode="ios" outline="true" class="chipadd">
+              <ion-icon *ngIf="unit=='Kg'" src="./assets/QTY/kg.svg" class="symbol"></ion-icon>
+              <ion-icon *ngIf="unit=='Ltr'" src="./assets/QTY/ph_drop.svg" class="symbol"></ion-icon>
+              <ion-icon *ngIf="unit=='Pcs'" src="./assets/QTY/pcs.svg" class="symbol"></ion-icon>
+              <ion-icon *ngIf="unit=='Plt'" src="./assets/QTY/Plt.svg" class="symbol"></ion-icon>
+              <ion-input [(ngModel)]="quantity" [disabled]="amount" type="number"  placeholder="{{unit}}" ></ion-input> 
+               <span *ngIf="quantity">{{unit}}</span>
+            </ion-chip>
+            <p class="or">
+              &nbsp; OR &nbsp;
+            </p>
+            <ion-chip color="primary" mode="ios" outline="true" class="chipadd">
+              <ion-icon src="./assets/QTY/rupee.svg" class="symbol"></ion-icon>
+              <ion-input [(ngModel)]="amount" [disabled]="quantity"  type="number" placeholder="Amount" ></ion-input> 
+            </ion-chip>
+          </div>
+         
+          <!-- <ion-input mode="md"   fill="outline" ></ion-input> -->
+          <!-- <ion-item fill="outline" shape="round" mode="md" >
+            <ion-icon name="star" slot="start"></ion-icon>
+  <ion-input placeholder="Enter amount" type="number" [(ngModel)]="amount" [disabled]="quantity"></ion-input>
+</ion-item> -->
+          <!-- <ion-input type="number" placeholder="Enter amount" [(ngModel)]="amount" [disabled]="quantity"></ion-input> -->
+      
+        <!-- <ion-col size="2" class="ion-text-center">
+          <p class="or">
+            &nbsp; OR &nbsp;
+          </p>
+            
+        </ion-col> -->
+        <!-- <ion-col size="5" class="ion-text-center">
+          <ion-item fill="outline" shape="round" mode="md" class="ion-no-padding">
+  <ion-label position="floating">Enter no. of {{unit}}</ion-label>
+  <ion-input type="number"   [(ngModel)]="quantity" [disabled]="amount"></ion-input>
+</ion-item>
+           <ion-input type="number" placeholder="Enter no. of {{unit}}" [(ngModel)]="quantity" [disabled]="amount"> </ion-input> -->
+        <!-- </ion-col> -->
+     
+      <!-- <p class="unit">/{{unit}}</p> -->
+      <div class="ion-text-center">
+        <ion-button expand="full" shape="round" mode="ios" color="primary" (click)="setQuanity(quantity, unit)" class="ion-margin-bottom">{{'confirm' | language : 'Confirm'}}</ion-button>
+      </div>
+    </ion-grid>
+  </div>
+</ion-footer>

@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" defaultHref="/profile" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-label>
+      <ion-title class="ion-no-padding">{{'bankDetails' | language : 'Bank Details'}}</ion-title>
+    </ion-label>
+  </ion-toolbar>
+  <ion-progress-bar mode="ios" color="primary" type="indeterminate" *ngIf="commonService.isLoading"></ion-progress-bar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment class="ionSegment" mode="md" value="UpiId" (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="UpiId">
+      <ion-label class="segment-label">{{'UPIID' | language:'UPI ID'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="BankAccount" [disabled]="true">
+      <ion-label class="segment-label">{{'BankAccount' | language:'Bank Account'}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <div *ngIf="segment === 'UpiId'" class="segment">
+    <ion-card class="card" *ngFor="let paymentInfo of userPaymentInfo; let i = index" (click)="gotToQrScanPage(i)">
+      <ion-row>
+        <ion-col size="2" class="ion-align-self-center">
+          <img src="assets/banking/{{paymentInfo.app}}.png" alt="">
+        </ion-col>
+        <ion-col size="8" class="ion-align-self-center">
+          <span class="IdBranch">
+            <h5 class="UpiId">{{paymentInfo.app}}</h5>
+            <!-- <img class="pngImage" src="assets/banking/{{paymentInfo.app}}.png" alt=""> 
+            <span style="margin-left: 5px;">{{paymentInfo.app}}</span> -->
+          </span>
+        </ion-col>
+        <ion-col size="2" class="ion-align-self-center">
+          <div class="checkbox">
+            <span *ngIf="paymentInfo.active == 'true'">{{'Active'|language:'Active'}}</span>
+            <span *ngIf="paymentInfo.active == 'false'">{{'InActive'|language:'InActive'}}</span>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-card>
+  </div>
+
+
+
+  <div class="btns2">
+    <button class="addbtn" (click)="addUPIOrBankAccount()">{{'add'|language:'Add'}}</button>
+  </div>
+
+</ion-content>

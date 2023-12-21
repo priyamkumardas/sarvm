@@ -1,0 +1,26 @@
+<ion-footer>
+<div class="CrossIcon" (click)="cancel()">
+  <ion-icon name="close"></ion-icon>
+</div>
+<ion-card class="content">
+  <p>Seller Profile</p>
+  <div class="method">
+    <div class="about_seller">
+    <div class="info">
+
+      <div id="img">
+
+        <img src="{{image? image :'/assets/images/images_blank.svg' }}" alt="">
+      </div>
+      <div id="about">
+        <h3 style="font-size:15px"> <strong>{{name}}</strong></h3>
+        <p class="about" style="font-size:15px">{{address}}</p>
+        <p class="about" style="font-size:15px">{{tagline}}</p>      
+      </div>
+    </div>
+   <p class="about">{{about}}</p>
+   
+  </div>
+  </div>
+</ion-card>
+</ion-footer> 

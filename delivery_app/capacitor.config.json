@@ -1,0 +1,6 @@
+{
+	"appId": "com.sarvm.loga",
+	"appName": "SarvM Logistics",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

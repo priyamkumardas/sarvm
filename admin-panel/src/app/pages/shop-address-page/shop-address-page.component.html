@@ -1,0 +1,57 @@
+<div class="main-content p-4">
+  <div class="card custom-card">
+    <div class="card-body">
+
+      <h5 class="mb-4">Shop List</h5>
+
+
+      <div class="table-responsive ">
+        <table class="table table-bordered mb-4" datatable [dtOptions]="dtoptions" [dtTrigger]="dtTrigger">
+          <thead>
+            <tr>
+              <th *ngFor="let item of shoplist" class="text-primary">{{item.name}}</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let item of alldata; let i=index;" >
+              <td>{{i}}</td>
+              <td>{{item.shop_id}}</td>
+              <td>{{item.shop_number}}</td>
+              <td>{{item.shop_name}}</td>
+              <td>
+                <Strong>Street:</Strong> {{item.street}} <br/>
+                <strong>Landmark:</strong> {{item.landmark}}<br/>
+                <strong>City:</strong> {{item.city}} - {{item.pincode}}
+              </td>
+              <td>
+                <span class="badge rounded-pill  bg-success" *ngIf="item.isKYCVerified ==true">{{item.isKYCVerified}}</span>
+                <span class="badge rounded-pill  bg-danger" *ngIf="item.isKYCVerified ==false">{{item.isKYCVerified}}</span>
+                <span class="badge rounded-pill  bg-danger" *ngIf="!item.isKYCVerified">Not done</span>
+
+              </td>
+
+              <td class="link">
+                <span *ngIf="item.isSubscribed" class="badge rounded-pill  bg-success">True</span>
+                <span *ngIf="!item.isSubscribed" class="badge rounded-pill  bg-danger">False</span>
+              </td>
+
+              <td class="link"><span  [routerLink]="['/view-shop-details', item.shop_id]" class="badge bg-secondary">View</span> </td>
+
+
+
+              <td class="link"><span  [routerLink]="['/shop-orders', item.shop_id]" class="badge bg-secondary">View</span> </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+

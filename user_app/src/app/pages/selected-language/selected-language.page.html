@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="router.url != '/update-language'">{{'welcome' | language : 'Welcome'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="stl-usr-lan-body">
+    <div class="stl-usr-lan-head">
+      <!-- <h3>{{'Welcome' | language : 'Welcome'}}</h3> -->
+      <h4>{{'SelectLanguage ' | language : 'Select Language'}}</h4>
+    </div>
+
+    <ion-searchbar animated color="light" type="text" mode="md" id="myInput" (ionChange) ="searchFunction()" [(ngModel)] = "searchLang" placeholder="{{'SearchLanguage ' | language : 'Search Language'}}">
+    </ion-searchbar>
+    <!-- <div class="stl-usr-lang-search">
+      <ion-input type="text" id="myInput" (keyup) ="searchFunction()" [(ngModel)] = "searchLang" placeholder="Search your language" >
+      <ion-icon name="search-outline"></ion-icon></ion-input>
+    </div> -->
+
+    <!-- <div class="stl-usr-lang-box">
+      <ion-grid>
+        <ion-row>
+          <ion-col size = "4" style="position: relative;" *ngFor="let item of allLanguage ">
+        <div class="stl-usr-lang-box-itm"  [style.background] = "item.text=== SelectedLan ? 'var(--ion-color-primary)':'var(--ion-color-light-rgb)'"  (click)="selectLanguage(item )">
+        <h4 [style.color] = "item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'"> {{item.text | slice: 0:1}}</h4>
+        <p  [style.color] = "item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'"> {{item.text}} </p>
+        </div>
+    </ion-col>
+  </ion-row>
+    </ion-grid>     -->
+
+      <div>
+            <ion-grid>
+               <ion-row>
+                 <ion-col class="ion-no-padding" class="long-text" size="4" *ngFor="let item of allLanguage ">
+                   <div class="ion-text-center">
+                        <ion-card  mode="md"  [style.background] = "item.text=== SelectedLan ? 'var(--ion-color-primary)':'var(--ion-color-light-rgb)'"  (click)="selectLanguage(item )">
+                          <ion-card-header>
+                               <ion-card-title [style.color]  = "item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'"><h1 class="ion-no-margin">{{item.displayText | slice: 0:1}}</h1></ion-card-title>
+                               </ion-card-header>
+                               <ion-card-content  [style.color] = "item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'">
+                               {{item.displayText | slice: 0:7}}
+                          </ion-card-content>
+                        </ion-card>
+                   </div>
+                 </ion-col>
+               </ion-row>
+           </ion-grid>
+    </div>
+  </div>
+
+  <!-- <div  class="stl-usr-lang-nextbtn" (click)="selectLang()">
+    <h3>{{'continue' | language}}
+    </h3>
+    <ion-icon name="chevron-forward-outline" class="stl-lan-frd-icn"></ion-icon>
+  </div> -->
+  <ion-fab vertical="bottom" slot="fixed" >
+      <ion-button  expand="block" (click)="selectLang()"  shape="round">
+        {{'continue' | language:'Continue'}}
+        <!-- <ion-icon name="chevron-forward-outline"></ion-icon> -->
+      </ion-button>
+  </ion-fab>
+</ion-content>

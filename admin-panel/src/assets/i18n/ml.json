@@ -1,0 +1,13 @@
+{
+    "language": "Malayalam",
+    "city": {
+        "delhi": "ഡൽഹി",
+        "mumbai": "മുംബൈ"
+    },
+    "system": {
+        "selectPref": "നിങ്ങളുടെ മുൻഗണന തിരഞ്ഞെടുക്കുക",
+        "continue": "",
+        "selectCity": "",
+        "proceed": ""
+    }
+}

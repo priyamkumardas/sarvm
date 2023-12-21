@@ -1,0 +1,56 @@
+.buttonCol {
+	position: absolute;
+	z-index: 999;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+	background: #fff;
+	padding: 20px;
+	border-radius: 20px 20px 0px 0px;
+	box-shadow: -2px -3px 13px 1px #cfcfce;
+
+	>h2 {
+		margin: 0;
+		font-size: 21px;
+	}
+
+	ion-button {
+		--background: #76c893 !important;
+		--border: 0.5px solid var(--ion-color-primary);
+		--padding-start: 40px !important;
+		font-weight: bold;
+		--border-radius: 24px !important;
+		--padding-end: 40px;
+	}
+}
+
+.addArea {
+	display: flex;
+	align-items: center;
+
+	>p {
+		text-align: left;
+		margin: 20px 10px;
+	}
+}
+
+.changeLocation {
+	text-decoration: none;
+}
+ion-content {
+	--background: transparent;
+  }
+ 
+body {
+	background: transparent;
+}
+.error-img{
+    display: flex;
+    height: 50%;
+    justify-content: center;
+    align-items: center;
+
+    img{
+        width: 80%;
+    }
+}

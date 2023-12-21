@@ -1,0 +1,28 @@
+
+
+<ion-card class="ion-card" *ngFor="let orders1 of orders;let ind = index" [ngClass]="{'active': id == orders1.orderID}">
+  <p class="orderId" (click)="gotoOrderDetails(orders1)">{{'order' | language : 'Order #'}}: {{orders1.orderID |
+    textTruncate : 11}}</p>
+  <ion-item class="ion-no-padding " lines="none" >
+    <ion-thumbnail slot="start" class="profile-pic">
+      <img alt="Silhouette of a person's head" src="{{orders1.userDetails.image}}" />
+    </ion-thumbnail>
+    <ion-label>
+      <div class="phonenumber">+91 {{orders1.userDetails.phone}}</div>
+      <div class="name">{{orders1?.userDetails?.name}}</div>
+      <p>
+        <ion-icon name="location-outline" slot="start"></ion-icon>
+        {{orders1?.delivery?.location?.address}}
+      </p>
+      <p class="deliverystatus">
+        <img class="imgicons" alt="" src="/assets/images/pickup.svg" />
+        <span class="status-text">{{orders1.delivery.mode}}</span>
+      </p>
+    </ion-label>
+    <!-- <ion-text class="amount"> {{orders1.amount - (orders1.discount?orders1.discount:0) |
+      currency:'INR':true
+      :'0.0-2'}}</ion-text> -->
+      <ion-text class="amount" *ngIf="orders1?.delivery?.mode == 'DELIVERY'"> {{orders1?.amount + (orders1?.delivery?.deliveryCharges) - (orders1.discount ? orders1.discount : 0) | currency:'INR':true :'0.0-2'}}</ion-text>
+    <ion-text class="amount" *ngIf="orders1?.delivery?.mode == 'PICKUP'"> {{orders1?.amount - (orders1?.discount ? orders1?.discount : 0) | currency:'INR':true :'0.0-2'}}</ion-text>
+  </ion-item>
+</ion-card>

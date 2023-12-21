@@ -1,0 +1,56 @@
+<!-- <div class="modal">
+  <div class="CrossIcon" (click)="closeDateTimePickerModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="content" *ngIf="formType === 'kycform'">
+    <ion-datetime size="cover" #datetime [value]="value" [(ngModel)]="value" (ionChange)="change($event, type)"
+      [max]="kycToday" [presentation]="type" [disabled]="isDisabled">
+      <ion-buttons slot="buttons">
+        <ion-button color="primary" shape="round" fill="clear" (click)="cancel()">{{'clear'|language:'Clear'}}</ion-button>
+        <ion-button shape="round" fill="clear" class="save" (click)="done()">{{'Apply'|language:'Apply'}}</ion-button>
+      </ion-buttons>
+    </ion-datetime>
+  </div>
+
+  <div class="content" *ngIf="formType !== 'kycform'">
+    <ion-datetime size="cover" #datetime [value]="value" [(ngModel)]="value" (ionChange)="change($event, type)"
+      [min]="date_info?.min ? date_info?.min : min" [max]="date_info?.max ? date_info?.max : '5050'" [presentation]="type" [disabled]="isDisabled">
+      <ion-buttons slot="buttons">
+        <ion-button color="primary" shape="round" fill="clear" (click)="cancel()">{{'clear'|language:'Clear'}}</ion-button>
+        <ion-button shape="round" fill="clear" class="save" (click)="done()">{{'Apply'|language:'Apply'}}</ion-button>
+      </ion-buttons>
+    </ion-datetime>
+  </div>
+</div> -->
+
+<ion-footer class="ion-no-border">
+  <div class="CrossIcon" (click)="cancel()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="dates-header">
+    <p class="header" >{{'selectdate'|language:'Select Date'}}</p>
+    
+    <div class="content" *ngIf="formType === 'kycform'">
+      <ion-datetime mode="md" size="cover" #datetime [value]="value" [max]="today" (ionChange)="change(datetime.value, contenerType)"
+        [presentation]="type" [disabled]="isDisabled">
+      </ion-datetime>
+    </div>
+
+    <div class="content" *ngIf="formType !== 'kycform'">
+      <ion-datetime mode="md" size="cover" #datetime [value]="value" [min]="date_info?.min ? date_info?.min : min" [max]="date_info?.max ? date_info?.max : '5050'" (ionChange)="change(datetime.value, contenerType)"
+        [presentation]="type" [disabled]="isDisabled">
+      </ion-datetime>
+    </div>
+
+    <ion-row>
+      <ion-col size="6">
+        <ion-button color="primary" expand="full" mode="ios" size="medium" shape="round" fill="outline"
+          (click)="cancel()"><ion-icon color="Primary" name="close-outline"></ion-icon>{{'ClearAll' | language : 'Clear All'}}</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button color="primary" expand="full" mode="ios" size="medium" shape="round"
+          (click)="done(datetime.value, contenerType)">{{'Apply' | language : 'Apply'}}</ion-button>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-footer>

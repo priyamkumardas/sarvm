@@ -1,0 +1,25 @@
+
+.banner {
+  width: 100%;
+  height: 350px;
+  background-image: url('../../../assets/images/Refer&Earn\ .svg');
+  background-size:     cover;
+  background-repeat:   no-repeat;
+  background-position: center center;
+}
+ion-content {
+  --background: var(--ion-color-secondary) 16%;
+}
+
+
+.header{
+  --padding-start:1rem;
+  --padding-end:1rem;
+}
+
+.homelist-img{
+  height: 40px;
+  width: 40px;
+  display: block;
+  margin: 0 auto 1rem;
+}

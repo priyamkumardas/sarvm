@@ -1,0 +1,170 @@
+
+<ion-content class="ion-padding">
+  
+        <ion-segment class="ionSegment" mode="md" value="UpiId" (ionChange)="segmentChanged($event)">
+          <ion-segment-button value="UpiId">
+            <ion-label>UPI IDs</ion-label>
+          </ion-segment-button>
+          <ion-segment-button value="BandAccount">
+            <ion-label>Bank Account</ion-label>
+          </ion-segment-button>
+        </ion-segment>
+     
+ <ion-grid fixed>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size="8" class="ion-align-items-center">
+      <div [hidden]="segment === 'UpiId' " class="segment">
+         <div class="bank-act">
+          <form [formGroup]="bankForm" (ngSubmit)="submitForm()" novalidate>
+            <div class="docInput" (click)="chooseImage()">
+              <img src="../../../../assets/images/upload.svg" alt="Upload the Document" />
+              <ion-icon slot="start" name="add" id="add"></ion-icon>
+              <div class="panInput">
+                <input type="file" formControlName="passbookphoto" id="pan" class="fileInput" />
+                <label for="pan">{{'uploadPassbookPhoto' | language : 'Upload Passbook Photo'}}</label>
+              </div>
+              <span class="error" *ngIf="isSubmitted && errorControl.passbookphoto.errors?.required">
+                {{'passbookphotoisrequired' | language : 'Passbook Photo is required.'}}
+              </span>
+            </div>
+            <ion-item fill="outline" shape="round">
+              <ion-label position="floating">{{'BeneficiaryName' | language : 'Beneficiary Name'}}</ion-label>
+              <ion-input type="text" formControlName="beneficiaryname" id="beneficiary-name"></ion-input>
+              <ion-note slot="error"  *ngIf="isSubmitted && errorControl.beneficiaryname.errors?.required"> {{'beneficiarynameisrequired' | language : 'Beneficiary Name is required.'}}</ion-note>
+            </ion-item>
+        
+            <!-- <div class="inputBox">
+              <input type="text" formControlName="beneficiaryname" id="beneficiary-name" />
+              <label for="name">{{'BeneficiaryName' | language : 'Beneficiary Name'}}</label>
+              <span class="error" *ngIf="isSubmitted && errorControl.beneficiaryname.errors?.required">
+                {{'beneficiarynameisrequired' | language : 'Beneficiary Name is required.'}}
+              </span>
+            </div> -->
+            <ion-item fill="outline" shape="round">
+              <ion-label position="floating">{{'bankName' | language : 'Bank Name'}}</ion-label>
+              <ion-input type="text" formControlName="bankname" id="bank-name" ></ion-input>
+              <ion-note slot="error" *ngIf="isSubmitted && errorControl.bankname.errors?.required"> {{'banknameisrequired' | language : 'Bank Name is required.'}}</ion-note>
+            </ion-item>
+            <!-- <div class="inputBox">
+              <input type="text" formControlName="bankname" id="bank-name" />
+              <label for="father-name">{{'bankName' | language : 'Bank Name'}}</label>
+              <span class="error" *ngIf="isSubmitted && errorControl.bankname.errors?.required">
+                {{'banknameisrequired' | language : 'Bank Name is required.'}}
+              </span>
+            </div> -->
+            <ion-item fill="outline" shape="round">
+              <ion-label position="floating">{{'accountNo' | language : 'Account No.'}}</ion-label>
+              <ion-input type="text" formControlName="accountno" id="dob"></ion-input>
+              <ion-note class="error" *ngIf="isSubmitted && errorControl.accountno.errors?.required"> {{'accountnumberisrequired' | language : 'Account Number is required.'}}</ion-note>
+            </ion-item>
+            <!-- <div class="inputBox">
+              <input type="text" formControlName="accountno" id="dob" />
+              <label for="dob">{{'accountNo' | language : 'Account No.'}}</label>
+              <span class="error" *ngIf="isSubmitted && errorControl.accountno.errors?.required">
+                {{'accountnumberisrequired' | language : 'Account Number is required.'}}
+              </span>
+            </div> -->
+            <ion-item fill="outline" shape="round">
+              <ion-label position="floating">{{'reEnterAccountNo' | language : 'Re-enter Account No.'}}</ion-label>
+              <ion-input type="text" formControlName="accountno" id="dob"></ion-input>
+              <ion-note class="error" *ngIf="isSubmitted && errorControl.reaccountno.errors?.required">
+                {{'accountnumberandre-accountnumberfieldsshouldmatch' | language : 'Account number and Re-account number fields should match'}} </ion-note>
+            </ion-item>
+<!--         
+            <div class="inputBox">
+              <input type="text" formControlName="reaccountno" id="dob" />
+              <label for="dob">{{'reEnterAccountNo' | language : 'Re-enter Account No.'}}</label>
+              <span class="error" *ngIf="isSubmitted && errorControl.reaccountno.errors?.required">
+                {{'re-enteraccountnumberisrequired' | language : 'Re-enter Account Number is required.'}}
+              </span>
+              <span class="error" *ngIf="isSubmitted && bankForm.hasError('accountnoNotMatch')">
+                {{'accountnumberandre-accountnumberfieldsshouldmatch' | language : 'Account number and Re-account number
+                fields
+                should match'}}
+              </span>
+            </div> -->
+            <ion-item fill="outline" shape="round">
+              <ion-label position="floating">{{'ifsc' | language : 'IFSC'}}</ion-label>
+              <ion-input type="text" formControlName="ifsc" id="dob"></ion-input>
+              <ion-note class="error" *ngIf="isSubmitted && errorControl.ifsc.errors?.required">
+                {{'ifsc' | language : 'IFSC'}}
+                {{'' | language : 'is Required'}}
+        </ion-note>
+            </ion-item>
+            <!-- <div class="inputBox">
+              <input type="text" formControlName="ifsc" id="dob" />
+              <label for="dob">{{'ifsc' | language : 'IFSC'}}</label>
+              <span class="error" *ngIf="isSubmitted && errorControl.ifsc.errors?.required">
+                {{'ifsc' | language : 'IFSC'}}
+                {{'' | language : 'is Required'}}
+        
+              </span>
+            </div> -->
+        
+            <div class="btns">
+             
+                
+             
+                <ion-button shape="round" expand="full" fill="solid" type="submit" mode="ios">{{'save&Continue' | language : 'Save & Continue'}}</ion-button>
+             
+            </div>
+          </form>
+         </div>
+       
+
+  </div>
+  
+  <div [hidden]="segment === 'BandAccount' " class="segment">
+    <ion-row>
+      <ion-col size="12">
+        <ion-card class="card">
+          <div class="UpiDetails">
+            <img src="../../assets/images/homeImg/PhoneP.svg" alt="">
+            <span class="IdBranch">
+              <h5 class="UpiId">9785432453@ybl</h5>
+              <img src="../../assets/images/homeImg/boiTag.svg" alt=""> <span style="margin-left: 12px;">Bank of India -
+                2312</span>
+            </span>
+            <div class="checkbox">
+              <input type="checkbox">
+            </div>
+          </div>
+  
+          <div class="UpiDetails">
+            <img src="../../assets/images/homeImg/GPay.svg" alt="">
+            <span class="IdBranch">
+              <h5 class="UpiId">9785432453@ybl</h5>
+              <img src="../../assets/images/homeImg/boiTag.svg" alt=""> <span style="margin-left: 12px;">Bank of India -
+                2312</span>
+            </span>
+            <input type="checkbox">
+          </div>
+  
+          <div class="UpiDetails">
+            <img src="../../assets/images/homeImg/GPay.svg" alt="">
+            <span class="IdBranch">
+              <h5 class="UpiId">9785432453@ybl</h5>
+              <img src="../../assets/images/homeImg/boiTag.svg" alt=""> <span style="margin-left: 12px;">Bank of India -
+                2312</span>
+            </span>
+            <input type="checkbox">
+          </div>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+   
+
+
+    <div class="btns2">
+      <button class="addbtn">Add</button>
+    </div>
+  </div>
+    </ion-col>
+  </ion-row>
+ 
+       
+  
+    
+ </ion-grid>
+  
+</ion-content>

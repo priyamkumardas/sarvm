@@ -1,0 +1,90 @@
+<div>
+  <form [formGroup]="vehicleInsuranceDocForm"(ngSubmit)="saveVehicleInsuranceDocDetails()">
+    <!-- updateOrAddVehicleInsurance ? updateVehicleInsuranceDocDetails() : -->
+    <div class="segment">
+      <div class="documentInput" (click)="chooseImage('vehicleInsurance')">
+        <ng-container>
+          <img [src]="vehicleInsuranceImage ? vehicleInsuranceImage: '/assets/icon/ic-vehicle-licence.svg'" alt=""
+            class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!vehicleInsuranceImage">
+            <label for="pan">
+              <u>{{'uploadVehicleInsurance' | language : 'Upload Vehicle Insurance'}}</u>
+            </label>
+          </div>
+        </ng-container>  
+        <div class="removeBtn" *ngIf="vehicleInsuranceImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('vehicleInsurance')">
+            {{'re-upload' | language :'Re-Upload'}}
+          </ion-button>
+        </div>
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.viInsuranceNo" formControlName="insuranceNumber"
+              id="insuranceNumber" class="input" (keypress)="keyPressNumbers($event)"></ion-input>
+            <label class="label">{{'RCNo.'|language:'RC No.'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.name" formControlName="name" class="input" id="name"
+              (keypress)="onKeyPress($event)"></ion-input>
+            <label class="label">{{'name' | language : 'Name'}}<span id="star">*</span></label>
+          </ion-col>
+
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.vehicleNumber" formControlName="vehicleNumber"
+              class="input" id="vehicleNumber" (keypress)="onKeyPress($event)"></ion-input>
+            <label class="label">{{'VehicleNumber' | language : 'Vehicle Number'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.insurance_from" [readonly]="true" formControlName="insuranceValidFrom"
+              id="insuranceValidFrom" (click)="openDateSelectModal('insuranceValidFrom')" class="inputDiff">
+            </ion-input>
+            <label class="label">{{'viValidFrom' | language : 'Valid From'}}<span id="star">*</span></label> -->
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.insurance_from" [readonly]="true" formControlName="insuranceValidFrom"
+              id="dateFiltVehicleForm" class="inputDiff">
+            </ion-input>
+            <ion-modal trigger="dateFiltVehicleForm" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'vehicleInsuranceDocForm'" [date_info]="dateCondition"
+                      [value]="insuranceValidFrom" [date_format]="format" (datePickerValue)="openDateSelectModal('insuranceValidFrom',$event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'viValidFrom' | language : 'Valid From'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.insurance_upto" [readonly]="true" formControlName="insuranceValidUpto"
+              id="insuranceValidUpto" (click)="openDateSelectModal('insuranceValidUpto')" class="inputDiff">
+            </ion-input>
+            <label class="label">{{'viValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label> -->
+
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.insurance_upto" [readonly]="true" formControlName="insuranceValidUpto" id="dateFiltVehicleUpto" class="inputDiff">
+            </ion-input>
+            <ion-modal trigger="dateFiltVehicleUpto" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'vehicleInsuranceDocForm'" [date_info]="dateCondition"
+                      [value]="insuranceValidUpto" [date_format]="format" (datePickerValue)="openDateSelectModal('insuranceValidUpto',$event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'viValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="kyc-footer">
+        <div class="footer">
+          <ion-button color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">{{'skip'|language:'Skip'}}</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">{{'saveAndContinue'|language:'Save and Continue'}}</ion-button>
+        </div>
+      </div>
+      
+    </div>
+  </form>
+</div>

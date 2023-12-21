@@ -1,0 +1,80 @@
+<!-- <ion-header>
+  <ion-toolbar>
+      <div class="header">
+          <ion-icon name="chevron-back-outline" (click)="onBack()"></ion-icon>
+      </div>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="/login"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+
+<ion-content>
+  <div class="refferal-banner" *ngIf="data">
+    <ion-img src="/assets/Illustration.svg"></ion-img>
+    <ion-text>{{shopId}}</ion-text>
+  </div>
+  <div class="retailer-otp">
+
+    <div class="otp-head">
+      <h3>{{'verificationCode' | language : 'Verification Code'}}</h3>
+      <h5>{{'otpsentto' | language : 'OTP Sent to'}} + 91 {{phoneNumber}}</h5>
+    </div>
+    <div class="otp-input">
+      <h4>{{'enterOtp' | language : 'Enter OTP'}}</h4>
+      <div class="otp-inpt-bx">
+        <ion-input
+          #otp1
+          required="true"
+          maxLength="4"
+          class="test"
+          [(ngModel)]="otp.first"
+          (ionFocus)="otp.first=''"
+          (ionChange)="onOTPChange($event, otp2)"
+          type="tel"
+        >
+        </ion-input>
+      </div>
+      <h5 *ngIf="timer">00 : {{ timer > 9 ? timer:'0'+timer }}</h5>
+    </div>
+    <p>{{'didn\'treceivetheotp?' | language : 'Didn\'t receive the OTP?'}}</p>
+    <div class="resend-otp">
+      <!-- <img src="assets/images/sms.png" alt="logo"> -->
+      <!-- <img src="assets/images/call.png" alt="logo"> -->
+      <ion-button *ngIf="timer==0" (click)="resendOtpFunc('sms')" size="small" class="active-B"
+        [disabled]="!resendOtp"><ion-icon slot="start" name="chatbubble-outline"></ion-icon> {{'sms' | language :
+        'SMS'}}</ion-button>
+      <ion-button *ngIf="timer==0" (click)="resendOtpFunc('call')" size="small" class="active-B"
+        [disabled]="!resendOtp"><ion-icon slot="start" name="call-outline"></ion-icon> {{'call' | language :
+        'Call'}}</ion-button>
+      <ion-button *ngIf="timer>0" (click)="resendOtpFunc('sms')" size="small" color="medium"
+        [disabled]="!resendOtp"><ion-icon slot="start" name="chatbubble-outline"></ion-icon> {{'sms' | language :
+        'SMS'}}</ion-button>
+      <ion-button *ngIf="timer>0" (click)="resendOtpFunc('call')" size="small" color="medium"
+        [disabled]="!resendOtp"><ion-icon slot="start" name="call-outline"></ion-icon> {{'call' | language :
+        'Call'}}</ion-button>
+    </div>
+    <div [ngClass]="otp.first.length == 4 ? 'otp-btn' : 'otp-btn-disabled'">
+     <ion-input
+        #otp2
+        type="button"
+        (click)="verifyOtp()"
+        value="{{'verify' | language : 'Verify'}}"></ion-input> 
+    
+      <p class="terms">
+        <span>{{'byClickingIacceptthe' | language : 'By
+          clicking, I accept the'}}</span> <a (click)="openUrl('https://sarvm.ai/terms&conditions.html')">
+          {{'terms&Conditions' | language : 'Terms & Conditions'}}</a><span>{{'and' | language : 'and'}}</span><a
+          (click)="openUrl('https://sarvm.ai/sarvm-privacy-policy.html')"> {{'privacyPolicy' | language : 'Privacy
+          Policy'}}</a>
+      </p>
+    </div>
+  </div>
+</ion-content>

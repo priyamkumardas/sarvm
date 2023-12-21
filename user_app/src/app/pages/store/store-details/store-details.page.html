@@ -1,0 +1,121 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title><strong>{{'Shopinfo'|language:'Shop info'}}</strong></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="shop_name">
+    <div id="name_rating">
+      <p id="name"> <strong>{{retailerData?.shop.name | titlecase}}</strong> </p>
+      <ion-row>
+        <!-- <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon> -->
+        <span> {{sellerDetails?.distance | number:'0.0-0'}} Km</span>
+      </ion-row>
+    </div>
+    <!-- <div id="btn">
+      <input type="button" value="OPEN">
+    </div> -->
+  </div>
+  <div class="map">
+    <app-map-component [customeclass]="'seller'" [isMarkerMoveable]="false" [latlng]="location"></app-map-component>
+    <div class="icn">
+      <ion-icon name="return-up-forward-outline" (click)="openBrowser(sellerDetails)"></ion-icon>
+    </div>
+  </div>
+  <div class="txt">
+    <div class="location" *ngIf="retailerData?.shop.location.address">
+      <ion-icon name="location-outline"></ion-icon>
+      <p>{{retailerData?.shop.location.address}}</p>
+    </div>
+    <div class="time" *ngIf="retailerData?.shop.openingHours">
+      <ion-icon name="time-outline"></ion-icon>
+      <p>{{retailerData?.shop.openingHours}}</p>
+    </div>
+    <div class="order_completed" *ngIf="retailerData?.shop.orders">
+      <img src="/assets/Shop-Info-Img/delivery.png">
+      <p>{{retailerData?.shop.orders}}</p>
+
+    </div>
+  </div>
+  <div class="about_seller" *ngIf="retailerData?.retailer.name">
+    <h1 style="font-size:16px"> <strong>{{'aboutSeller'| language:'About Seller '}}</strong> </h1>
+    <div class="info" (click)="showProfile()">
+      <div id="img">
+        <div class="triangle1"></div>
+        <div class="triangle2"></div>
+        <img src="{{retailerData?.retailer.profileImageUrl ? retailerData?.retailer.profileImageUrl  : '/assets/images/images_blank.svg'}}" alt="">
+      </div>
+      <div id="about">
+        <h3 style="font-size:15px"> <strong>{{retailerData?.retailer.name}}</strong></h3>
+        <p style="font-size:12px">From {{sellerDetails?.locality}}, {{sellerDetails?.city}}</p>
+        <p style="font-size:12px">{{retailerData?.retailer.tagline}}</p>
+      </div>
+    </div>
+  </div>
+  <p class="selling-txt"><strong>{{'selling'|language:'Selling'}}</strong></p>
+  <div class="item">
+    <ion-row>
+      <ion-col *ngFor="let itm of categories" size="3">
+        <ion-img src="{{itm.image ? itm.image : '/assets/Shop-Info-Img/Ellipse 85.png' }}" alt=""></ion-img>
+        <p>{{itm.name}}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <!-- <p style="margin-top :15px ;margin-left: 16px; margin-bottom:10px ; font-size: 16px;"><strong>{{'ratings' | language:'Ratings'}}</strong></p>
+  <div class="ratings">
+    <div class="cur">
+      <img src="/assets/Shop-Info-Img/Ellipse 85.png" alt="">
+      <p style="font-size: 12px; margin-top: 4px;">{{'fabulous'| language:'Fabulous'}}</p>
+      <p style="font-size: 10px; margin-top:5px;">89% Customers rated 4+</p>
+    </div>
+    <div class="stars">
+      <ion-row>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <span>1200+</span>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <span>900+</span>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <span>600+</span>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <span>440+</span>
+      </ion-row>
+      <ion-row>
+        <ion-icon name="star" color="warning"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <ion-icon name="star" color="medium"></ion-icon>
+        <span>90+</span>
+      </ion-row>
+    </div>
+  </div> -->
+</ion-content>

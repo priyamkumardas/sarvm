@@ -1,0 +1,377 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'trackOrder'|language:'Track Order'}}</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button fill="clear" (click)="support()" color="primary"  class="support" [disabled]="addDisable">
+            <ion-icon slot="start" src="/assets/bx_support.svg"></ion-icon>
+         {{'support' | language:'Support'}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher slot="fixed" (ionRefresh)="getOrder(id,$event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <div class="complete-content">
+    <div class="tracking-graphics">
+      <div class="tracking-list">
+        <ul *ngIf="status[order?.status] != 11">
+          <!-- NEW -->
+          <li id="order-placed">
+            <div class="item">
+              <img src="/assets/Track-order/bi_cart-check1.svg" alt="" srcset="">
+              <p style="width: 100%">{{'orderPlaced' | language}} <span style="float: right;font-weight: 600;">{{'orderId'| language:'Order ID'}} {{order?.orderID}}</span></p>
+            </div>
+            <div [ngClass]="status[order?.status] > 1 ? status[order?.status] == 10 ? 'cancelled' : 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 1 ? status[order?.status] == 10 ? 'cancelled' : 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 1 ? status[order?.status] == 10 ? 'cancelled' : 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 1 ? status[order?.status] == 10 ? 'cancelled' : 'completed' : 'remaining'"></div>
+          </li>
+          <!-- REJECTED -->
+          <ul *ngIf="status[order?.status] == 10">
+            <li id="order-placed">
+              <div class="item">
+                <img src="/assets/Track-order/rejected.svg" alt="" srcset="">
+                <p>{{'Order Rejected'|language:'Order Rejected'}}</p>
+              </div>
+            </li>
+          </ul>
+          <!-- ACCEPTED -->
+          <li *ngIf="status[order?.status] > 1 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/akar-icons_check-box1.svg" alt="" srcset="">
+              <p>{{'orderAccepted'|language:' Order Accepted'}}</p>
+              <div class="call-us" *ngIf="!order?.payment.acknowledged && !order?.payment.laPayment  && order?.payment.mode == 'POSTPAID'">
+                <ion-button style="margin-left: 16px;" *ngIf="status[order?.status] != 10 && status[order?.status] != 9" shape="round"
+                  (click)="payNow()">Pay Now</ion-button>
+              </div>
+            </div>
+            <div [ngClass]="status[order?.status] > 2 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 2 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 2 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 2 ? 'completed' : 'remaining'"></div>
+          </li>
+          <li *ngIf="status[order?.status] < 2 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/akar-icons_check-box.svg" alt="" srcset="">
+              <p>{{'orderAccepted'|language:' Order Accepted'}}</p>
+            </div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </li>
+          <!-- PROCESSING -->
+          <li *ngIf="status[order?.status] > 2 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/fluent_vehicle-truck-bag-24-regular1.svg" alt="" srcset="">
+              <p>{{'processing' | language}}</p>
+            </div>
+            <div [ngClass]="status[order?.status] > 3 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 3 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 3 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 3 ? 'completed' : 'remaining'"></div>
+          </li>
+          <li *ngIf="status[order?.status] < 3 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/fluent_vehicle-truck-bag-24-regular.svg" alt="" srcset="">
+              <p>{{'processing' | language}}</p>
+            </div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </li>
+          <!-- READY -->
+          <li *ngIf="status[order?.status] > 3 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/fluent_box-checkmark-24-regular1.svg" alt="" srcset="">
+              <p>{{'ready' | language}}
+                <span *ngIf="order?.delivery.mode == 'PICKUP'"> for {{'pickUp' | language : 'Pickup'}}</span>
+                <span *ngIf="order?.delivery.mode != 'PICKUP'"> for {{'delivery' | language : 'Delivery'}}</span>
+              </p>
+            </div>
+            <div [ngClass]="status[order?.status] > 4 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 4 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 4 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 4 ? 'completed' : 'remaining'"></div>
+          </li>
+          <li *ngIf="status[order?.status] < 4 && status[order?.status] != 10">
+            <div class="item">
+              <img src="/assets/Track-order/fluent_box-checkmark-24-regular.svg" alt="" srcset="">
+              <p>{{'ready' | language}}
+                <span *ngIf="order?.delivery.mode == 'PICKUP'"> for {{'pickUp' | language :'Pickup'}}</span>
+                <span *ngIf="order?.delivery.mode != 'PICKUP'"> for {{'delivery' | language : 'Delivery'}}</span>
+              </p>
+            </div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </li>
+          <!-- DELIVERED picup/NO_SHOW picup -->
+          <li *ngIf="status[order?.status] > 4 && status[order?.status] != 10 && order?.delivery.mode == 'PICKUP'">
+            <!-- DELIVERED picup -->
+            <div *ngIf="status[order?.status] < 10 && order?.delivery.mode == 'PICKUP'">
+              <div class="item">
+                <img src="/assets/Track-order/icon-park-outline_delivery1.svg" alt="" srcset="">
+                <p>{{'pickedUp'|language:'Picked Up'}}</p>
+              </div>
+            </div>
+            <!-- NO_SHOW picup -->
+            <div *ngIf="status[order?.status] == 12 && order?.delivery.mode == 'PICKUP'">
+              <div class="item">
+                <img src="/assets/Track-order/Box.svg" alt="" srcset="">
+                <p>{{'NoShow'|language:'No Show'}}</p>
+              </div>
+            </div>
+            <div *ngIf="status[order?.status] != 12" [ngClass]="status[order?.status] > 5 && status[order?.status] == 9 ? 'completed' : 'remaining'"></div>
+            <div *ngIf="status[order?.status] != 12" [ngClass]="status[order?.status] > 5 && status[order?.status] == 9 ? 'completed' : 'remaining'"></div>
+            <div *ngIf="status[order?.status] != 12" [ngClass]="status[order?.status] > 5 && status[order?.status] == 9 ? 'completed' : 'remaining'"></div>
+            <div *ngIf="status[order?.status] != 12" [ngClass]="status[order?.status] > 5 && status[order?.status] == 9 ? 'completed' : 'remaining'"></div>
+          </li>
+          <li *ngIf="status[order?.status] < 5 && status[order?.status] != 10 && order?.delivery.mode == 'PICKUP'">
+            <div class="item">
+              <img src="/assets/Track-order/icon-park-outline_delivery.svg" alt="" srcset="">
+              <p>{{'pickUp' | language :'Pickup'}}<span> {{'NoShow'|language:' - No Show'}}</span>
+              </p>
+            </div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </li>
+          <!-- DISPATCHED -->
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] > 4 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/mdi_truck-delivery-outline1.svg" alt="" srcset="">
+                    <p>{{'dispatched' | language}}</p>
+                  </div>
+                  <div (click)="callDeliveryMan()" class="call-us" *ngIf="status[order?.status] == 5 || 6 || 7">
+                    <div class="delivery_man">
+                      <img src="/assets/Track-order/delivery man.svg" alt="" srcset="">
+                    </div>
+                    <div class="call-deliveryMan">
+                      <button id="btn">{{'call' | language}}</button>
+                      <img src="\assets\images\phone-call.png" alt="call-us" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <div [ngClass]="status[order?.status] > 5 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 5 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 5 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 5 ? 'completed' : 'remaining'"></div>
+          </div>
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] < 5 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/mdi_truck-delivery-outline.svg" alt="" srcset="">
+                    <p>{{'dispatched' | language}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </div>
+          <!-- PICKEDUP -->
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] > 5 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/icon-park-outline_delivery1.svg" alt="" srcset="">
+                    <p>{{'PickupforDelivery'|language:'Picked Up for Delivery'}}</p>
+                  </div>
+                 
+                </div>
+              </div>
+            </li>
+            <div [ngClass]="status[order?.status] > 6 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 6 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 6 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 6 ? 'completed' : 'remaining'"></div>
+          </div>
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] < 6 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/icon-park-outline_delivery.svg" alt="" srcset="">
+                    <p>{{'PickupforDelivery'|language:'Picked Up for Delivery'}}</p>
+                  </div>
+                
+                </div>
+              </div>
+            </li>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </div>
+          <!---In Transit-->
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] > 6 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/transit1.svg" alt="" srcset="">
+                    <p>{{'intransit'|language:'In Transit'}}</p>
+                  </div>
+                  
+                </div>
+              </div>
+            </li>
+            <div [ngClass]="status[order?.status] > 7 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 7 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 7 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 7 ? 'completed' : 'remaining'"></div>
+          </div>
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] < 7 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/transit.svg" alt="" srcset="">
+                    <p>{{'intransit'|language:'In Transit'}}</p>
+                  </div>
+                  
+                </div>
+              </div>
+            </li>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </div>
+          <!-- DELIVERED delivery -->
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] > 7 && status[order?.status] != 10 && status[order?.status] != 12">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/Group1.svg" alt="" />
+                    <p>{{'Delivered '|language:'Delivered '}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <div [ngClass]="status[order?.status] > 8 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 8 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 8 ? 'completed' : 'remaining'"></div>
+            <div [ngClass]="status[order?.status] > 8 ? 'completed' : 'remaining'"></div>
+          </div>
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] == 12">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/Group1.svg" alt="" />
+                    <p>{{'DeliveryNoShow'|language:'Delivery - No Show'}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </div>
+          <div *ngIf="order?.delivery.mode != 'PICKUP' && status[order?.status] < 8 && status[order?.status] != 10">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/Group.svg" alt="" />
+                    <p>{{'Delivered '|language:'Delivered '}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+            <div class="remaining"></div>
+          </div>
+          <!-- COMPLETED -->
+          <div *ngIf="status[order?.status] > 8 && status[order?.status] != 10 && status[order?.status] != 12">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/doublecheck.svg" alt="" />
+                    <p>{{'orders'|language:'Order'}} {{'Completed'|language:'Completed'}}</p>
+                  </div>
+                </div>
+              </div>
+            </li>
+          </div>
+          <div *ngIf="status[order?.status] < 9">
+            <li id="dispatched">
+              <div id="dispatched-icon" style="width:100%">
+                <div class="dispatch">
+                  <div class="item">
+                    <img src="/assets/Track-order/doublecheck1.svg" alt="" />
+                    <p>{{'orders'|language:'Order'}} {{'Completed'|language:'Completed'}}</p>
+                    <!-- <p>{{'completed'|language:'Order Completed'}}</p> -->
+                  </div>
+                </div>
+              </div>
+            </li>
+          </div>
+          
+        </ul>
+        <ul *ngIf="status[order?.status] == 11">
+          <li id="order-placed">
+            <div class="item">
+              <img src="/assets/Track-order/cancelled.svg" alt="" srcset="">
+              <p>{{'Order Cancelled' | language:'Order Cancelled'}}</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+ 
+  <p class="payment" *ngIf="order?.payment.paid">Payment Done&nbsp;<span *ngIf="order?.status !='COMPLETED' && order?.payment.paid">- Acknowledgement Pending</span><ion-icon name="checkmark-circle-outline"></ion-icon></p>
+  <p id="contact">{{'contactSeller' | language}}</p>
+  <div class="seller-info">
+    <div id="profile-pic">
+      <img src="{{order?.seller?.image?order?.seller?.image:'/assets/icon/seller-profile.svg'}}" alt="profile-pic" />
+    </div>
+    <div id="text-info">
+      <div id="shop-owner">{{order?.seller?.name}}</div>
+      <div id="shop-name">{{order?.shop?.name}}</div>
+      <div id="shop-address">{{order?.shop?.address}}</div>
+    </div>
+    <div id="seller-call-icon">
+      <a href="{{'tel:'+order?.seller?.phone}}">
+        <img src="/assets/images/phone-call.png" alt="call-us" />
+      </a>
+    </div>
+  </div>
+  <div class="order-row" *ngIf="order?.instruction">
+    <p id="text">{{'Instruction ' | language:"Instruction "}}</p>
+    <p id="info">{{order?.instruction}}</p>
+  </div>
+  <div class="instructions">
+    <div [routerLink]="['/order-details',id]">{{'orderSummary'|language:'Order Summary'}}</div>
+    <button class="instructionbtn" *ngIf="!order?.instruction && status[order?.status] < 6" (click)="instruction()" [disabled]="addDisable">{{'addInstructions' |
+      language}}</button>
+  </div>
+</ion-content>
+<ion-footer>
+  <div class="active_order" [routerLink]="['/active-order','ACTIVE']">
+    <span>{{activeOrders}} {{'ActiveOrder' | language:'Active Order'}}</span>
+    <p>{{'view' | language:'View'}}</p>
+  </div>
+</ion-footer>

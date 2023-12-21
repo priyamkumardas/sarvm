@@ -1,0 +1,59 @@
+<div class="payment-dialog">
+  <div class="payment-type">
+    <div class="payment-type-header">
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-phonepe.svg"></ion-icon>
+      </div>
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-gpay.svg"></ion-icon>
+      </div>
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-paytm.svg"></ion-icon>
+      </div>
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-bhim.svg"></ion-icon>
+      </div>
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-gpay.svg"></ion-icon>
+      </div>
+      <div class="card">
+        <ion-icon src="assets/icon/ic-payment-paytm.svg"></ion-icon>
+      </div>
+    </div>
+    <div class="card">
+      <ion-icon src="assets/icon/ic-add-round.svg"></ion-icon>
+    </div>
+  </div>
+  <div class="payment-type-body">
+    <div class="payment-user">
+      <ion-item lines="none">
+        <ion-thumbnail slot="start">
+          <img src="assets/icon/ic-recived.svg">
+        </ion-thumbnail>
+        <ion-label>
+          <p class="user-name">Yuvraj Singh</p>
+          <p class="user-no">+91 9987654321</p>
+        </ion-label>
+      </ion-item>
+    </div>
+    <div class="payment-barcode">
+      <img src="assets/icon/ic-payment-barcode.svg" />
+    </div>
+    <div class="payment-id">
+      <p>UPI ID: abcd005@hdfcbank</p>
+    </div>
+    <div class="payment-received">
+      <p>₹520 Payment Received</p>
+    </div>
+  </div>
+  <div class="payment-button">
+    <ion-button shape="round" fill="clear" class="no" (click)="cancel()">
+      {{'no' | language : 'No'}}
+      <ion-icon class="end-icon" slot="start" src="assets/icon/ic-thumbs-down.svg"></ion-icon>
+    </ion-button>
+    <ion-button shape="round" class="yes" (click)="accept()">
+      {{'yes' | language : 'Yes'}}
+      <ion-icon class="end-icon" slot="start" src="assets/icon/ic-thumbs-up.svg"></ion-icon>
+    </ion-button>
+  </div>
+</div>

@@ -1,0 +1,73 @@
+ion-title {
+    padding: 0px;
+}
+
+ion-row {
+    margin-left: 13px;
+    margin-right: 13px;
+}
+
+ion-img {
+    margin: auto;
+}
+ion-text{
+    color: var(--ion-color-primary);
+    margin-left: 6px;
+}
+ion-col {
+    text-align: center;
+    p {
+        font-size: 12px;
+        line-height: 19px;
+    }
+}
+
+ion-icon {
+    color: #10ba32;
+}
+
+.img {
+    height: 70px;
+    width: 70px;
+    margin: auto;
+    display: flex;
+    background: #fcfcfc;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 1px 3px rgba(51, 51, 51, 0.25);
+    border-radius: 100%;
+}
+
+.imgs {
+    filter: grayscale(90%);
+}
+
+ion-row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+
+
+.support {
+   font-weight: 600;
+}
+
+.phoneCall {
+    width: 17px;
+    margin-right: 3px;
+}
+
+#support-text {
+    font-weight: 400;
+    color: var(--ion-color-primary);
+    font-size: 14px;
+}
+
+ion-item {
+    p {
+        font-size: 14px;
+        line-height: 20px;
+        color: #000000;
+    }
+}

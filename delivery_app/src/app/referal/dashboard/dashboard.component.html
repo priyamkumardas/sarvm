@@ -1,0 +1,108 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" defaultHref="/home" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button routerLink="/referal/my-referal">
+        <ion-icon class="gift" class="" name="gift-outline" ></ion-icon> 
+        <ion-label>{{'MyRewards '|language:'My Rewards '}}</ion-label> 
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<!-- <ion-content > -->
+  <div class="container">
+    <div class="header">
+      <!-- <div class="navbr">
+        <ion-icon
+          (click)="action()"
+          class="nav-back"
+          name="chevron-back-outline"
+        ></ion-icon>
+        <ion-img
+          class="nav-logo"
+          src="assets/icon/Sarvmlogo.png"
+        ></ion-img>
+        <ion-icon
+          class="nav-gift"
+          (click)="openMyRewardsModal()"
+          name="gift-outline"
+        ></ion-icon>
+        <ion-text (click)="openMyRewardsModal()">{{
+          "MyRewards" | language: "My Rewards"
+        }}</ion-text>
+      </div> -->
+
+      <div class="gift-img">
+        <ion-img src="assets/InvitePageImg/Reward.png"></ion-img>
+      </div>
+
+      <p>
+        {{'Invitepeoplefromyournetworkandlearncashrewards'|language:'Invite people and earn cash rewards'}}
+      </p>
+    </div>
+
+    <!-- <p>Invite people from your network and earn cash rewards</p> -->
+  
+
+  <div class="box">
+    <p id="txt">
+      {{ "Getcashrewardsupto " | language: "Get Cash Rewards Upto " }}
+    </p>
+    <p id="rupee">₹ {{ maxReward | language: maxReward }}</p>
+
+    <ion-button routerLink="/referal/invite-referal" class="btn" shape="round">{{'Invite '|language:'Invite '}}</ion-button>
+    <div class="rfl-stat">
+      <div>
+        <p>{{ 'Referralstatus ' | language: 'Referral Status ' }}</p>
+      </div>
+      <!-- <div>
+              <p>{{ "TotalReferal" | language: "Total Referal" }}</p>
+          </div> -->
+    </div>
+    <div class="card">
+      <div class="item">
+        <!-- <p>{{ "Referralstatus" | language: "Referral Status" }}</p> -->
+        <ion-progress-bar
+          value="{{ referred }}"
+          color="success"
+        ></ion-progress-bar>
+      </div>
+
+      <!-- <div class="item">
+          <p>Total Referrals</p>
+          <ion-progress-bar
+            value="{{ acknowledged }}"
+            color="medium"
+          ></ion-progress-bar>
+          <br />
+          <p>{{ "Signup" | language: "Sign Up" }}</p>
+          <ion-progress-bar
+            value="{{ signedUp }}"
+            color="primary"
+          ></ion-progress-bar>
+          <br />
+          <p>{{ "Order" | language: "Order" }}</p>
+          <ion-progress-bar
+            value="{{ order }}"
+            color="secondary"
+          ></ion-progress-bar>
+          <br />
+          <p>{{ "ProfileComplete" | language: "Profile Complete" }}</p>
+          <ion-progress-bar
+            value="{{ profileComplete }}"
+            color="tertiary"
+          ></ion-progress-bar>
+        </div> -->
+    </div>
+  </div>
+</div>
+  <!-- <ion-footer>
+    
+  </ion-footer>
+</ion-content> -->
+
+

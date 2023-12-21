@@ -1,0 +1,79 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'payment'| language : 'Payment'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="content">
+    <div class="img-box" *ngIf="cartData.delivery.mode != 'DELIVERY'">
+      <img src="/assets/images/pay-pickup.svg">
+    </div>
+    <div class="img-box" *ngIf="cartData.delivery.mode == 'DELIVERY'">
+      <img src="/assets/images/pay-delivery.svg" >
+    </div>
+   
+    <p class="price" *ngIf="cartData.delivery.mode == 'DELIVERY'">{{'totalPayable' | language:'Total Payable'}} {{(cartData.aggregateDeliveryCharges + cartData.amountWithDiscount) | currency:'INR':true :'0.0-2'}}</p>
+	  <p class="price" *ngIf="cartData.delivery.mode != 'DELIVERY'">{{'totalPayable' | language:'Total Payable'}} {{cartData.amountWithDiscount | currency:'INR':true :'0.0-2'}}</p>
+
+    <ion-button size="full" class="btn" (click)="placeOrder()" shape="round">
+      <span *ngIf="cartData.delivery.mode != 'DELIVERY'">{{'payAtPickup' | language:'  Pickup'}}</span>
+      <span *ngIf="cartData.delivery.mode == 'DELIVERY'">{{'PayatDelivery' | language:'Pay at Delivery'}}</span>
+    </ion-button>
+
+    <!-- <ion-grid style="margin-top:25px ;margin-left:8px ; margin-right:8px ;margin-bottom: 20px;" >
+      <ion-row style="text-align: center;">
+        <ion-col class="details "  routerLink="">
+          <img src="../assets/Frame 7617 1.png">
+          <p>{{'savedDetails' | language}}
+          </p>
+        </ion-col>
+        <ion-col class="details"  routerLink="" >
+          <img src="../assets/atm-card-icon-vector-21021472 1.png">
+          <p>{{'debitAtmCard' | language}}</p>
+        </ion-col>
+        <ion-col class="details" routerLink="">
+          <img src="../assets/images (7) 1.png">
+          <p>{{'creditCards'|language:'Credit Cards'}}</p>
+        </ion-col>
+        <ion-col class="details"  routerLink="">
+          <img src="../assets/online-banking-icon_1825664-removebg-preview 1.png">
+          <p>{{'netBanking' | language}}
+          </p>
+        </ion-col>
+      </ion-row>
+    </ion-grid> -->
+
+    <!-- <button class = "card_option">
+      {{'addDebitCreditCard' | language}}
+      <ion-icon class="plus_icon" name="add-outline"></ion-icon>
+    </button>
+
+
+    <ion-grid class="Wallet_upi_box" >
+      <ion-row class="txt">
+        <p >{{'walletsUpi' | language}}</p>
+      </ion-row>
+      <ion-row>
+        <ion-col class="wallets"  routerLink="">
+          <img src="../assets/5cdac4b8-2300-4604-adad-e30e0b65ba26 1.png">
+          <p>{{'phonePay'|language:'Phone Pay'}}</p>
+        </ion-col>
+        <ion-col class="wallets" routerLink="">
+          <img src="../assets/9135eb9e-c545-4d33-87a3-00f5fd5893f3 1.png">
+          <p>{{'paytm' | language}}</p>
+        </ion-col>
+        <ion-col class="wallets"  routerLink="">
+          <img src="../assets/e799776a-0c87-4394-895d-cdbed8676260 1.png">
+          <p>{{'otherUpi' | language}}</p>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid> -->
+    <ion-button [disabled]="true" size="full" class="btn" (click)="loadCheckout()" shape="round">
+      {{'payNow'|language:'Pay Now'}}
+    </ion-button>
+  </div>
+</ion-content>

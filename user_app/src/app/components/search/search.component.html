@@ -1,0 +1,13 @@
+<ion-item class="search-box" lines="none" animated="true" show-cancel-button="focus" border-radius="10vh">
+	<ion-icon name="search" slot="start"></ion-icon>
+	<ion-input noEmoticons placeholder="{{'location' | language:'Location'}}" id="search-box" [(ngModel)]="searchText"
+		debounce="500" (ionChange)="searchText?searchAddress(searchText):''"></ion-input>
+	<ion-icon name="mic-outline" slot="end" (click)="commonService.featureNotAvailable()"></ion-icon>
+</ion-item>
+<div class="divStyle" *ngIf="searchAddResult?.length>0 && searchText">
+	<ion-list>
+		<ion-item *ngFor="let place of searchAddResult" (click)="sendData(place)">
+			<p>{{place.display_name}}</p>
+		</ion-item>
+	</ion-list>
+</div>

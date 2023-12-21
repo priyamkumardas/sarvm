@@ -1,0 +1,105 @@
+  ion-footer {
+
+    bottom: 0px;
+    position: absolute;
+    width: -webkit-fill-available;
+  }
+
+  .otpBox-header {
+
+    background: white;
+    border-radius: 20px 21px 0px 0px;
+    width: -webkit-fill-available;
+    padding-bottom: 46px;
+  }
+
+  ion-card {
+
+    width: 90%;
+    margin: 0px auto 5px auto;
+    box-shadow: none;
+    padding: 5px 0px 5px 16px;
+    background: #FFFFFF;
+    border-radius: 27px;
+    border: 1px solid #999999;
+    height: 56px;
+
+    label {
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 16px;
+      color: rgba(79, 80, 82, 0.5);
+      display: block;
+      margin-bottom: 3px;
+      padding-left: 2px;
+    }
+
+
+    input {
+
+      font-family: 'Poppins';
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 16px;
+      color: rgba(0, 0, 0, 0.6);
+      outline: none;
+      border: none;
+    }
+  } 
+  
+  .txt{
+  
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 16px;  
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    margin: 0px 0px 20px 0px;
+  }
+
+  .header {
+
+    font-family: 'Poppins';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 30px;
+    color: #4F5052;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+  }
+
+
+  ion-button {
+
+    width: 90%;
+    height: 48px;
+    display: block;
+    margin: auto;
+    --border-radius: 30px;
+
+  }
+  .footer-md::before{
+        background-image: none;
+  }
+  .CrossIcon {
+    height: 48px;
+    width: 48px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    border-radius: 100%;
+    background: #FBFBFB;
+  }
+

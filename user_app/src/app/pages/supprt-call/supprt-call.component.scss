@@ -1,0 +1,68 @@
+.content {
+    background: var(--ion-color-secondary-contrast);
+    border-radius: 20px 20px 0px 0px;
+    width: -webkit-fill-available;
+    padding-bottom: 20px;
+    margin: 0;
+}
+.CrossIcon {
+    margin-top: 20vh;
+    height: 48px;
+    width: 48px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 30px;
+    border-radius: 100%;
+    background: #FBFBFB;
+    padding: 5px;
+}
+
+.container{
+    display: flex;
+    margin: 10px;
+    height: 78px;
+    align-items: center;
+    text-decoration: none;
+}
+.image{
+    width: 60px;
+    height: 60px;
+    border-radius: 6px;
+}
+.detailes{
+    padding-left: 10px;
+}
+.date{
+    position: absolute;
+    right: 15px;
+    color: #4F5052;
+}
+ion-footer{
+    position: absolute;
+    bottom: 0;
+}
+ion-card {
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  overflow-y: auto;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}
+.orderId{
+    color: #00A64F;
+    font-weight: 900;
+}
+.shopName{    
+    font-weight: 900;
+    color: #4F5052;
+}
+.OId{
+    color: #4F5052;
+}

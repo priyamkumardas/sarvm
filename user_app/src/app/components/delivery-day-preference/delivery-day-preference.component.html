@@ -1,0 +1,46 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="cancel()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="dates-header" *ngIf="!scheduleTime">
+    <p class="header"><!-- <span (click)="openCalendar = 0"><ion-icon name="chevron-back-outline"></ion-icon></span> --> {{'scheduleDelivery' | language : 'Schedule Delivery'}}</p>
+    <ion-grid *ngIf="openCalendar">
+      <ion-row class="dates" color="primary">
+        <ion-col size="4" size-sm="2" size-md="2" size-lg="2" *ngFor="let item of data">
+          <ion-card color="warning" class="box" (click)="setDeliverySlot(item)">
+            <p>{{item | customeDate}} </p>
+          </ion-card>
+        </ion-col>
+        <ion-col size="4" size-sm="2" size-md="2" size-lg="2">
+          <ion-card color="warning" (click)="hide()" class="box">
+            <p> {{'more' | language : 'More'}} </p>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-datetime *ngIf="!openCalendar" presentation="date" (ionChange)="setDeliverySlot(selectedDate)" [(ngModel)]="selectedDate" [min]="todayDate"></ion-datetime>
+  </div>
+
+  <!-- <div class="dates-header" *ngIf="scheduleTime">
+
+    <p class="header">Schedule Delivery</p>
+    <ion-icon name="calendar-outline" class="cal"></ion-icon>
+
+    <p class="date"> </p>
+    <ion-grid>
+
+      <ion-row class="time" color="primary">
+        <ion-col class="col" *ngFor="let slot of slots">
+          <ion-card class="box2" (click)="setDeliverySlot(slot.timeSlot)">
+            <div class="img">
+              <ion-img src="../../../assets/time Modal/{{slot?.img}}"></ion-img>
+            </div>
+            <p>{{slot?.timeSlot}}</p>
+          </ion-card>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+
+  </div> -->
+</ion-footer>

@@ -1,0 +1,55 @@
+<section class="login">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="col-lg-12 hv-100">
+
+        <div class="form-content">
+          <img  src="assets/images/admin.png"/>
+
+          <h4 class="text-center"> Enter Mobile number for OTP Verification </h4>
+
+
+          <form  [formGroup]="login" (ngSubmit)="validateForm()" novalidate>
+
+            <div class="input-group mt-5">
+              <span class="input-group-text">+91</span>
+              <input type="tel"
+              [(ngModel)]="mobileNumber"
+              [maxlength]="10"
+              formControlName="mobileNumber"
+              class="form-control common__style"
+              placeholder=" Enter Mobile number "/>
+            </div>
+
+
+            <div *ngIf="isSubmitted && login.get('mobileNumber')?.invalid || login.get('mobileNumber')?.dirty || login.get('mobileNumber')?.touched">
+
+              <p class="error" *ngIf="login.get('mobileNumber')?.hasError('required')">
+                required
+              </p>
+
+              <p class="error" *ngIf="login.get('mobileNumber')?.hasError('minlength') || login.get('mobileNumber')?.hasError('pattern')" >
+                min length
+              </p>
+            </div>
+
+
+            <div class="text-center mt-5">
+            <button type="submit" class="btn btn-primary signinbtn">Submit</button>
+          </div>
+
+          </form>
+
+      </div>
+
+      </div>
+
+
+
+
+
+
+    </div>
+  </div>
+</section>

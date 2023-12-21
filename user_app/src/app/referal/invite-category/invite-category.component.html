@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" defaultHref="/home" text=""></ion-back-button>
+    </ion-buttons>
+    <ion-title slot="start">{{ 'Invite ' | language: 'Invite' }}
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="openMyRewardsModal()" mode="ios">
+        <ion-icon class="gift" name="gift-outline" color="dark"></ion-icon>
+        <ion-label color="dark"> {{"MyRewards " | language: "My Rewards "}}</ion-label>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-margin" *ngFor="let itm of refCategory;let idx=index" size="6"
+        (click)="action('refer-form',idx,itm)">
+        <div class="imgBox">
+          <ion-img src="{{itm.image}}"></ion-img>
+        </div>
+        <p class="name">{{itm.languageKey | language : itm.name}}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

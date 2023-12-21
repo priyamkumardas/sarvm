@@ -1,0 +1,72 @@
+
+
+<div class="container pt-3">
+<div class="row">
+
+
+
+  <div class="col-md-3">
+
+    <div class="form-check"
+    *ngFor="let item of catalog; let i = index;"
+    (click)="getId(i)"
+    >
+      <input type="checkbox" class="form-check-input"
+      [id]="item.id"
+      [name]="item.name"
+      [value]="item.key">
+      <label class="form-check-label" for="check1">{{item.name}}</label>
+    </div>
+
+
+  </div>
+
+
+  <div class="col-md-3">
+
+    <div class="form-check" *ngFor="let item of categories; let i = index;"
+    (click)="getsubId(i)"
+    >
+      <input type="checkbox" class="form-check-input"
+      [id]="item.id"
+      [name]="item.name"
+      [value]="item.key">
+      <label class="form-check-label" for="check1">{{item.name}}</label>
+    </div>
+
+
+  </div>
+
+
+  <div class="col-md-3">
+
+    <div class="form-check" *ngFor="let item of subCatagoriers; let i = index;"
+    (click)="getproduct(i)"
+    >
+      <input type="checkbox" class="form-check-input"
+      [id]="item.id"
+      [name]="item.name"
+      [value]="item.key">
+      <label class="form-check-label" for="check1">{{item.name}}</label>
+    </div>
+  </div>
+  <div class="col-md-3">
+    <div class="form-check" *ngFor="let item of product; let i = index;"
+    (click)="getproduct(i)"
+    >
+      <input type="checkbox" class="form-check-input"
+      [id]="item.id"
+      [name]="item.name"
+      [value]="item.key">
+      <label class="form-check-label" for="check1">{{item.name}}</label>
+    </div>
+
+
+  </div>
+
+
+</div>
+</div>
+
+
+

@@ -1,0 +1,182 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'Profile '| language : 'Profile'}}</ion-title>
+    <ion-buttons slot="end" routerLink="/my-qr">
+      <ion-button>
+        <ion-icon slot="icon-only" name="qr-code-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="info" (click)="editProfile()">
+    <div id="info">
+      <p class="name">+91-{{userData.phone}}</p>
+    </div>
+    <div class="edit">
+      <ion-icon id="edit-icon" src="/assets/icon/edit.svg"></ion-icon>
+      <p>{{'editProfile' | language : 'Edit Profile'}}</p>
+    </div>
+  </div>
+  <div class="myAcc">
+    <p class="AccTxt"><strong>{{'myAccount'|language:'My Account'}}</strong></p>
+    <ion-row>
+      <ion-col size="3" class="available">
+        <div class="img" (click)="moveToStoreListing()">
+          <ion-icon name="heart-outline" color="warning" ion-icon size="large"></ion-icon>
+        </div>
+        <p>{{'favourites'|language:'favourites'}}</p>
+      </ion-col>
+      <ion-col size="3" class="available">
+        <div class="img" routerLink="/setting">
+          <!-- <img src="/assets/My-Acc-Img/carbon_settings.png" alt="" /> -->
+          <ion-icon name="settings-outline" color="warning" ion-icon size="large"></ion-icon>
+        </div>
+        <p>{{'settings'|language:'settings'}}</p>
+      </ion-col>
+      <ion-col size="3">
+        <div class="img" routerLink="/saved-address">
+          <!-- <img
+            src="/assets/My-Acc-Img/akar-icons_location.png"
+            alt=""
+          /> -->
+          <ion-icon color="warning" name="location-outline" ion-icon size="large"></ion-icon>
+        </div>
+        <p>{{'myAddress'|language:'My Address'}}</p>
+      </ion-col>
+      <ion-col size="3">
+        <div class="img" routerLink="/help">
+          <!-- <img src="/assets/My-Acc-Img/bx_help-circle.png" alt="" /> -->
+          <ion-icon color="warning" ion-icon size="large" name="help-outline"></ion-icon>
+        </div>
+        <p>{{'help'|language:'Help'}}</p>
+      </ion-col>
+    </ion-row>
+  </div>
+  <div class="Reffer">
+    <p class="Reffer-txt"
+      *ngIf="userData.userType !== 'EMPLOYEE_SH'  && userData.userType !== 'EMPLOYEE_CO' && userData.userType !== 'EMPLOYEE_SSO'">
+      <strong>{{'refer'|language: 'Refer'}}</strong>
+    </p>
+    <p class="Reffer-txt"
+      *ngIf="userData.userType === 'EMPLOYEE_SH' || userData.userType == 'EMPLOYEE_CO' || userData.userType == 'EMPLOYEE_SSO'">
+      <strong>{{'employee'|language: 'Employee'}}</strong>
+    </p>
+    <ion-row>
+      <div class="cards" routerLink="/referal" expand="block">
+        <div class="img">
+          <img src="/assets/icon/refer.svg" alt="icon"/>
+        </div>
+        <p>{{'refer'|language: 'Refer'}}</p>
+      </div>
+      <div *ngIf="userData.userType == 'EMPLOYEE_SH' || userData.userType == 'EMPLOYEE_CO'" class="cards"
+        id="business-modal" routerLink="/employee-list">
+        <div class="img">
+          <img  src="/assets/icon/employee-new.svg" alt="icon"/>
+        </div>
+
+        <p >{{'manageemployee' | language: 'Manage Employee'}}</p>
+      </div>
+      <div class="cards" id="business-modal" routerLink="/referal/my-referal">
+        <div class="img">
+          <ion-icon color="warning" name="gift-outline" ion-icon size="large"></ion-icon>
+        </div>
+        <p>{{'MyRewards '|language: 'My Rewards'}}</p>
+      </div>
+    </ion-row>
+  </div>
+  <ion-accordion-group style="margin-top: 15px;">
+    <ion-accordion *ngFor="let data of orderSet;let i= index">
+      <ion-item slot="header" class="past-order-txt">
+        <p style="margin: 0px;"><strong>{{data.type|language : data.defaultValue}}</strong></p>
+      </ion-item>
+      <div slot="content">
+        <div class="past-order">
+          <div class="cardconatiner" value="i" *ngFor="let value of data.value">
+            <div class="date-time">
+              <p class="date" slot="start" display="inline-block" margin-right>
+                {{value.delivery.deliveryDate | date:'dd MMM yyyy'}}
+              </p>
+              <p class="date">
+                {{value.orderTime}}
+              </p>
+            </div>
+            <ion-card class="ordercard">
+              <div class="container">
+                <img [routerLink]="['/order-details',value.orderID]" class="farm-img" [src]="value.shop.image"
+                  onerror=" this.onerror = null ;this.src ='https://media.istockphoto.com/vectors/storefront-flat-design-ecommerce-icon-vector-id912819604?k=20&m=912819604&s=612x612&w=0&h=tUJrqTFeqBRNSWCFyTJLU1ekulp5PfnF6w5nngqHCV4='"
+                  alt="order" />
+                <div class="middletext">
+                  <p class="shopName">{{value.shop.name | titlecase}}
+                    <span>
+                      <a href="tel:{{value.seller.phone}}">
+                        <img class="call" src="/assets/images/phone-call.png" alt="call-us" />
+                      </a>
+                    </span>
+                  </p>
+                  <p [routerLink]="['/order-details',value.orderID]" class="location">
+                    <ion-icon class="icon" src="/assets/img/ic_location.svg"></ion-icon>
+                    <span class="value">{{value.shop.address}}</span>
+                  </p>
+                  <div [routerLink]="['/order-details',value.orderID]" class="delivering-status">
+                    <ion-icon slot="start" *ngIf="value.delivery.mode == 'DELIVERY'"
+                      src="/assets/img/delivery.svg"></ion-icon>
+                    <ion-icon slot="start" *ngIf="value.delivery.mode != 'DELIVERY'"
+                      src="/assets/img/pickup.svg"></ion-icon>
+                    <span>{{value.delivery.mode}}</span>
+                  </div>
+                </div>
+              </div>
+              <div class="buttons">
+                <ion-button *ngIf="data.type!='activeOrders'" (click)="commonservice.featureNotAvailable()"
+                  class="detail" fill="outline" color="primary" shape="round">
+                  <ion-icon src="/assets/icon/star.svg"></ion-icon>
+                  {{'rateorder' | language:'Rate Order' | titlecase}}
+                </ion-button>
+                <ion-button *ngIf="data.type!='activeOrders'" (click)="commonservice.featureNotAvailable()"
+                  class="detail" color="primary" shape="round">
+                  <ion-icon src="/assets/icon/arrow.svg"></ion-icon>
+                  {{'reorder ' | language:'Re Order' | titlecase}}
+                </ion-button>
+                <ion-button *ngIf="data.type=='activeOrders'" [routerLink]="['/order-details',value.orderID]"
+                  class="detail" fill="outline" color="primary" shape="round">
+                  <ion-icon src="/assets/icon/Detail.svg"></ion-icon>
+                  {{'details' | language:'Details' | titlecase}}
+                </ion-button>
+                <ion-button *ngIf="data.type=='activeOrders'" [routerLink]="['/track-order',value.orderID]"
+                  class="track" fill="solid" color="primary" shape="round">
+                  <ion-icon src="/assets/track.svg"></ion-icon>
+                  {{'track' | language:'Track' | titlecase}}
+                </ion-button>
+              </div>
+            </ion-card>
+          </div>
+          <p class="moreorder" *ngIf="data.value?.length"
+            [routerLink]="['/tabs/active-order',data.type=='activeOrders'?'ACTIVE':'COMPLETED']">
+            {{'viewMoreOrders'|language: 'View More Orders'}}
+          </p>
+          <p style="display:flex" class="moreorder" *ngIf="!data.value?.length && !flag">
+            <img class="gif-loader" src="/assets/loading-state.gif" alt="" srcset="">
+            <span>Loading</span>
+          </p>
+          <p class="moreorder" *ngIf="flag && !data.value?.length">
+            {{'noOrder'|language: 'No Order Found !!'}} 
+        </div>        
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+  <div class="logout" (click)="logout()">
+    <img class="logoutImg" src="/assets/My-Acc-Img/power.svg" alt="" srcset="">
+    <p>{{'logout'|language:'Logout'}}</p>
+  </div>
+  <div id="container">
+    <p *ngIf="!appEnvirorment">
+      {{'Environment:Staging' | language : 'Environment: Staging'}}
+    </p>
+    <span *ngIf="commonservice.appCodeVersionName"><strong>{{'appversion:' | language:'App Version:'}}</strong> {{
+      commonservice.appCodeVersionName}}</span>
+  </div>
+</ion-content>

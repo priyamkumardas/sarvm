@@ -1,0 +1,42 @@
+<div class="container content" >
+    <h2 class="py-4">Edit Shop Details</h2>
+    <form [formGroup]="shopDetailsEdit">
+      <div class="form-group row">
+        <label for="shop_id" class="col-sm-2 col-form-label">Shop Id</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="shop_id">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="brand" class="col-sm-2 col-form-label">Shop name</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="shop_name">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="city" class="col-sm-2 col-form-label"> City</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control"  formControlName="city">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <label for="pincode" class="col-sm-2 col-form-label">Pincode</label>
+        <div class="col-sm-3">
+          <input type="text" class="form-control" formControlName="pincode">
+        </div>
+      </div>
+      <br>
+      <div class="form-group row">
+        <div class="col-sm-4 offset-sm-2">
+          <button type="submit" class="btn btn-primary mr-2" (click)="updateShotData()">Update</button>
+          <button style="margin-left: 20px;" type="reset" class="btn btn-outline-primary"  [routerLink]="['/shop-data']">Cancel</button>
+        </div>
+      </div>
+    </form>
+    <!-- <agm-map [latitude]="lat" [longitude]="lng">
+      <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
+    </agm-map> -->
+  </div>

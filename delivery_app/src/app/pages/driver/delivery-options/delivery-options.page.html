@@ -1,0 +1,142 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="onBack()">
+      <ion-icon name="chevron-back-outline" class="veh-doc-back-icn"></ion-icon>
+    </ion-buttons>
+    <ion-title>{{'deliveryOptions' | language : 'Delivery Options'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="delivery-header">
+    <p><span>{{'distancecovers' | language : 'Distance covers'}}</span>&nbsp;<span class="item-type">{{selectKM}}</span></p>
+  </div>
+
+  <div class="delivery-distance" [style]="flatRate ? 'pointer-events: none; opacity: 0.4;' : ''">
+    <ion-row>
+      <ion-col size="11">
+        <ion-segment [scrollable]="true" class="select-time-section" [value]="selectKM">
+          <div *ngFor="let item of deliveryKilometros; let ind = index">
+            <div *ngFor="let coll of item | keyvalue">
+              <ion-segment-button value={{coll.key}} id={{coll.key}} (click)="selectDistance(coll.key, coll.value)">
+                <img src="assets/icon/ic-track.svg" alt="icon" />
+                <ion-label>{{coll.key}}</ion-label>
+              </ion-segment-button>
+            </div>
+          </div>
+        </ion-segment>
+      </ion-col>
+      <ion-col size="1">
+        <div class="add-item" (click)="openDistanceCoversModal()">
+          <img src="assets/icon/ic-plus.svg" alt="icon" />
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="delivery-rate-charge">
+    <ion-row>
+      <ion-col size="5">
+        <ion-item lines="none" class="delivery-rate">
+          <span class="flat-rate">{{'flatRate' | language : 'Flat Rate'}}</span>
+          <ion-checkbox slot="end" [(ngModel)]="flatRate" (ionChange)="onFlatRateChange($event)"></ion-checkbox>
+        </ion-item>
+      </ion-col>
+      <ion-col size="7">
+        <ion-item lines="none" class="delivery-charge">
+          <ion-label class="surcharge">{{'surcharge' | language : 'Surcharge'}}:</ion-label>
+          <ion-input type="Number" name="type" [(ngModel)]="surCharge" [disabled]="!flatRate" (ionInput)="isNumberKey($event)"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <div class="distance-type" *ngIf="!flatRate" >
+    <div class="distance-header">
+      <p><span>{{'DeliveryChargesfor' | language : 'Delivery Charges for'}}</span>&nbsp;<span class="dist-type">{{selectKM}}</span></p>
+    </div>
+
+    <!-- <ion-row class="distan-items">
+      <ion-col size="3" class="distan-catagory">
+        <p>0-5 Kg</p>
+      </ion-col>
+      <ion-col size="9">
+        <ion-item lines="none" class="distan-input">
+          <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+          <ion-input type="Number" name="type"></ion-input>
+        </ion-item>
+        <span class="error-view">Please enter numerical value!</span>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="distan-items">
+      <ion-col size="3" class="distan-catagory">
+        <p>5-10 Kg</p>
+      </ion-col>
+      <ion-col size="9">
+        <ion-item lines="none" class="distan-input">
+          <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+          <ion-input type="Number" name="type"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <ion-row class="distan-items">
+      <ion-col size="3" class="distan-catagory">
+        <p>10-15 Kg</p>
+      </ion-col>
+      <ion-col size="9">
+        <ion-item lines="none" class="distan-input">
+          <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+          <ion-input type="Number" name="type"></ion-input>
+        </ion-item>
+      </ion-col>
+    </ion-row>-->
+
+    <!-- <div *ngFor="let item of demoArr; let ind = index">
+      <div *ngFor="let coll of item[objArr]">
+        <ion-row class="distan-items">
+          <ion-col size="3" class="distan-catagory">
+            <p>{{coll.wTo}}-{{coll.wFrom}} Kg</p>
+          </ion-col>
+          <ion-col size="9">
+            <ion-item lines="none" class="distan-input">
+              <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+              <ion-input type="Number" name="type" [(ngModel)]="coll.wCharge"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div> -->
+
+
+    <div *ngFor="let item of deliveryKilometros; let ind = index">
+      <div *ngFor="let coll of item[selectKM]">
+        <ion-row class="distan-items">
+          <ion-col size="3" class="distan-catagory">
+            <p>{{coll.wTo}}-{{coll.wFrom}} Kg</p>
+          </ion-col>
+          <ion-col size="9">
+            <ion-item lines="none" class="distan-input">
+              <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+              <ion-input type="Number" name="type" [(ngModel)]="coll.wCharge"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </div>
+    </div>
+
+    <div class="add-view">
+      <ion-button class="add-weight-view" [disabled]="selectKM === '' ? true : false" (click)="openAddWeightModal()">
+        <ion-icon class="add-weight" src="assets/icon/ic-plus.svg" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+  </div>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="footer">
+    <ion-button color="primary" fill="solid" expand="full" shape="round" class="save btn" type="submit"
+      (click)="saveDeliveryCharges()">{{'save' | language : 'Save'}}</ion-button>
+  </div>
+</ion-footer>

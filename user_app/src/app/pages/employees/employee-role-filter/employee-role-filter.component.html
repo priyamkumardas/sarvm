@@ -1,0 +1,31 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss(active)">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content ion-no-margin" >
+    <p class="clear" (click)="modelCtrl.dismiss()">{{'clear'|language:'Clear'}}</p>
+    <!-- <p class="done" (click)="modelCtrl.dismiss(active)">Done</p> -->
+    <ion-grid class="ion-padding">
+      <ion-row>
+        <ion-col [ngClass]="{'active':active == 'SH'}" (click)="modelCtrl.dismiss('SH')"  > 
+          <div  class="ion-text-center">
+          <ion-img src="/assets/Group.png" class="roleImg"></ion-img>
+          <p class="ion-text-nowrap">{{'StateHead'|language:'State Head'}}</p>
+        </div>
+      </ion-col>
+        <ion-col [ngClass]="active == 'CO'?'active':''" (click)="modelCtrl.dismiss('CO')" >
+           <div  class="ion-text-center">
+          <ion-img src="/assets/Group.png" class="roleImg"></ion-img>
+          <p class="ion-text-nowrap">{{'CityOfficer '|language:'City Officer'}}</p>
+        </div>
+      </ion-col>
+        <ion-col [ngClass]="active == 'SSO'?'active':''" (click)="modelCtrl.dismiss('SSO')" >
+           <div  class="ion-text-center">
+          <ion-img src="/assets/Group.png" class="roleImg"></ion-img>
+          <p>{{'sales&serviceofficer'|language:'sales & service Officer'}}</p>
+        </div>
+      </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-footer>

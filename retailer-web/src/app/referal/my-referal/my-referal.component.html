@@ -1,0 +1,176 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-button (click)="action('close')">
+                <ion-icon class="" name="chevron-back-outline"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-img (click)="refferalclose()" class="nav-logo" src="assets/icon/Sarvmlogo.png"></ion-img>
+    </ion-toolbar>
+</ion-header>
+
+<ion-toolbar (click)="referralService.startWalletActivity()">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="10">
+        <p class="reward-text">
+          {{ "totalRewardsEarned" | language: "Total Rewards Earned" }}
+        </p>
+        <p class="reward-text">₹ {{ rewardsEarned }}</p>
+      </ion-col>
+      <ion-col size="2">
+        <ion-img src="assets/ReferrlImg/noto_wrapped-gift.png" alt="" srcset=""></ion-img>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-searchbar color="light" type="tel" mode="ios" placeholder="Search Number" debounce="1000"
+    [(ngModel)]="phoneNumber" (ionChange)="searchNumber()"></ion-searchbar>
+</ion-toolbar>
+
+<ion-segment class="ind-btn" [(ngModel)]="segment" (ionChange)="segmentChanged($event)" scrollable>
+    <ion-segment-button color="light" class="rewr-btn" mode="md" value="0" checked>
+        <p>{{ "MyRewards" | language: "My Rewards" }}</p>
+    </ion-segment-button>
+    <ion-segment-button class="rewr-btn" mode="md" value="1">
+        <p>{{ "MyReferrals" | language: "My Referrals" }}</p>
+    </ion-segment-button>
+</ion-segment>
+
+<ion-content>
+  <span [ngSwitch]="segment">
+    <ion-slides *ngSwitchCase="'0'">
+      <ion-grid>
+        <ion-row class="box">
+          <ion-col size="3">
+            <ion-img src="assets/ReferrlImg/Diamond.png" alt=""></ion-img>
+          </ion-col>
+          <ion-col size="9">
+            <p id="first-para">
+              {{ "increaseEarningBy" | language: "Increase Earning by 150%" }}
+            </p>
+            <p id="next-para">
+              {{
+              "increaseReferralEarningOnEachSuccessfulInvite"
+              | language
+              : "Increase earning on each invite"
+              }}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <!-- <app-empty-list *ngIf="!myReferrals.length"></app-empty-list> -->
+      <ion-grid class="gifts">
+        <ion-row>
+          <ion-col class="cards" sizeLg="4" sizeMd="4" sizeXs="6" *ngFor="let referrals of myReferrals"
+            [id]="referrals?._id">
+            <div class="icon">
+              <ion-img *ngIf="referrals.type === 'INDIVIDUAL'" src="assets/ReferrlImg/person.svg" alt=""></ion-img>
+              <ion-img *ngIf="referrals.type === 'deliveryValet'" src="assets/ReferrlImg/delivery.svg" alt="">
+              </ion-img>
+              <ion-img *ngIf="referrals.type === 'RETAILER'" src="assets/ReferrlImg/storefront.svg" alt=""></ion-img>
+              <ion-img *ngIf="referrals.type === 'wholeseller'" src="assets/ReferrlImg/wholeseller.png" alt="">
+              </ion-img>
+              <ion-img *ngIf="referrals.type === 'farmer'" src="assets/ReferrlImg/farmer.png" alt=""></ion-img>
+              <ion-img *ngIf="referrals.type === 'traderBroker'" src="assets/ReferrlImg/trader_broker.png" alt="">
+              </ion-img>
+              <ion-img *ngIf="referrals.type === 'deliveryPartner'" src="assets/ReferrlImg/deliveryPartner.png" alt="">
+              </ion-img>
+              <ion-img *ngIf="referrals.type === 'other'" src="assets/ReferrlImg/other.png" alt=""></ion-img>
+            </div>
+            <ion-img class="gift-img" *ngIf="!referrals.referral_reward_status"
+              src="assets/ReferrlImg/noto_wrapped-gift1.png" alt=""></ion-img>
+            <ion-img class="gift-img" *ngIf="referrals.referral_reward_status"
+              src="assets/ReferrlImg/noto_wrapped-gift.png" alt=""></ion-img>
+            <p id="txt1">
+              {{
+              referrals?.referral_reward_status ? "You Won" : "You Can Win"
+              }}
+            </p>
+            <p id="txt2">₹ {{ referrals?.max_reward }}</p>
+            <p id="txt3">
+              <!-- {{ "byReferring" | language: "By referring" }} -->
+              {{ referrals.masked_phone_number}}
+            </p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-slides>
+
+    <ion-slides *ngSwitchCase="'1'">
+      <ion-segment [(ngModel)]="selectedSub" (ionChange)="userCategorySegmentChange($event)" class="sub-segment"
+        scrollable>
+        <ion-segment-button *ngFor="let seg of subSegmentList; let j = index" mode="md" [value]="j"
+          [attr.checked]="selectedSub === j">
+          <p>{{ seg.type }}</p>
+        </ion-segment-button>
+      </ion-segment>
+      <hr class="separator" />
+      <div>
+        <ion-slides>
+          <div class="nav">
+            <p *ngFor="let f of filters; let i = index" (click)="applyFilter(f.key, i)"
+              [class.active]="selectedIndex === i">
+              {{ f.value }}
+            </p>
+          </div>
+          <div class="box2" *ngFor="let referrals of myReferrals" [id]="referrals?._id">
+            <ion-img id="type" *ngIf="referrals?.type === 'INDIVIDUAL'" src="assets/ReferrlImg/person.svg" alt="">
+            </ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'deliveryValet'" src="assets/ReferrlImg/delivery.svg"
+              alt=""></ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'RETAILER'" src="assets/ReferrlImg/storefront.svg" alt="">
+            </ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'wholeseller'" src="assets/ReferrlImg/wholeseller.png" alt="">
+            </ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'farmer'" src="assets/ReferrlImg/farmer.png" alt=""></ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'traderBroker'" src="assets/ReferrlImg/trader_broker.png"
+              alt=""></ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'deliveryPartner'" src="assets/ReferrlImg/deliveryPartner.png"
+              alt=""></ion-img>
+            <ion-img id="type" *ngIf="referrals?.type === 'other'" src="assets/ReferrlImg/other.png" alt=""></ion-img>
+            <ion-img  id="like" src="assets/ReferrlImg/tabler_thumb-up.png"
+              *ngIf="referrals?.ack_status" alt=""></ion-img>
+            <ion-img  id="like" src="assets/ReferrlImg/ic_thumb_up_inactive.png"
+              *ngIf="!referrals?.ack_status" alt=""></ion-img>
+            <p id="num">+91 {{ referrals?.phone_number }}</p>
+            <p id="StatusTxt">
+              Referral Status:
+              <!-- {{ referrals?.first_order_status }} -->
+            </p>
+            <div class="Allcheckbox">
+              <ng-container *ngFor="let stage of referrals.stages">
+                <div *ngIf="stage?.show" class="checkbox">
+                  <ion-icon color="warning" *ngIf="stage?.value" name="checkmark-circle"></ion-icon>
+                  <ion-icon color="medium" *ngIf="!stage?.value" name="checkmark-circle"></ion-icon>
+                  <span>{{ stage?.name }}</span>
+                </div>
+              </ng-container>
+            </div>
+            <div class="line"></div>
+            <ion-row>
+              <ion-col size="6">
+                <ion-button (click)="sendReminder(referrals)" *ngIf="!referrals?.referral_reward_status" class="btn">
+                  <!-- <img src="../../../assets/ReferrlImg/Sms.svg" alt="" /> -->
+                  <ion-icon src="../../../assets/ReferrlImg/sms.svg" slot="start"></ion-icon>
+                  {{ "Reminder" | language: "Reminder" }}
+                </ion-button>
+              </ion-col>
+              <ion-col size="6">
+                <ion-button href="tel:{{ referrals?.phone_number }}" *ngIf="!referrals?.referral_reward_status"
+                  class="btn2">
+                  <!-- <img src="../../../assets/ReferrlImg/Call.svg" alt="" /> -->
+                  <ion-icon src="../../../assets/ReferrlImg/call.svg" slot="start"></ion-icon>
+                  {{ "call" | language: "Call" }}
+                </ion-button>
+              </ion-col>
+            </ion-row>
+
+    <p id="StatusTxt" *ngIf="referrals?.referral_reward_status">
+        <img src="assets/ReferrlImg/rewards.png" alt="" /> {{ "youHaveGotTheReward" | language: "You have got the Reward" }}
+    </p>
+    </div>
+    </ion-slides>
+    </div>
+    </ion-slides>
+    </span>
+</ion-content>

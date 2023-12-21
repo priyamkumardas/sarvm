@@ -1,0 +1,129 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+        <ion-icon name="reload-outline" class="refresh" color="primary"  (click)="getMerchantDetails()"></ion-icon>
+    </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="onClickSearch()">
+        <ion-icon name="search"></ion-icon>
+      </ion-button>
+      <ion-button (click)="optionsMenu()">
+        <ion-icon name="ellipsis-vertical"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-progress-bar mode="ios" color="primary" type="indeterminate" *ngIf="commonservice.isLoading"></ion-progress-bar>
+</ion-header>
+<ion-content >
+  <ion-grid  class="ion-padding">
+    <ion-row class="ion-justify-content-center">
+      <ion-col size="11" class="ion-align-items-center">
+        <ion-searchbar  mode="ios" placeholder="Search for product name" [debounce]="500" (ionChange)="searchProduct($event)" [(ngModel)]="searchText" #search [hidden]="!isSearch"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <div class="boxx">
+    <div class="innerbox">
+        <div class="left ">
+          <div class="hometitle">
+            <img src="./assets/home.svg" alt="load">
+            <p>{{vendorDetails?.shop_name | titlecase}}</p>
+
+          </div>
+            <p *ngIf="!deliveryStatus" style="color: #ff4242;font-size: 12px;margin-left: 16px;">Not delivering at your current location</p>
+        </div>
+        <div class="right ">
+          <p>
+            <a [href]="'tel:'+vendorDetails?.seller.phone">
+              <ion-img src="{{vendorDetails?.seller.image?vendorDetails?.seller.image:'/assets/Login-Img/gg_profile@2x.svg'}}" alt="profilepic"> </ion-img>
+            </a>
+          </p>
+          <div class="about">
+            <!-- <p class="name">{{vendorDetails?.shop_name}}</p> -->
+          </div>
+        </div>
+    </div>
+    <div style="overflow: auto;">
+        <ion-segment no-padding [value]="selectedCategory" style=" width: fit-content;" mode="md" class="segment" [scrollable]="true" *ngIf="vendorDetails?.store_meta[0]?.url">
+          <ion-segment-button [value]="i" *ngFor="let category of vendorDetails?.dataList?.catalog; let i = index" (click)="selectedCategory=i;selectedSubCategory=0;selectedMicroCategory=1">
+            <span [ngClass]="selectedCategory==i?'selectedCategory active':'selectedCategory'">
+              {{category?.name}}
+            </span>
+          </ion-segment-button>
+        </ion-segment>
+    </div>
+  </div>
+  <ion-row class=" sub-nav " *ngIf="vendorDetails?.dataList?.catalog?.length">
+    <ion-col class="sub-nav-btn " size="4" size-sm="4" size-md="4" size-lg="4" *ngFor="let item of vendorDetails?.dataList?.catalog[selectedCategory]?.categories[selectedSubCategory].categories;let i = index" (click)="selectedMicroCategory = i+1" [ngClass]="{'class_sub-nav-btn': i == selectedMicroCategory-1}">
+      <p>{{item?.name | titlecase}}</p>
+    </ion-col>
+  </ion-row>
+  <div *ngIf="vendorDetails?.dataList?.catalog?.length" class="filter-container ">
+    <div class="filters ">
+      <ion-list class="list " lines="none ">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="ion-align-self-start " size="2">
+              <div style="background: rgba(0, 166, 79, 0.1);border-radius: 0px 20px 0px 0px;overflow: hidden;border: 1px solid #69bb7b;">
+                <ion-row class="sideRow">
+                  <ion-col size="12" class="sideCol" *ngFor="let item of vendorDetails?.dataList?.catalog[selectedCategory]?.categories;let i = index" [ngClass]="{'selected': i == selectedSubCategory}" (click)="selectedSubCategory = i;selectedMicroCategory = 1">
+                    <!-- <ion-avatar> -->
+                    <img class="imgslide" alt="loading" src="{{item.image}}" />
+                    <!-- </ion-avatar> -->
+                    <p>{{item.name | titlecase}}</p>
+                  </ion-col>
+                </ion-row>
+              </div>
+            </ion-col>
+            <ion-col class="ion-align-self-start " size="10">
+              <ion-row style="margin-left:5px ; margin-right:5px" *ngIf="selectedMicroCategory">
+                <ng-container *ngFor="let item of vendorDetails?.dataList?.catalog[selectedCategory]?.categories[selectedSubCategory].categories[selectedMicroCategory-1].products">
+                  <ion-col style="padding: 5px;" size="6" *ngIf="searchText ? item.name.toLowerCase().includes(searchText.toLowerCase()) : true">
+                    <div class="card-box">
+                      <div class="slide-image ">
+                        <span [ngClass]="item.status?.trim().toLowerCase() == 'published' ? 'wpd-sale-badge' : 'idDisabled wpd-sale-badge'" *ngIf="item?.discount">{{'PreOrder' | language:'Preorder'}}
+                          {{item?.discount}}% Off</span>
+                        <img [ngClass]="item.status?.trim().toLowerCase() == 'published' ? 'imgslide' : 'idDisabled imgslide'" alt="loading" src="{{item?.image}}" onerror=" this.onerror = null ;this.src ='https://www.shutterstock.com/image-photo/assorted-organic-vegetables-fruits-wicker-600w-1720876849.jpg'" />
+                        <div class="heart">
+                          <ion-icon size="large" name="heart-outline" color="dark"></ion-icon>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="slide-sub ">
+                      <div class="up">
+                        <div style="display:flex;">
+                          <p class="item-name">{{item?.name}}</p>
+                          <ion-img *ngIf="itemsInCart.includes(item.id)" style="height: 18px;" src="/assets/images/completed.svg"></ion-img>
+                        </div>
+                        <p class="price" *ngIf="item.status?.trim().toLowerCase() == 'published'">{{item.price|
+                          currency:'INR':true :'0.0-2'}} / {{item.soldBy | titlecase}}</p>
+                        <p class="price" *ngIf="item.status?.trim().toLowerCase() != 'published'">{{10 | currency:'INR':true :'0.0-2'}} / {{'Kg' | titlecase}}</p>
+                      </div>
+                      <div class="Qua-Add">
+                        <button class="quantity" (click)="item.status?.trim().toLowerCase() == 'published' ? quantity(item) : ''"  [disabled]="addDisable">
+                          <p>{{item?.qty}} {{item.status?.trim().toLowerCase() == 'published'?item.soldBy:'Kg' |
+                             titlecase}}</p>
+                          <ion-icon name="chevron-down-outline" style="color: black;"></ion-icon>
+                          </button>
+                        <!-- <p class="qunatity">1 {{item?.units}} </p> -->
+                        <button [ngClass]="item.status?.trim().toLowerCase() == 'published' ? '' : 'idDisabled'" (click)="item.status?.trim().toLowerCase() == 'published' ? selectDate(item, true) : ''" [disabled]="addDisable">{{'add'|language:'Add'}}</button>
+                      </div>
+                    </div>
+                  </ion-col>
+                </ng-container>
+              </ion-row>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </div>
+  </div>
+  <app-empty-list *ngIf="flag"></app-empty-list>
+</ion-content>
+<div class="cart" *ngIf="cartData?.cart?.length" [routerLink]="['/cart']">
+  <span>{{cartData.totalProducts}} {{'items'|language:'Items '}}</span>
+  <button class="viewCart">{{'viewCart' | language:'View Cart'}}</button>
+</div>

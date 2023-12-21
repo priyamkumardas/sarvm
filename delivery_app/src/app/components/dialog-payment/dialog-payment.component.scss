@@ -1,0 +1,142 @@
+.payment-dialog {
+    .payment-type {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-y: hidden;
+        white-space: nowrap;
+        overflow-x: scroll;
+        background: rgba(164, 44, 36, 0.2);
+        ion-icon {
+            width: 68px;
+            height: 68px;
+        }
+        .payment-type-header {
+            width: 100%;
+            height: 67px;
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-y: hidden;
+            white-space: nowrap;
+            overflow-x: scroll;
+            &::-webkit-scrollbar {
+                display: none;
+            }
+            .card {
+                flex: 0 0 auto;
+                display: flex;
+                align-items: center;
+                ion-icon {
+                    width: 68px;
+                    height: 68px;
+                }
+            }
+        }
+    }
+    .payment-type-body {
+        .payment-user {
+            position: relative;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            ion-thumbnail {
+                width: 50px;
+                height: 50px;
+                margin-right: 8px;
+                img {
+                    border-radius: 20px;
+                }
+            }
+            ion-label {
+                .user-name {
+                    font-family: "AvertaStd-Semibold";
+                    line-height: 21px;
+                    font-weight: 700;
+                    font-size: 17px;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: 0.01em;
+                    color: #000000;
+                }
+                .user-no {
+                    font-family: "AvertaStd-Regular";
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 19px;
+                    display: flex;
+                    align-items: center;
+                    letter-spacing: 0.01em;
+                    color: #000000;
+                }
+            }
+        }
+        .payment-barcode {
+            text-align: center;
+            img {
+                width: 270px;
+                height: 270px;
+            }
+        }
+        .payment-id {
+            text-align: center;
+            p {
+                font-family: "AvertaStd-Regular";
+                font-size: 18px;
+                line-height: 19px;
+                color: #333333;
+                margin: 10px 0px 10px 0px;
+            }
+        }
+        .payment-received {
+            height: 40px;
+            text-align: center;
+            display: flex;
+            justify-content: center;
+            background: rgba(164, 44, 36, 0.2);
+            p {
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 18px;
+                line-height: 24px;
+                display: flex;
+                align-items: center;
+                text-align: center;
+                letter-spacing: 0.02em;
+                color: #4f5052;
+                margin: 0px;
+                justify-content: center;
+            }
+        }
+    }
+
+    .payment-button {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        justify-content: space-evenly;
+        margin: 10px 0px 14px 0px;
+        ion-button {
+            width: 40%;
+            height: 40px;
+            font-family: "AvertaStd-Bold";
+            font-size: 16px;
+            align-items: center;
+            text-align: center;
+            text-transform: none;
+            color: #ffffff;
+            border-radius: 30px;
+        }
+        .no {
+            background: #ffffff;
+            color: #f7bc0d;
+            border: 1px solid #f7bc0d;
+            border-radius: 20px;
+        }
+        .yes {
+            color: #ffffff;
+            background: #a42c24;
+            border-radius: 20px;
+        }
+    }
+}

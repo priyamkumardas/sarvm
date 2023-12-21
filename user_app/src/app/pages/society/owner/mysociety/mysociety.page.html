@@ -1,0 +1,39 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My society</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text color="primary" class="ion-padding">
+    <h5 id="addSocietyModal">Open Modal</h5>
+  </ion-text>
+  <ion-modal class="mySocietyModal" #addSocietyModal trigger="addSocietyModal" [isOpen]="false">    
+    <ng-template>
+      <ion-footer>
+        <div class="CrossIcon" (click)="addSocietyModal.dismiss()">
+          <ion-icon name="close-outline"></ion-icon>
+        </div>
+        <div class="options">
+          <p class="header">My Society</p>
+          <ion-grid>
+            <ion-row class="society ion-padding-bottom">
+              <ion-col size="6" class="ion-text-center">
+                <ion-button mode="ios" class="btn" [routerLink]="['/addsociety']" (click)="addSocietyModal.dismiss()">
+                  <ion-icon slot="icon-only" name="add"></ion-icon>
+                </ion-button>
+                <ion-label class="title">Add Society</ion-label>
+              </ion-col>
+              <ion-col size="6" class="ion-text-center">
+                <ion-button mode="ios" class="btn">
+                  <ion-icon slot="icon-only" name="refresh"></ion-icon>
+                </ion-button>
+                <ion-label class="title">Update Society</ion-label>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-footer>
+    </ng-template>
+  </ion-modal>
+</ion-content>

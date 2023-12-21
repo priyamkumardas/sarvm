@@ -1,0 +1,43 @@
+@import '../custom.scss';
+ion-header {
+    ion-toolbar {
+        ion-title {
+            font-family: 'Poppins';
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            color: #4F5052;
+        }
+
+        ion-button {
+            --background: var(--ion-color-primary);
+            // --border-radius: 50px;
+            --border-radius: 32px;
+            width: 40px;
+            height: 40px;
+            margin-right: 8px;
+
+            ion-icon {
+                color: #fff;
+                --ionicon-stroke-width: 50px;
+            }
+        }
+    }
+}
+ion-content {
+    --padding-top: 8px !important;
+    --padding-start: 8px !important;
+    --padding-end: 8px !important;
+
+    .title {
+        font-family: 'Poppins';
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 24px;
+        color: #4F5052;
+    }
+
+    
+}

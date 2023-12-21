@@ -1,0 +1,39 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss('Close')">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <ion-card class="content">
+    <div class="ion-text-center">
+      <p class="date">Filter By Month</p>
+    </div>
+
+    <div class="ion-text-center year">
+      <ion-icon slot="start" (click)="incDec('dec')" name="chevron-back-outline"></ion-icon>
+      <p>{{year}}</p>
+      <ion-icon slot="end" (click)="incDec('inc')" name="chevron-forward-outline"></ion-icon>
+    </div>
+
+    <ion-grid>
+      <ion-row class="ion-margin-horizontal">
+        <ion-col class="roles" size="3" *ngFor="let month of monthNames;let i=index" value="i">
+          <div class="ion-text-center"  [ngClass]="{'filterActive': Month===month}" (click)="clickhere(month)">
+            <p class="ion-text-nowrap">{{month}}</p>
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="top-btns">
+          <div>
+           <ion-button slot="start"  shape="round" fill="clear" (click)="modelCtrl.dismiss(active)"> 
+            <ion-icon slot="start" name="close-outline"></ion-icon>
+            Clear</ion-button>
+          </div>
+          <div>
+           <ion-button slot="end" shape="round" (click)="apply()">Apply</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+</ion-footer>

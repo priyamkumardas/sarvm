@@ -1,0 +1,13 @@
+{
+    "language": "Marathi",
+    "city": {
+        "delhi": "दिल्ली",
+        "mumbai": "मुंबई"
+    },
+    "system": {
+        "selectPref": "तुमचे प्राधान्य निवडा",
+        "continue": "",
+        "selectCity": "",
+        "proceed": ""
+    }
+}

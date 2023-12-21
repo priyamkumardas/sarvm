@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button slot="start" color="primary" defaultHref="/home" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'notification' | language : 'Notification'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="header">{{'New'|language:'New'}}</div>
+  <ion-list *ngFor="let notifi of notificationItems">
+    <ion-item lines="none">
+      <ion-thumbnail slot="start">
+        <img *ngIf="notifi?.status == 'NEW'" src="assets/icon/ic-recived.svg">
+        <!-- <img *ngIf="notifi?.status == 'REMINDER'" src="assets/icon/ic-bell-notifi.svg"> -->
+      </ion-thumbnail>
+      <ion-label>
+        <strong class="order-id">{{notifi?.message}}</strong>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer class="ion-no-border footer">
+  <app-bottom-tab-view [tabsTextAvailable]="false"></app-bottom-tab-view>
+</ion-footer>

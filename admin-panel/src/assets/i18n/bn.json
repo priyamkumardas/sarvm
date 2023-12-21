@@ -1,0 +1,13 @@
+{
+    "language": "Bangali",
+    "city": {
+        "delhi": "দিল্লি",
+        "mumbai": "মুম্বাই"
+    },
+    "system": {
+        "selectPref": "আপনার পছন্দ নির্বাচন করুন",
+        "continue": "",
+        "selectCity": "",
+        "proceed": ""
+    }
+}

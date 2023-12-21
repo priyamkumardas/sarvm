@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'selectLocation' | language:'Select Location'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h4 class="ion-padding-top ion-padding-start">{{'currentLocation' | language:'Current Location'}}</h4>
+  <ion-list inset="boolean" lines="inset" mode="md" [routerLink]="['/custom-address']" >
+    <ion-item lines="none" style="--padding-start:0px;padding: 0px 0px 10px;">
+      <ion-card style="margin:0px;">
+        <div class="icon"><ion-icon name="locate-outline" size="large"></ion-icon></div>
+        <ion-label class="Text">{{'usingGps' | language:'Useing GPS'}}</ion-label>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <h4 *ngIf="address?.length" class="ion-padding-start">{{'savedAddress' | language:'Saved Address'}}</h4>
+  <ion-list *ngIf="address?.length" inset="boolean" lines="inset" mode="md">
+    <ion-item *ngFor="let data of address" (click)="setGlobalLatLong({'display_name':data.streetAddress+' near '+data.landmark+', '+data.region+', '+data.city+' '+data.state+', '+data.country+ ' '+data.pincode,lat:data.location.latitude,lon:data.location.longitude,addressType:data.addressType})" lines="none" style="--border-width: 0 0 0px 0;--padding-start:0px;padding: 0px 0px 10px;">
+      <ion-card [ngClass]="currentAddress?.lat == data.location.latitude && (currentAddress.display_name == (data.streetAddress+' near '+data.landmark+', '+data.region+', '+data.city+' '+data.state+', '+data.country+ ' '+data.pincode)) || currentAddress.display_name == (data.streetAddress+' near '+data.landmark+' '+data.region+' '+data.city+' '+data.state+' '+data.country+ ' '+data.pincode) ?'active':''" style="margin:0px;">
+        <div class="icon">
+          <ion-icon *ngIf="data.addressType == 'Other'" name="location-outline" size="large"></ion-icon>
+          <ion-icon *ngIf="data.addressType == 'Home'" name="home-outline" size="large"></ion-icon>
+          <ion-icon *ngIf="data.addressType == 'Work'" name="bag-outline" size="large"></ion-icon>
+        </div>
+        <!-- <ion-label class="Text">{{data.addressType}}</ion-label> -->
+        <ion-label class="Text"><span *ngIf="data.addressType == 'Other'">{{'other' | language:'Other'}}<br/></span>
+          <span *ngIf="data.addressType == 'Home'">{{'home' | language:'Home'}}<br/></span>
+          <span *ngIf="data.addressType == 'Work'">{{'work' | language:'Work'}}<br/></span>
+          {{data.streetAddress}} near {{data.landmark}}, {{data.region}}, {{data.city}} {{data.state}}, {{data.country}}, {{data.pincode}}</ion-label>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <h4 *ngIf="recenAddress?.length" class="ion-padding-start">{{'recentSearch' | language:'Recent Search'}}</h4>
+  <ion-list *ngIf="recenAddress?.length" inset="boolean" lines="inset" mode="md">
+    <ion-item *ngFor="let data of recenAddress" (click)="setGlobalLatLong(data)" lines="none" style="--border-width: 0 0 0px 0;--padding-start:0px;padding: 0px 0px 10px;">
+      <ion-card [ngClass]="currentAddress?.lon == data?.lon && currentAddress?.display_name  == data?.display_name ?'active':''" style="margin:0px;">
+        <div class="icon"><ion-icon name="location-outline" size="large"></ion-icon></div>
+        <ion-label class="Text">{{data?.display_name}}</ion-label>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+  <ion-button  mode="ios" *ngIf="userData" style="margin: 10px;" routerLink="/update-address/0" expand="block" shape="round">
+    {{'addNewAddress' | language:'Add New Address'}}
+  </ion-button>
+</ion-content>

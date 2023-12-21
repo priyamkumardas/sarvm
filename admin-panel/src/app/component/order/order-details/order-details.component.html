@@ -1,0 +1,59 @@
+<div class="main-content p-4">
+<div class="card component-card_8">
+<div class="card-body">
+
+  <h5 class="mb-4">Order Details</h5>
+
+  <div class="row">
+
+    <div class="col-xxl-6">
+      <p class="text-muted mb-0"><strong>Order ID :</strong> {{order?.orderID}}</p>
+      <p class="text-muted mb-0"><strong>Invoice Date :</strong> {{order?.delivery?.deliveryDate}}</p>
+    </div>
+
+    <div class="col-xxl-6">
+      <p class="text-muted mb-0"><strong>Payment Mode :</strong> {{order?.payment?.mode}}</p>
+      <p class="text-muted mb-0"><strong>Delivery Date :</strong> {{order?.delivery?.deliveryDate}} | {{order?.delivery?.deliverySlot}}</p>
+      <p class="text-muted mb-0"><strong>Order Status :</strong> {{order?.status}}</p>
+    </div>
+
+    <p class="mt-4"><strong>Delivery Location :</strong> {{order?.delivery?.location.address}}</p>
+
+
+  </div>
+
+
+  <div class="table-responsive ">
+    <table class="table table-bordered mb-4">
+      <thead>
+        <tr>
+          <th *ngFor="let item of orderDetails" class="text-primary">{{item.name}}</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr *ngFor="let item of order?.products; let i=index;" >
+          <td >{{i}}</td>
+          <td>{{item.name}}</td>
+          <td>{{item.unit}} - {{item.soldBy}}</td>
+          <td>{{item.qty}}</td>
+          <td>{{item.price}}</td>
+        </tr>
+
+        <tr>
+          <td colspan="3">&nbsp;</td>
+          <td><strong>Total</strong></td>
+          <td>
+            <span class="badge rounded-pill bg-success"> {{order?.amount}}</span> </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+    </div>
+
+</div>
+</div>

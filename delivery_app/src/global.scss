@@ -1,0 +1,148 @@
+/*
+ * App Global CSS
+ * ----------------------------------------------------------------------------
+ * Put style rules here that you want to apply globally. These styles are for
+ * the entire app and not just one component. Additionally, this file can be
+ * used as an entry point to import other CSS/Sass files to be included in the
+ * output CSS.
+ * For more information on global stylesheets, visit the documentation:
+ * https://ionicframework.com/docs/layout/global-stylesheets
+ */
+
+
+/* Core CSS required for Ionic components to work properly */
+
+@import "~@ionic/angular/css/core.css";
+
+/* Basic CSS for apps built with Ionic */
+
+@import "~@ionic/angular/css/normalize.css";
+@import "~@ionic/angular/css/structure.css";
+@import "~@ionic/angular/css/typography.css";
+@import "~@ionic/angular/css/display.css";
+
+/* Optional CSS utils that can be commented out */
+
+@import "~@ionic/angular/css/padding.css";
+@import "~@ionic/angular/css/float-elements.css";
+@import "~@ionic/angular/css/text-alignment.css";
+@import "~@ionic/angular/css/text-transformation.css";
+@import "~@ionic/angular/css/flex-utils.css";
+.swiper-wrapper {
+    display: inherit;
+}
+
+.my-model-component-css {
+    --width: 100%;
+    --height: 200px;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.DeliveryDayPreference-component-css {
+    --width: 100%;
+    // --height: 60%;
+    --height: 85%;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+        // --border-radius: 20px 20px 0px 0px;
+    }
+}
+
+.delete-qr {
+    --width: 100%;
+    --height: 100%;
+
+    &::part(content) {
+        background-color: transparent !important;
+    }
+}
+
+/* .gst-modal-css {
+    --width: 100%;
+    --height: 100%;
+    &::part(content) {
+        background-color: transparent !important;
+        // position: absolute;
+        // bottom: 0;
+    }
+} */
+
+.schedule-time-component-css {
+    --width: 100%;
+    --height: 34%;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.schedule-calendar-component-css {
+    --width: 100%;
+    --height: 70%;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.schedule-date-component-css{
+    --width: 100%;
+    --height: 45%;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.full-screen-notification {
+    --width: 90%;
+    --height: 98%;
+    &::part(content) {
+        background-color: transparent !important;
+        position: absolute;
+        bottom: 0;
+    }
+}
+
+.cancel-modal-component-css {
+    --width: 340px;
+    --min-width: 320px;
+    --height: fit-content;
+    --border-radius: 6px;
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.5) !important;
+}
+
+.cancel-modal-css {
+    --width: 100%;
+    --background: transparent !important;
+    // --min-width: 320px;
+    // --height: fit-content;
+    // --border-radius: 6px;
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.5) !important;
+}
+
+.gst-modal-css {
+    --width: 100%;
+    --height: 100%;
+    //--backdrop-opacity: var(--ion-backdrop-opacity, 0.4);
+    --backdrop-opacity: var(--ion-backdrop-opacity, 0.32) !important;
+    &::part(content) {
+        background-color: transparent !important;
+        // position: absolute;
+        // bottom: 0;
+    }
+}
+
+.cancel-order-modal {
+    --width: 100%;
+    --background: transparent
+}

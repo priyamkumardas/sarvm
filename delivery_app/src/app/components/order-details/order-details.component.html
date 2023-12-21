@@ -1,0 +1,89 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeAddWeightModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <p>Order #: {{orderData.orderId}}</p>
+    </div>
+
+
+    <div class="container">
+      <div class="user-profile">
+        <div class="img">
+          <div class="profileTxt">
+            <img [src]="orderData?.dropOff?.userImage ? orderData?.dropOff?.userImage : 'assets/icon/gray_user.svg'" alt="" class="product-pic" />
+          </div>
+          <div class="callIcon">
+            <a href="tel:{{orderData?.dropOff?.phoneNumber}}"><img src="assets/icon/ic-call-round-green.svg" alt="call-icon"/></a>
+          </div>
+        </div>
+      </div>
+      <div class="user-details">
+        <div class="info">
+          <!-- <p class="name">{{orderData.dropOff.name}}</p> -->
+          <p class="name">{{orderData?.dropOff?.userName}}</p>
+          <p class="mobile">+91 {{orderData?.dropOff?.phoneNumber}}</p>
+          <!-- <div class="location">
+            <p class="address">Centering text vertically inside a div is a bit more complicated</p>
+          </div> -->
+        </div>
+
+        <div class="payment">
+          <p>{{orderData.orderItemDetails.length}} {{'itemsfor' | language : 'items for'}} <span class="amount">{{orderData.amount | currency:'INR':'symbol':'0.0-2'}}</span></p>
+          <p>Payment : <span>{{orderData?.payment?.paid == true ? 'Paid' : 'Pending'}}</span></p>
+        </div>
+      </div>
+    </div>
+
+    <p class="heading">{{'orderSummary' | language : 'Order Summary'}}</p>
+    <div class="orderSummary">
+      <ion-item *ngFor="let item of orderData?.orderItemDetails" lines="none">
+        <ion-avatar>
+          <img [src]="item.image ? item.image : 'assets/ReferrlImg/noto_wrapped-gift.png'" class="product-img" />
+        </ion-avatar>
+        <ion-label>{{item?.name}} x {{item?.unit ? item?.unit : item?.qty}}
+          <div class="totalPrice">{{item?.qty}} {{item?.soldBy}} <ion-chip *ngIf="item?.required">Mandatory</ion-chip></div>
+        </ion-label>
+        <ion-label class="item-price">{{item?.price | currency:'INR':'symbol':'0.0-2'}}</ion-label>
+      </ion-item>
+      <!-- <div class="completeOrderInfo" *ngFor="let item of orderData?.orderItemDetails">
+        <div class="item-img">
+          <img [src]="item.image ? item.image : 'assets/ReferrlImg/noto_wrapped-gift.png'" class="product-img" />
+        </div>
+        <div class="order-content">
+          <div class="quantity">{{item?.name}} x {{item?.unit ? item?.unit : item?.qty}} </div>
+          <div class="totalPrice">{{item?.qty}} {{item?.soldBy}} <ion-chip *ngIf="item?.required">Mandatory</ion-chip></div>
+        </div>
+        <div class="available-tag">
+          <p>available</p>
+        </div>
+        <div class="item-price">
+          <p>{{item?.price | currency:'INR':'symbol':'0.0-2'}}</p>
+        </div>
+      </div> -->
+    </div>
+    <div class="divider"></div>
+    <div class="amounts">
+      <p class="sum">Order Total</p> 
+      <p class="right-text">{{orderData?.amount | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="amounts">
+      <p class="sum">Delivery Charge</p> 
+      <p class="right-text">{{orderData?.deliveryInfo?.deliveryCharges | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="amounts">
+      <p class="sum">Discount</p> 
+      <p class="right-text">- {{(orderData.discount ? orderData?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="bill-amounts">
+      <p class="sum">Total</p> 
+      <p class="right-text">{{orderData?.amount + (orderData?.deliveryInfo?.deliveryCharges ? orderData?.deliveryInfo?.deliveryCharges : 0) - (orderData.discount ? orderData?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="amounts ion-padding-bottom">
+      <p class="sum">Order Weight</p> 
+      <p class="right-text">{{orderData.orderWeight | number: '0.0-2'}} KG</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p>{{'addInstructions'|language:'Add Instructions'}}</p>
+    <div class="method">
+      <ion-textarea #instruction placeholder="{{'TypeSomethingHere'|language:'Type Something Here'}}" [cols]="5"></ion-textarea>
+      <ion-button (click)="modelCtrl.dismiss(instruction.value)" fill="solid" color="primary" shape="round" >
+        {{'submit'|language:'Submit'}}
+      </ion-button>
+    </div>
+  </ion-card>
+</ion-footer>

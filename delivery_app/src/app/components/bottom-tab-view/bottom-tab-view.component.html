@@ -1,0 +1,21 @@
+<ion-tab-bar slot="bottom">
+  <ion-tab-button layout="icon-top" (click)="orderPageNavigation('home')">
+    <ion-icon  src="assets/icon/LA-LOGO.svg"></ion-icon>
+    <ion-label [ngClass]="checkRouter === '/home' ? 'active': ''">{{'home' | language : 'Home'}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button layout="icon-top" [selected]="checkRouter === '/payment-insight' ? true : false"
+    (click)="orderPageNavigation('payment-insight')">
+    <ion-icon color="dark" src="assets/icon/ic-payments.svg"></ion-icon>
+    <ion-label>{{'Payments'|language:'Payments'}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button layout="icon-top" [selected]="checkRouter === '/trip-history' ? true : false"
+    (click)="orderPageNavigation('trip-history')">
+    <ion-icon color="dark" src="assets/icon/ic-history.svg"></ion-icon>
+    <ion-label>{{'History' | language : 'History'}}</ion-label>
+  </ion-tab-button>
+  <ion-tab-button layout="icon-top" [selected]="checkRouter === '/notification' ? true : false"
+    (click)="orderPageNavigation('notification')">
+    <ion-icon color="dark" src="assets/icon/ic-bell.svg"></ion-icon>
+    <ion-label>{{'notification' | language : 'Notification'}}</ion-label>
+  </ion-tab-button>
+</ion-tab-bar>

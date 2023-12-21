@@ -1,0 +1,66 @@
+<ion-header class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button mode="md" defaultHref="/selected-language"></ion-back-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-grid class="center-grid" >
+   <ion-row class="ion-padding-top" >
+    <ion-col size="12">
+        <div class="ion-text-center">
+            <ion-img class="img" src="assets/images/basket.png" alt="logo"></ion-img>
+        </div>
+    </ion-col>
+   </ion-row>
+        <ion-label>
+            <p class="ion-text-center">
+                {{'entermobilenumberforotpverification' | language : 'Enter Mobile for OTP Verification'}}
+            </p>
+        </ion-label>
+<ion-row class="ion-margin-top">
+    <ion-col size="12">
+        <ion-item fill="" shape="round" color="light" lines="full">
+            <ion-input class="placeh" style="width: 10px" slot="start" placeholder="+91" maxlength="4" [readonly]="true"
+                value="+91"></ion-input>
+            <ion-input class="mob" #inputinfo placeholder="{{'enterMobilenumber' | language : 'Enter Mobile Number'}}"
+                inputmode="tel" value="number" type="text" minlength="10" class="inputField" maxlength="10"
+                (ionInput)="isNumberKey($event)" (ionChange)="validatePhone($event)"
+                [(ngModel)]="phoneNumber"></ion-input>
+            <ion-icon slot="end" *ngIf="invalidPhone" name="checkmark-circle-sharp" style="color: gray"></ion-icon>
+            <ion-icon slot="end" *ngIf="!invalidPhone" name="checkmark-circle-sharp" color="primary"></ion-icon>
+        </ion-item>
+    </ion-col>
+</ion-row>
+       
+        <ion-row class="ion-margin-top">
+            <ion-col>
+                <ion-button shape="round" strong="true" mode="md" expand="block" size="large" fill="solid"
+                    [disabled]="invalidPhone" (click)="sendNumberForOtp(inputinfo)">{{'next' | language :
+                    'Next'}}</ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-text>
+            <p class="term-link"> {{'byClickingIacceptthe'|language:'By clicking, I accept the'}} <a (click)="openUrl('https://sarvm.ai/terms&conditions.html')"> {{'terms&Conditions' | language : 'Terms
+                & Conditions'}}</a> {{'and' | language : 'and'}} <a (click)="openUrl('https://sarvm.ai/sarvm-privacy-policy.html')"> {{'privacyPolicy' | language :
+                    'Privacy Policy'}}</a>.
+                <!-- <a (click)="openUrl('https://sarvm.ai/terms&conditions.html')"> {{'terms&Conditions' | language : 'Terms
+                    & Conditions'}}</a><span>{{'and' | language : 'and'}}</span> <a
+                    (click)="openUrl('https://sarvm.ai/sarvm-privacy-policy.html')"> {{'privacyPolicy' | language :
+                    'Privacy Policy'}}</a> -->
+            </p>
+        </ion-text>
+   
+</ion-grid>
+</ion-content>
+<ion-footer class="ion-no-border">
+    <ion-toolbar>
+        <ion-buttons slot="end" style="margin-right: 2em; margin-bottom: 2em;">
+            
+            <ion-button routerDirection="root"  mode="ios" color="medium" style="margin: 0 !important;"
+                routerLink="/tabs/home">{{'skip' | language : 'Skip'}}</ion-button>
+        <ion-icon name="chevron-forward-outline"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-footer>

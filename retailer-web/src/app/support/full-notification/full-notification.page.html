@@ -1,0 +1,61 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>full-notification</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content style="height: 98%;">
+  <div class="orderDetails">
+    <p class="orderId">{{'order' | language : 'Order #'}}: {{order?.orderID | slice:0:14}}...</p>
+    <div class="profile">
+      <div class="img">
+        <img *ngIf="order?.user?.image != ''"  src="{{order?.user?.image}}" alt="profilePic" class="profilePic" />
+        <div *ngIf="order?.user?.image == ''" class="profileTxt">
+          {{getCharector(order.user.name)}} 
+        </div>
+        <a href="tel:{{order?.user?.phone}}"><img src="\assets\images\Group 7995.svg" alt="call-icon" class="callIcon" /></a>
+      </div>
+      <div class="info">
+        <p class="name">{{order?.user?.name}}</p>
+        <p class="stock">{{order?.user?.phone}}</p>
+        <div class="location">
+          <ion-icon name="location-outline"></ion-icon>
+          <p class="address">{{order?.delivery?.location?.address | slice:0:20}}...</p>
+        </div>
+        <p class="items">{{order?.products.length}} {{'itemsfor' | language : 'items for'}} <span class="amount">{{order?.amount}}</span></p>
+      </div>
+      <div class="box">
+        <div class="pickup">
+          <img src="\assets\images\Group (2).svg" alt="pickup" />
+          <p class="status">{{order?.delivery?.mode}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="orderSummary">
+    <p class="heading">{{'orderSummary' | language : 'Order Summary'}}</p>
+    <div class="container">
+      <div class="completeOrderInfo" *ngFor="let item of order?.products">
+        <img class="product-img" src="{{item?.image}}" alt="">
+        <div class="quantity">
+          <p class="product">{{item?.name | textTruncate : 15}} {{" X " + item?.qty}}</p>
+          <p class="weight"> {{item?.qty}} {{item?.unit ? item?.unit : item?.soldBy}}</p>
+        </div>
+        <p class="totalPrice">{{item?.price | currency:'INR':true :'0.0-2'}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="bill">
+    <p class="sum">{{'orderTotal' | language : 'Order Total'}}</p>
+    <p class="totalSum">{{order?.amount |  currency:'INR':true :'0.0-2'}}</p>
+  </div>
+
+  <div class="instructions-view" *ngIf="order?.instruction">
+    <p class="instruct-title">Delivery Instructions</p>
+    <ion-label class="instruct-detials">
+      {{order?.instruction}}
+    </ion-label>
+  </div>
+</ion-content>

@@ -1,0 +1,412 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin" (click)="onBack()">
+      <ion-back-button slot="start" color="primary" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'Kyc' | language : 'KYC'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment mode="md" value="aadharCard" scrollable="true" [(ngModel)]="segment"
+    (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="aadharCard">
+      <ion-label>{{'AadharCard' | language : 'Aadhar Card'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="panCard">
+      <ion-label>{{'PanCard' | language : 'PAN Card'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="policeVerification">
+      <ion-label>{{'PoliceVerification' | language : 'Police Verification'}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <form [formGroup]="kycForm" (ngSubmit)="updateOrAdd ? updateKYCDetails() : submitForm()">
+    <div *ngIf="segment === 'aadharCard'" class="segment">
+      <div class="documentInput" (click)="chooseImage('AADHAR')">
+        <ng-container>
+          <img [src]="aadharImage ? aadharImage: '/assets/icon/ic-vehicle-licence.svg'" alt="" class="doc-img" />
+          <div class="labels" *ngIf="!aadharImage">
+            <label for="document"><u>{{'uploadAdhaarCard' | language : 'Upload Adhaar Card'}}</u><span
+              id="star">*</span></label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="aadharImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('aadhar')">
+            {{'re-upload' | language :'Re-upload '}}</ion-button>
+        </div>
+        <!-- <p *ngIf="aadharUploadPercent != 100">Uploading - {{aadharUploadPercent}}% Complete</p> -->
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'AadharCardNo.'|language:'Aadhar Card No.'}}</ion-label>
+              <ion-input type="tel" [(ngModel)]="kycUserInfo.aadharCardNumber" formControlName="aadharCardNumber"
+              id="aadharCardNumber"  minlength="12" maxlength="12" (keypress)="onlyNumbers($event)"></ion-input>
+            </ion-item>
+            <!-- <ion-input type="tel" [(ngModel)]="kycUserInfo.aadharCardNumber" formControlName="aadharCardNumber"
+              id="aadharCardNumber" class="input" minlength="12" maxlength="12" (keypress)="onlyNumbers($event)"></ion-input>
+            <label for="aadharCardNumber" class="label">{{'AadharCardNo.'|language:'Aadhar Card No.'}}</label> -->
+          </ion-col>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'name' | language : 'Name'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.name" id="name" formControlName="name" 
+              (keypress)="onKeyPress($event)"></ion-input>
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.name" id="name" formControlName="name" class="input"
+              (keypress)="onKeyPress($event)"></ion-input>
+            <label for="name" class="label">{{'name' | language : 'Name'}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dob" class="inputDiff" (click)="openDateSelectModal('kycform')">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <label for="dob" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'dob'|language:'DOB'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt"></ion-input>
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input> -->
+            <ion-modal trigger="dateFilt" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'kycform'" [date_info]="dateCondition"
+                      [value]="defaultDate" [date_format]="format" (datePickerValue)="openDateSelectModal($event)">
+                  </app-date-time-picker>
+              </ng-template>
+          </ion-modal>
+          <!-- <label for="dob" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+          </ion-col>
+
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'locality/area'|language:'Locality/Area'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="locality" class="labelDiff">{{'locality/area'|language:'Locality/Area'}}<span id="star">*</span></label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'street'|language:'Street'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input> 
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="street" class="labelDiff">{{'street'|language:'Street'}}</label> -->
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'city'|language:'City '}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+              (keypress)="restrictSpecialCharacters($event)"></ion-input>
+              
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="city" class="labelDiff">{{'city'|language:'City '}}</label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.state" formControlName="state" id="state"
+              class="inputDiff"></ion-input> -->
+              <ion-item fill="outline" shape="round" class="inputfield">
+                <ion-label position="floating">{{'state'|language:'State'}}</ion-label>
+            <ion-select placeholder="" mode="ios" [(ngModel)]="kycUserInfo.state" formControlName="state" id="state">
+              <ion-select-option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</ion-select-option>
+            </ion-select>
+           
+              </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'pincode'|language:'Pin Code '}}</ion-label>
+              <ion-input  type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode" id="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" 
+              (keypress)="keyPressNumbers($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode" id="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" class="inputDiff"
+              (keypress)="keyPressNumbers($event)"></ion-input>
+            <label for="pinCode" class="labelDiff">{{'pincode'|language:'Pin Code '}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngIf="segment === 'panCard'" class="segment">
+      <div class="documentInput" (click)="chooseImage('PAN')">
+        <ng-container>
+          <img [src]="panImage ? panImage: '/assets/icon/ic-vehicle-licence.svg'" alt="" class="doc-img" />
+          <div class="labels" *ngIf="!panImage">
+            <label for="document"><u>{{'uploadPanCard' | language : 'Upload PAN Card'}}</u><span
+              id="star">*</span></label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="panImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('pan')">
+            {{'re-upload' | language :'Re-Upload'}}</ion-button>
+        </div>
+        <!-- <p *ngIf="panUploadPercent != 100">Uploading - {{panUploadPercent}}% Complete</p> -->
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'panCardNo'|language:'PAN Card No.'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.panCardNumber" formControlName="panCardNumber"
+              id="panCardNumber"  pattern="^[A-Za-z]{5}[0-9]{4}[A-Za-z]$"  (keypress)="restrictSpecialChar($event)"
+              minlength="10" maxlength="10" (ionChange)="setFilteredItems($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.panCardNumber" formControlName="panCardNumber"
+              id="panCardNumber" class="input" pattern="^[A-Za-z]{5}[0-9]{4}[A-Za-z]$"  (keypress)="restrictSpecialChar($event)"
+              minlength="10" maxlength="10" (ionChange)="setFilteredItems($event)"></ion-input>
+            <label for="panCardNumber" class="label">{{'panCardNo'|language:'PAN Card No.'}}</label> -->
+          </ion-col>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'name' | language : 'Name'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.name" id="name" formControlName="name" 
+              (keypress)="onKeyPress($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.name" id="name" formControlName="name" class="input"
+              (keypress)="onKeyPress($event)"></ion-input>
+            <label for="name" class="label">{{'name' | language : 'Name'}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" class="inputDiff" (click)="openDateSelectModal('kycform')">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <label for="shopNumber" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'dob'|language:'DOB'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" ></ion-input>  
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input> -->
+            <ion-modal trigger="dateFilt" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'kycform'" [date_info]="dateCondition"
+                      [value]="defaultDate" [date_format]="format" (datePickerValue)="openDateSelectModal($event)">
+                  </app-date-time-picker>
+              </ng-template>
+          </ion-modal>
+          <!-- <label for="shopNumber" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'locality/area'|language:'Locality/Area'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+              (keypress)="restrictSpecialCharacters($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="locality" class="labelDiff">{{'locality/area'|language:'Locality/Area'}}<span id="star">*</span></label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'street'|language:'Street'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="street" class="labelDiff">{{'street'|language:'Street'}}</label> -->
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'city'|language:'City '}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="city" class="labelDiff">{{'city'|language:'City '}}</label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.state" formControlName="state" id="state"
+              class="inputDiff"></ion-input> -->
+              <ion-item fill="outline" shape="round" class="inputfield"><ion-label position="floating">{{'state'|language:'State'}}</ion-label>
+            <ion-select placeholder="" mode="ios"  [(ngModel)]="kycUserInfo.state" formControlName="state" id="state">
+              <ion-select-option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</ion-select-option>
+            </ion-select>
+          </ion-item>
+            <!-- <label for="state" class="labelDiff">{{'state'|language:'State'}}</label> -->
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'pincode'|language:'Pin Code '}}</ion-label>
+              <ion-input  type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" 
+              (keypress)="keyPressNumbers($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" class="inputDiff"
+              (keypress)="keyPressNumbers($event)"></ion-input>
+            <label for="pinCode" class="labelDiff">{{'pincode'|language:'Pin Code '}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div *ngIf="segment === 'policeVerification'" class="segment">
+      <div class="documentInput" (click)="chooseImage('POLICEVERIFICATION')">
+        <ng-container>
+          <img [src]="policeImage ? policeImage: '/assets/icon/ic-vehicle-licence.svg'" alt="" class="doc-img" />
+          <div class="labels" *ngIf="!policeImage">
+            <label for="document"><u>{{'UploadPoliceVerificationCard' | language : 'Upload Police Verification Card'}}</u><span
+              id="star">*</span></label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="policeImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('police')">{{'re-upload' | language :
+            'Re-Upload'}}</ion-button>
+        </div>
+        <!-- <p *ngIf="policeUploadPercent != 100">Uploading - {{policeUploadPercent}}% Complete</p> -->
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'PoliceStationName'|language:'Police Station Name'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.policeStationName" formControlName="policeStationName"
+              id="policeStationName"  (keypress)="restrictSpecialCharacters($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.policeStationName" formControlName="policeStationName"
+              id="policeStationName" class="input" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="policeStationName" class="label">{{'PoliceStationName'|language:'Police Station Name'}}</label> -->
+          </ion-col>
+          <ion-col size="12">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'fullName' | language : 'Full Name'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.fullName" id="fullName" formControlName="fullName"
+               (keypress)="onKeyPress($event)"></ion-input>  
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.fullName" id="fullName" formControlName="fullName"
+              class="input" (keypress)="onKeyPress($event)"></ion-input>
+            <label for="fullName" class="label">
+              {{'fullName' | language : 'Full Name'}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dob" class="inputDiff" (click)="openDateSelectModal('kycform')">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <label for="shopNumber" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'dob'|language:'DOB'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" ></ion-input>  
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.dob" [readonly]="true" formControlName="dob" id="dateFilt" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input> -->
+            <ion-modal trigger="dateFilt" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'kycform'" [date_info]="dateCondition"
+                      [value]="defaultDate" [date_format]="format" (datePickerValue)="openDateSelectModal($event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <!-- <label for="shopNumber" class="labelDiff">{{'dob'|language:'DOB'}}</label> -->
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'locality/area'|language:'Locality/Area'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>   
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.locality" formControlName="locality" id="locality"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="locality" class="labelDiff">{{'locality/area'|language:'Locality/Area'}} <span id="star">*</span></label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'street'|language:'Street'}}</ion-label>
+              <ion-input  type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>   
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.street" formControlName="street" id="street"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="street" class="labelDiff">{{'street'|language:'Street'}}</label> -->
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'city'|language:'City '}}</ion-label>
+              <ion-input type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+               (keypress)="restrictSpecialCharacters($event)"></ion-input>   
+            </ion-item>
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.city" formControlName="city" id="city"
+              class="inputDiff" (keypress)="restrictSpecialCharacters($event)"></ion-input>
+            <label for="city" class="labelDiff">{{'city'|language:'City '}}</label> -->
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="kycUserInfo.state" formControlName="state" id="state"
+              class="inputDiff"></ion-input> -->
+              <ion-item fill="outline" shape="round" class="inputfield">
+                <ion-label position="floating">{{'state'|language:'State'}}</ion-label>
+            <ion-select placeholder="" mode="ios"  [(ngModel)]="kycUserInfo.state" formControlName="state" id="state">
+              <ion-select-option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</ion-select-option>
+            </ion-select>
+              </ion-item>
+          </ion-col>
+          <ion-col size="6">
+            <ion-item fill="outline" shape="round" class="inputfield">
+              <ion-label position="floating">{{'pincode'|language:'Pin Code '}}</ion-label>
+              <ion-input type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode" id="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" 
+              (keypress)="keyPressNumbers($event)"></ion-input>   
+            </ion-item>
+            <!-- <ion-input type="tel" [(ngModel)]="kycUserInfo.pinCode" formControlName="pinCode" id="pinCode"
+              inputmode="number" id="pincode" minlength="6" maxlength="6" class="inputDiff"
+              (keypress)="keyPressNumbers($event)"></ion-input>
+            <label for="pinCode" class="labelDiff">{{'pincode'|language:'Pin Code '}}</label> -->
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+
+    <div class="kyc-footer">
+      <div class="footer">
+        <ion-button mode="ios" fill="clear" class="skip btn" *ngIf="!updateOrAdd" (click)="ConfirmKYCSkip()">
+          {{'skip'|language:'Skip'}}
+        </ion-button>
+        <ion-button mode="ios" fill="clear" class="save btn" type="submit">
+          {{ !updateOrAdd ? ('save&Continue'|language:'Save & Continue') : ('save'|language:'Save')}}
+        </ion-button>
+      </div>
+    </div>
+  </form>
+</ion-content>

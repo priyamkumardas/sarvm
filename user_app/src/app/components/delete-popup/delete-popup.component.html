@@ -1,0 +1,16 @@
+<div class="cont">
+  <div class="imgTop">
+    <img src="./assets/icon/sad.svg"/>
+  </div>
+  <div class="msg">
+    <p id="firstMsg">{{'deleteaddress'|language:'Delete Address'}}</p>
+    <p>{{'areyousure?'|language:'Are You Sure?'}}</p>
+  </div>
+  <div class="btns">
+    <ion-button fill="clear" expand="full" class="no" (click)="viewNo()">
+     <ion-icon slot="start" src="../../../../assets/icon/thumbs-down.svg"></ion-icon>{{'no'|language:'No'}}</ion-button>
+
+    <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+      <ion-icon slot="start" src="../../../../assets/icon/thumbs-up.svg"></ion-icon>{{'yes'|language:'Yes'}}</ion-button>
+  </div>
+</div>

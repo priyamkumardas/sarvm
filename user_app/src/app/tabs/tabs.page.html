@@ -1,0 +1,47 @@
+<ion-tabs (ionTabsDidChange)="changeActiveTab($event)">
+  <!-- Tab bar -->
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home">
+      <ion-icon *ngIf="selectedTab != 'home'" src="assets/icon/inactive-home.svg" ></ion-icon>
+      <ion-icon *ngIf="selectedTab == 'home'" src="assets/icon/home.svg" ></ion-icon>
+      <ion-label>{{'home' | language:'Home'}}</ion-label>
+      <!-- <ion-label class="Text"><span *ngIf="data.addressType == 'Home'">{{'home' | language:'Home'}}<br/></span> -->
+    </ion-tab-button>
+    <ion-tab-button tab="favourites">
+      <ion-icon name="heart-outline"></ion-icon>
+      <ion-label>{{'favoruites'| language:'Favourites'}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="active-order">
+      <ion-icon name="bag-outline"></ion-icon>
+      <ion-label>{{'orders'|language:'Orders'}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-label>{{'notification'|language:'Notification'}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<!-- <ion-tabs *ngIf="router.url.includes('productlisting')">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="home" [selected]="checkRouter === '/productlisting' ? true : false" (click)="orderPageNavigation('home')">
+      <ion-icon src="assets/icon/inactive-home.svg" ></ion-icon>
+      <ion-label>Home</ion-label>
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="heart-outline"></ion-icon>
+      <ion-label>Favourites</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()">
+      <ion-icon name="notifications-outline"></ion-icon>
+      <ion-label>Notification</ion-label>
+
+    </ion-tab-button>
+    <ion-tab-button (click)="commonService.featureNotAvailable()" >
+      <ion-icon name="volume-medium-outline"></ion-icon>
+      <ion-label>Voice</ion-label>
+
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs> -->

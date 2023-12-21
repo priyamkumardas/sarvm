@@ -1,0 +1,78 @@
+ion-modal.mySocietyModal {
+    --width: 100%;
+
+    &::part(content) {
+        background-color: transparent !important;
+    }
+
+    ion-footer {
+        bottom: 0px;
+        position: absolute;
+        width: -webkit-fill-available;
+        &::before {
+            background-image: none;
+        }
+        .CrossIcon {
+            height: 48px;
+            width: 48px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            color: #000;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 30px;
+            border-radius: 100%;
+            background: #FBFBFB;
+        }
+
+        .options {
+            background: white;
+            border-radius: 20px 21px 0px 0px;
+            width: -webkit-fill-available;
+
+            .header {
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: 600;
+                font-size: 20px;
+                line-height: 30px;
+                color: #4F5052;
+                margin: 0;
+                padding: 20px;
+                text-align: center;
+            }
+
+            .society {
+                margin: 0px 16px 0px 16px;
+
+                .btn {
+                    height: 80px;
+                    --background: linear-gradient(105.49deg, rgba(249, 207, 86, 0.52) 4.02%, #F9CF56 100%);
+                    --background-focused: linear-gradient(105.49deg, rgba(249, 207, 86, 0.52) 4.02%, #F9CF56 100%);                    
+                    --background-activated: linear-gradient(105.49deg, rgba(249, 207, 86, 0.52) 4.02%, #F9CF56 100%);                    
+                    --border-radius: 24px;
+                    width: 100%;
+
+                    ion-icon {
+                        color: #4F5052;
+                        font-size: 40px;
+                        --ionicon-stroke-width: 50px;
+                    }
+                }
+
+                .title {
+                    height: 21px;
+                    font-family: 'Poppins';
+                    font-style: normal;
+                    font-weight: 500;
+                    font-size: 14px;
+                    line-height: 21px;
+                    color: #4F5052;
+                }
+            }
+        }
+    }
+
+}

@@ -1,0 +1,44 @@
+
+<ion-footer>
+  <div class="CrossIcon" (click) = "closeGstModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p class="ion-text-center">Update GSTIN</p>
+    <div class="contentDiv">
+      <ion-item fill="outline" shape="round" class="ion-margin-bottom" >
+        <ion-label position="floating">GST Number</ion-label>
+        <ion-input type="text" id="gstNo"  minlength="15" maxlength="15" [(ngModel)]="gstNo"></ion-input>
+      </ion-item>
+        <ion-button mode="ios" fill="solid" shape="round" expand="block" (click)="ConfirmGstNumber()">Continue</ion-button>
+      </div>
+  </ion-card>
+  </ion-footer>
+
+  <!-- <ion-item fill="outline" shape="round">
+    <ion-label position="floating">GST Number</ion-label>
+    <ion-input type="text" id="gstNo"  minlength="15" maxlength="15" [(ngModel)]="gstNo"></ion-input>
+  </ion-item>
+  <div>
+
+  </div> -->
+  <!-- <div class="inputBox"> -->
+
+    <!-- <ion-input type="text" id="gstNo" placeholder="GST Number" minlength="15" maxlength="15" [(ngModel)]="gstNo"></ion-input> -->
+
+      <!-- <ion-label for="gstNo">GSTIN Number</ion-label> -->
+      <!-- <img src="\assets\images\lens.svg" alt="lens" class="lens"> -->
+  <!-- </div> -->
+  <!-- <ion-row [ngClass] = "isModal ? ' ': 'active'">
+    <ion-col size="6" *ngIf = "isModal">
+      <ion-button mode="ios" fill="outline" shape="round" expand="block" (click)="skipped()">Skip</ion-button>
+    </ion-col>
+    <ion-col size="6">
+      <ion-button mode="ios" fill="solid" shape="round" expand="block" (click)="ConfirmGstNumber()">Continue</ion-button>
+    </ion-col>
+  </ion-row>
+</ion-grid> -->
+  
+<!-- </div>  -->
+
+<!-- </div> -->

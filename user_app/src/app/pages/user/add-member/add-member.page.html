@@ -1,0 +1,104 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+
+			<ion-back-button  mode="md" defaultHref="/profile"></ion-back-button>
+		</ion-buttons>
+
+
+    <ion-title>{{'addMember' | language:'Addmember'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="container">
+    <div class="outer" [ngStyle]="{'background-image': 'url(' + photo + ')'}">
+        <div class="inner" (click)="openSelectImageModal()">
+          <ion-icon name="camera-outline" class="camera-icon"></ion-icon>
+        </div>
+     </div>
+  </div>
+
+
+  <!-- <div class="container" style="display:flex; justify-content:center; margin:8%">
+    <label for="fileInput">
+      <img [src]="url ? url : '../../assets/images/profile.png'" alt="loading" class="profile_img" />
+      <input id="fileInput" style="display:none" type='file' accept="image/x-png, image/gif, image/jpeg" (change)="onSelectFile($event)"  />
+    </label>
+    <ion-img button id="pic" src="../../assets/images/change.svg" alt="" class="changepic" (click)="openSelectImageModal()"></ion-img>
+  </div> -->
+
+    <ion-img button id="pic" src="../../assets/images/change.svg" alt="" class="changepic"></ion-img>
+
+  <!-- </div > -->
+
+  <!-- forms  entering details -->
+
+  <div [formGroup]="form">
+
+
+    <!-- Name validation -->
+
+    <div class="box">
+      <ion-card>
+        <label for="name">{{'name' | language:'Name'}}</label>
+        <input placeholder="Name" formControlName="name" id="name">
+      </ion-card>
+      <div *ngIf="f.name.touched && f.name.invalid">
+        <div class ="hidden" *ngIf="f.name.errors.required">Name is required.</div>
+        <div class ="hidden" *ngIf="f.name.errors.pattern">Only alphabets allowed.</div>
+      </div>
+    </div>
+    <!-- number validation -->
+
+    <!-- number validation -->
+    <div class="box">
+      <ion-card>
+        <label for="mobileNumber">{{'mobileNumber' | language:'Mobile Number'}}</label>
+        <input placeholder="Mobile number" formControlName="mobileNumber" id="mobileNumber">
+      </ion-card>
+      <div *ngIf="f.mobileNumber.touched && f.mobileNumber.invalid" >
+        <div class ="hidden" *ngIf="f.mobileNumber.errors.required">Mobile Number is required.</div>
+        <div class ="hidden" *ngIf="f.mobileNumber.errors.pattern">Please, Enter 10 digit Mobile Number.</div>
+      </div>
+    </div>
+
+    <!-- relation validation -->
+
+    <div class="box">
+      <ion-card>
+        <label for="relation">{{'relation' | language:'Relation'}}</label>
+        <input placeholder="Relation" formControlName="relation" id="relation">
+      </ion-card>
+
+      <div *ngIf="f.relation.touched && f.relation.invalid">
+        <div class ="hidden" *ngIf="f.relation.errors.required">Relation is required.</div>
+        <div class ="hidden" *ngIf="f.relation.errors.pattern">Only alphabets allowed.</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div *ngIf = "form.valid && flag">
+    <div class="hidden">Please, Upload photo.</div>
+  </div>
+
+  <ion-button [disabled]="!form.valid || flag "  color ="primary" (click) = "otpBoxModal()">  Add </ion-button>
+
+</ion-content>
+
+  <!-- <ion-img src={{profileURL}}></ion-img> -->
+
+  <!-- <ion-fab vertical="bottom" horizontal="left" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery(0)">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button (click)="addPhotoToGallery(1)">
+      <ion-icon name="camera"></ion-icon>
+    </ion-fab-button>
+  </ion-fab> -->
+
+

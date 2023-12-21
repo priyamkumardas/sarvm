@@ -1,0 +1,159 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="md" class="subHeader">
+    <ion-title class="modal-title">I'm Selling</ion-title>
+    <!-- Search -->
+    <ion-searchbar search-icon="search-outline" type="text" mode="md" id="myInput" (ionChange)="searchFunction()"
+    [(ngModel)]="searchLang" placeholder="{{'Searchbyfruitscategory' | language : 'Search by category'}}"></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid class="modal-grid">
+    <!-- Categories -->
+    <ion-row>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4"  
+      *ngFor="let category of searchLang?categories:masterCategoryArray" >
+      <ion-card class="ion-card-modal" mode="ios">
+        <span>
+          <ion-checkbox class="custom-checkbox"  id="{{category?.name}}" (click)="chooseCategory(category)"
+                [(ngModel)]="category.checked" mode="md"></ion-checkbox>
+              </span>
+              <div (click)="category.checked = !category.checked;chooseCategory(category)" >
+                  <img class="productimage" [src]="category?.image"/>
+                  <ion-card-header>
+                    <ion-card-title>{{category?.name}}</ion-card-title>
+                  </ion-card-header>
+                  
+              </div>
+             
+        
+      </ion-card>
+    </ion-col>
+      <!-- <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="/assets/image/fishes.svg" />
+          <ion-card-header>
+            <ion-card-title>Fish</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Restaurant.svg" />
+          <ion-card-header>
+            <ion-card-title>Restaurant</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Dairy.svg" />
+          <ion-card-header>
+            <ion-card-title>Dairy</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Flowers.svg" />
+          <ion-card-header>
+            <ion-card-title>Flowers</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="./../../../../assets/image/Bakery.svg" />
+          <ion-card-header>
+            <ion-card-title>Bakery</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/fruit.svg" />
+          <ion-card-header>
+            <ion-card-title>Fruits</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Meat.svg" />
+          <ion-card-header>
+            <ion-card-title>Meat</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span class="span">
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/groceries.svg" />
+          <ion-card-header>
+            <ion-card-title>Grocery</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Sweets.svg" />
+          <ion-card-header>
+            <ion-card-title>Sweets</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/Pann.svg" />
+          <ion-card-header>
+            <ion-card-title>Paan</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+      <ion-col size="6" size-sm="4" size-md="4" size-lg="4">
+        <ion-card class="ion-card-modal">
+          <span>
+            <ion-checkbox class="custom-checkbox" slot="end" mode="md"></ion-checkbox>
+          </span>
+          <img class="productimage" src="../../../../assets/image/kalasha 1.svg" />
+          <ion-card-header>
+            <ion-card-title>Pooja</ion-card-title>
+          </ion-card-header>
+        </ion-card>
+      </ion-col> -->
+    </ion-row>
+  </ion-grid>
+</ion-content>
+<ion-footer mode="ios">
+  <ion-toolbar>
+    <ion-button size="large" expand="block" shape="round" (click)="navigate()">{{'continue' | language : 'Continue'}}</ion-button>
+  </ion-toolbar>
+</ion-footer>

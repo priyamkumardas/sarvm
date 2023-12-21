@@ -1,0 +1,12 @@
+<ion-content [fullscreen]="true" [style.--background]="'transparent'">
+  <div class="icon">
+    <ion-icon name="close-outline" size="large" (click)="goBack()"></ion-icon>
+  </div>
+  <div class="scan-box">
+  </div>
+  <div class="text">
+    <ion-text>{{'PleasescanthereferralQRcode'|language:'Please scan the referral QR code'}}</ion-text>
+  </div>
+  <ion-button style="margin: 0 !important;position: absolute;bottom: 10px;color: #fff;right: 10px;" mode="ios" color="primary" (click)="toOtp()">Skip<ion-icon name="chevron-forward-outline"></ion-icon>
+  </ion-button>
+</ion-content>

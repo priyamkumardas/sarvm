@@ -1,0 +1,105 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="aid == '0'">{{'AddAddress' | language:'Add Address'}}</ion-title>
+    <ion-title *ngIf="aid != '0'">{{'editAddress' | language:'Edit Address'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-progress-bar *ngIf="!commonService.hasCurrentLocation && connected" type="indeterminate"></ion-progress-bar>
+  <app-search *ngIf="connected" (searchOutput)="getcurrent = true;searchAddress($event)"></app-search>
+  <app-map-component [customeclass]="'add'" [isMarkerMoveable]="true" *ngIf="location.lat && connected" [latlng]="location" (locationChange)="getAddress($event)"></app-map-component>
+  <div *ngIf="!connected" class="error-img"><img src="/assets/images/internet_error.svg" alt=""></div>
+  <div class="location" (click)="getcurrent = true;getLocation()">
+    <ion-icon name="locate-outline"></ion-icon>Use current location
+  </div>
+  <div *ngIf="connected" class="buttonCol">
+    <div *ngIf="formatted_address" class="currentAddress"><ion-icon name="location-outline" size="large"></ion-icon><p>{{formatted_address}}</p></div>
+    <!-- <h2>{{'editAddress' | language:'Edit Address'}}</h2> -->
+    <form (ngSubmit)="f.form.valid && (aid != '0'?editAddress():addAddress())" #f="ngForm">
+      <ion-input id="clickButton" (click)="autoClickfunction()" style="visibility: hidden;position: absolute;"></ion-input>
+        <!-- <div class="addArea">
+        <ion-label class="inputlabel">
+          <ion-text color="dark" >
+            <p>{{'pincode' | language:'Pincode'}}</p>
+          </ion-text>
+          <ion-input type="text" pattern="\d*" maxlength="6" [(ngModel)]="form.pincode" (keyup)="getFormPostalCode($event)" #pincode="ngModel" name="pincode" required></ion-input>
+        </ion-label>
+      </div>
+      <ion-label class="error" *ngIf="f.submitted && pincode.invalid">{{'PleaseEnterPincode' | language:'Please Enter Pincode'}}</ion-label> -->
+      <div class="addArea">
+        <ion-label class="inputlabel">
+          <ion-text color="dark">
+            <p>{{'House/Flat/Blockno.' | language:'House/Flat/Block no.'}}</p>
+          </ion-text>
+          <ion-input [(ngModel)]="form.streetAddress" #streetAddress="ngModel" name="streetAddress" required type="text"></ion-input>
+        </ion-label>
+      </div>
+      <ion-label class="error" *ngIf="f.submitted && streetAddress.invalid">{{'PleaseEnterHouse/Flat/Blockno' | language:'Please Enter House/flat/Block no'}}</ion-label>
+      <div class="addArea">
+        <ion-label class="inputlabel">
+          <ion-text color="dark">
+            <p>{{'Apartment/Road/Area' | language:'Apartment/Road/Area'}}</p>
+          </ion-text>
+          <ion-input type="text" [(ngModel)]="form.locality" #locality="ngModel" name="locality" required></ion-input>
+        </ion-label>
+      </div>
+      <ion-label class="error" *ngIf="f.submitted && locality.invalid">{{'PleaseEnterApartment/Road/Area' | language:'Please Enter Apartment/Road/Area'}}</ion-label>
+      <div class="addArea">
+        <ion-label class="inputlabel">
+          <ion-text color="dark">
+            <p>{{'landMark' | language:'Landmark'}}</p>
+          </ion-text>
+          <ion-input type="text" [(ngModel)]="form.landmark" #landmark="ngModel" name="landmark" required></ion-input>
+        </ion-label>
+      </div>
+      <ion-label class="error" *ngIf="f.submitted && landmark.invalid">{{'PleaseEnterLandmark' | language:'Please Enter Landmark'}}</ion-label>
+       
+        <!-- <ion-row>
+          <ion-col size="6">
+            <div class="addArea">
+              <ion-label class="inputlabel">
+                <ion-text color="dark">
+                  <p>{{'City/Ward/District' | language:'City/Ward/District'}}</p>
+                </ion-text>
+                <ion-input type="text" [(ngModel)]="form.city" #city="ngModel" name="city" required></ion-input>
+              </ion-label>
+            </div>
+          </ion-col>
+          <ion-col size="6">
+            <div class="addArea4">
+              <ion-label class="inputlabel">
+                <ion-text color="dark">
+                  <p>{{'state' | language:'State'}}</p>
+                </ion-text>
+                <ion-select style="font-size: 14px;padding: 8.5px 10px;" placeholder="Select State" [(ngModel)]="form.state" #state="ngModel" name="state" required >
+                  <ion-select-option *ngFor="let state of stateList" value="{{state.name}}">{{state.name}}</ion-select-option>
+                </ion-select>
+              </ion-label>
+            </div>
+          </ion-col>
+        </ion-row> -->
+        
+        
+        <p>{{'saveas' | language:'Save as'}}</p>
+        <div class="chips"> 
+
+          <ion-chip [ngClass]="form.addressType == 'Home'?'selected':''" (click)="form.addressType = 'Home'" color="primary" mode="ios" outline="true">
+            <ion-icon src="/assets/home2.svg"></ion-icon>
+            <ion-label>{{'home' | language:'Home'}}</ion-label>
+          </ion-chip>
+          <ion-chip [ngClass]="form.addressType == 'Work'?'selected':''" (click)="form.addressType = 'Work'" color="primary" mode="ios" outline="true">
+            <ion-icon src="/assets/bag.svg"></ion-icon>
+            <ion-label>{{'work' | language:'Work'}}</ion-label>
+          </ion-chip>
+          <ion-chip [ngClass]="form.addressType == 'Other'?'selected':''" (click)="form.addressType = 'Other'" color="primary" mode="ios" outline="true">
+            <ion-icon src="/assets/location2.svg"></ion-icon>
+            <ion-label>{{'other' | language:'Other'}}</ion-label>
+          </ion-chip>
+      </div>
+      <ion-button class="btnsave" type="submit">{{'saveAndProceed' | language:'Save and Proceed'}}</ion-button>
+    </form>
+  </div>
+</ion-content>

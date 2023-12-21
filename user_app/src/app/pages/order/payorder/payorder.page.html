@@ -1,0 +1,18 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p>{{'Pay'|language:'Pay'}} {{amount | currency:'INR':true :'0.0-2'}}</p>
+    <div class="method">
+      <div class="cash" (click)="modelCtrl.dismiss('CASH')">
+        <img src="/assets/cash.svg"><br>
+        <span>{{'Cash'|language:'Cash'}}</span>
+      </div>
+      <div class="upi" (click)="commonservice.featureNotAvailable()">
+        <img src="/assets/upi.svg"><br>
+        <span>{{'upi'|language:'UPI'}}</span>
+      </div>
+    </div>
+  </ion-card>
+</ion-footer>

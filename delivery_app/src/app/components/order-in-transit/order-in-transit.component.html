@@ -1,0 +1,63 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeOrderInTransitModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="content" *ngIf="tripDetail">
+    <div class="order-image">
+      <img [src]="tripDetail?.dropOff?.userImage ? tripDetail?.dropOff?.userImage : 'assets/icon/gray_user.svg'">
+    </div>
+
+    <div class="header-title">
+      <p>In Transit!</p>
+    </div>
+
+    <div class="order-info">
+      <div class="item-img">
+        <img
+          [src]="tripDetail?.dropOff?.userImage ? tripDetail?.dropOff?.userImage : 'assets/icon/gray_user.svg'"
+          alt="" class="product-img" />
+      </div>
+      <div class="order-content">
+        <div class="pickup-text">Deliver to</div>
+        <div class="pickup-text pickup-name">{{tripDetail?.dropOff?.userName}}</div>
+        <div class="pickup-text">{{tripDetail?.dropOff?.location?.address}}</div>
+      </div>
+    </div>
+
+    <div class="order-pick-drop">
+      <div class="column">
+        <div class="pickup-view" (click)="callCustomer(tripDetail?.dropOff?.phoneNumber)">
+          <a><img src="assets/icon/ic-call-round-green.svg"
+              alt="icon" /></a>
+          <span>Call</span>
+        </div>
+      </div>
+      <div class="column">
+        <div class="pickup-view" (click)="openMap(tripDetail.dropOff.location.lat,tripDetail.dropOff.location.lon)">
+          <ion-icon src="assets/icon/ic-round-directions.svg" alt="icon"></ion-icon>
+          <span>Go to map</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-id">
+      <ion-icon src="assets/icon/ic-cart-check.svg" alt="icon"></ion-icon>
+      <p>Order: {{tripDetail.orderId}}</p>
+    </div>
+  </div>
+
+
+  <div class="select-view">
+    <!-- <ion-item class="btn-accept"> -->
+      <!-- <ion-select interface="popover" 
+      placeholder="Reached Delivery location"
+      (ionChange)="dialogOrderStatusComponentModal($event, tripDetail)">
+        <ion-select-option value="NO_SHOW">No Show</ion-select-option>
+        <ion-select-option value="DELIVERED">Delivered</ion-select-option>
+      </ion-select> -->
+      <ion-button class="btn-accept" fill="solid" shape="round" type="submit"
+        (click)="dialogOrderStatusComponentModal('REACHED_DL', tripDetail)">Reached Delivery location</ion-button>
+    <!-- </ion-item> -->
+  </div>
+
+</div>

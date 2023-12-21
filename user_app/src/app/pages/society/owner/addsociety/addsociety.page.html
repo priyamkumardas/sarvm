@@ -1,0 +1,48 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="mysociety" text=""></ion-back-button>
+		</ion-buttons>
+		<ion-title class="ion-text-left">Add Society</ion-title>
+	</ion-toolbar>
+</ion-header>
+
+<ion-content>
+	<ion-item class="location" counter="true" shape="round" fill="outline" mode="md" lines="none">
+		<ion-icon name="search" slot="start"></ion-icon>
+		<ion-input noEmoticons placeholder="Location" id="search-box" debounce="500"></ion-input>
+		<ion-icon name="mic-outline" slot="end"></ion-icon>
+	</ion-item>	
+</ion-content>
+
+<ion-footer>
+	<ion-item class="location-details ion-no-padding ion-no-margin ion-padding-horizontal" lines="none">
+		<ion-icon slot="start" name="location-outline"></ion-icon>
+		<ion-label class="address">123 Lane, Paschim Enclave, Near Buddha temple Rajori garden Delhi 110025,
+			India</ion-label>
+	</ion-item>
+	<form class="ion-padding-horizontal">
+		<ion-row class="ion-justify-content-center ion-align-items-center">
+			<ion-col size="12" size-sm="6" size-md="3" size-lg="3">
+				<ion-item class="fieldset-input" counter="true" shape="round" fill="outline" mode="md">
+					<ion-label position="floating" mode="md">Society Name</ion-label>
+					<ion-input fill="outline" type="text" mode="md"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col size="12" size-sm="6" size-md="3" size-lg="3">
+				<ion-item class="fieldset-input" counter="true" shape="round" fill="outline" mode="md">
+					<ion-label position="floating" mode="md">City</ion-label>
+					<ion-input fill="outline" mode="md"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col size="12" size-sm="6" size-md="3" size-lg="3">
+				<ion-item class="fieldset-input" counter="true" shape="round" fill="outline" mode="md">
+					<ion-label position="floating" mode="md">Pin code</ion-label>
+					<ion-input fill="outline" type="number" pattern="[0-9]*" inputmode="numeric" mode="md"></ion-input>
+				</ion-item>
+			</ion-col>
+		</ion-row>
+		<ion-button class="ion-margin-bottom" expand="block" shape="round"
+			[routerLink]="['/upload-documents']">Register</ion-button>
+	</form>
+</ion-footer>

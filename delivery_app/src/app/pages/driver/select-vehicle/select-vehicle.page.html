@@ -1,0 +1,77 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'Iwilldeliverby' | language : 'I will deliver by'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+
+    <ion-row>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='PEDESTRIAN'?'changestyle':'vehicle-item'"
+          (click)="selectedVehicle('PEDESTRIAN')">
+          <img src="assets/images/ic_pedestrian.svg" alt="vehicle-img" />
+          <ion-label>{{'Pedestrian '|language:'Pedestrian '}}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='BICYCLE'?'changestyle':'vehicle-item'"
+          (click)="selectedVehicle('BICYCLE')">
+          <img src="assets/images/ic_bicycle.svg" alt="vehicle-img" />
+          <ion-label>{{'Bicycle'|language:'Bicycle'}}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='CYCLE RICKSHAW'?'changestyle':'vehicle-item'"
+          (click)="selectedVehicle('CYCLE RICKSHAW')">
+          <img src="assets/images/ic_cycle_rickshaw.svg" alt="vehicle-img" />
+          <ion-label>{{'CycleRickshaw'|language:'Cycle Rickshaw'}}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='AUTO RICKSHAW'?'changestyle':'vehicle-item'"
+          (click)="selectedVehicle('AUTO RICKSHAW')">
+          <img src="assets/images/ic_auto_rickshaw.svg" alt="vehicle-img" />
+          <ion-label>{{'AutoRickshaw'|language:'Auto Rickshaw'}}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='BIKE'?'changestyle':'vehicle-item'" (click)="selectedVehicle('BIKE')">
+          <img src="assets/images/ic_bike.svg" alt="vehicle-img" />
+          <ion-label>{{'Bike'|language:'Bike'}}</ion-label>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <div [ngClass]="selectVehicleItem==='E-RICKSHAW'?'changestyle':'vehicle-item'"
+          (click)="selectedVehicle('E-RICKSHAW')">
+          <img src="assets/images/ic_e_rickshaw.svg" alt="vehicle-img" />
+          <ion-label>{{'E-Rickshaw'|language:'E-Rickshaw'}}</ion-label>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <div class="footer">
+    <ng-template [ngIf]="selectVehicleItem === 'PEDESTRIAN' || selectVehicleItem === 'BICYCLE'" [ngIfElse]="loggedOut">
+      <ion-button expand="block" shape="round" (click)="addUpdateDeliveryPreference()" >{{'next'|language:'Next'}}</ion-button>
+    </ng-template>
+    
+    <ng-template #loggedOut>
+      <ion-button *ngIf="previousUrl == '/profile' || previousUrl == '/vehicle-document'" fill="outline" shape="round" class="skip" [disabled]="selectVehicleItem ? false : true" (click)="goToVehicleDocument()">{{'EditVehicleDocs'|language:'Edit Vehicle Docs'}}</ion-button>
+      <ion-button expand="block" shape="round" (click)="addUpdateDeliveryPreference()" >{{'next'|language:'Next'}}</ion-button>
+    </ng-template>
+  </div>
+</ion-footer>

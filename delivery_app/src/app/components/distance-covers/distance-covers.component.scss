@@ -1,0 +1,103 @@
+.modal {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+}
+
+.CrossIcon {
+    height: 15vw;
+    width: 15vw;
+    margin-bottom: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10vw;
+    border-radius: 50%;
+    color: grey;
+    background: var(--ion-color-primary-contrast);
+}
+.content {
+    background: var(--ion-color-primary-contrast);
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-evenly;
+    height: 400px;
+}
+.header {
+    margin: 20px;
+    text-align: center;
+    .title {
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 24px;
+        color: #222222;
+    }
+    .distance-info{
+        p{
+            margin: 10px 0px 0px 0px;
+        }
+    }
+}
+
+.distance-type {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .distan-items {
+        width: 200px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 12px 12px 12px;
+        border: 1px solid rgba(125, 124, 131, 0.4);
+        justify-content: space-around;
+        border-radius: 24px;
+        .add-distance {
+            width: 30px;
+            height: 30px;
+        }
+        .distance-title {
+            width: 39px;
+            height: 24px;
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 500;
+            font-size: 16px;
+            line-height: 24px;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.1px;
+            color: #333333;
+        }
+    }
+}
+.submit-view {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    left: 0;
+    bottom: 20px;
+    right: 0;
+    ion-button {
+        width: 80%;
+        height: 45px;
+        background: #a42c24;
+        border-radius: 30px;
+        text-transform: none;
+        font-family: "AvertaStd-Bold";
+        font-size: 16px;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #ffffff;
+    }
+}

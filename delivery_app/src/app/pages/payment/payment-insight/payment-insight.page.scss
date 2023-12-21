@@ -1,0 +1,240 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.header {
+    display: flex;
+    ion-icon {
+        margin: auto 3vw;
+        color: #10bab2;
+    }
+}
+ion-toolbar {
+    display: flex;
+    ion-title {
+        font-weight: bold;
+        font-size: 18px;
+        justify-content: center;
+        place-content: center;
+    }
+    ion-icon {
+        margin: auto 0;
+        font-size: 5vw;
+        padding: 0 0 0 3vw;
+        color: #a42c24;
+    }
+}
+
+ion-modal {
+    --background: #0000003b !important;
+}
+
+.segment-view {
+    align-items: center;
+    ion-segment-button {
+        //width: 50%;
+        font-size: 14px;
+        text-transform: none;
+        --color-checked: #a42c24;
+        --indicator-color: transparent !important;
+        --indicator-box-shadow: transparent !important;
+        //border-radius: 10px !important;
+        img{
+            margin-right: 5px;
+        }
+    }
+    .segment-button-checked ::ng-deep {
+        --color: #a42c24;
+        font-weight: 600;
+        font-size: 14px;
+    }
+
+    .custom-calander-segment{
+        width: 40px;
+        max-width: 40px;
+        min-width: 50px;
+        .calander-img{
+            width: 34px;
+            min-width: 44px;
+        }
+    }
+}
+
+.card-earning-section {
+    text-align: center;
+    background: #ffffff;
+    box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    padding: 8px;
+   margin: 10px 12px;
+}
+.total-earn {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 18px;
+    text-align: center;
+    color: #2c2c2c;
+}
+
+// .card-amout-status {
+//     // background: rgba(255, 255, 255, 0.9);
+//     // box-shadow: 2px 2px 10px 10px rgba(44, 44, 44, 0.05);
+//     // border-radius: 10px;
+//     // margin: 12px;
+// }
+
+.panel-new-trips {
+    // height: 66px;
+    margin-top: 10px;
+    text-align: center;
+    ion-row {
+        text-align: center;
+        ion-col {
+            text-align: center;
+            margin-bottom: 12px;
+            .status-amount-text {
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: 500;
+                font-size: 16px;
+                text-align: center;
+                color: #2c2c2c;
+            }
+            .status-amount {
+                font-family: "Poppins";
+                font-style: normal;
+                font-weight: 600;
+                font-size: 18px;
+                text-align: center;
+                color: #770000;
+                margin: 0px;
+                padding: 10px 0px 0px 0px;
+            }
+            .amount {
+                color: #037022;
+            }
+            ion-card{
+                border-radius: 10px;
+                box-shadow: 1px 1px 10px 5px rgba(0, 0, 0, 0.05);
+                height: 65px;
+                padding: 8px;
+            }
+        }
+    }
+}
+
+.list-data-today {
+    width: 95%;
+    box-sizing: border-box;
+    background: #ffffff;
+    border: 1px solid #d9d9d9;
+    border-radius: 10px;
+    padding: 10px 10px 0px 10px;
+    margin: 12px 12px 12px 12px;
+    ion-grid {
+        padding: 0px;
+        margin: 0px;
+        ion-row {
+            height: 80px;
+            padding: 0px;
+            margin: 0px;
+            ion-col {
+                padding: 0px;
+                margin: 0px;
+                text-align: center;
+                .today-date {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #747474;
+                    margin: 6px 0px 0px 0px;
+                    text-align: start;
+                }
+                .today-name {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 14px;
+                    color: #333333;
+                    margin: 8px 0px 0px 0px;
+                    text-align: start;
+                }
+                .today-order {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 400;
+                    font-size: 12px;
+                    color: #464646;
+                    margin: 8px 0px 0px 0px;
+                    text-align: start;
+                }
+                ion-icon {
+                    width: 40px;
+                    height: 40px;
+                }
+                .today-amount {
+                    font-family: "Poppins";
+                    font-style: normal;
+                    font-weight: 600;
+                    font-size: 10px;
+                    text-align: center;
+                    color: #464646;
+                    .amount {
+                        color: #037022;
+                    }
+                }
+            }
+        }
+    }
+    ion-button {
+        width: 50%;
+        //font-family: "Poppins";
+        font-style: normal;
+        font-weight: 500;
+        font-size: 12px;
+        line-height: 18px;
+        color: #000000;
+        text-transform: none;
+    }
+}
+
+ion-item-divider {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    color: #a42c24;
+    --background: #ffffff;
+    padding-bottom: 2px !important;
+    background: #ffffff;
+    padding: 0px;
+    border-bottom: 0px none;
+}
+
+.left-padd{
+    padding-left: 10px;
+}
+
+.footer {
+    display: block;
+    position: relative;
+    justify-content: space-evenly;
+    align-items: center;
+    bottom: 0px;
+    background-image: none;
+    box-shadow: 0px 1px 10px 1px rgba(2, 27, 26, 0.1);
+    ion-icon {
+        font-size: 25px;
+    }
+}
+.reminderCall{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}

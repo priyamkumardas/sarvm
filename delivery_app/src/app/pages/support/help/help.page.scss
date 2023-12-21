@@ -1,0 +1,153 @@
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ion-toolbar {
+  display: flex;
+  --background: #fff;
+  --ion-color-base: #fff !important;
+}
+
+ion-title {
+  font-weight: 600;
+  font-size: 17px;
+}
+
+.header-icon {
+  font-family: "Poppins";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #4f5052;
+  text-align: center;
+  margin: 20px 8px 8px 8px;
+  .icon-border {
+    height: 70px;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid rgba(125, 124, 131, 0.2);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  p {
+    margin: 8px;
+  }
+}
+
+.contact-view {
+  margin: 12px;
+  .contact-header {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 24px;
+    color: #4f5052;
+  }
+  .contact-care-item {
+    display: flex;
+    margin-top: 18px;
+    ion-icon {
+      width: 22px;
+      height: 22px;
+    }
+    p {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #4f5052;
+      place-self: center;
+      margin-left: 4px;
+    }
+  }
+  .contact-location {
+    display: flex;
+    margin-top: 22px;
+    ion-icon {
+      width: 22px;
+      height: 22px;
+    }
+    p {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #4f5052;
+      place-self: center;
+      margin-left: 4px;
+    }
+  }
+
+  .contact-link {
+    display: flex;
+    margin-top: 22px;
+    ion-icon {
+      width: 22px;
+      height: 22px;
+    }
+    p {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 16px;
+      line-height: 18px;
+      color: #4f5052;
+      place-self: center;
+      margin-left: 4px;
+    }
+  }
+}
+
+ion-icon {
+  color: #a42c24;
+}
+
+ion-row {
+  margin-left: 13px;
+  margin-right: 13px;
+}
+
+ion-img {
+  margin: auto;
+}
+ion-text{
+  color: #76C893;
+  margin-left: 6px;
+}
+
+.phoneCall {
+  width: 17px;
+  margin-right: 0px;
+  margin-left: 15px;
+}
+
+.support {
+  font-weight: 600;
+}
+
+ion-col {
+  text-align: center;
+  p {
+      font-size: 12px;
+      line-height: 19px;
+  }
+}
+
+ion-item {
+  p {
+      font-size: 14px;
+      line-height: 20px;
+      color: #000000;
+  }
+}
+
+a {
+  text-decoration: none;
+}

@@ -1,0 +1,13 @@
+{
+    "language": "Panjabi",
+    "city": {
+        "delhi": "ਦਿੱਲੀ",
+        "mumbai": "ਮੁੰਬਈ"
+    },
+    "system": {
+        "selectPref": "ਆਪਣੀ ਪਸੰਦ ਚੁਣੋ",
+        "continue": "",
+        "selectCity": "",
+        "proceed": ""
+    }
+}

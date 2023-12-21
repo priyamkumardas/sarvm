@@ -1,0 +1,54 @@
+<div class="container mb-3">
+  <div class="row row-cols-1 row-cols-md-3 g-0 justify-content-center">
+    <div class="card">
+      <div class="card-header border-0">
+        <qrcode [qrdata]="shopQR" [imageSrc]="'./assets/icons/sarvmQR.svg'" [width]="300" [errorCorrectionLevel]="'H'"></qrcode>
+       </div>
+       <div class="card-body">
+         <div class="d-flex justify-content-center">
+           <div class="p-2">
+           <div class="p-2">
+             <button class="btn btn-success" onclick="window.print()">Print</button>
+           </div>
+         </div>
+         <div>
+
+           
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row text-center">
+            <div class="col-md-6 col-lg-6 col-md-6 col-6 m-auto ">
+              <p class="text-center heading"> Retailer</p>
+              <img src="./assets/icons/Retailer.svg" width="70%" height="70%" alt="">
+              <div class="me-auto">
+                <div>
+                  <!-- <a class="btn btn-primary" href="#" role="button" ><img src="./images/images-2/App Store.svg" style="margin-bottom: 20px;" width="100%" height="100%"></a> -->
+                  <img src="./assets/icons/App_Store_Disable.svg" alt="" style="margin-bottom: 20px;" width="100%"
+                    height="100%">
+                  <a href="https://play.google.com/store/apps/details?id=com.sarvm.biz" target="_blank">
+                    <img src="./assets/icons/Google Play.svg" width="100%" height="100%" alt=""></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-lg-6 col-md-6 col-6 m-auto">
+              <p class="text-center heading"> Consumer</p>
+              <img src="./assets/icons/Household.svg" width="70%" height="70%">
+              <div class="me-auto">
+                <!-- <qrcode [qrdata]="'consumer'"
+                    [width]="125" 
+                    [errorCorrectionLevel]="'M'">
+                  </qrcode> -->
+                <img src="./assets/icons/App_Store_Disable.svg" style="margin-bottom: 20px;" width="100%" height="100%">
+                <a href="https://play.google.com/store/apps/details?id=com.sarvm.hh" target="_blank"><img
+                    src="./assets/icons/Google Play.svg" width="100%" height="100%"></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+     </div>
+   </div>
+ </div>

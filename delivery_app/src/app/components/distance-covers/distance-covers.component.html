@@ -1,0 +1,35 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeDistanceCoversModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <span class="title">{{'distanceCovers' | language : 'Distance Covers'}}</span>
+      <div class="distance-info">
+        <p class="distance-title"><span>{{lastDistance}} {{'to' | language : 'to'}} {{distanceFrom}}</span>&nbsp;<span>{{'km' | language : 'KM'}}</span></p>
+      </div>
+    </div>
+
+    <div class="distance-type">
+      <div class="distan-items">
+        <div>
+          <ion-icon class="add-distance" src="assets/icon/ic-circle-minus.svg"
+            (click)="decrement()"></ion-icon>
+        </div>
+        <div>
+          <ion-label class="distance-title" type="Number"
+            name="type"><span>{{distanceFrom}}</span>&nbsp;<span>{{'km' | language : 'KM'}}</span></ion-label>
+        </div>
+        <div>
+          <ion-icon class="add-distance" src="assets/icon/ic-circle-plus.svg" (click)="increment()"></ion-icon>
+        </div>
+      </div>
+
+      <div class="submit-view">
+        <ion-button color="primary" fill="solid" expand="full" shape="round" class="save btn"
+          type="submit" (click)="saveDistance()">{{'save' | language : 'Save'}}</ion-button>
+      </div>
+    </div>
+  </div>
+</div>

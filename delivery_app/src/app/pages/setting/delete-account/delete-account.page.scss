@@ -1,0 +1,76 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.options {
+  background: #fff;
+  border-radius: 20px 21px 0px 0px;
+  width: -webkit-fill-available;
+  padding: 0 16px 16px;
+
+  .header {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 15px;
+    color: #4f5052;
+    margin: 0;
+    padding: 16px 0 8px;
+    text-align: left;
+    text-transform: capitalize;
+  }
+
+  ion-radio-group {
+    ion-item {
+      --padding-start: 0;
+      --padding-end: 0;
+      --inner-padding-end: 0px;
+      --background: #fff;
+
+      &.item-radio-checked {
+        ion-label {
+          color: var(--ion-color-primary);
+          font-weight: 400;
+        }
+      }
+
+      ion-label {
+        font-family: "Poppins";
+        font-style: normal;
+        font-size: 15px;
+        letter-spacing: 0.01em;
+        text-transform: capitalize;
+        color: #333333;
+      }
+
+      ion-radio {
+        margin-right: 12px;
+      }
+    }
+  }
+
+  ion-textarea {
+    --padding-start: 12px;
+    --padding-end: 12px;
+    --padding-top: 12px;
+    --padding-bottom: 12px;
+    margin: 8px 0;
+    border: 1px solid #d9d9d9;
+    border-radius: 20px;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: 0.01em;
+    text-transform: capitalize;
+    color: #333333;
+  }
+}
+
+.submitbtn {
+  position: absolute;
+  width: 90%;
+  top: 90%;
+}

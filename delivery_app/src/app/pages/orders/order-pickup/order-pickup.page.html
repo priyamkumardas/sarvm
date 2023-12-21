@@ -1,0 +1,122 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button slot="start" color="primary" defaultHref="home" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'Pickup' | language : 'Pickup'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="header">
+    <p>Order #: {{tripOrderDetail.orderId}}</p>
+  </div>
+  <div class="container">
+    <div class="user-profile">
+      <div class="img">
+        <div class="profileTxt">
+          <img
+            [src]="tripOrderDetail?.pickUp?.shopImage ? tripOrderDetail?.pickUp?.shopImage : 'assets/icon/gray_user.svg'"
+            alt="" class="profile-img" />
+        </div>
+        <div class="callIcon">
+          <a href="tel:{{tripOrderDetail?.pickUp?.phoneNumber}}"><img src="assets/icon/ic-call-round-green.svg"
+              alt="call-icon" /></a>
+        </div>
+      </div>
+    </div>
+    <div class="user-details">
+      <div class="info">
+        <p class="name">{{tripOrderDetail?.pickUp?.shopName}}</p>
+        <p class="mobile">+91 {{tripOrderDetail?.pickUp?.phoneNumber}}</p>
+        <div class="location">
+          <p class="address">{{tripOrderDetail?.pickUp?.location?.address}}</p>
+        </div>
+      </div>
+      <div class="payment">
+        <p>{{tripOrderDetail?.orderItemDetails?.length}} {{'itemsfor' | language : 'items for'}} <span
+            class="amount">{{tripOrderDetail?.amount | currency:'INR':'symbol':'0.0-2'}}</span></p>
+        <p>{{'payment'|language:'Payment '}} : <span>{{tripOrderDetail?.payment?.paid == true ? 'Paid' : 'Pending'}}</span></p>
+      </div>
+    </div>
+  </div>
+
+  <p class="heading">{{'orderSummary' | language : 'Order Summary'}}</p>
+  <div class="orderSummary">
+    <ion-item *ngFor="let item of tripOrderDetail?.orderItemDetails" lines="none">
+      <ion-avatar>
+        <img [src]="item.image ? item.image : 'assets/ReferrlImg/noto_wrapped-gift.png'" class="product-img" />
+      </ion-avatar>
+      <ion-label>{{item?.name}} x {{item?.unit ? item?.unit : item?.qty}}
+        <div class="totalPrice">{{item?.qty}} {{item?.soldBy}} <ion-chip *ngIf="item?.required">Mandatory</ion-chip></div>
+      </ion-label>
+      <ion-label class="item-price">{{item?.price | currency:'INR':'symbol':'0.0-2'}}</ion-label>
+    </ion-item>
+    <!-- <div class="completeOrderInfo" *ngFor="let item of tripOrderDetail?.orderItemDetails">
+      <div class="item-img">
+        <img [src]="item.image ? item.image : 'assets/ReferrlImg/noto_wrapped-gift.png'" class="product-img" />
+      </div>
+      <div class="order-content">
+        <div class="quantity">{{item.name}} x {{item?.unit ? item?.unit : item.qty}} </div>
+        <div class="totalPrice">{{item.qty}} {{item.soldBy}} <ion-chip *ngIf="item?.required">Mandatory</ion-chip></div>
+      </div>
+      <div class="available-tag" (click)="openOrderItemStatusModal()">
+        <p>available</p>
+      </div>
+      <div class="item-price">
+        <p>{{item.price | currency:'INR':'symbol':'0.0-2'}}</p>
+      </div>
+    </div> -->
+  </div>
+
+  <div>
+    <div class="divider"></div>
+    <div class="amounts">
+      <p class="sum">{{'orderTotal'|language:'Order Total'}}</p> 
+      <p class="right-text">{{tripOrderDetail?.amount | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="amounts">
+      <p class="sum">{{'deliveryCharge'|language:'Delivery Charge'}}</p> 
+      <p class="right-text">{{tripOrderDetail?.deliveryInfo?.deliveryCharges | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="amounts">
+      <p class="sum">{{'discount'|language:'Discount'}}</p> 
+      <p class="right-text">- {{(tripOrderDetail?.discount ? tripOrderDetail?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+    <div class="bill-amounts">
+      <p class="sum">{{'total'|language:'Total'}}</p> 
+      <p class="right-text">{{tripOrderDetail?.amount + (tripOrderDetail?.deliveryInfo?.deliveryCharges ? tripOrderDetail?.deliveryInfo?.deliveryCharges : 0) - (tripOrderDetail.discount ? tripOrderDetail?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</p>
+    </div>
+  </div>
+
+  <div class="submit-view">
+    <ion-grid>
+      <ion-row>
+        <ion-item class="picker-view" lines="none">
+          <ion-thumbnail slot="start" class="picker-img">
+            <div class="profileTxt">
+              <img
+                [src]="tripOrderDetail?.dropOff?.userImage ? tripOrderDetail?.dropOff?.userImage : 'assets/icon/gray_user.svg'"
+                alt="" class="product-img" />
+            </div>
+          </ion-thumbnail>
+          <ion-label>
+            <p class="picker-title">Deliver to</p>
+            <p class="picker-name">{{tripOrderDetail?.dropOff?.userName}}</p>
+          </ion-label>
+          <div class="callIcon">
+            <a href="tel:{{tripOrderDetail?.dropOff?.phoneNumber}}"><img src="assets/icon/ic-call-round-green.svg"
+                alt="call-icon" /></a>
+          </div>
+        </ion-item>
+      </ion-row>
+      <ion-row class="ion-justify-content-center">
+        <ion-button class="btn-accept" fill="solid" expand="full" shape="round" type="submit"
+          (click)="dialogOrderStatusComponentModal('PICKUP', tripOrderDetail)">
+          {{'pickUp'|language:'Pickup'}}
+          <ion-icon slot="end" src="assets/icon/ic-white-tick.svg"></ion-icon>
+        </ion-button>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

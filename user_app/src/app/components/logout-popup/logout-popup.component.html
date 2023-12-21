@@ -1,0 +1,14 @@
+<div class="cont">
+  <div class="msg">
+    <ion-img *ngIf="forBack" src="/assets/images/error-outline.svg"></ion-img>
+    <p>{{header}}</p>
+    <p class="subheader">{{subHeader}}</p>
+  </div>
+  <div class="btns">
+    <ion-button fill="clear" expand="full" class="no" (click)="viewNo()">
+     <ion-icon slot="start" src="/assets/icon/thumbs-down.svg"></ion-icon>No</ion-button>
+
+    <ion-button fill="clear" expand="full" class="yes" (click)="viewYes()">
+      <ion-icon slot="start" src="/assets/icon/thumbs-up.svg"></ion-icon>Yes</ion-button>
+  </div>
+</div>

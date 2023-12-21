@@ -1,0 +1,95 @@
+
+<div class="modal">
+  <div class="CrossIcon" (click)="closeOrderAcceptedModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="content" *ngIf="tripDetail">
+    <div class="order-image">
+      <img [src]="tripDetail?.pickUp?.shopImage ? tripDetail?.pickUp?.shopImage : 'assets/icon/gray_user.svg'">
+    </div>
+
+    <div class="header-title">
+      <p>Order Accepted!</p>
+    </div>
+
+    <div class="order-info">
+      <div class="item-img">
+        <img
+          [src]="tripDetail?.pickUp?.shopImage ? tripDetail?.pickUp?.shopImage : 'assets/icon/gray_user.svg'"
+          alt="" class="product-img" />
+      </div>
+      <div class="order-content">
+        <div class="pickup-text">Pickup from</div>
+        <div class="pickup-text pickup-name">{{tripDetail?.pickUp?.shopName}}</div>
+        <div class="pickup-text pickup-address">{{tripDetail?.pickUp?.location?.address}}</div>
+      </div>
+    </div>
+
+    <div class="order-pick-drop">
+      <div class="column">
+        <div class="pickup-view" (click)="callCustomer(tripDetail?.pickUp?.phoneNumber)">
+          <a><img src="assets/icon/ic-call-round-green.svg"
+              alt="icon" /></a>
+          <span>Call</span>
+        </div>
+      </div>
+      <div class="column">
+        <div class="pickup-view" (click)="openMap(tripDetail.pickUp.location.lat,tripDetail.pickUp.location.lon)">
+          <ion-icon src="assets/icon/ic-round-directions.svg" alt="icon"></ion-icon>
+          <span>Go to map</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="order-id">
+      <ion-icon src="assets/icon/ic-cart-check.svg" alt="icon"></ion-icon>
+      <p>Order: {{tripDetail.orderId}}</p>
+    </div>
+  </div>
+
+
+    <div class="select-view">
+    <!-- <ion-item class="btn-accept"> -->
+      <!-- <ion-select interface="popover" 
+      placeholder="Reached Pickup location"
+      (ionChange)="dialogOrderStatusComponentModal($event, tripDetail)">
+        <ion-select-option value="PICKUP">Pick Up</ion-select-option>
+        <ion-select-option value="REACHED_DL">Reached DL</ion-select-option>
+        <ion-select-option value="DELIVERED">Delivered</ion-select-option>
+      </ion-select> -->
+      <ion-button class="btn-accept" fill="solid" shape="round" type="submit"
+        (click)="dialogOrderStatusComponentModal('REACHED_PL', tripDetail)">Reached Pickup Location</ion-button>
+    <!-- </ion-item> -->
+  </div>
+
+  <!-- <div class="select-card">
+    <div class="card">
+      <ion-item lines="none" id="left-btn" class="ion-text-center" size="small">
+        <ion-select interface="popover" placeholder="Reached Pickup location"
+          [(ngModel)]='value' (ionChange)="dialogOrderStatusComponentModal(value, tripDetail)">
+          <ion-select-option *ngIf="tripDetail.status == 'ACCEPTED'" value="PICKUP">Pick Up</ion-select-option>
+          <ion-select-option *ngIf="tripDetail.status == 'ACCEPTED' || tripDetail.status == 'PICKUP'"
+            value="REACHED_DL">Reached DL</ion-select-option>
+          <ion-select-option *ngIf="tripDetail.status == 'ACCEPTED' || tripDetail.status == 'PICKUP' || tripDetail.status == 'REACHED_DL'"
+            value="DELIVERED">Delivered</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-text-center" id="icon" slot="end" size="small"
+        *ngIf="tripDetail.status === orderStatus.ACCEPTED" (click)="dialogOrderStatusComponentModal('PICKUP', tripDetail)">
+        <ion-icon name="caret-forward-outline" color="light" size="large"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-text-center" id="icon" slot="end" size="small"
+        *ngIf="tripDetail.status === orderStatus.PICKUP" (click)="dialogOrderStatusComponentModal('REACHED_DL', tripDetail)">
+        <ion-icon name="caret-forward-outline" color="light" size="large"></ion-icon>
+      </ion-item>
+
+      <ion-item lines="none" class="ion-text-center" id="icon" slot="end" size="small"
+        *ngIf="tripDetail.status === orderStatus.REACHED_DL" (click)="dialogOrderStatusComponentModal('DELIVERED', tripDetail)">
+        <ion-icon name="caret-forward-outline" color="light" size="large"></ion-icon>
+      </ion-item>
+    </div>
+  </div> -->
+
+</div>

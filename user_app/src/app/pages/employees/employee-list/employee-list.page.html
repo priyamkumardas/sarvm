@@ -1,0 +1,106 @@
+<ion-header *ngIf="!isModel">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button mode="md" defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    
+    <ion-title>{{'Employeemanagement '|language:'Employee Management'}}</ion-title>
+    <ion-buttons  slot="end" mode="ios">
+      <ion-button *ngIf="userData.userType ==='EMPLOYEE_SH' || userData.userType ==='EMPLOYEE_CO'" [routerLink]="['/add-employee',0]">
+        <ion-icon color ="primary" slot="end" name="add-circle" id="plus"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<div *ngIf="isModel"  class="CrossIcon" (click)="modalCtrl.dismiss()">
+    <ion-icon name="close"></ion-icon>
+</div>
+<ion-content [ngClass]="isModel?'model':''">
+  <ion-item color="light" class="search-box" lines="none">
+    <ion-icon color="medium" name="search" slot="start"></ion-icon>
+    <ion-input placeholder="{{'search' | language:'Search'}}" [(ngModel)]="searchInput" (ionChange)="searchEmp()"></ion-input>
+  </ion-item>
+<!-- <ion-item class="ion-no-padding" lines="none"> -->
+  <ion-button shape="round"  (click)="filterByName(!nameIncOrder)" class="filter">
+   {{'name'|language:'Name'}}
+    <ion-icon name="swap-vertical-outline"></ion-icon>
+  </ion-button>
+
+  <ion-button shape="round" [ngClass]="roleFilter?'IsActive':'filter'" (click)="openFilterModal()">
+    {{'roles'|language:'Roles'}}
+    <ion-icon color="primary" name="caret-down-outline"></ion-icon>
+  </ion-button>
+
+  <!-- <ion-button shape="round"  (click)="filterByName(!nameIncOrder)" class="filter">
+    Active
+    <ion-icon name="swap-vertical-outline"></ion-icon>
+  </ion-button> -->
+<!-- </ion-item> -->
+
+    <div class="contentdiv" >
+      <div *ngIf="!searchInput;else search_content">
+        <ng-container *ngIf="roleFilter?.length;else data_content">
+          <p class="total_emp">{{'totalemployeesfound'|language:'Total Employees Found '}} : {{filterData.length}}</p>
+
+          <ion-card class="card" *ngFor="let data of filterData" (click)="isModel?modalCtrl.dismiss(data.employeeId):redirectToProfile(data.employeeId)">
+            <div class="profile">
+              <img [src]="data.profilePhotoURL?data.profilePhotoURL:'assets/employee/employee_default.png'" alt="profile picture">
+              <ion-icon name="ellipse" [ngClass]="data.status?'active':'inactive'"></ion-icon>
+            </div>
+            <div class="info">
+              <!-- <p id ="Empid">Emp ID : {{data.employeeId}}</p> -->
+              <p id ="Empid"> {{data.fullName | titlecase}}</p>
+              <ion-button size="small" shape="round" href="tel:{{ data.mobileNumber }}"  >
+                <ion-icon slot="start" name="call-outline"></ion-icon>{{data.mobileNumber}}
+              </ion-button>
+              <!-- <p id ="name"><ion-icon name="call-outline"></ion-icon>{{data.mobileNumber}} </p> -->
+              <p id ="role"><strong>{{data.role}}</strong> </p>
+            </div>
+          </ion-card>
+        </ng-container>
+        <ng-template #data_content>
+          <p class="total_emp">{{'totalemployeesfound ' | language:'Total Employees Found '}} : {{employees.length}}</p>
+
+          <ion-card class="card" *ngFor="let data of employees" (click)="isModel?modalCtrl.dismiss(data.employeeId):redirectToProfile(data.employeeId)">
+            <div class="profile">
+              <img [src]="data.profilePhotoURL?data.profilePhotoURL:'assets/employee/employee_default.png'" alt="profile picture">
+              <ion-icon name="ellipse" [ngClass]="data.status?'active':'inactive'"></ion-icon>
+            </div>
+            <div class="info">
+              <p id ="Empid"> {{data.fullName | titlecase}}</p>
+              <!-- <p id ="name"><ion-icon name="call-outline"></ion-icon>{{data.mobileNumber}} </p> -->
+              <ion-button size="small" shape="round" href="tel:{{ data.mobileNumber }}"  >
+                <ion-icon slot="start" name="call-outline"></ion-icon>{{data.mobileNumber}}
+              </ion-button>
+              <p id ="role"><strong>{{data.role}}</strong> </p>
+            </div>
+          </ion-card>
+        </ng-template>
+      </div>
+      <ng-template #search_content>
+        <p class="total_emp">{{'totalemployeesfound' | language:'Total Employees Found'}} : {{searchData.length}}</p>
+
+        <ion-card class="card" *ngFor="let data of searchData" (click)="isModel?modalCtrl.dismiss(data.employeeId):redirectToProfile(data.employeeId)">
+          <div class="profile">
+            <img [src]="data.profilePhotoURL?data.profilePhotoURL:'assets/employee/employee_default.png'" alt="profile picture">
+            <ion-icon name="ellipse" [ngClass]="data.status?'active':'inactive'"></ion-icon>
+          </div>
+          <div class="info">
+            <p id ="Empid"> {{data.fullName | titlecase}}</p>
+            <ion-button size="small" shape="round" href="tel:{{ data.mobileNumber }}"  >
+              <ion-icon slot="start" name="call-outline"></ion-icon>{{data.mobileNumber}}
+            </ion-button>
+            <!-- <p id ="name"><ion-icon name="call-outline"></ion-icon>{{data.mobileNumber}} </p> -->
+            <p id ="role"><strong>{{data.role}}</strong> </p>
+          </div>
+        </ion-card>
+      </ng-template>
+      
+    </div>
+    <div *ngIf="flag" style="margin-top: 9em;">
+        <app-empty-list></app-empty-list>
+    </div>
+  
+  <!-- </div> -->
+</ion-content>

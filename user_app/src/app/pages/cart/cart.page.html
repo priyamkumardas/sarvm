@@ -1,0 +1,236 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'orderSummary'| language : 'Order Summary'}}</ion-title>
+    <ion-buttons slot="end">
+      <!-- <ion-button (click)="support()">
+          <div id="support-img">
+            <img src="/assets/bx_support.png" alt="Support" />
+          </div>
+          <ion-text>{{'support'|language:'Support'}}</ion-text>
+        </ion-button> -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ng-container *ngIf="!this.cartData?.cart.length || !this.cartData?.totalProducts">
+  <ion-content class="order-summary">
+    <div class="order-part">
+      <div class="cart-summary">
+        <img src="/assets/images/empty.jpg" alt="empty" />
+      </div>
+    </div>
+    <ion-button routerLink="/" color='primary' class="continue" shape="round">{{'continue' |
+      language:'Continue'}}</ion-button>
+  </ion-content>
+</ng-container>
+<ion-content class="content" *ngIf="this.cartData?.cart.length && this.cartData?.totalProducts">
+  <!-- Cart Products -->
+  <ng-container *ngIf="this.cartData?.cart.length && this.cartData?.totalProducts">
+    <div class="order-part" *ngFor="let cartItem of cartData.cart;let l = index">
+      <div class="cart-summary">
+        <div style="display: flex" class="dateAndTime">
+          <div style="display: flex" class="left">
+            <p class="date">{{cartItem?.date | customeDate}}</p>
+            <!-- <ion-icon name="calendar-outline" class="cal"></ion-icon> -->
+            <img src="/assets/images/calendar1.svg" class="cal" alt="">
+          </div>
+          <!-- <div class="time" (click)="OpenCalendarModal('time')">
+            <p class="timeText">{{data.}}</p>
+            <ion-icon name="chevron-down-outline" class="arrow"></ion-icon>
+          </div> -->
+        </div>
+        <div *ngFor="let timeSlot of cartItem.timeSlots; let i = index">
+          <div class="shop" *ngFor="let shop of timeSlot.shops; let j = index">
+            <div class="shopname ion-padding">
+              <img class="shopimage" src="/assets/icon/storelogo.svg" alt="" />
+              <ion-label>{{shop?.shop_name | titlecase}}</ion-label>
+            </div>
+            <ion-card class="cart-items" *ngFor="let item of shop.products; let k = index">
+              <div>
+                <img class="img" [src]="item?.image" alt="banana" />
+              </div>
+              <div class="details">
+                <div class="upper">
+                  <div class="txt">
+                    <p class="itemText"> {{item?.name}}</p>
+                    <!-- <p class="itemText"> {{item?.qty}} {{item?.soldBy}}</p> -->
+                    <p class="itemText"> {{item?.qty}} {{item?.soldBy}}</p>
+                  </div>
+                  <div class="quantities">
+                    <ion-icon name="remove" (click)="updateQuantity('remove',item,i,j,k,l,shop)"></ion-icon>
+                    <!-- <p class="itemQuantity">{{item?.qty}}</p> -->
+                    <p class="itemQuantity">{{item?.unit}}</p>
+                    <ion-icon name="add" (click)="updateQuantity('add',item,i,j,k,l,shop)"></ion-icon>
+                  </div>
+                  <div class="prices">
+                    <!-- <p class="itemPrice">{{item.price | currency:'INR':true :'0.0-2'}}</p> -->
+                    <p class="itemPrice">{{item.price * item?.qty * item?.unit | currency:'INR':true :'0.0-2'}}</p>
+                  </div>
+                </div>
+                <div class="bottom">
+                  <div class="check">
+                    <input type="checkbox" [(ngModel)]="item.required" />
+                    <p class="itemMand">{{'mandatoryitem'|language:'Mandatory Item'}}</p>
+                  </div>
+                  <button class="calendaricon" (click)="OpenCalendarModal(cartItem,l,i,j,k)" [disabled]="isDisable">
+                    <!-- <ion-icon name="calendar-outline" style="color:black"></ion-icon> -->
+                    <img src="/assets/images/calendar.svg" alt="">
+                  </button>
+                </div>
+              </div>
+            </ion-card>
+            <div class="discount" *ngIf="cartData.delivery.mode == 'DELIVERY'">
+              <ion-row>
+                <ion-col *ngIf="!shop?.deliveryStatus" size="12">
+                  <p *ngIf="!shop?.deliveryStatus" style="color: #ff4242;">Not delivering at your current location</p>
+                </ion-col>
+                <ion-col *ngIf="shop?.deliveryStatus" size="6">
+                  <p style="color:#4F5052">{{'deliveryCharge' | language: 'Delivery Charge'}}</p>
+                </ion-col>
+                <ion-col *ngIf="shop?.deliveryStatus" size="6" class="ion-text-right">
+                  <p>{{shop?.deliveryCharges | currency:'INR': true :'0.0-2'}}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <!-- Empty Cart -->
+  <!-- Details bill  -->
+  <div class="dateAndTime">
+    <div class="left">
+      <p class="date">{{'detailedBill' | language : 'Detailed bill'}}</p>
+    </div>
+  </div>
+  <div class="cart-bill">
+    <ion-accordion-group expand="inset" mode="ios">
+      <ion-accordion style="background: transparent;" value="first" toggleIcon="chevron-down-outline" toggleIconSlot="start">
+        <ion-item slot="header">
+          <ion-label>
+            <p class="text">{{'cartTotal' | language:'Cart Total'}}</p>
+          </ion-label>
+          <p class="prices">{{cartData.amount | currency:'INR':true:'0.0-2'}}</p>
+        </ion-item>
+        <div class="ion-padding content" slot="content" *ngFor="let cartItem of cartData.cart">
+          <div *ngFor="let timeSlot of cartItem.timeSlots">
+            <div class="shops" *ngFor="let shop of timeSlot.shops">
+              <ion-row>
+                <ion-col size="9">
+                  <p class="pricetype">{{shop.shop_name | titlecase}}</p>
+                </ion-col>
+                <ion-col size="3" class="ion-text-right">
+                  <p class="prices">{{shop.perShopAmount | currency:'INR':true :'0.0-2'}}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+    <ion-accordion-group expand="inset" mode="ios">
+      <ion-accordion style="background: transparent;" value="first" toggleIcon="chevron-down-outline" toggleIconSlot="start">
+        <ion-item slot="header">
+          <ion-label>
+            <p class="text">{{'discount' | language:'Discount'}}</p>
+          </ion-label>- {{cartData.discount | currency:'INR':true :'0.0-2'}}
+        </ion-item>
+        <div class="ion-padding content" slot="content" *ngFor="let cartItem of cartData.cart">
+          <div *ngFor="let timeSlot of cartItem.timeSlots">
+            <div class="shops" *ngFor="let shop of timeSlot.shops">
+              <ion-row>
+                <ion-col size="9">
+                  <p class="pricetype">{{shop.shop_name | titlecase}}</p>
+                </ion-col>
+                <ion-col size="3" class="ion-text-right">
+                  <p class="prices">- {{shop.perShopDiscount | currency:'INR':true :'0.0-2'}}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+    <ion-accordion-group expand="inset" mode="ios" *ngIf="cartData.delivery.mode == 'DELIVERY'">
+      <ion-accordion style="background: transparent;" value="first" toggleIcon="chevron-down-outline" toggleIconSlot="start">
+        <ion-item slot="header">
+          <ion-label>
+            <p class="text">{{'deliveryCharges' | language:'Delivery Charges'}}</p>
+          </ion-label>
+          {{cartData.aggregateDeliveryCharges | currency:'INR':true :'0.0-2'}}
+        </ion-item>
+        <div class="ion-padding content" slot="content" *ngFor="let cartItem of cartData.cart">
+          <div *ngFor="let timeSlot of cartItem.timeSlots">
+            <div class="shops" *ngFor="let shop of timeSlot.shops">
+              <ion-row>
+                <ion-col size="9">
+                  <p class="pricetype">{{shop.shop_name | titlecase}}</p>
+                </ion-col>
+                <ion-col size="3" class="ion-text-right">
+                  <p class="prices">{{shop.deliveryCharges | currency:'INR':true :'0.0-2'}}</p>
+                </ion-col>
+              </ion-row>
+            </div>
+          </div>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+    <div class="cart-bill-part">
+      <p class="pricetype">{{'total' | language:'Total'}}</p>
+      <p class="prices" *ngIf="cartData.delivery.mode != 'DELIVERY'">{{cartData.amountWithDiscount | currency:'INR':true :'0.0-2'}}</p>
+      <p class="prices" *ngIf="cartData.delivery.mode == 'DELIVERY'" >{{(cartData.amountWithDiscount + cartData.aggregateDeliveryCharges) | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+  </div>
+  <!-- <div class="cart-bill">
+    <div class="cart-bill-part">
+      <p class="pricetype">{{'cartTotal' | language:'Cart Total'}}</p>
+      <p class="prices">{{cartData.amount | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+    <div class="cart-bill-part">
+      <p class="pricetype">{{'discount' | language}}</p>
+      <p class="prices">{{cartData.discount | currency:'INR':true :'0.0-2'}}</p>
+      <ng-template #elseBlock>
+        <p class="prices">{{cartData.totalDiscount | currency:'INR':true :'0.0-2'}}</p>
+      </ng-template>
+    </div>
+    <div class="cart-bill-part">
+      <p class="pricetype">{{'deliveryCharge' | language:'Delivery Charge'}}</p>
+      <p class="prices">{{cartData.aggregateDeliveryCharges | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+    <div class="cart-bill-part">
+      <p class="pricetype"><strong>{{'total' | language}}</strong></p>
+      <p class="prices">{{(cartData.amountWithDiscount + cartData.aggregateDeliveryCharges) | currency:'INR':true
+        :'0.0-2'}}</p>
+      <ng-template #elseTotalBlock>
+        <p class="prices">{{(cartData.amount + cartData.aggregateDeliveryCharges) - cartData.totalDiscount |
+          currency:'INR':true :'0.0-2'}}</p>
+      </ng-template>
+    </div>
+  </div> -->
+  <div class="cart-selfp">
+    <input id="d1" name="option" (change)="upadteLocalCart()" [(ngModel)]="cartData.delivery.mode" value="PICKUP"
+      type="radio" />
+    <label for="d1" class="deliveryText">{{'selfPickup' | language}}</label>
+  </div>
+  <div class="cart-selfp1">
+    <div class="cart-selfp">
+      <input id="d2" name="option" (change)="upadteLocalCart()" [(ngModel)]="cartData.delivery.mode" value="DELIVERY"
+        type="radio" />
+      <label for="d2" class="deliveryText">{{'delivery' | language}}</label>
+    </div>
+  </div>
+  <p *ngIf="cartData.delivery.mode == 'DELIVERY'" class="delivryAtText">Delivery at</p>
+  <ion-card *ngIf="cartData.delivery.mode == 'DELIVERY'" class="address">
+    <ion-icon  *ngIf="!cartData.delivery.location.type" name="location-outline"></ion-icon>
+    <ion-icon  *ngIf="cartData.delivery.location.type == 'Other'" name="location-outline"></ion-icon>
+    <ion-icon *ngIf="cartData.delivery.location.type == 'Home'" name="home-outline"></ion-icon>
+    <ion-icon *ngIf="cartData.delivery.location.type == 'Work'" name="bag-outline"></ion-icon>
+    <p class="addressText"> {{cartData.delivery.location.address}} </p>
+    <!-- <p class="changeText"  routerLink="/address-list">CHANGE</p> -->
+  </ion-card>
+  <ion-button color='primary' class="continue" (click)="cartData.delivery.mode == 'DELIVERY' && !deliveryStatus ? notDelivering() : checkout()" shape="round">
+    {{'continue' | language}}</ion-button>
+</ion-content>

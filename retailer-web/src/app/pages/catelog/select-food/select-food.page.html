@@ -1,0 +1,168 @@
+<app-header></app-header>
+<ion-content class="customContainer">
+    <ion-refresher mode="ios" slot="fixed" >
+        <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher>
+    <!-- Sub Header START -->
+    <ion-grid class="subHeader">
+        <ion-row class="ion-justify-content-around ion-align-items-center">
+            <ion-col size="12" size-sm="4" size-md="4" size-lg="4">
+                <ion-toolbar mode="md">
+                    <ion-buttons slot="start">
+                        <ion-back-button defaultHref="/home"></ion-back-button>
+                    </ion-buttons>
+                    <ion-title class="page-title" slot="start">Catalog Management</ion-title>
+                </ion-toolbar>
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4" size-lg="4">
+                <ion-searchbar [debounce]="500" search-icon="search-outline" id="myInput" mode="md"
+                    show-clear-button="focus" placeholder="Search Categories, Products"
+                     #search></ion-searchbar>
+
+            </ion-col>
+            <ion-col size="12" size-sm="4" size-md="4" size-lg="4">
+                <ion-item lines="none" class="ion-float-right addCatalog">
+                    <ion-img slot="start" src="/assets/image/Group.svg"></ion-img>
+                    <ion-label color="primary" [routerLink]="['/my-catalog']">My Catalog</ion-label>
+                    <ion-fab-button class="ion-fab-button" slot="end" size="small" (click)="addCatalog()">
+                        <ion-icon name="add"></ion-icon>
+                    </ion-fab-button>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+
+    <!-- Sub Header END -->
+    <!-- <ion-header mode="md">
+    <ion-toolbar>
+        <ion-buttons slot="start" class="ion-no-margin">
+            <ion-back-button slot="start" color="primary" defaultHref="/home" text=""
+                icon="chevron-back-outline"></ion-back-button>
+        </ion-buttons>
+        <ion-label>
+            <ion-searchbar class="" [debounce]="500" show-clear-button="focus" placeholder="Search" mode="ios" id="myInput" #search></ion-searchbar>
+        </ion-label>
+        <ion-buttons slot="end">
+            <ion-button color="primary">
+                <ion-img class="mycatbtn" src="assets/images/myCatalogbtn.svg" [routerLink]="['/my-catalog']"></ion-img>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+
+    <!-- <ion-refresher mode="ios" slot="fixed" (ionRefresh)="pullToRefresh($event)">
+        <ion-refresher-content pullingText="Pull to refresh" refreshingSpinner="circles"
+            refreshingText="Refreshing..."></ion-refresher-content>
+    </ion-refresher> -->
+    <ion-grid>
+
+        <ion-row class="ion-align-items-center">
+
+            <ion-col size="12">
+                <div class="navbar">
+                    <a *ngFor="let item of finalData;let i = index" id="{{item?.id}}" class="ellipsis"
+                        [ngClass]="{'active' : i == selectedCategory}"
+                        (click)="selectedCategory = i;selectedSubCategory = 0">
+                        {{ item?.name | textTruncate : 12 }}
+                    </a>
+                </div>
+            </ion-col>
+
+            <!-- <ion-col sizeLg="2" sizeMd="2" sizeXs="2" size="2">
+                <p routerLink="/select-category" class="more-btn">
+                    <ion-icon class="plus-btn" slot="icon-only" name="add-circle"></ion-icon>
+                </p>
+            </ion-col> -->
+
+        </ion-row>
+        <ion-row>
+            <ion-col size="9">
+                <div class="filter">
+                    <a class="active">Apple</a>
+                    <a>Orange</a>
+                    <a>Banana</a>
+                    <a>Mango</a>
+                    <a>Grapes</a>
+                </div>
+            </ion-col>
+
+            <ion-col size="3">
+                <ion-item lines="none">
+                    <div class="text" slot="end">
+                        <p (click)="addRemoveAll(true)"
+                            *ngIf="!finalData[selectedCategory]?.categories[selectedSubCategory].categories[0].itemSelected"
+                            class="selectall">
+                            <u>{{'Select all' | language : 'Select all'}}</u>
+                        </p>
+                        <p (click)="addRemoveAll(false)"
+                            *ngIf="finalData[selectedCategory]?.categories[selectedSubCategory]?.categories[0]?.itemSelected"
+                            class="cancel">
+                            <u>{{'clear' | language : 'Clear'}}</u>
+                        </p>
+                    </div>
+                </ion-item>
+            </ion-col>
+        </ion-row>
+
+
+        <ion-row>
+            <ion-col size="2">
+                <div class="info-section">
+                    <div class="sidebar">
+                        <div class="scroll">
+                            <div class="type" (click)="selectedSubCategory = j"
+                                *ngFor="let sub of finalData[selectedCategory]?.categories;let j = index"
+                                [ngClass]="{'current' : j === selectedSubCategory}">
+                                <ion-label>
+                                    <ion-img src="{{ sub?.image }}" alt=""></ion-img>
+                                    <span>{{sub?.name| slice:0:18}}</span>
+
+                                </ion-label>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ion-col>
+
+            <ion-col size="10">
+                <ion-grid class="product-display">
+                    <ion-row>
+
+<ng-container *ngFor="let product of finalData[selectedCategory]?.categories[selectedSubCategory].categories[0].products">
+                        <ion-col size="6" size-sm="6" size-md="3" size-lg="2" *ngIf="search.value ? product.name.toLowerCase().includes(search.value.toLowerCase()) : true">
+                            <ion-card class="product">
+                                <span>
+                                    <ion-checkbox slot="end" mode="md" (ngModelChange)="checkIsChecked()"
+                                        [disabled]="product?.status == 'published'"
+                                        [checked]="selectedIds.includes(product.id.toString())"
+                                        [(ngModel)]="product.checked"></ion-checkbox>
+                                </span>
+
+                                <img class="productimage" (click)="product.checked = !product.checked; checkIsChecked()" 
+                                    src="{{ product?.image ? product?.image : 'assets/images/fruit.jpg'}}"
+                                    alt="{{product.name | slice:0:10}}" />
+
+                                <ion-card-header>
+                                    <ion-card-title> {{product.name}}</ion-card-title>
+                                </ion-card-header>
+                            </ion-card>
+                        </ion-col>
+                    </ng-container>
+                    </ion-row>
+                </ion-grid>
+
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+</ion-content>
+
+
+
+
+<ion-footer>
+    <!-- <ion-button style="margin: 10px;" shape="round" expand="full" (click)="onContinue()">{{'continue' | language : 'Continue'}}</ion-button> -->
+    <ion-button style="margin: 10px;" shape="round" expand="full" (click)="onContinue()" mode="ios">{{'continue' |
+        language : 'Continue'}} ({{totalCount}})</ion-button>
+</ion-footer>

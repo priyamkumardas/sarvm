@@ -1,0 +1,41 @@
+ion-toolbar {
+    display: flex;
+    ion-title {
+      font-weight: bold;
+      font-size: 18px;
+      justify-content: center;
+      place-content: center;
+    }
+    ion-icon {
+      margin: auto 0;
+      font-size: 5vw;
+      padding: 0 0 0 3vw;
+      color: #a42c24;
+    }
+    ion-button {
+      font-family: "Poppins";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 24px;
+      text-transform: uppercase;
+      color: #a42c24;
+    }
+}
+
+h3 {
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.wrapdiv {
+    white-space: break-spaces;
+}
+
+.header-label {
+    font-size: 1.5em;
+}
+
+a {
+  text-decoration: none;
+}

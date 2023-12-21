@@ -1,0 +1,72 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <p class="order-id">#{{orderDropPick.orderId}}</p>
+      <p class="order-value">{{'OrderValue'|language:'Order Value'}}:&nbsp;<span class="amount">{{orderDropPick?.amount + (orderDropPick?.deliveryInfo?.deliveryCharges ? orderDropPick?.deliveryInfo?.deliveryCharges : 0) - (orderDropPick.discount ? orderDropPick?.discount : 0) | currency:'INR':'symbol':'0.0-2'}}</span></p>
+    </div>
+
+    <div class="amount-view">
+      <div>
+        <div class="weight-and-earning">
+          <ion-icon src="assets/icon/ic-kg.svg"></ion-icon>
+          <p class="item-size">{{orderDropPick?.orderWeight | number: '0.0-2'}}</p>
+        </div>
+        <p class="item-identity">{{'Weight '|language:'Weight '}}</p>
+      </div>
+      <div>
+        <div class="weight-and-earning">
+          <!-- <ion-icon src="assets/icon/ic-rupee-red.svg"></ion-icon> -->
+          <p class="item-size">{{orderDropPick?.earning !== 'N/A' ? orderDropPick?.earning : 'N/A'}}</p>
+        </div>
+        <p class="item-identity">{{'Earning'|language:'Earning'}}</p>
+      </div>
+    </div>
+
+    <div class="timeline-wrapper">
+      <div class="middle-line"></div>
+      <div class="left-circle right-top">
+        <div class="circle-point"></div>
+      </div>
+      <div class="right-circle left-top">
+        <div class="circle-point"></div>
+      </div>
+    </div>
+
+    <ion-row class="address-view">
+      <ion-col size="6">
+        <p class="address-header">{{orderDropPick?.pickUp?.shopName}}</p>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-call-red.svg" />
+          <p class="today-date">+91 {{orderDropPick.pickUp.phoneNumber}}</p>
+        </div>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-location.svg" />
+          <p class="today-date"><span>{{orderDropPick.pickUp.location.address}}</span></p>
+        </div>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-clock-time.svg" />
+          <p class="today-date">{{'pickUp'|language:'Pickup'}}: {{orderDropPick.pickUp.time | date:"MMM dd, YYYY HH:mm a"}}</p>
+        </div>
+      </ion-col>
+      <ion-col size="6">
+        <p class="address-header">{{orderDropPick?.dropOff?.userName}}</p>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-call-red.svg" />
+          <p class="today-date">+91 {{orderDropPick.dropOff.phoneNumber}}</p>
+        </div>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-location.svg" />
+          <p class="today-date"><span>{{orderDropPick.dropOff.location.address}}</span></p>
+        </div>
+        <div class="inline-icon-text">
+          <img src="assets/icon/ic-clock-time.svg" />
+          <p class="today-date">{{'Drop-Off'|language:'Drop-Off'}}: {{orderDropPick.dropOff.time | date:"MMM dd, YYYY HH:mm a"}}</p>
+        </div>
+      </ion-col>
+    </ion-row>
+  </div>
+</div>

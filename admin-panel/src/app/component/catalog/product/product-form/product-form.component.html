@@ -1,0 +1,327 @@
+<div class="main-content p-4">
+  <h2 class="title" *ngIf="!productcatalogData">{{this.product_id == '0'?'Add':'Edit'}} Product</h2>
+
+  <div class="container" [ngClass]="{ 'hide': !productFormhide }">
+    <div *ngIf="!productcatalogData">
+      <form [formGroup]="productFormdata" style="display: flex;flex-direction: column;"
+        (ngSubmit)="onCreateProduct(productFormdata.value)">
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Product Image<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="upload">
+            <img class="uploadImg"
+              [src]="productFormdata.get('image').value ? productFormdata.get('image').value : imageUrl" width=150
+              height="150" />
+            <div class="round">
+              <input #file type="file" accept=".png, .jpg, .jpeg" (change)="getPresignedUrl($event)" />
+              <img class="editIcon" src="/assets/images/pencil-square.svg" width=20 height=20 />
+            </div>
+          </div>
+        </div>
+
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Product Name<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="name" name="name" class="form-control" formControlName="name"
+              placeholder="Product name..">
+            <div *ngIf="productFormdata.get('name').invalid && productFormdata.get('name').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('name').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="subject">Description<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="col-75">
+            <textarea id="description" name="description" class="form-control" formControlName="description"
+              placeholder="Write something.." style="height:60px"></textarea>
+            <div
+              *ngIf="productFormdata.get('description').invalid && productFormdata.get('description').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('description').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Place of origin:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="place_of_origin" name="place_of_origin" class="form-control"
+              formControlName="place_of_origin">
+            <div
+              *ngIf="productFormdata.get('place_of_origin').invalid && productFormdata.get('place_of_origin').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('place_of_origin').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Minimum Order Quantity<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="min_oq" name="min_oq" class="form-control" formControlName="min_oq">
+            <div *ngIf="productFormdata.get('min_oq').invalid && productFormdata.get('min_oq').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('min_oq').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Maximum Order Quantity:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="max_oq" name="max_oq" class="form-control"
+              formControlName="max_oq">
+            <div *ngIf="productFormdata.get('max_oq').invalid && productFormdata.get('max_oq').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('max_oq').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Minimum price per order:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="min_ppo" name="min_ppo" class="form-control"
+              formControlName="min_ppo">
+            <p *ngIf="productFormdata.get('min_ppo').errors?.number_negative">
+              Không được nhập giá trị số nhỏ hơn 0
+            </p>
+            <div
+              *ngIf="productFormdata.get('min_ppo').invalid && productFormdata.get('min_ppo').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('min_ppo').errors?.required">
+                This field is required
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Weight Per Piece:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="weight_per_piece" name="weight_per_piece"
+              class="form-control" formControlName="weight_per_piece">
+            <div
+              *ngIf="productFormdata.get('weight_per_piece').invalid && productFormdata.get('weight_per_piece').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('weight_per_piece').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Regular price:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="rp" name="rp" class="form-control"
+              formControlName="rp">
+            <div *ngIf="productFormdata.get('rp').invalid && productFormdata.get('rp').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('rp').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">MRP:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="mrp" name="mrp" class="form-control"
+              formControlName="mrp">
+            <div *ngIf="productFormdata.get('mrp').invalid && productFormdata.get('mrp').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('mrp').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Selling Price:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="sp" name="sp" class="form-control"
+              formControlName="sp">
+            <div *ngIf="productFormdata.get('sp').invalid && productFormdata.get('sp').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('sp').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Return option:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="return_option" name="return_option" class="form-control"
+              formControlName="return_option">
+            <div
+              *ngIf="productFormdata.get('return_option').invalid && productFormdata.get('return_option').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('return_option').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Veg<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="col-75">
+            <select name="veg" id="veg" formControlName="veg" class="stringFields">
+              <option [value]="type.value" *ngFor="let type Of allowedValues | keyvalue">{{type.value}}</option>
+            </select>
+            <div *ngIf="productFormdata.get('veg').invalid && productFormdata.get('veg').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('veg').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Tax_status<span class="asterisk">*</span>:</label>
+          </div>
+          <div class="col-75">
+            <select name="tax_status" id="tax_status" formControlName="tax_status" class="stringFields">
+              <option value="TAXABLE">Taxable</option>
+              <option value="NON_TAXABLE">Non Taxable</option>
+            </select>
+            <div
+              *ngIf="productFormdata.get('tax_status').invalid && productFormdata.get('tax_status').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('tax_status').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">HSN:</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="hsn" name="hsn" class="form-control" formControlName="hsn">
+            <div *ngIf="productFormdata.get('hsn').invalid && productFormdata.get('hsn').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('hsn').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Tax:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="tax" name="tax" class="form-control"
+              formControlName="tax">
+            <div *ngIf="productFormdata.get('tax').invalid && productFormdata.get('tax').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('tax').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Minimum Price:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="min_price" name="min_price"
+              class="form-control" formControlName="min_price">
+            <div
+              *ngIf="productFormdata.get('min_price').invalid && productFormdata.get('min_price').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('min_price').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" class="form-group">
+          <div class="col-25">
+            <label for="fname">Maximum Price:</label>
+          </div>
+          <div class="col-75">
+            <input type="number" min="0" (input)="checkValue($event)" id="max_price" name="max_price"
+              class="form-control" formControlName="max_price">
+            <div
+              *ngIf="productFormdata.get('max_price').invalid && productFormdata.get('max_price').touched || isSubmitted">
+              <div class="alert alert-danger" *ngIf="productFormdata.get('max_price').errors?.required">
+                This field is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row form-group center">
+          <button *ngIf="!toggleButton" class="addBtn" type="submit">Add</button>
+          <button *ngIf="toggleButton" class="addBtn" (click)="updateProductData(this.product_id)"
+            type="button">Submit</button>
+        </div>
+      </form>
+    </div>
+    <!--Product mapping-->
+    <h2 class="title" *ngIf="productcatalogData">{{this.product_id == '0'?'Add':'Edit'}} Category</h2>
+    <label for="subject" *ngIf="productcatalogData">
+      <h4>Choose category:</h4>
+    </label>
+    <div class="row" class="form-group" *ngIf="productcatalogData">
+      <div class="col-12">
+        <div class="container pt-3">
+          <div class="row">
+            <div class="col-md-4">
+              <!-- <p>Product Id --- {{productid}}</p> -->
+              <div class="form-check" *ngFor="let category of catalogData; let i = index;"
+                (click)="selectedCat = i+1;selectedSubCat=0">
+                <input type="checkbox" class="form-check-input"
+                  (change)="deSelect(category.checked,category.name,'CategorySection')" [(ngModel)]="category.checked">
+                <label class="form-check-label">{{category.name}}
+                  <i class="fa fa-angle-right"></i></label>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="selectedCat">
+              <!-- <p>catalog_id --- {{mapCatagory.catalogId}}</p> -->
+              <div class="form-check" *ngFor="let subcategory of catalogData[selectedCat-1]?.categories; let i = index;"
+                (click)="selectedSubCat = i+1">
+                <input type="checkbox" class="form-check-input"
+                  (change)="deSelect(subcategory.checked,subcategory.name,'SubCategorySection')"
+                  [(ngModel)]="subcategory.checked">
+                <label class="form-check-label">{{subcategory.name}} <i class="fa fa-angle-right"></i></label>
+              </div>
+            </div>
+            <div class="col-md-4" *ngIf="selectedSubCat">
+              <ng-container
+                *ngFor="let products of catalogData[selectedCat-1]?.categories[selectedSubCat-1]?.categories; let i = index;">
+                <div class="form-check" *ngIf="products.name != 'all'">
+                  <input type="checkbox" class="form-check-input"
+                    (change)="deSelect(products.checked,products.name,'ProductsSection')"
+                    [(ngModel)]="products.checked">
+                  <label class="form-check-label">{{products.name}}</label>
+                </div>
+              </ng-container>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row" class="form-group" style="display: flex;">
+        <button (click)="updateProduct()" style="margin: auto;" type="submit">Add</button>
+      </div>
+    </div>

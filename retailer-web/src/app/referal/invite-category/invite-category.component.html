@@ -1,0 +1,96 @@
+<ion-header >
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="action('close')">
+        <ion-icon
+          class=""
+          name="chevron-back-outline"
+        ></ion-icon>
+      </ion-button>
+      <!-- <ion-button >
+        {{ "Invite" | language: "Invite" }}
+      </ion-button> -->
+      <ion-title slot="secondary" >{{ "Invite" | language: "Invite" }}
+      </ion-title>
+    </ion-buttons>
+    <ion-img (click)="refferalclose()" class="nav-logo" src="assets/icon/Sarvmlogo.png"></ion-img>
+    
+    
+      
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- <div class="header">
+    <ion-icon
+      id="back"
+      (click)="action('close')"
+      name="chevron-back-outline"
+    ></ion-icon>
+    <span>{{ "Invite" | language: "Invite" }}</span> -->
+    <!-- for language translation it should be Invite  -->
+  <!-- </div> -->
+  
+  <ion-grid>
+    <ion-row>
+      <ion-col (click)="action('refer-form', {name:'Consumer',image:'/assets/InvitePageImg2/person.svg'})">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg2/person.svg"></ion-img>
+        </div>
+        <p>{{ "consumer" | language: "Consumer" }}</p>
+        <!-- for language translation it should be Individual  -->
+      </ion-col>
+      <ion-col (click)="action('refer-form', {name:'RETAILER',image:'/assets/InvitePageImg2/storefront.svg'})">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg2/storefront.svg"></ion-img>
+        </div>
+        <p>{{ "retailer" | language: "Retailer" }}</p>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/Group 7737.png"></ion-img>
+        </div>
+        <p>{{ "Deliveryvalet" | language: "Delivery Valet" }}</p>
+      </ion-col>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/bi_shop.png"></ion-img>
+        </div>
+        <p>{{ "Wholesaler" | language: "Wholesaler" }}</p>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/Farmer.png"></ion-img>
+        </div>
+        <p>{{ "Farmer" | language: "Farmer" }}</p>
+      </ion-col>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/broker.png"></ion-img>
+        </div>
+        <p>{{ "Trader/Broker" | language: "Trader/Broker" }}</p>
+      </ion-col>
+    </ion-row>
+  
+    <ion-row>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/Truck.png"></ion-img>
+        </div>
+        <p>{{ "Deliverypartner" | language: "Delivery Partner" }}</p>
+      </ion-col>
+      <ion-col (click)="notAvailable()">
+        <div class="imgBox">
+          <ion-img src="../../../assets/InvitePageImg/Other.png"></ion-img>
+        </div>
+        <p>{{ "other" | language: "Other" }}</p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  </ion-content>

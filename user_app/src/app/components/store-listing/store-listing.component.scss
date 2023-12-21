@@ -1,0 +1,168 @@
+.thumbnailloading {
+  height: 150px;
+  // width: 150px;
+  // filter: grayscale(90%);
+}
+
+.titlearea {
+  font-size: 5px;
+}
+
+p {
+  font-size: 18px;
+}
+
+.full-width-card {
+  display: flex;
+  width: 100%;
+  height: 118px;
+  margin-left: 16px;
+  margin-right: 16px;
+  margin-bottom: 16px;
+
+  .heart {
+    width: 25px;
+    position: absolute;
+    height: 25px;
+    background: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    border-radius: 100%;
+    top: 0;
+    right: 0;
+    align-items: center;
+
+    ion-icon.redicon {
+      color: #eb445a;
+      font-size: 20px;
+    }
+  }
+
+  #img {
+    height: inherit;
+    object-fit: cover;
+    width: 100%;
+    border-radius: 5px 15px;
+  }
+
+  .image {
+    flex: 1;
+    background: #E7E7E7;
+    border-top-right-radius: 20px;
+    border-bottom-left-radius: 20px;
+
+    .delete {
+      height: 118px;
+      position: relative;
+    }
+
+    .delete .delete-button {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 20px;
+      width: 20px;
+      border-radius: 50%;
+      background: linear-gradient(180deg, rgba(0, 0, 0, 0.33) 0%, rgba(0, 0, 0, 0.45) 100%);
+    }
+  }
+
+  .content {
+    flex: 1.5;
+    //display: flex;
+    align-self: center;
+    place-self: end;
+    font-size: 14px;
+    justify-content: space-between;
+    padding: 0px 15px 0px 15px;
+
+    .details {
+      flex-direction: column;
+      display: flex;
+      flex: 1;
+      color: #151522;
+
+      .title,
+      .desc {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+      }
+
+      .title {
+        overflow: hidden !important;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        font-weight: 500;
+        color: #151522;
+        font-size: 14px;
+        font-weight: 600;
+        max-height: 20px;
+        min-height: 18px;
+        // margin-bottom: 5px;
+        // padding-bottom: 6px;
+      }
+
+      .desc {
+        font-size: 13px;
+        color: #666666;
+        /* padding-bottom: 6px; */
+        margin: 0px;
+      }
+
+      .rating-content {
+        text-align: center;
+        display: flex;
+        align-items: center;
+        // padding-bottom: 6px;
+
+        .dot {
+          height: 4px;
+          margin-left: 3.5px;
+          margin-right: 3.5px;
+          width: 4px;
+          border-radius: 100%;
+          background-color: #4F5052;
+        }
+
+        .view {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            width: 14px;
+            height: 14px;
+            vertical-align: middle;
+          }
+
+          .value {
+            vertical-align: middle;
+          }
+        }
+      }
+
+      .delivering-status {
+        height: 24px;
+        // background: linear-gradient(90deg, #888d8a 1.55%, rgba(141, 149, 144, 0.32) 69.44%);
+        border-radius: 2px 20px 20px 2px;
+        align-items: center;
+        display: flex;
+        width: 145px;
+
+        a{
+          text-decoration: none;
+        }
+        img {
+          margin: 0px 9px 0px 2px;
+        }
+        span{
+          color: var(--ion-color-warning-contrast);
+        }
+      }
+    }
+  }
+}

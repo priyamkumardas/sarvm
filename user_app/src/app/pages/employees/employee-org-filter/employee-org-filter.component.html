@@ -1,0 +1,20 @@
+<ion-footer>
+  <div class="CrossIcon" (click)="modelCtrl.dismiss(active)">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <ion-card class="content">
+    <p class="clear" (click)="modelCtrl.dismiss()">{{'clear'|language:'Clear'}}</p>
+    <div class="contentDiv">
+      <div *ngFor="let data of myResponce" [ngClass]="{'active':active == data._id}" (click)="modelCtrl.dismiss({name:data.name,id:data._id})">
+        <ion-img *ngIf="data.name == 'sarvm'"src="/assets/Group 27.svg" class="roleImg"></ion-img>
+        <ion-img *ngIf="data.name != 'sarvm'"src="/assets/noun-franchise-4997824 1.svg" class="roleImg"></ion-img>
+        <label>{{data.name|language:data.name | titlecase}}</label>   
+      </div>
+     
+      <!-- <div [ngClass]="active == 'freelancer'?'active':''" (click)="modelCtrl.dismiss('freelancer')">
+        <ion-img src="/assets/noun-freelancer-2909387 1.svg" class="roleImg"></ion-img>
+        <label>{{'freelancer'|language:'Freelancer'}}</label>
+      </div> -->
+    </div>
+  </ion-card>
+</ion-footer>

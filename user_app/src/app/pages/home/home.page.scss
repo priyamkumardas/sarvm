@@ -1,0 +1,177 @@
+
+.bar-header {
+  border: 0px !important;
+  border-bottom-color: transparent !important;
+  background-image: none !important;
+  border-bottom: none !important;
+}
+ion-item{
+  margin-left: -18px;
+}
+ion-avatar{
+ margin-right: 0;
+}
+.wallet{
+  max-width: 86%;
+}
+.address{
+  width: 80%;
+  width: -webkit-fill-available;
+  font-size: 12px;
+  font-weight: 300;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.addressType{
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Poppins';
+  font-style: normal;
+  color: #4F5052;
+}
+// Near You Section Thumbnail
+
+.thumbnailloading {
+  height: 150px;
+  width: 150px;
+  // filter: grayscale(90%);
+}
+.btn-green{
+  color: rgb(86 195 156) !important;
+}
+
+
+.search-box {
+  margin: 20px 15px 10px 15px;
+  --min-height: 35px;
+  --padding-start: 16px;
+  border-radius: 36px;
+  --background: #F6F6F6;
+  overflow: hidden;
+
+  >ion-input {
+    height: 35px;
+    --padding-top: 8px;
+    --padding-bottom: 8px;
+  }
+
+  >ion-icon {
+    font-size: 20px;
+    margin-right: 12px;
+    margin-left: 5px;
+  }
+}
+
+.txt {
+  margin: 0;
+  font-family: 'Poppins';
+  font-style: normal;
+  margin-left: 16px;
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 30px;
+  color: #4F5052;
+
+}
+
+ion-grid {
+
+  margin-left: 16px;
+  margin-right: 16px;
+
+  ion-row {
+  
+    ion-col {
+      text-align: center;
+      height: 100%;
+
+      .box {
+
+        img {
+          height: 50px;
+          width: 50px;
+        }
+
+        p {
+
+          font-family: 'Poppins';
+          font-style: normal;
+          font-weight: 400;
+          font-size: 12px;
+          line-height: 18px;
+          color: #4F5052;
+
+        }
+      }
+    }
+  }
+}
+
+.navbaar {
+  display: flex;
+  justify-content: space-around;
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-bottom: 1.5em;
+
+    .box1 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // width: 70px;
+      height: 30px;
+      border: 0.5px solid #999999;
+      border-radius: 14px;
+      padding-left: 6px;
+      padding-right: 6px;
+      background-color: white;
+
+      p {
+        margin: 0;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 400;
+        font-size: 13px;
+        line-height: 24px;
+        color: #4F5052;
+         }
+
+    img {
+      height: 12px;
+      width: 12px;
+      margin-left: 4px;
+    }
+  }
+}
+
+.footer-md::before{
+  background-image: none;
+}
+.footer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  position: sticky;
+  bottom: 0px;
+  background-color: transparents;
+  height: 50px;
+  box-shadow: 0px 1px 10px 1px rgba(2, 27, 26, 0.1);
+  border-radius: 20px 20px 0px 0px;
+ 
+}
+.location-icons {
+  align-items: center;
+  display: flex;
+  ion-icon{
+    height: 27px;
+    width: 27px;
+    color: var(--ion-color-medium-shade);
+  }
+}
+.distance{
+  margin-left: 16px;
+  font-size: 14px;
+  color: #666;
+  background-color: white;
+}

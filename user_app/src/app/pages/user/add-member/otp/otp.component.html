@@ -1,0 +1,24 @@
+<ion-footer>
+
+  <div class="CrossIcon" (click)="cancel()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+
+
+  <div class="otpBox-header">
+
+    <p class="header">{{'enterOtp' | language:'Enter OTP'}}</p>
+ 
+    <ion-card> 
+         <label for="OTP">{{'otp' | language:'OTP'}}</label>
+         <input type="number">
+    </ion-card>
+
+    <p class="txt">{{'anotphasbeensentatyourregisteredmobilenumber' | language:'An OTP has been sent at your registered mobile number'}}</p>
+
+    <ion-button color ="primary">{{'verify' | language:'Verify'}}</ion-button>
+  </div>
+  
+
+</ion-footer> 

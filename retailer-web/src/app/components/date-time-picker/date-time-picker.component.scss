@@ -1,0 +1,20 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ion-datetime {
+  --background: white;
+  color: var(--ion-color-base) !important;
+  padding: 5vw;
+}
+
+ion-button {
+  color: #4f5052;
+}
+
+.cancelBtn {
+  position: absolute;
+  left: -67vw;
+}

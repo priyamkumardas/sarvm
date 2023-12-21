@@ -1,0 +1,90 @@
+<div>
+  <form [formGroup]="pollutionCertificateDocForm" (ngSubmit)="savePollutionCertificateDocDetails()">
+    <!-- updateOrAddPollutionCertificate ? updatePollutionCertificateDocDetails() :  -->
+    <div class="segment">
+      <div class="documentInput" (click)="chooseImage('pollutionCertificate')">
+        <ng-container>
+          <img [src]="pollutionCertificateImage ? pollutionCertificateImage: '/assets/icon/ic-vehicle-licence.svg'"
+            alt="" class="doc-img" />
+          <!--<input type="file" accept="image/*" id="pan" class="document" />  (change)="uploadImage($event,'pan')" -->
+          <div class="labels" *ngIf="!pollutionCertificateImage">
+            <label for="pan">
+              <u>{{'uploadPollutionCertificate' | language : 'Upload Pollution Certificate'}}</u>
+            </label>
+          </div>
+        </ng-container>
+        <div class="removeBtn" *ngIf="pollutionCertificateImage">
+          <ion-button color="warning" class="re-upload" (click)="removeImage('pollutionCertificate')">
+            {{'re-upload' | language :'Re-Upload'}}
+          </ion-button>
+        </div>
+      </div>
+      <ion-grid fixed>
+        <ion-row>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.pollutionCertificateNumber"
+              formControlName="pollutionCertificateNumber" id="pollutionCertificateNumber" class="input"
+              (keypress)="keyPressNumbers($event)"></ion-input>
+            <label class="label">{{'pcCertificateNo' | language : 'Certificate No'}}<span id="star">*</span></label>
+          </ion-col>
+          <ion-col size="12">
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.vehicleNumber" formControlName="vehicleNumber"
+              class="input" id="vehicleNumber" (keypress)="onKeyPress($event)"></ion-input>
+            <label class="label">{{'pcVehicleNo' | language : 'Vehicle No'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+
+        <ion-row>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.pollution_certificate_valid_from" [readonly]="true"
+              formControlName="pollutionCertificateValidFrom" id="pollutionCertificateValidFrom" 
+              class="inputDiff" (click)="openDateSelectModal('pollutionCertificateValidFrom')">
+            </ion-input>
+            <label class="label">{{'pcValidFrom' | language : 'Valid From'}}<span id="star">*</span></label> -->
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.pollution_certificate_valid_from" [readonly]="true" formControlName="pollutionCertificateValidFrom" id="dateFiltPollutionFrom" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <ion-modal trigger="dateFiltPollutionFrom" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'kycform'" [date_info]="dateCondition"
+                      [value]="pollutionCertificateValidFrom" [date_format]="format" (datePickerValue)="openDateSelectModal('pollutionCertificateValidFrom',$event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'pcValidFrom' | language : 'Valid From'}}<span id="star">*</span></label>
+
+          </ion-col>
+          <ion-col size="6">
+            <!-- <ion-input type="text" [(ngModel)]="vehicleDocInfo.pollution_certificate_valid_upto" [readonly]="true"
+              formControlName="pollutionCertificateUpto" id="pollutionCertificateUpto" 
+              class="inputDiff" (click)="openDateSelectModal('pollutionCertificateUpto')">
+            </ion-input>
+            <label class="label">{{'pcValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label> -->
+
+            <ion-input type="text" [(ngModel)]="vehicleDocInfo.pollution_certificate_valid_upto" [readonly]="true" formControlName="pollutionCertificateUpto" id="dateFiltPollutionUpto" class="inputDiff">
+              <ion-icon class="calendar-icon" src="assets/icon/ic-calendar-red.svg" slot="end"></ion-icon>
+            </ion-input>
+            <ion-modal trigger="dateFiltPollutionUpto" handleBehavior="cycle" show-backdrop="false" side="end">
+              <ng-template>
+                  <app-date-time-picker [formType]="'kycform'" [date_info]="dateCondition"
+                      [value]="pollutionCertificateUpto" [date_format]="format" (datePickerValue)="openDateSelectModal('pollutionCertificateUpto', $event)">
+                  </app-date-time-picker>
+              </ng-template>
+            </ion-modal>
+            <label class="label">{{'pcValidUpto' | language : 'Valid Upto'}}<span id="star">*</span></label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+      <div class="kyc-footer">
+        <div class="footer">
+          <ion-button color="primary" fill="outline" expand="block" shape="round" class="skip btn"
+          (click)="skipVehicleDocument()">Skip</ion-button>
+          <ion-button color="primary" fill="solid" expand="block" shape="round" class="save btn" type="submit">Save &
+          Continue</ion-button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>

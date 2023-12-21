@@ -1,0 +1,22 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeVerifyOtpModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="content">
+    <div class="otp-input">
+      <h4>{{'enterOtp' | language : 'Enter OTP'}}</h4>
+      <div class="otp-inpt-bx">
+        <ion-input #otp1 required="true" maxLength="4" class="test" [(ngModel)]="otp.first" (ionFocus)="otp.first = ''"
+          (ionChange)="onOTPChange($event)" type="tel" [class.error]="invalidOtp">
+        </ion-input>
+      </div>
+      <h5 *ngIf="timer">00 : {{ timer > 9 ? timer:'0'+timer }}</h5>
+    </div>
+    <div class="otp-btn">
+      <ion-input #otp2 type="button" class="{{invalidOTPInput ? 'verifyDisabled' : ''}}" [disabled]="invalidOTPInput" (click)="checkAndVerifyOtp()"
+        value="{{'verify' | language : 'Verify'}}"></ion-input>
+    </div>
+    
+  </div>
+</div>

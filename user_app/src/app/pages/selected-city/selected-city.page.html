@@ -1,0 +1,25 @@
+<ion-header translucent  class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <h3 class="selpretext">{{'selectYourCity' | language}}</h3>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <div class="city-stl-search">
+    <ion-icon name="search-outline" class="city-srch"></ion-icon>
+    <ion-icon name="mic-outline" class="city-mic"></ion-icon>
+
+    <input type="text" (keyup) ="searchFunction()" [(ngModel)] = "searchCity" placeholder="Search City" />
+  </div>
+  <div class="city-stl-body">
+    <div *ngFor='let cityobj of localListOfCity;'  class="stl-city-itm" (click)="onSelect(cityobj.subname)" >
+      <img  [id]="cityobj.title" [src]="cityobj.cityUrl" [ngClass]="cityobj.subname===isCity ? 'border-highlight':''"  >
+      <h4>{{cityobj.subname}}</h4>
+    </div>
+  </div>
+  <button class="stl-city-nextbtn" (click)="selectCity()">{{'proceed' | language:'Proceed'}}</button>
+</ion-content>

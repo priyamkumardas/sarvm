@@ -1,0 +1,40 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start" mode="ios">
+        <ion-back-button color="primary" mode="md" defaultHref="/profile"></ion-back-button>
+      </ion-buttons>
+      <ion-title><strong><span *ngIf="id!=0">{{'Edit'|language:'Edit'}}</span> {{'userProfile'|language:'User Profile'}}</strong></ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <div class="profile">
+      <img src="{{ userProfileURL }}" class="profile_img" />
+      <div class="camera" (click)="presentActionSheet()">
+        <ion-icon color="light" name="camera-outline"></ion-icon>
+      </div>
+    </div>
+    <!-- forms for entering details -->
+    <form style="display: block" (ngSubmit)="f.valid && addUserDetails()" #f="ngForm">
+      <div class="inputBox">
+        <ion-input type="text" [(ngModel)]="form.basicInformation.personalDetails.firstName" #fullName="ngModel" name="fullName" required>
+        </ion-input>
+        <span class="placeholder"> {{'name'|language:'Name'}}<span id="star">*</span></span>
+        <ion-label class="error" *ngIf="f.submitted && fullName.invalid">{{'invalidName'|language:'Invalid Name'}}</ion-label>
+      </div>
+      <div class="inputBox">
+        <ion-input pattern="^[0-9]{10}$" maxlength="10" type="tel" [(ngModel)]="form.basicInformation.personalDetails.mobileNumber" [readonly]="true" #mobileNumber="ngModel" name="mobileNumber" required></ion-input>
+        <span class="placeholder">{{'mobileNumber'|language:'Mobile Number'}}<span id="star">*</span></span>
+      </div>
+      <div class="inputBox">
+        <ion-input pattern="^[0-9]{10}$" maxlength="10" type="tel" [(ngModel)]="form.basicInformation.personalDetails.secondaryMobileNumber" #altMobileNumber="ngModel" name="altMobileNumber"></ion-input>
+        <span class="placeholder">{{'alternateMobileNumber' | language:'Alternate Mobile Number'}}</span>
+        <ion-label class="error" *ngIf="f.submitted && altMobileNumber.invalid">{{'invalidNumber'|language:'Invalid Number'}}</ion-label>
+      </div>
+      <div class="inputBox">
+        <textarea class="inputBoxabt" [(ngModel)]="form.basicInformation.personalDetails.aboutUs" #aboutUs="ngModel" name="About" required type="text" rows="4"></textarea>
+        <span class="placeholder">{{'aboutMe'|language:'About Me'}} <span id="star">*</span></span>
+      </div>
+      <ion-button type="submit" class="btn" color="primary"><span *ngIf="id=='0'">{{'save&Continue'|language:'Save & Continue'}}</span><span *ngIf="id!='0'">{{'saveChanges'|language:'Save Changes'}}</span></ion-button>
+    </form>
+  </ion-content>
+  

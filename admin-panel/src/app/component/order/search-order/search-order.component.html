@@ -1,0 +1,18 @@
+<div class="container content">
+<div class="row">
+    <div class="col-3">
+        <h3>Search Order</h3>
+        <h5>Enter Order ID here :</h5>
+       <div class="">
+        <input type="text" class="form-control" id="name"
+        required
+        [(ngModel)]="orderId" name="name">
+       </div>
+       <small style="color:red" *ngIf="showErrorMsg">*Please fill the required field</small>
+        <br>
+      <div class="">
+        <button class="btn btn-outline-primary" type="submit" (click)="onSubmit()">Get Orders</button>
+      </div>
+    </div>
+</div>
+</div>

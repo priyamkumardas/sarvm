@@ -1,0 +1,34 @@
+<ion-footer>
+<div class="CrossIcon" (click)="closeModal()"> 
+  <ion-icon name="close-outline"></ion-icon>
+</div>
+<div class="content">
+  <p class="title">{{'UploadProfilePhoto'|language:'Upload Profile Photo'}}</p>
+  <ion-grid >
+    <ion-row class="ion-justify-center">
+     <ion-col size="3">
+       <div class="ion-text-center" (click)="startCapture(1)">
+         <ion-icon src="/assets/img/Camera.svg"></ion-icon>
+       </div>
+     </ion-col>
+     <ion-col size="3">
+       <div class="ion-text-center" (click)="startCapture(0)">
+          <ion-icon src="/assets/img/Photo.svg"></ion-icon>
+       </div>
+     </ion-col>
+     <ion-col size="3">
+       <div class="ion-text-center" (click)="commonService.featureNotAvailable()">
+          <ion-icon src="/assets/img/drive.svg"></ion-icon>
+       </div>
+     </ion-col>
+     <ion-col size="3">
+      <div class="ion-text-center" (click)="commonService.featureNotAvailable()">
+        <ion-icon src="/assets/img/Delete.svg"></ion-icon>
+      </div>
+    </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+</ion-footer>
+
+

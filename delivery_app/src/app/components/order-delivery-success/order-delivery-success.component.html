@@ -1,0 +1,23 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeOrderDeliverySuccessModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+  <div class="content">
+    <div class="order-image-view">
+      <img src="assets/icon/ic-delivery-boy-delivered.svg">
+    </div>
+    <div class="content-title">
+      <p class="content-first-title">Great Job!</p>
+      <p class="content-sub-title">You did a perfect trip</p>
+    </div>
+    <div class="payment-amount">
+      <ion-icon class="currency-img" src="assets/icon/ic-rupee-red.svg"></ion-icon>
+      <span class="amount">40</span>
+    </div>
+    <div class="earn-title">Trip Earning</div>
+    <div class="submit-view">
+      <ion-button class="btn-gotit" fill="solid" expand="full" shape="round" (click)="closeOrderDeliverySuccessModal()">Got it!
+      </ion-button>
+    </div>
+  </div>
+</div>

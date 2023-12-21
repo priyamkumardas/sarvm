@@ -1,0 +1,186 @@
+.modal {
+    position: absolute;
+    top: 0;
+    width: -webkit-fill-available;
+}
+
+.CrossIcon {
+    height: 15vw;
+    width: 15vw;
+    margin-bottom: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    //margin-right: auto;
+    font-size: 10vw;
+    border-radius: 50%;
+    color: grey;
+    background: var(--ion-color-primary-contrast);
+}
+.content {
+    background: var(--ion-color-primary-contrast);
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    //justify-content: space-evenly;
+    height: 100%;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.order-image {
+    text-align: center;
+    margin: 0px 10px 6px 10px;
+    img {
+        width: 200px;
+        height: 200px;
+        border: 8px solid #037022;
+        border-radius: 50%;
+        display: inline-block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+.header-title {
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 30px;
+    line-height: 45px;
+    color: #000000;
+    p {
+        text-align: center;
+    }
+}
+
+.order-info {
+    box-sizing: border-box;
+    height: 100px;
+    border: 1px solid #cccccc;
+    filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.05));
+    border-radius: 10px;
+    display: flex;
+    .item-img {
+        width: 40%;
+        height: 80px;
+        place-self: center;
+        padding-left: 5px;
+        .product-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 5px;
+        }
+    }
+    .order-content {
+        place-self: center;
+        padding: 10px;
+        .pickup-text {
+            display: flex;
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 18px;
+            color: #2c2c2c;
+        }
+        .pickup-name {
+            color: #000000;
+            display: flex;
+            font-weight: 700;
+        }
+    }
+}
+
+.order-pick-drop {
+    box-sizing: border-box;
+    margin-top: 12px;
+    .row:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .column {
+        float: left;
+        width: 47%;
+        height: 100%;
+        margin-left: 5px;
+        margin-right: 5px;
+        border: 1px solid #cccccc;
+        filter: drop-shadow(2px 2px 10px rgba(0, 0, 0, 0.05));
+        border-radius: 10px;
+    }
+
+    .pickup-view {
+        height: 55px;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+        span {
+            align-self: center;
+            font-family: "Poppins";
+            font-style: normal;
+            font-weight: 600;
+            font-size: 16px;
+            line-height: 21px;
+            text-align: center;
+            letter-spacing: 0.015em;
+            color: #000000;
+            margin: 5px;
+        }
+        ion-icon {
+            width: 34px;
+            height: 34px;
+            place-self: center;
+            margin-right: 8px;
+        }
+    }
+}
+
+.order-id {
+    display: flex;
+    margin-top: 10px;
+    ion-icon {
+        width: 20px;
+        height: 20px;
+    }
+    p {
+        margin: 2px;
+        margin-left: 6px;
+        font-family: "Poppins";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 18px;
+        color: #2c2c2c;
+    }
+}
+
+.select-view {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    right: 0;
+    margin: 16px;
+    .btn-accept {
+        width: 90%;
+        height: 45px;
+        text-transform: none;
+        font-family: "AvertaStd-Bold";
+        font-size: 18px;
+        font-weight: 600;
+        line-height: 19px;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        color: #FFFFFF;
+        letter-spacing: 0.01em;
+        ion-icon{
+            margin-left: 5px;
+        }
+    }
+}

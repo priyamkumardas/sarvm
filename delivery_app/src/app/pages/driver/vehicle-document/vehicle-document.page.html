@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin" (click)="onBack()">
+      <ion-back-button slot="start" color="primary" text=""
+        icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'VehicleDetails' | language : 'Vehicle Details'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-segment mode="md" value="drivingLicense" scrollable="true" [(ngModel)]="segment"
+    (ionChange)="segmentChanged($event)">
+    <ion-segment-button value="drivingLicense">
+      <ion-label>{{'drivingLicense' | language : 'Driving License'}}</ion-label>  
+    </ion-segment-button>
+    <ion-segment-button value="rcLicense">
+      <ion-label>{{'RC' | language : 'RC'}}</ion-label>
+    </ion-segment-button>
+    <!-- <ion-segment-button value="vehicleInsurance">
+      <ion-label>{{'vehicleInsurance' | language : 'Vehicle Insurance'}}</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="pollutionCertificate">
+      <ion-label>{{'pollutionCertificate' | language : 'Pollution Certificate'}}</ion-label>
+    </ion-segment-button> -->
+    <ion-segment-button value="othersLicense">
+      <ion-label>{{'others' | language : 'Others'}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+
+  <!-- Driving License -->
+  <div *ngIf="segment === 'drivingLicense'" class="segment">
+    <app-vehicle-driving-license [isProfilePage]="isProfile"></app-vehicle-driving-license>
+  </div>
+
+  <!-- RC License -->
+  <div *ngIf="segment === 'rcLicense'" class="segment">
+    <app-vehicle-rc [isProfilePage]="isProfile"></app-vehicle-rc>
+  </div>
+
+  <!-- Vehicle Insurance -->
+  <!-- <div *ngIf="segment === 'vehicleInsurance'" class="segment">
+    <app-vehicle-insurance></app-vehicle-insurance>
+  </div> -->
+
+  <!-- Pollution Certificate -->
+  <!-- <div *ngIf="segment === 'pollutionCertificate'" class="segment">
+    <app-vehicle-pollution-certificate></app-vehicle-pollution-certificate>
+  </div> -->
+
+  <!-- Others License -->
+  <div *ngIf="segment === 'othersLicense'" class="segment">
+    <ion-segment mode="md" value="vehiclePermit" class="sub-segment" [(ngModel)]="othersSegment"
+      (ionChange)="othersSegmentChanged($event)">
+      <ion-segment-button value="vehiclePermit" [disabled]="true" (click)="commonService.featureNotAvailable()">
+        <ion-label>{{'vehiclePermit' | language : 'Vehicle Permit'}}</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="dewormingCertificate">
+        <ion-label>{{'DewormingCertificate' | language : 'Deworming Certificate'}}</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <div *ngIf="othersSegment === 'vehiclePermit'" class="segment">
+      <app-vehicle-others-permit [isProfilePage]="isProfile" ></app-vehicle-others-permit>
+    </div>
+
+    <div *ngIf="othersSegment === 'dewormingCertificate'" class="segment">
+      <app-vehicle-others-deworming-certi [isProfilePage]="isProfile"></app-vehicle-others-deworming-certi>
+    </div>
+  </div>
+
+
+
+
+
+
+  <!-- <div class="upload-container">
+    <p class="uploadText">Upload Documents</p>
+    <input
+      type="file"
+      (change)="uploadImg($event)"
+      id="browser-file"
+      class="file-upload"
+    />
+    <ion-content class="files-upload-cont">
+      <ion-slides pager [options]="slideOpts">
+        <ion-slide>
+          <div class="doc dl-1">
+            <img
+              class="attach"
+              src="assets/VehicleDetailsImages/attachment.png"
+              alt="attach"
+              (click)="selectImage('dlFront')"
+            />
+            <img
+              class="image"
+              src="{{dlFront}}"
+              alt="Driving License Front"
+              (click)="selectImage('dlFront')"
+            />
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="doc dl-2">
+            <img
+              class="attach"
+              src="assets/VehicleDetailsImages/attachment.png"
+              alt="attach"
+              (click)="selectImage('dlBack')"
+            />
+            <img
+              class="image"
+              src="{{dlBack}}"
+              alt="Driving License Back"
+              (click)="selectImage('dlBack')"
+            />
+          </div>
+        </ion-slide>
+        <ion-slide>
+          <div class="doc permit">
+            <img
+              class="attach"
+              src="assets/VehicleDetailsImages/attachment.png"
+              alt="attach"
+              (click)="selectImage('vehiclePermit')"
+            />
+            <img
+              class="image"
+              src="{{vehiclePermit}}"
+              alt="Vehicle Permit"
+              (click)="selectImage('vehiclePermit')"
+            />
+          </div>
+        </ion-slide>
+      </ion-slides>
+    </ion-content>
+  </div>
+  <div class="upload-container">
+    <p class="uploadText">Upload RC</p>
+    <ion-content class="files-upload-cont">
+      <div class="doc permit">
+        <img
+          class="attach"
+          src="assets/VehicleDetailsImages/attachment.png"
+          alt="attach"
+          (click)="selectImage('vehicleRc')"
+        />
+        <img
+          class="image"
+          src="{{vehicleRc}}"
+          alt="Vehicle Permit"
+          (click)="selectImage('vehicleRc')"
+        />
+      </div>
+    </ion-content>
+    <div class="next">
+      <ion-button class="next-button" shape="round" color="dark"
+        >Next</ion-button
+      >
+    </div>
+  </div> -->
+</ion-content>

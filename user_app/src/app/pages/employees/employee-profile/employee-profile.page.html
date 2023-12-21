@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" >
+      <ion-back-button text="" mode="md" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="profile">
+    <img [src]="empData?.profilePhotoURL?empData?.profilePhotoURL:'assets/employee/employee_default.png'" class="profile_img" />
+    <div *ngIf="userData.userType == 'EMPLOYEE_SH'" class="edit" [routerLink]="['/add-employee',id]">
+      <ion-icon src="/assets/icon/edit.svg"></ion-icon>
+      <!-- <ion-icon  id="edit-icon" name="brush-outline"></ion-icon> -->
+    </div>
+    <p id="emplyId"><strong>{{empData?.employeeId}}</strong></p> 
+    <p id="name"><strong>{{empData?.fullName | titlecase}}</strong></p>
+    <ion-button *ngIf="userData.userType == 'EMPLOYEE_SH' && !empData?.status" mode="md" shape="round" fill="outline" size="small" (click)="approveEmployee()">{{'Approved'|language:'Approve'}}</ion-button>
+  </div>
+
+  
+  <div class="btn" *ngIf="userData.userType == 'EMPLOYEE_SH'">
+    <p *ngIf="!empData?.status" id="activateBtn" (click)="editEmployeeStatus()">{{'activate'|language:'Activate'}}</p>
+    <p *ngIf="empData?.status" id="deactivateBtn" (click)="editEmployeeStatus()">{{'deactivate'|language:'Deactivate'}}</p>
+    <ion-icon class="ion-margin-left" (click)="deleteAlert()"  src="/assets/icon/Delete.svg"></ion-icon>
+   <!-- <p><ion-icon (click)="deleteAlert()" color ="grey" name="trash-outline"></ion-icon></p> -->
+    </div>
+
+  <div class="contactInfo">
+    <div class="phone flex">
+      <p class="p1">{{'phone'|language:'Phone'}}</p>
+      <p class="p2">{{empData?.mobileNumber}}</p>
+    </div>
+    <div class="roles flex">
+      <p class="p1">{{'roles'|language:'Roles'}}</p>
+      <p class="p2">{{empData?.role}}</p>
+    </div>
+    <div class="man flex">
+      <p class="p1">{{'ManagerId '|language:'Manager ID'}}</p>
+      <p class="p2">{{empData?.managerId}}</p>
+    </div>
+    <div class="roles flex">
+      <p class="p1">{{'DateofJoining '|language:'Date of Joining'}}</p>
+      <p class="p2">{{empData?.dateofJoining | date: 'dd MMM YYYY'}}</p>
+    </div>
+    
+  </div>
+ 
+</ion-content>

@@ -1,0 +1,111 @@
+// @siddhesh
+// background light
+.bg-light {
+    --background: #F8F9F9;
+}
+
+.subHeader {
+    ion-toolbar {
+        --background: transparent;
+
+        ion-back-button {
+            display: block;
+        }
+    }
+
+    .page-title {
+        color: var(--ion-color-dark);
+        font-weight: 500;
+        font-size: 1.1rem;
+        letter-spacing: 0.0125em;
+        padding: 0 16px 0 0;
+    }
+
+    ion-searchbar {
+        --background: transparent;
+        --box-shadow: none;
+        --border-radius: 50px;
+        --icon-color: var(--ion-color-dark);
+        --placeholder-color: var(--ion-color-dark);
+        --color: var(--ion-color-dark);
+        --placeholder-font-weight: 500;
+        border-radius: 50px;
+        border: 1px solid var(--ion-color-light-shade);
+        padding: 0;
+    }
+
+    ion-item {
+        --background: transparent;
+
+        ion-img {
+            margin-right: 8px;
+        }
+
+        ion-label {
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+
+        .ion-fab-button {
+            --box-shadow: none;
+            margin-left: 12px;
+        }
+    }
+}
+
+.custom-search {
+    width: auto;
+    --min-height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 50px;
+
+    ion-icon {
+        margin: 8px 12px 8px 0;
+    }
+
+    ion-input {
+        font-weight: 400;
+        font-size: 16px;
+        color: var(--ion-color-dark) !important;
+        --padding-bottom: 0;
+        --padding-top: 0;
+        --placeholder-font-weight: 500;
+    }
+}
+
+ion-content.customContainer {
+    --padding-top: 0em;
+    --padding-start: 4rem;
+    --padding-end: 4rem;
+
+    @media (max-width: 767px) {
+        --padding-top: 0em;
+        --padding-start: 0rem;
+        --padding-end: 0rem;
+    }
+}
+
+ion-footer {
+    @media (min-width: 992px) {
+        padding: 8px 16px;
+    }
+    ion-button {
+        @media (min-width: 992px) {
+            float: right;
+            width: auto !important;
+            margin: 0 16px !important;
+        }
+    }
+}
+
+ion-checkbox::part(container) {
+    border: 2px solid var(--ion-color-primary);
+}
+
+ion-segment
+{
+    ion-segment-button
+    {
+        max-width: fit-content;
+    }
+}

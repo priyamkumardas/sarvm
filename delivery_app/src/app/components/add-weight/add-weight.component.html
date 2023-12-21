@@ -1,0 +1,54 @@
+<div class="modal">
+  <div class="CrossIcon" (click)="closeAddWeightModal()">
+    <ion-icon name="close-outline"></ion-icon>
+  </div>
+
+  <div class="content">
+    <div class="header">
+      <span class="title">{{'addWeight' | language : 'Add Weight'}}</span>
+    </div>
+
+    <div class="distance-type">
+      <ion-row class="distan-items">
+        <ion-col size="3" class="distan-catagory">
+          <p>{{'weight' | language : 'Weight'}}</p>
+        </ion-col>
+        <ion-col size="3">
+          <ion-item lines="none" class="distan-input">
+            <ion-input type="Number" placeholder="0" [(ngModel)]="weightTo" (ionInput)="isNumberKey($event)" name="type"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="1" class="ion-text-center">
+          <p>-</p>
+        </ion-col>
+        <ion-col size="3">
+          <ion-item lines="none" class="distan-input">
+            <ion-input type="Number" placeholder="0" [(ngModel)]="weightFrom" (ionInput)="isNumberKey($event)" name="type"></ion-input>
+          </ion-item>
+        </ion-col>
+        <ion-col size="2" class="distan-catagory ion-text-center">
+          <p>{{'kg' | language : 'Kg'}}</p>
+        </ion-col>
+      </ion-row>
+
+      <ion-row class="distan-items">
+        <ion-col size="5" class="distan-catagory">
+          <p>{{'deliveryCharge' | language : 'Delivery Charge'}}</p>
+        </ion-col>
+        <ion-col size="7">
+          <ion-item lines="none" class="distan-input">
+            <ion-icon src="assets/icon/ic-rupee-black.svg" slot="start"></ion-icon>
+            <ion-input type="Number" placeholder="0" [(ngModel)]="weightCharge" (ionInput)="isNumberKey($event)" name="type"></ion-input>
+          </ion-item>
+        </ion-col>
+      </ion-row>
+
+
+
+      <div class="submit-view">
+        <ion-button color="primary" fill="solid" expand="full" shape="round" class="save btn"
+          type="submit" (click)="saveWeight()">{{'save' | language : 'Save'}}</ion-button>
+      </div>
+    </div>
+  </div>
+</div>

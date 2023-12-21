@@ -1,0 +1,101 @@
+.modal {
+    position: absolute;
+    bottom: 0;
+    width: -webkit-fill-available;
+}
+
+.CrossIcon {
+    height: 15vw;
+    width: 15vw;
+    margin-bottom: 5vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 10vw;
+    border-radius: 50%;
+    color: grey;
+    background: var(--ion-color-primary-contrast);
+}
+
+.content {
+    background: var(--ion-color-primary-contrast);
+    border-radius: 20px 20px 0px 0px;
+    display: flex;
+    flex-direction: column;
+    height: 370px;
+}
+
+.otp-input {
+    margin-top: 40px;
+    margin-left: 2px;
+  }
+
+.otp-input > h4 {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height */
+    text-align: center;
+    color: #000000;
+}
+
+.otp-input > h5 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    /* identical to box height */
+    margin-left: 40%;
+    margin-top: 10px;
+    align-items: center;
+    text-align: center;
+    letter-spacing: 0.015em;
+    margin: auto;
+    color: #000000;
+}
+
+.otp-inpt-bx {
+    display: flex;
+    height: 60px;
+    width: 190px;
+    margin-top: 12px;
+    margin: auto;
+}
+
+.otp-inpt-bx > ion-input {
+    width: 50px;
+    text-align: left;
+    height: 50px;
+    padding-left: 20px;
+}
+
+.test {
+    padding-left: 6px !important;
+    letter-spacing: 34px;
+    border: 0;
+    background-image: linear-gradient(to left, var(--ion-color-primary) 70%, rgba(255, 255, 255, 0) 0%);
+    background-position: bottom;
+    background-size: 50px 1px;
+    background-repeat: repeat-x;
+    background-position-x: 35px;
+    outline: none;
+    font-family: "Poppins";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 28px;
+    line-height: 48px;
+    color: #a42c24;
+}
+
+.otp-btn > ion-input {
+    height: 48px;
+    --background: var(--ion-color-primary);
+    width: 80vw;
+    color: #fff;
+    margin-top: 15px;
+    border-radius: 40px;
+    font-size: 16px;
+}

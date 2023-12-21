@@ -1,0 +1,17 @@
+<ion-header>
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<ion-back-button defaultHref="/tabs/home"></ion-back-button>
+		</ion-buttons>
+		<ion-title>{{categoryId|language:categoryId}} {{'shop'|language:"Shops"}}</ion-title>
+	</ion-toolbar>
+</ion-header>
+<ion-content>
+	<ion-progress-bar mode="ios" color="primary" type="indeterminate" *ngIf="commonservice.isLoading"></ion-progress-bar>
+  <div *ngFor="let item of merchantListArray" class="main">
+    <app-store-listing-component [item]="item" (favEvent)="favouriteShop($event)"></app-store-listing-component>
+  </div>
+  <div *ngIf="flag">
+    <app-empty-list></app-empty-list>
+  </div>
+</ion-content>

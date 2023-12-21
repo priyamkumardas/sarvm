@@ -1,0 +1,30 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title >{{'location' | language:'Location'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-progress-bar *ngIf="!commonService.hasCurrentLocation && connected" type="indeterminate"></ion-progress-bar>
+  <app-search *ngIf="connected" (searchOutput)="searchAddress($event)"></app-search>
+  <app-map-component [customeclass]="'select'" [isMarkerMoveable]="true" *ngIf="location.lat && connected" [latlng]="location" (locationChange)="getAddress($event)"></app-map-component>
+  <div *ngIf="!connected" class="error-img"><img src="/assets/images/internet_error.svg" alt=""></div>
+
+  <div *ngIf="connected" class="buttonCol">
+    <h2>{{'selectLocation' | language:'Select Location'}}</h2>
+    <div class="addArea">
+      <img src="/assets/location.png">
+      <p *ngIf="!address" style="width: 80%;" >
+        <ion-skeleton-text [animated]="true" style="width: 80%;"></ion-skeleton-text>
+        <ion-skeleton-text [animated]="true" style="width: 40%;"></ion-skeleton-text>
+      </p>
+      <p style="width:100%" *ngIf="address">{{address['display_name']}}</p>
+      <img src="/assets/button.svg" (click)="this.commonService.featureNotAvailable()">
+    </div>
+    <ion-input id="clickButton" (click)="autoClickfunction()" style="visibility: hidden;position: absolute;"></ion-input>
+    <ion-button type="button" (click)="setGlobalLatLong()">{{'confirmLocation' | language:'Confirm location'}}</ion-button>
+  </div>
+</ion-content>

@@ -1,0 +1,55 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <ion-buttons slot="start" class="ion-no-margin">
+      <ion-back-button slot="start" color="primary" text="" icon="chevron-back-outline"></ion-back-button>
+    </ion-buttons>
+    <ion-title *ngIf="router.url != '/update-language'">{{'welcome' | language : 'Welcome'}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="stl-usr-lan-body">
+    <div class="stl-usr-lan-head">
+      <!-- <h3 class="welcome">{{'welcome' | language : 'Welcome'}}</h3> -->
+      <h4>{{'selectLanguage' | language : 'Select Language'}}</h4>
+    </div>
+
+    <ion-searchbar animated color="light" type="text" mode="md" id="myInput" (ionChange)="searchFunction()"
+      [(ngModel)]="searchLang" placeholder="{{'SearchLanguage ' | language : 'Search Language'}}">
+    </ion-searchbar>
+
+    <div>
+      <ion-grid>
+        <ion-row>
+          <ion-col class="ion-no-padding" class="long-text" size="4" *ngFor="let item of allLanguage ">
+            <div class="ion-text-center">
+              <ion-card mode="md"
+                [style.background]="item.text=== SelectedLan ? 'var(--ion-color-primary)':'rgba(255, 255, 255, 0.6)'"
+                (click)="selectLanguage(item )">
+                <ion-card-header>
+                  <ion-card-title
+                    [style.color]="item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'">
+                    <h1 class="ion-no-margin">
+                      {{item.displayText | slice: 0:1}}
+                    </h1>
+                  </ion-card-title>
+                </ion-card-header>
+                <ion-card-content
+                  [style.color]="item.text === SelectedLan ? 'var(--ion-color-light)' : 'var(--ion-color-primary)'">
+                  {{item.displayText | slice: 0:7}}
+                </ion-card-content>
+              </ion-card>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+
+  <div class="submit-view">
+    <ion-button  fill="solid" expand="full" shape="round" class="save btn" type="submit"
+      (click)="selectLang()">
+      {{'continue' | language}}
+    </ion-button>
+  </div>
+
+</ion-content>

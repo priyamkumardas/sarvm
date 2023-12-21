@@ -1,0 +1,233 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/tabs/home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{'orderDetails'|language:'Order Details'}}</ion-title>
+    <ion-buttons slot="end" >
+      <ion-button fill="clear" (click)="support()" color="primary" class="support" [disabled]="addDisable">
+            <ion-icon slot="start" src="/assets/bx_support.svg"></ion-icon>
+         {{'support' | language:'Support'}}
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <!-- <div class="box">
+    <div class="shop">
+      <img src="/assets/Vector (2).png" alt="" srcset="">
+      <p id="details-text">{{order?.shop.name | titlecase}}
+      <p>
+    </div>
+    <div class="right ">
+      <p class="from"><a [href]="'tel:'+ order?.seller.phone">
+          <ion-icon name="call"></ion-icon>{{order?.seller.phone}}
+        </a></p>
+    </div>
+  </div> -->
+  <!-- <div class="seller-info">
+    <div id="profile-pic">
+      <img
+        src="{{order?.seller?.image?order?.seller?.image:'./assets/img/store.svg'}}"
+        alt="profile-pic"
+      />
+    </div>
+    <div id="text-info">
+      <div id="shop-owner">{{order?.seller?.name}}</div>
+      <div id="shop-name">{{order?.shop?.name}}</div>
+      <div id="shop-address"  (click)="openWithInAppBrowser(order)">{{order?.shop?.address}}</div>
+    </div>
+    <div id="seller-call-icon">
+      <a href="{{'tel:'+order?.seller?.phone}}">
+        <img src="/assets/images/phone-call.png" alt="call-us" />
+      </a>
+    </div>
+  </div> -->
+  <ion-grid class="ion-margin">
+    <ion-row class="ion-margin">
+      <ion-col size="12" class="ion-padding">
+        <ion-list lines="none">
+          <ion-item lines="none">
+            <ion-icon src="./assets/img/store.svg" slot="start"></ion-icon>
+            <ion-label>
+              <h3>{{order?.shop?.name}}</h3>
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ion-label (click)="openWithInAppBrowser(order)" class="location">
+              <ion-icon style="font-size: 20px;width: 16%;" name="location-outline"></ion-icon>
+              &nbsp;&nbsp;
+              <p id="address">{{order?.shop?.address}}</p>
+            </ion-label>
+            <div style="margin-right: 15px;" (click)="openWithInAppBrowser(order)">
+              <img src="assets/icon/goto icon.svg" alt="Direction_icon">
+            </div>
+            <a href="{{'tel:'+order?.seller?.phone}}">
+              <ion-icon src="/assets/support_call.svg" class="call-btn"></ion-icon>
+            </a>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-list class="ion-padding">
+      <ion-list-header>
+        <ion-label>
+          <p id="text">{{'orderhistory'|language:'Order History'}}</p>
+        </ion-label>
+      </ion-list-header>
+      <!-- <div class="summary-box" *ngFor="let data of order?.products"> -->
+      <ion-item lines="none" *ngFor="let data of order?.products" class="ion-no-padding">
+        <ion-thumbnail slot="start" class="item-img">
+          <img class="summary-img" src="{{data.image?data.image:'https://tse1.mm.bing.net/th?id=OIP.BhqNrm-ROO1VL1Xcobq6bQHaFj&pid=Api&P=0&w=231&h=173'}}" alt="img" />
+        </ion-thumbnail>
+        <ion-label>
+          <p id="name">{{data.name | titlecase}}</p>
+          <p id="quantity">
+            {{data.price | currency:'INR':true :'0.0-2'}}/{{data.soldBy}} x
+            {{data.qty}}
+          </p>
+        </ion-label>
+        <ion-label>
+          <p id="quantity">
+            x {{data.unit}}
+          </p>
+        </ion-label>
+        <!-- <div class="summary-name">
+        <div style="display: flex; align-items: center">
+          <p id="name">{{data.name | titlecase}}</p>
+          <span id="count"> x {{data.unit}}</span>
+        </div>
+        <p id="quantity">
+          {{data.price | currency:'INR':true :'0.0-2'}}/{{data.soldBy}} x
+          {{data.qty}}
+        </p>
+      </div> -->
+        <!-- <p id="amount"> -->
+        <ion-text slot="end">
+          {{(data.qty*data.price*data.unit) | currency:'INR':true :'0.0-2'}}
+        </ion-text>
+        <!-- </p> -->
+      </ion-item>
+    </ion-list>
+    <!-- <ion-item lines="none" class="ion-no-padding" >
+    <ion-label>
+    <p class="disc">{{'amount' | language : 'Amount'}}</p>
+   
+  </ion-label>
+  <ion-text class="cartamount" slot="end">{{order?.amount | currency:'INR':true :'0.0-2'}}</ion-text>
+  </ion-item>
+  <ion-item lines="none" class="ion-no-padding ">
+    <ion-label>
+    <p  class="disc">{{'discount' | language : 'Discount'}}</p>
+   
+  </ion-label>
+  <ion-text class="cartamount" slot="end">- {{order?.discount | currency:'INR':true :'0.0-2'}}</ion-text>
+  </ion-item>
+  <ion-item lines="none" class="ion-no-padding">
+    <ion-label>
+    <p  class="disc">{{'orderTotal' | language}}</p>
+   
+  </ion-label>
+  <ion-text class="cartamount" slot="end">{{order?.amount - order?.discount | currency:'INR':true :'0.0-2'}}</ion-text>
+  </ion-item> -->
+    <div class="total">
+      <p id="disc" style="width: 50% ;">{{'amount' | language : 'Amount'}}</p>
+      <p class="cartamount">{{order?.amount | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+    <div class="total">
+      <p id="disc" style="width: 50% ;">{{'discount' | language : 'Discount'}}</p>
+      <p class="cartamount">- {{order?.discount | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+    <div class="total" *ngIf="order?.delivery?.mode == 'DELIVERY'">
+      <p id="disc" style="width: 50% ;">{{'deliveryCharges' | language : 'Delivery Charges'}}</p>
+      <p class="cartamount">{{order?.delivery?.deliveryCharges | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+    <div class="total">
+      <p id="text" style="width: 50% ;">{{'orderTotal' | language}}</p>
+      <p class="orderTotal">{{order?.amountAfterDiscount | currency:'INR':true :'0.0-2'}}</p>
+    </div>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'orderId' | language:'Order Id'}}</p>
+        <p id="info">{{order?.orderID}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'paymentMethod' | language :'Payment Method'}}</p>
+        <p id="info">
+          <span *ngIf="order?.delivery.mode == 'DELIVERY'">{{'PayOnDelivery' | language :'Pay On Delivery'}}</span>
+          <span *ngIf="order?.delivery.mode != 'DELIVERY'">{{'payAtPickup' | language :'Pay at Pickup'}}</span>
+        </p>
+      </ion-label>
+      <ion-button slot="end" *ngIf="showPayNow && !order?.payment.paid" expand="block" shape="round" size="small" (click)="payNow()" [disabled]="addDisable">{{'payNow'|language:'Pay Now'}}</ion-button>
+    </ion-item>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'payment' | language}}</p>
+        <p *ngIf="!order?.payment.paid" id="info">{{'pending' | language :'Pending '}}</p>
+        <p *ngIf="order?.payment.paid" id="info">{{'paid' | language :'Paid '}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'dateOfOrder' | language:'Date Of Order'}}</p>
+        <p id="info">{{order?.createdAt | date:'dd MMM yyyy'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label>
+        <p *ngIf="order?.delivery.mode == 'DELIVERY'" id="text">{{'Date Of Delivery' | language:'Date Of Delivery'}}</p>
+        <p *ngIf="order?.delivery.mode != 'DELIVERY'" id="text">{{'Date Of Pickup' | language:'Date of Pickup'}}</p>
+        <p id="info">{{order?.delivery.deliveryDate | date:'dd MMM yyyy'}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <!-- </div> -->
+  <!-- <div class="order-row"> -->
+  <ion-card *ngIf="order?.delivery.mode == 'DELIVERY'">
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'deliverAt' | language}}</p>
+        <p id="info" class="ion-text-wrap">
+          <strong>{{order?.delivery.location.type}}</strong> {{order?.delivery.location.address}}
+        </p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngIf="order?.instruction">
+    <ion-item lines="none">
+      <ion-label>
+        <p id="text">{{'Instruction ' | language:"Instruction "}}</p>
+        <p id="info">{{order?.instruction}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card (click)="instruction()" *ngIf="!order?.instruction && status[order?.status] < 6" class="ion-text-center" [disabled]="addDisable">
+    <p class="instruction">{{'addInstructions'|language:'Add Instruction'}}</p>
+  </ion-card>
+  <ion-button shape="round" (click)="cancelOrder()" *ngIf="order?.canCancel" class="cancel" color='danger'> {{'cancelOrder'|language:'Cancel Order'}}</ion-button>
+</ion-content>

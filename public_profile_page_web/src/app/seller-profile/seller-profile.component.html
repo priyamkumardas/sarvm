@@ -1,0 +1,151 @@
+<div class="container mb-3">
+  <div class="row row-cols-1 row-cols-md-3 g-0 justify-content-center">
+    <div class="card">
+      <div class="card-header border-0">
+        <!-- <img
+          src="{{retailerData?.shop?.profileUrl ? retailerData?.shop?.profileUrl : './assets/icons/istockphoto.svg'}}"
+          height="300px" alt="..." /> -->
+        <qrcode [qrdata]="shopQR" [imageSrc]="'./assets/icons/sarvmQR.svg'" [width]="300" [errorCorrectionLevel]="'H'"
+          class="qrcode">
+        </qrcode>
+      </div>
+      <h3 class="shopname">{{retailerData?.shop?.name}}</h3>
+      <div class="card-body">
+        <div class="d-flex justify-content-evenly btns">
+          <div class="p-2 allbtn">
+            <a style="text-decoration: none;" href="tel:+91{{retailerData?.retailer?.mobileNumber}}">
+              <div><img src="/assets/icons/Call.svg" alt=""></div>
+              <div class="d-lg-inline text-success">call</div>
+            </a>
+          </div>
+          <div class="p-2 allbtn ">
+            <div onclick="window.print()">
+              <div><img src="/assets/icons/Print.svg" alt=""> </div>
+              <div class="text-success">print</div>
+            </div>
+          </div>
+          <div class="p-2 allbtn">
+            <a style="text-decoration: none;"
+              href="https://maps.google.com/?q={{retailerData?.shop?.location?.lat}},{{retailerData?.shop?.location?.lon}}"
+              target="_blank">
+              <div><img src="/assets/icons/Direction.svg" alt=""></div>
+              <div class="text-success">direction</div>
+            </a>
+          </div>
+        </div>
+        <hr>
+        <div class="location"
+          (click)="openShopAddress(retailerData?.shop?.location?.lat,retailerData?.shop?.location?.lon)">
+          <i class="bi bi-geo-alt"></i>
+          <div class="p-0 align-self-start"
+            *ngIf="retailerData?.shop?.location?.address && retailerData?.shop?.location?.pincode">
+            <div class="address">{{retailerData?.shop?.location?.address}},{{retailerData?.shop?.location?.pincode}}
+            </div>
+          </div>
+        </div>
+        <hr>
+
+        <h6>About Seller</h6>
+        <div class="d-flex justify-content-between">
+          <div class="d-flex">
+            <div class="d-flex sellerimage">
+              <img
+                src="{{retailerData?.retailer?.profileImageUrl ? retailerData?.retailer?.profileImageUrl : './assets/icons/Vector.svg'}}"
+                class="img-profile" alt="..." />
+            </div>
+            <div class="d-flex flex-column retailerinfo">
+              <div class=" retailername" *ngIf="retailerData?.retailer?.name">{{retailerData?.retailer?.name}}</div>
+              <div class="retailername" *ngIf="retailerData?.retailer?.mobileNumber">
+                +91 {{retailerData?.retailer?.mobileNumber}}
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="sellingitem">
+          <h5>Selling</h5>
+          <div class="items">
+            <div *ngFor="let item of retailerData?.catalog">
+              <div class="d-flex flex-column item">
+                <span class="" id="catbg"><img src="{{item.image}}" class="categoryImage" alt="..."></span>
+                <p class="card-text">{{item.name}}</p>
+              </div>
+              <!-- <div class="d-flex flex-column align-self-start" style="">
+                  <span class="" id="catbg"><img src="images/Shop/Vegetables.png" class="" alt="..."></span>
+                  <p class="card-text">Vegetables</p>
+              </div>      
+          </div>
+          <hr style="width:100%;text-align:left;margin-left:0">
+          <div class="d-flex mb-2 justify-content-center" style="">
+              <div class="row d-lg-none">
+                  <button class="btn btn-rounded" id="down"><i class="bi bi-download"></i>&nbsp; Download</button>
+              </div> -->
+
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="clear"></div>
+      <footer class="fixed-bottom">
+        <div class="footer">
+          <button class="btn btn-lg button" (click)="openModal()"><img src="./assets/icons/Filedownload.svg" alt=""/>
+            Download App</button>
+        </div>
+      </footer>
+    </div>
+  </div>
+</div>
+
+<ng-template #content let-modal>
+  <div class="modal-header border-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="container-fluid">
+      <div class="row text-center">
+        <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+          <p class="text-center heading"> Retailer</p>
+          <img src="./assets/icons/Retailer.svg" width="70%" height="70%" alt="">
+          <div class="me-auto">
+            <div>
+              <!-- <a class="btn btn-primary" href="#" role="button" ><img src="./images/images-2/App Store.svg" style="margin-bottom: 20px;" width="100%" height="100%"></a> -->
+              <img src="./assets/icons/App_Store_Disable.svg" alt="" style="margin-bottom: 20px;" width="100%"
+                height="100%">
+              <a href="https://play.google.com/store/apps/details?id=com.sarvm.biz" target="_blank">
+                <img src="./assets/icons/Google Play.svg" width="100%" height="100%" alt=""></a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+          <p class="text-center heading"> Consumer</p>
+          <img src="./assets/icons/Household.svg" width="70%" height="70%">
+          <div class="me-auto">
+            <!-- <qrcode [qrdata]="'consumer'"
+                [width]="125" 
+                [errorCorrectionLevel]="'M'">
+              </qrcode> -->
+            <a target="_blank" href="https://apps.apple.com/in/app/sarvm/id1639099386"> <img
+                src="./assets/icons/App Store.svg" style="margin-bottom: 20px;" width="100%" height="100%"></a>
+
+            <a href="https://play.google.com/store/apps/details?id=com.sarvm.hh" target="_blank"><img
+                src="./assets/icons/Google Play.svg" width="100%" height="100%"></a>
+          </div>
+        </div>
+        <div class="col-md-4 col-lg-4 col-md-4 col-4 m-auto mb-3">
+          <p class="text-center heading">Logistics</p>
+          <img src="./assets/icons/Delivery-Logo 1.svg" width="70%" height="70%">
+          <div>
+            <a> <img src="./assets/icons/App Store.svg" style="margin-bottom: 20px;opacity: 0.2;" width="100%"
+                height="100%"></a>
+
+            <a href="https://play.google.com/store/apps/details?id=com.sarvm.loga&hl=en-IN" target="_blank"><img
+                src="./assets/icons/Google Play.svg" width="100%" height="100%"></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer border-0">
+  </div>
+</ng-template>
